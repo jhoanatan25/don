@@ -1,0 +1,487 @@
+<h1 id="jquery-smart-wizard">jQuery Smart Wizard</h1>
+<p>Version 3 and later at
+<a href="http://mstratman.github.com/jQuery-Smart-Wizard/">http://mstratman.github.com/jQuery-Smart-Wizard/</a></p>
+<p>Original version 2 and earlier are from
+<a href="http://www.techlaboratory.net/products.php?product=smartwizard">http://www.techlaboratory.net/products.php?product=smartwizard</a></p>
+<p>Licensed under a Creative Commons Attribution-ShareAlike 3.0 Unported License.
+<a href="http://creativecommons.org/licenses/by-sa/3.0/">http://creativecommons.org/licenses/by-sa/3.0/</a></p>
+<h2 id="getting-started">Getting Started</h2>
+<p>Basic Usage:</p>
+<pre><code class="lang-javascript">$(&#39;#wizard&#39;).smartWizard();
+</code></pre>
+<p>Using with option parameters:</p>
+<pre><code class="lang-javascript">$(&#39;#wizard&#39;).smartWizard({
+  // Properties
+    selected: 0,  // Selected Step, 0 = first step   
+    keyNavigation: true, // Enable/Disable key navigation(left and right keys are used if enabled)
+    enableAllSteps: false,  // Enable/Disable all steps on first load
+    transitionEffect: &#39;fade&#39;, // Effect on navigation, none/fade/slide/slideleft
+    contentURL:null, // specifying content url enables ajax content loading
+    contentURLData:null, // override ajax query parameters
+    contentCache:true, // cache step contents, if false content is fetched always from ajax url
+    cycleSteps: false, // cycle step navigation
+    enableFinishButton: false, // makes finish button enabled always
+    hideButtonsOnDisabled: false, // when the previous/next/finish buttons are disabled, hide them instead
+    errorSteps:[],    // array of step numbers to highlighting as error steps
+    labelNext:&#39;Next&#39;, // label for Next button
+    labelPrevious:&#39;Previous&#39;, // label for Previous button
+    labelFinish:&#39;Finish&#39;,  // label for Finish button        
+    noForwardJumping:false,
+  // Events
+    onLeaveStep: null, // triggers when leaving a step
+    onShowStep: null,  // triggers when showing a step
+    onFinish: null  // triggers when Finish button is clicked
+});
+</code></pre>
+<p>Parameters and Events are describing on the table below.</p>
+<h2 id="installing-smart-wizard-3">Installing Smart Wizard 3</h2>
+<h3 id="step-1-include-files">Step 1: Include Files</h3>
+<p>Include the following JavaScript and css files on your page. </p>
+<ol>
+<li>jQuery Library file (Don&#39;t include if you already have it on your page) </li>
+<li>CSS(Style Sheet) file for Smart Wizard </li>
+<li>JavaScript plug-in file for Smart Wizard</li>
+</ol>
+<p>To include the files copy and paste the below lines inside the head tag (<code>&lt;head&gt; &lt;/head&gt;</code>) of your page. 
+Make sure the paths to the files are correct with your working environment.</p>
+<pre><code class="lang-html">&lt;script type=&quot;text/javascript&quot; src=&quot;jquery-1.4.2.min.js&quot;&gt;&lt;/script&gt;
+&lt;link href=&quot;smart_wizard.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot;&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;jquery.smartWizard.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+<h3 id="step-2-the-javascript">Step 2: The JavaScript</h3>
+<p>Inititialize the Smart Wizard, copy and paste the below lines inside the head tag (<code>&lt;head&gt; &lt;/head&gt;</code>) of your page</p>
+<pre><code class="lang-html">&lt;script type=&quot;text/javascript&quot;&gt;
+  $(document).ready(function() {
+      // Initialize Smart Wizard
+        $(&#39;#wizard&#39;).smartWizard();
+  }); 
+&lt;/script&gt;
+</code></pre>
+<h3 id="step-3-the-html">Step 3: The HTML</h3>
+<p>Finally the html, below shows the HTML markup for the Smart Wizard, You can customize it by including your on contents for each steps. 
+Copy and paste the below html inside the body tag (<code>&lt;body&gt;&lt;/body&gt;</code>) of your page.</p>
+<pre><code class="lang-html">&lt;div id=&quot;wizard&quot; class=&quot;swMain&quot;&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href=&quot;#step-1&quot;&gt;
+          &lt;label class=&quot;stepNumber&quot;&gt;1&lt;/label&gt;
+          &lt;span class=&quot;stepDesc&quot;&gt;
+             Step 1&lt;br /&gt;
+             &lt;small&gt;Step 1 description&lt;/small&gt;
+          &lt;/span&gt;
+      &lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;#step-2&quot;&gt;
+          &lt;label class=&quot;stepNumber&quot;&gt;2&lt;/label&gt;
+          &lt;span class=&quot;stepDesc&quot;&gt;
+             Step 2&lt;br /&gt;
+             &lt;small&gt;Step 2 description&lt;/small&gt;
+          &lt;/span&gt;
+      &lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;#step-3&quot;&gt;
+          &lt;label class=&quot;stepNumber&quot;&gt;3&lt;/label&gt;
+          &lt;span class=&quot;stepDesc&quot;&gt;
+             Step 3&lt;br /&gt;
+             &lt;small&gt;Step 3 description&lt;/small&gt;
+          &lt;/span&gt;                   
+       &lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;#step-4&quot;&gt;
+          &lt;label class=&quot;stepNumber&quot;&gt;4&lt;/label&gt;
+          &lt;span class=&quot;stepDesc&quot;&gt;
+             Step 4&lt;br /&gt;
+             &lt;small&gt;Step 4 description&lt;/small&gt;
+          &lt;/span&gt;                   
+      &lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;div id=&quot;step-1&quot;&gt;   
+      &lt;h2 class=&quot;StepTitle&quot;&gt;Step 1 Content&lt;/h2&gt;
+       &lt;!-- step content --&gt;
+  &lt;/div&gt;
+  &lt;div id=&quot;step-2&quot;&gt;
+      &lt;h2 class=&quot;StepTitle&quot;&gt;Step 2 Content&lt;/h2&gt; 
+       &lt;!-- step content --&gt;
+  &lt;/div&gt;                      
+  &lt;div id=&quot;step-3&quot;&gt;
+      &lt;h2 class=&quot;StepTitle&quot;&gt;Step 3 Title&lt;/h2&gt;   
+       &lt;!-- step content --&gt;
+  &lt;/div&gt;
+  &lt;div id=&quot;step-4&quot;&gt;
+      &lt;h2 class=&quot;StepTitle&quot;&gt;Step 4 Title&lt;/h2&gt;   
+       &lt;!-- step content --&gt;                         
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<h2 id="more-details-descriptions-">More details &amp; descriptions:</h2>
+<h3 id="load-ajax-content">Load ajax content</h3>
+<p>To load the content via ajax call you need to specify the property &quot;<em>contentURL</em>&quot;. </p>
+<p>example:</p>
+<pre><code class="lang-html">&lt;script type=&quot;text/javascript&quot;&gt;
+  $(document).ready(function() {
+      // Initialize Smart Wizard with ajax content load
+        $(&#39;#wizard&#39;).smartWizard({contentURL:&#39;services/ajaxcontents.php&#39;});
+  }); 
+&lt;/script&gt;
+</code></pre>
+<p>When a step got focus the SmartWizard will post the step number to this contentURL and so you can write server side logic to format the content with the step number to be shown next. The response to this call should be the content of that step in HTML format. </p>
+<p>To get the step number in php:</p>
+<pre><code class="lang-php">$step_number = $_REQUEST[&quot;step_number&quot;];
+</code></pre>
+<p>By default the SmartWizard will fetch the step content only on the first focus of the step, and cache the content and use it on the further focus of that step. But you can turn off the content cache by specifying the property &quot;<em>contentCache</em>&quot; to false. </p>
+<p>example:</p>
+<pre><code class="lang-html">&lt;script type=&quot;text/javascript&quot;&gt;
+  $(document).ready(function() {
+      // Initialize Smart Wizard with ajax content load and cache disabled
+        $(&#39;#wizard&#39;).smartWizard({contentURL:&#39;services/ajaxcontents.php&#39;,contentCache:false});
+  }); 
+&lt;/script&gt;
+</code></pre>
+<p>Please see the ajax contents demo and following files on the source code to know how ajax content loading is implemented.</p>
+<ol>
+<li><em>smartwizard2-ajax.htm</em></li>
+<li><em>services/service.php</em></li>
+</ol>
+<h3 id="input-validation">Input validation</h3>
+<p>Smart Wizard 3 does not have in-built form validation, but you can call you own validation function for each steps or for all steps with the events. Smart Wizard 3 has three events (<em>onLeaveStep</em>, <em>onShowStep</em>, <em>onFinish</em>). So you can write your step validation login in &quot;<em>onLeaveStep</em>&quot; event and on validation fail you can stay on that step by cancelling that event. Validation logic for all steps can be write on &quot;<em>onFinish</em>&quot; event and so you can avoid submitting the form with errors. </p>
+<p>example:</p>
+<pre><code class="lang-html">&lt;script type=&quot;text/javascript&quot;&gt;
+$(document).ready(function(){
+    // Smart Wizard         
+    $(&#39;#wizard&#39;).smartWizard({
+        onLeaveStep:leaveAStepCallback,
+        onFinish:onFinishCallback
+    });
+
+    function leaveAStepCallback(obj, context){
+        alert(&quot;Leaving step &quot; + context.fromStep + &quot; to go to step &quot; + context.toStep);
+        return validateSteps(context.fromStep); // return false to stay on step and true to continue navigation 
+    }
+
+    function onFinishCallback(objs, context){
+        if(validateAllSteps()){
+            $(&#39;form&#39;).submit();
+        }
+    }
+
+    // Your Step validation logic
+    function validateSteps(stepnumber){
+        var isStepValid = true;
+        // validate step 1
+        if(stepnumber == 1){
+            // Your step validation logic
+            // set isStepValid = false if has errors
+        }
+        // ...      
+    }
+    function validateAllSteps(){
+        var isStepValid = true;
+        // all step validation logic     
+        return isStepValid;
+    }          
+});
+&lt;/script&gt;
+</code></pre>
+<p>Please see the step validation demo and <em>smartwizard2-validation.php</em> in the source code to know how step input validation is implemented.</p>
+<h3 id="highlight-error-steps">Highlight error steps</h3>
+<p>Highlighting error steps in Smart Wizard is easy</p>
+<pre><code class="lang-javascript">$(&#39;#wizard&#39;).smartWizard(&#39;setError&#39;,{stepnum:3,iserror:true});
+</code></pre>
+<p>It takes two arguments </p>
+<ol>
+<li>stepnum :- Step number to which is highlighted as error </li>
+<li>iserror :- true = set the step as error step and false = remove the error highlighting </li>
+</ol>
+<p>example:</p>
+<pre><code class="lang-html">&lt;script type=&quot;text/javascript&quot;&gt;
+    $(document).ready(function() {
+        // Initialize Smart Wizard
+        $(&#39;#wizard&#39;).smartWizard();
+
+        function setError(stepnumber){
+            $(&#39;#wizard&#39;).smartWizard(&#39;setError&#39;,{stepnum:stepnumber,iserror:true});
+        }
+    }); 
+&lt;/script&gt;
+</code></pre>
+<h3 id="show-message-inside-the-wizard">Show message inside the wizard</h3>
+<p>An in-built message box is available with Smart Wizard 3 and you can call it as like below</p>
+<pre><code class="lang-javascript">$(&#39;#wizard&#39;).smartWizard(&#39;showMessage&#39;,&#39;Hello! World&#39;);
+</code></pre>
+<p>example:</p>
+<pre><code class="lang-html">&lt;script type=&quot;text/javascript&quot;&gt;
+    $(document).ready(function() {
+        // Initialize Smart Wizard
+        $(&#39;#wizard&#39;).smartWizard();
+
+        function showWizardMessage(){
+            var myMessage = &#39;Hello this is my message&#39;;
+            // You can call this line wherever to show message inside the wizard
+            $(&#39;#wizard&#39;).smartWizard(&#39;showMessage&#39;,myMessage);
+        }
+    }); 
+&lt;/script&gt;
+</code></pre>
+<h2 id="parameter-description-">Parameter Description:</h2>
+<table>
+    <tr>
+        <th>Parameter Name</th>
+        <th>Description</th>
+        <th>Values</th>
+        <th>Default Value</th>
+    </tr>
+    <tr>
+        <td><strong>selected</strong></td>
+        <td>specify the initially-selected step</td>
+        <td>integer</td>
+        <td>0</td>
+    </tr>
+    <tr>
+        <td><strong>keyNavigation</strong></td>
+        <td>
+            enable/disable key navigation.
+            <br />
+            left/right keys are used if enabled
+        </td>
+        <td>
+            true = enabled
+            <br />
+            false= disabled
+        </td>
+        <td>true</td>
+    </tr>
+    <tr>
+        <td><strong>enableAllSteps</strong></td>
+        <td>Enable/Disable all steps on first load</td>
+        <td>
+            true = enabled 
+            <br />
+            false= disabled
+        </td>
+        <td>false</td>
+    </tr>
+    <tr>
+        <td><strong>transitionEffect</strong></td>
+        <td>Animation effect on step navigation</td>
+        <td>none/fade/slide/slideleft</td>
+        <td>fade</td>
+    </tr>
+    <tr>
+        <td><strong>contentURL</strong></td>
+        <td>Setting this property will enable ajax content loading, setting null will disable ajax contents</td>
+        <td>null or a valid url</td>
+        <td>null</td>
+     <tr>
+        <td><strong>contentURLData</strong></td>
+        <td>with ContentURL set, use this property to override the ajax query parameters used when loading contents</td>
+        <td>null or a function that takes the new step number and returns an object to override ajax parameters</td>
+        <td>null</td>
+    </tr>
+    </tr>
+    <tr>
+        <td><strong>contentCache</strong></td>
+        <td>This property will enable caching of the content on ajax content mode. So the contents are fetched from the url only on first load of the step</td>
+        <td>
+            true = enabled
+            <br />
+            false= disabled
+        </td>
+        <td>true</td>
+    </tr>
+    <tr>
+        <td><strong>cycleSteps</strong></td>
+        <td>This property allows to cycle the navigation of steps</td>
+        <td>
+            true = enabled
+            <br />
+            false= disabled
+        </td>
+        <td>false</td>
+    </tr>
+    <tr>
+        <td><strong>enableFinishButton</strong></td>
+        <td>This property will make the finish button enabled always</td>
+        <td>
+            true = enabled
+            <br />
+            false= disabled
+        </td>
+        <td>false</td>
+    </tr>
+    <tr>
+        <td><strong>hideButtonsOnDisabled</strong></td>
+        <td>This property will hide the disabled buttons instead of just disabling them</td>
+        <td>
+            true = enabled
+            <br />
+            false= disabled
+        </td>
+        <td>false</td>
+    </tr>
+    <tr>
+        <td><strong>errorSteps</strong></td>
+        <td>an array of step numbers to highlighting as error steps</td>
+        <td>
+            array of integers
+            <br />
+            ex: [2,4]
+        </td>
+        <td>[]</td>
+    </tr>
+    <tr>
+        <td><strong>labelNext</strong></td>
+        <td>Label for Next button</td>
+        <td>String</td>
+        <td>Next</td>
+    </tr>
+    <tr>
+        <td><strong>labelPrevious</strong></td>
+        <td>Label for Previous button</td>
+        <td>String</td>
+        <td>Previous</td>
+    </tr>
+    <tr>
+        <td><strong>labelFinish</strong></td>
+        <td>Label for Finish button</td>
+        <td>String</td>
+        <td>Finish</td>
+    </tr>
+    <tr>
+        <td><strong>noForwardJumping</strong></td>
+        <td>If true, automatically disable all steps following the current step.
+        <br />
+        <br />
+        e.g. If I am on step 4, and click step 1, steps 2-4 will be disabled and I cannot jump back to 3 or 4, and can only proceed &quot;next&quot; to step 2.</td>
+        <td>Boolean</td>
+        <td>false</td>
+    </tr>
+</table>
+
+<h2 id="event-description-">Event Description:</h2>
+<table>
+    <tr>
+        <th>Event Name</th>
+        <th>Description</th>
+        <th>Parameters</th>
+    </tr>
+    <tr>
+        <td><strong>onLeaveStep</strong></td>
+        <td>
+            Triggers when leaving a step.
+            <br />
+            <br />
+            This is a decision making event, based on its function return value (true/false) the current step navigation can be cancelled.
+        </td>
+        <td>
+            <strong>Object</strong>: object of the step anchor element.
+            You can access the step number and step body element using this object.
+            <br />
+            <strong>Object</strong>: Context information with keys: <em>fromStep</em> and <em>toStep</em>
+        </td>
+    </tr>
+    <tr>
+        <td><strong>onShowStep</strong></td>
+        <td>Triggers when showing a step.</td>
+        <td>
+            <strong>Object</strong>: object of the step anchor element.
+            You can access the step number and step body element using this object.
+            <br />
+            <strong>Object</strong>: Context information with keys: <em>fromStep</em> and <em>toStep</em>
+        </td>
+    </tr>
+    <tr>
+        <td><strong>onFinish</strong></td>
+        <td>
+            Triggers when the Finish button is clicked.
+            <br />
+            <br />
+            This is a decision making event, based on its function return value (true/false) the further actions can be cancelled.
+            <br />
+            <br />
+            e.g.: If the validation fails we can cancel form submitting and can show an error message. Please see the form validation example for the implementation
+            <br />
+            <br />
+            If this callback is not set, clicking the finish button will submit the form in which the wizard is placed, and do nothing if a parent form is not found.
+        </td>
+        <td>
+            <strong>Object Array</strong>: an array of the object of all the step anchor elements
+            <strong>Object</strong>: Context information with key: <em>fromStep</em> indicating which step the user was on when they clicked the finish button.
+        </td>
+    </tr>
+</table>
+
+<h2 id="public-methods-">Public methods:</h2>
+<p>Methods can be called by calling <code>smartWizard(&quot;method_name&quot;, arguments)</code></p>
+<p>For example, calling the <em>showMessage</em> method to display &quot;Hello, World!&quot; would
+look like this:</p>
+<pre><code class="lang-javascript">$(&quot;#your_wizard&quot;).smartWizard(&#39;showMessage&#39;, &#39;Hello, World!&#39;);
+</code></pre>
+<p>Here are the available methods:</p>
+<table>
+    <tr>
+        <th>Method Name</th>
+        <th>Arguments</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td><strong>showMessage</strong></td>
+        <td><strong>String</strong>: the message to show.</td>
+        <td>Show a message in the action bar</td>
+    </tr>
+    <tr>
+        <td><strong>hideMessage</strong></td>
+        <td>None</td>
+        <td>Hide the message in the action bar</td>
+    </tr>
+    <tr>
+        <td><strong>showError</strong></td>
+        <td><strong>Integer</strong>: the step number to highlight with an error.</td>
+        <td>This is a convenience wrapper around <em>setError</em>.</td>
+    </tr>
+    <tr>
+        <td><strong>hideError</strong></td>
+        <td><strong>Integer</strong>: the step number to un-highlight with an error.</td>
+        <td>This is a convenience wrapper around <em>setError</em>.</td>
+    </tr>
+    <tr>
+        <td><strong>setError</strong></td>
+        <td><strong>Object</strong>: with keys <em>stepnum</em> and <em>iserror</em>.</td>
+        <td>Set or unset error status on a particular step. Passing <em>iserror</em> as true sets the error. Passing in a false value turns off the error.</td>
+    </tr>
+    <tr>
+        <td><strong>goForward</strong></td>
+        <td>None</td>
+        <td>Load the next step.</td>
+    </tr>
+    <tr>
+        <td><strong>goBackward</strong></td>
+        <td>None</td>
+        <td>Load the previous step.</td>
+    </tr>
+    <tr>
+        <td><strong>goToStep</strong></td>
+        <td><strong>Integer</strong> - the step number to load</td>
+        <td>Load the specified step.</td>
+    </tr>
+    <tr>
+        <td><strong>enableStep</strong></td>
+        <td><strong>Integer</strong> - the step number to enable</td>
+        <td>Enable the specified step.</td>
+    </tr>
+    <tr>
+        <td><strong>disableStep</strong></td>
+        <td><strong>Integer</strong> - the step number to disable</td>
+        <td>Disable the specified step.</td>
+    </tr>
+    <tr>
+        <td><strong>currentStep</strong></td>
+        <td>None</td>
+        <td>Returns the number of the current step.</td>
+    </tr>
+    <tr>
+        <td><strong>fixHeight</strong></td>
+        <td>None</td>
+        <td>
+            Adjusts the height of the step contents for the current step.
+            In general you won&#39;t need this, but it&#39;s useful if you are
+            dynamically setting the contents.
+        </td>
+    </tr>
+</table>
+

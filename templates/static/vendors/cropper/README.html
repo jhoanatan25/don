@@ -1,0 +1,938 @@
+<h1 id="cropper">Cropper</h1>
+<blockquote>
+<p>A simple jQuery image cropping plugin.</p>
+</blockquote>
+<ul>
+<li><a href="https://fengyuanchen.github.io/cropper">Website</a></li>
+<li><a href="https://github.com/fengyuanchen/cropperjs">Cropper without jQuery</a></li>
+</ul>
+<p><a href="https://travis-ci.org/fengyuanchen/cropper"><img src="https://travis-ci.org/fengyuanchen/cropper.svg" alt="Build Status Images"></a></p>
+<h2 id="table-of-contents">Table of contents</h2>
+<ul>
+<li><a href="#features">Features</a></li>
+<li><a href="#main">Main</a></li>
+<li><a href="#getting-started">Getting started</a></li>
+<li><a href="#options">Options</a></li>
+<li><a href="#methods">Methods</a></li>
+<li><a href="#events">Events</a></li>
+<li><a href="#no-conflict">No conflict</a></li>
+<li><a href="#browser-support">Browser support</a></li>
+<li><a href="#contributing">Contributing</a></li>
+<li><a href="#versioning">Versioning</a></li>
+<li><a href="#license">License</a></li>
+</ul>
+<h2 id="features">Features</h2>
+<ul>
+<li>Supports 39 <a href="#options">options</a></li>
+<li>Supports 27 <a href="#methods">methods</a></li>
+<li>Supports 7 <a href="#events">events</a></li>
+<li>Supports touch (mobile)</li>
+<li>Supports zooming</li>
+<li>Supports rotating</li>
+<li>Supports scaling (flipping)</li>
+<li>Supports multiple croppers</li>
+<li>Supports to crop on a canvas</li>
+<li>Supports to crop image in the browser-side by canvas</li>
+<li>Supports to translate Exif Orientation information</li>
+<li>Cross-browser support</li>
+</ul>
+<h2 id="main">Main</h2>
+<pre><code>dist/
+├── cropper.css     ( 5 KB)
+├── cropper.min.css ( 4 KB)
+├── cropper.js      (79 KB)
+└── cropper.min.js  (28 KB)
+</code></pre><h2 id="getting-started">Getting started</h2>
+<h3 id="quick-start">Quick start</h3>
+<p>Four quick start options are available:</p>
+<ul>
+<li><a href="https://github.com/fengyuanchen/cropper/archive/master.zip">Download the latest release</a>.</li>
+<li>Clone the repository: <code>git clone https://github.com/fengyuanchen/cropper.git</code>.</li>
+<li>Install with <a href="http://npmjs.org">NPM</a>: <code>npm install cropper</code>.</li>
+<li>Install with <a href="http://bower.io">Bower</a>: <code>bower install cropper</code>.</li>
+</ul>
+<h3 id="installation">Installation</h3>
+<p>Include files:</p>
+<pre><code class="lang-html">&lt;script src=&quot;/path/to/jquery.js&quot;&gt;&lt;/script&gt;&lt;!-- jQuery is required --&gt;
+&lt;link  href=&quot;/path/to/cropper.css&quot; rel=&quot;stylesheet&quot;&gt;
+&lt;script src=&quot;/path/to/cropper.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+<p>The <a href="https://github.com/cdnjs/cdnjs">cdnjs</a> provides CDN support for Cropper&#39;s CSS and JavaScript. You can find the links <a href="https://cdnjs.com/libraries/cropper">here</a>.</p>
+<h3 id="usage">Usage</h3>
+<p>Initialize with <code>$.fn.cropper</code> method.</p>
+<pre><code class="lang-html">&lt;!-- Wrap the image or canvas element with a block element (container) --&gt;
+&lt;div&gt;
+  &lt;img id=&quot;image&quot; src=&quot;picture.jpg&quot;&gt;
+&lt;/div&gt;
+</code></pre>
+<pre><code class="lang-css">/* Limit image width to avoid overflow the container */
+img {
+  max-width: 100%; /* This rule is very important, please do not ignore this! */
+}
+</code></pre>
+<pre><code class="lang-js">$(&#39;#image&#39;).cropper({
+  aspectRatio: 16 / 9,
+  crop: function(e) {
+    // Output the result data for cropping image.
+    console.log(e.x);
+    console.log(e.y);
+    console.log(e.width);
+    console.log(e.height);
+    console.log(e.rotate);
+    console.log(e.scaleX);
+    console.log(e.scaleY);
+  }
+});
+</code></pre>
+<h4 id="faq">FAQ</h4>
+<p>See the <a href="FAQ.md">FAQ</a> documentation.</p>
+<h4 id="notes">Notes</h4>
+<ul>
+<li><p>The size of the cropper inherits from the size of the image&#39;s parent element (wrapper), so be sure to wrap the image with a <strong>visible block element</strong>.</p>
+<blockquote>
+<p>If you are using cropper in a modal, you should initialize the cropper after the modal shown completely. Otherwise, you will not get a correct cropper.</p>
+</blockquote>
+</li>
+<li><p>The outputted cropped data bases on the original image size, so you can use them to crop the image directly.</p>
+</li>
+<li><p>If you try to start cropper on a cross-origin image, please make sure that your browser supports HTML5 <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_settings_attributes">CORS settings attributes</a>, and your image server supports the <code>Access-Control-Allow-Origin</code> option (see the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS">HTTP access control (CORS)</a>).</p>
+</li>
+</ul>
+<h4 id="known-issues">Known issues</h4>
+<ul>
+<li><p><a href="https://developer.apple.com/library/mac/documentation/AppleApplications/Reference/SafariWebContent/CreatingContentforSafarioniPhone/CreatingContentforSafarioniPhone.html">Known iOS resource limits</a>: As iOS devices limit memory, the browser may crash when you are cropping a large image (iPhone camera resolution). To avoid this, you may resize the image first (below 1024px) before start a cropper.</p>
+</li>
+<li><p>Known image size increase: When export the cropped image on browser-side with the <code>HTMLCanvasElement.toDataURL</code> method, the the exported image&#39;size may be greater than the original image&#39;s. This is because the exported image&#39;type is not the same as the original image&#39;s. So just pass the original image&#39;s type as the first parameter to <code>toDataURL</code> to fix this. For example, if the original type is JPEG, then use <code>$().cropper(&#39;getCroppedCanvas&#39;).toDataURL(&#39;image/jpeg&#39;)</code> to export image.</p>
+</li>
+</ul>
+<p><a href="#table-of-contents">⬆ back to top</a></p>
+<h2 id="options">Options</h2>
+<p>You may set cropper options with <code>$().cropper(options)</code>.
+If you want to change the global default options, You may use <code>$.fn.cropper.setDefaults(options)</code>.</p>
+<h3 id="viewmode">viewMode</h3>
+<ul>
+<li>Type: <code>Number</code></li>
+<li>Default: <code>0</code></li>
+<li>Options:<ul>
+<li><code>0</code>: the crop box is just within the container</li>
+<li><code>1</code>: the crop box should be within the canvas</li>
+<li><code>2</code>: the canvas should not be within the container</li>
+<li><code>3</code>: the container should be within the canvas</li>
+</ul>
+</li>
+</ul>
+<p>Define the view mode of the cropper.</p>
+<h3 id="dragmode">dragMode</h3>
+<ul>
+<li>Type: <code>String</code></li>
+<li>Default: <code>&#39;crop&#39;</code></li>
+<li>Options:<ul>
+<li><code>&#39;crop&#39;</code>: create a new crop box</li>
+<li><code>&#39;move&#39;</code>: move the canvas</li>
+<li><code>&#39;none&#39;</code>: do nothing</li>
+</ul>
+</li>
+</ul>
+<p>Define the dragging mode of the cropper.</p>
+<h3 id="aspectratio">aspectRatio</h3>
+<ul>
+<li>Type: <code>Number</code></li>
+<li>Default: <code>NaN</code></li>
+</ul>
+<p>Set the aspect ratio of the crop box. By default, the crop box is free ratio.</p>
+<h3 id="data">data</h3>
+<ul>
+<li>Type: <code>Object</code></li>
+<li>Default: <code>null</code></li>
+</ul>
+<p>The previous cropped data if you had stored, will be passed to <code>setData</code> method automatically.</p>
+<h3 id="preview">preview</h3>
+<ul>
+<li>Type: <code>String</code> (<strong>jQuery selector</strong>)</li>
+<li>Default: <code>&#39;&#39;</code></li>
+</ul>
+<p>Add extra elements (containers) for previewing.</p>
+<p><strong>Notes:</strong></p>
+<ul>
+<li>The maximum width is the initial width of preview container.</li>
+<li>The maximum height is the initial height of preview container.</li>
+<li>If you set an <code>aspectRatio</code> option, be sure to set the preview container with the same aspect ratio.</li>
+<li>If preview is not getting properly displayed, set <code>overflow:hidden</code> to the preview container.</li>
+</ul>
+<h3 id="responsive">responsive</h3>
+<ul>
+<li>Type: <code>Boolean</code></li>
+<li>Default: <code>true</code></li>
+</ul>
+<p>Re-render the cropper when resize the window.</p>
+<h3 id="restore">restore</h3>
+<ul>
+<li>Type: <code>Boolean</code></li>
+<li>Default: <code>true</code></li>
+</ul>
+<p>Restore the cropped area after resize the window.</p>
+<h3 id="checkcrossorigin">checkCrossOrigin</h3>
+<ul>
+<li>Type: <code>Boolean</code></li>
+<li>Default: <code>true</code></li>
+</ul>
+<p>Check if the current image is a cross-origin image.</p>
+<p>If it is, when clone the image, a <code>crossOrigin</code> attribute will be added to the cloned image element and a timestamp will be added to the <code>src</code> attribute to reload the source image to avoid browser cache error.</p>
+<p>By adding <code>crossOrigin</code> attribute to image will stop adding timestamp to image url, and stop reload of image.</p>
+<h3 id="checkorientation">checkOrientation</h3>
+<ul>
+<li>Type: <code>Boolean</code></li>
+<li>Default: <code>true</code></li>
+</ul>
+<p>Check the current image&#39;s Exif Orientation information.</p>
+<p>More exactly, read the Orientation value for rotating or flipping the image, and then override the Orientation value with <code>1</code> (the default value) to avoid some issues (#120, #509) on iOS devices.</p>
+<p><strong>Note:</strong> Don&#39;t trust this all the time as some JPG images have incorrect (not standard) Orientation values.</p>
+<blockquote>
+<p>Requires <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray">Typed Arrays</a> support (<a href="http://caniuse.com/typedarrays">IE 10+</a>).</p>
+</blockquote>
+<h3 id="modal">modal</h3>
+<ul>
+<li>Type: <code>Boolean</code></li>
+<li>Default: <code>true</code></li>
+</ul>
+<p>Show the black modal above the image and under the crop box.</p>
+<h3 id="guides">guides</h3>
+<ul>
+<li>Type: <code>Boolean</code></li>
+<li>Default: <code>true</code></li>
+</ul>
+<p>Show the dashed lines above the crop box.</p>
+<h3 id="center">center</h3>
+<ul>
+<li>Type: <code>Boolean</code></li>
+<li>Default: <code>true</code></li>
+</ul>
+<p>Show the center indicator above the crop box.</p>
+<h3 id="highlight">highlight</h3>
+<ul>
+<li>Type: <code>Boolean</code></li>
+<li>Default: <code>true</code></li>
+</ul>
+<p>Show the white modal above the crop box (highlight the crop box).</p>
+<h3 id="background">background</h3>
+<ul>
+<li>Type: <code>Boolean</code></li>
+<li>Default: <code>true</code></li>
+</ul>
+<p>Show the grid background of the container.</p>
+<h3 id="autocrop">autoCrop</h3>
+<ul>
+<li>Type: <code>Boolean</code></li>
+<li>Default: <code>true</code></li>
+</ul>
+<p>Enable to crop the image automatically when initialize.</p>
+<h3 id="autocroparea">autoCropArea</h3>
+<ul>
+<li>Type: <code>Number</code></li>
+<li>Default: <code>0.8</code> (80% of the image)</li>
+</ul>
+<p>A number between 0 and 1. Define the automatic cropping area size (percentage).</p>
+<h3 id="movable">movable</h3>
+<ul>
+<li>Type: <code>Boolean</code></li>
+<li>Default: <code>true</code></li>
+</ul>
+<p>Enable to move the image.</p>
+<h3 id="rotatable">rotatable</h3>
+<ul>
+<li>Type: <code>Boolean</code></li>
+<li>Default: <code>true</code></li>
+</ul>
+<p>Enable to rotate the image.</p>
+<h3 id="scalable">scalable</h3>
+<ul>
+<li>Type: <code>Boolean</code></li>
+<li>Default: <code>true</code></li>
+</ul>
+<p>Enable to scale the image.</p>
+<h3 id="zoomable">zoomable</h3>
+<ul>
+<li>Type: <code>Boolean</code></li>
+<li>Default: <code>true</code></li>
+</ul>
+<p>Enable to zoom the image.</p>
+<h3 id="zoomontouch">zoomOnTouch</h3>
+<ul>
+<li>Type: <code>Boolean</code></li>
+<li>Default: <code>true</code></li>
+</ul>
+<p>Enable to zoom the image by dragging touch.</p>
+<h3 id="zoomonwheel">zoomOnWheel</h3>
+<ul>
+<li>Type: <code>Boolean</code></li>
+<li>Default: <code>true</code></li>
+</ul>
+<p>Enable to zoom the image by wheeling mouse.</p>
+<h3 id="wheelzoomratio">wheelZoomRatio</h3>
+<ul>
+<li>Type: <code>Number</code></li>
+<li>Default: <code>0.1</code></li>
+</ul>
+<p>Define zoom ratio when zoom the image by wheeling mouse.</p>
+<h3 id="cropboxmovable">cropBoxMovable</h3>
+<ul>
+<li>Type: <code>Boolean</code></li>
+<li>Default: <code>true</code></li>
+</ul>
+<p>Enable to move the crop box by dragging.</p>
+<h3 id="cropboxresizable">cropBoxResizable</h3>
+<ul>
+<li>Type: <code>Boolean</code></li>
+<li>Default: <code>true</code></li>
+</ul>
+<p>Enable to resize the crop box by dragging.</p>
+<h3 id="toggledragmodeondblclick">toggleDragModeOnDblclick</h3>
+<ul>
+<li>Type: <code>Boolean</code></li>
+<li>Default: <code>true</code></li>
+</ul>
+<p>Enable to toggle drag mode between &quot;crop&quot; and &quot;move&quot; when click twice on the cropper.</p>
+<h3 id="mincontainerwidth">minContainerWidth</h3>
+<ul>
+<li>Type: <code>Number</code></li>
+<li>Default: <code>200</code></li>
+</ul>
+<p>The minimum width of the container.</p>
+<h3 id="mincontainerheight">minContainerHeight</h3>
+<ul>
+<li>Type: <code>Number</code></li>
+<li>Default: <code>100</code></li>
+</ul>
+<p>The minimum height of the container.</p>
+<h3 id="mincanvaswidth">minCanvasWidth</h3>
+<ul>
+<li>Type: <code>Number</code></li>
+<li>Default: <code>0</code></li>
+</ul>
+<p>The minimum width of the canvas (image wrapper).</p>
+<h3 id="mincanvasheight">minCanvasHeight</h3>
+<ul>
+<li>Type: <code>Number</code></li>
+<li>Default: <code>0</code></li>
+</ul>
+<p>The minimum height of the canvas (image wrapper).</p>
+<h3 id="mincropboxwidth">minCropBoxWidth</h3>
+<ul>
+<li>Type: <code>Number</code></li>
+<li>Default: <code>0</code></li>
+</ul>
+<p>The minimum width of the crop box.</p>
+<p><strong>Note:</strong> This size is relative to the page, not the image.</p>
+<h3 id="mincropboxheight">minCropBoxHeight</h3>
+<ul>
+<li>Type: <code>Number</code></li>
+<li>Default: <code>0</code></li>
+</ul>
+<p>The minimum height of the crop box.</p>
+<p><strong>Note:</strong> This size is relative to the page, not the image.</p>
+<h3 id="build">build</h3>
+<ul>
+<li>Type: <code>Function</code></li>
+<li>Default: <code>null</code></li>
+</ul>
+<p>A shortcut of the &quot;build.cropper&quot; event.</p>
+<h3 id="built">built</h3>
+<ul>
+<li>Type: <code>Function</code></li>
+<li>Default: <code>null</code></li>
+</ul>
+<p>A shortcut of the &quot;built.cropper&quot; event.</p>
+<h3 id="cropstart">cropstart</h3>
+<ul>
+<li>Type: <code>Function</code></li>
+<li>Default: <code>null</code></li>
+</ul>
+<p>A shortcut of the &quot;cropstart.cropper&quot; event.</p>
+<h3 id="cropmove">cropmove</h3>
+<ul>
+<li>Type: <code>Function</code></li>
+<li>Default: <code>null</code></li>
+</ul>
+<p>A shortcut of the &quot;cropmove.cropper&quot; event.</p>
+<h3 id="cropend">cropend</h3>
+<ul>
+<li>Type: <code>Function</code></li>
+<li>Default: <code>null</code></li>
+</ul>
+<p>A shortcut of the &quot;cropend.cropper&quot; event.</p>
+<h3 id="crop">crop</h3>
+<ul>
+<li>Type: <code>Function</code></li>
+<li>Default: <code>null</code></li>
+</ul>
+<p>A shortcut of the &quot;crop.cropper&quot; event.</p>
+<h3 id="zoom">zoom</h3>
+<ul>
+<li>Type: <code>Function</code></li>
+<li>Default: <code>null</code></li>
+</ul>
+<p>A shortcut of the &quot;zoom.cropper&quot; event.</p>
+<p><a href="#table-of-contents">⬆ back to top</a></p>
+<h2 id="methods">Methods</h2>
+<p>As there is an <strong>asynchronous</strong> process when load the image, you <strong>should call most of the methods after built</strong>, except &quot;setAspectRatio&quot;, &quot;replace&quot; and &quot;destroy&quot;.</p>
+<pre><code class="lang-js">$().cropper({
+  built: function () {
+    $().cropper(&#39;method&#39;, argument1, , argument2, ..., argumentN);
+  }
+});
+</code></pre>
+<h3 id="crop-">crop()</h3>
+<p>Show the crop box manually.</p>
+<pre><code class="lang-js">$().cropper({
+  autoCrop: false,
+  built: function () {
+    // Do something here
+    // ...
+
+    // And then
+    $(this).cropper(&#39;crop&#39;);
+  }
+});
+</code></pre>
+<h3 id="reset-">reset()</h3>
+<p>Reset the image and crop box to their initial states.</p>
+<h3 id="clear-">clear()</h3>
+<p>Clear the crop box.</p>
+<h3 id="replace-url-onlycolorchanged-">replace(url[, onlyColorChanged])</h3>
+<ul>
+<li><p><strong>url</strong>:</p>
+<ul>
+<li>Type: <code>String</code></li>
+<li>A new image url.</li>
+</ul>
+</li>
+<li><p><strong>onlyColorChanged</strong> (optional):</p>
+<ul>
+<li>Type: <code>Boolean</code></li>
+<li>If only change the color, not the size, then the cropper only need to change the srcs of all related images, not need to rebuild the cropper. This can be used for applying filters.</li>
+<li>If not present, its default value is <code>false</code>.</li>
+</ul>
+</li>
+</ul>
+<p>Replace the image&#39;s src and rebuild the cropper.</p>
+<h3 id="enable-">enable()</h3>
+<p>Enable (unfreeze) the cropper.</p>
+<h3 id="disable-">disable()</h3>
+<p>Disable (freeze) the cropper.</p>
+<h3 id="destroy-">destroy()</h3>
+<p>Destroy the cropper and remove the instance from the image.</p>
+<h3 id="move-offsetx-offsety-">move(offsetX[, offsetY])</h3>
+<ul>
+<li><p><strong>offsetX</strong>:</p>
+<ul>
+<li>Type: <code>Number</code></li>
+<li>Moving size (px) in the horizontal direction.</li>
+</ul>
+</li>
+<li><p><strong>offsetY</strong> (optional):</p>
+<ul>
+<li>Type: <code>Number</code></li>
+<li>Moving size (px) in the vertical direction.</li>
+<li>If not present, its default value is <code>offsetX</code>.</li>
+</ul>
+</li>
+</ul>
+<p>Move the canvas (image wrapper) with relative offsets.</p>
+<pre><code class="lang-js">$().cropper(&#39;move&#39;, 1);
+$().cropper(&#39;move&#39;, 1, 0);
+$().cropper(&#39;move&#39;, 0, -1);
+</code></pre>
+<h3 id="moveto-x-y-">moveTo(x[, y])</h3>
+<ul>
+<li><p><strong>x</strong>:</p>
+<ul>
+<li>Type: <code>Number</code></li>
+<li>The <code>left</code> value of the canvas</li>
+</ul>
+</li>
+<li><p><strong>y</strong> (optional):</p>
+<ul>
+<li>Type: <code>Number</code></li>
+<li>The <code>top</code> value of the canvas</li>
+<li>If not present, its default value is <code>x</code>.</li>
+</ul>
+</li>
+</ul>
+<p>Move the canvas (image wrapper) to an absolute point.</p>
+<h3 id="zoom-ratio-">zoom(ratio)</h3>
+<ul>
+<li><strong>ratio</strong>:<ul>
+<li>Type: <code>Number</code></li>
+<li>Zoom in: requires a positive number (ratio &gt; 0)</li>
+<li>Zoom out: requires a negative number (ratio &lt; 0)</li>
+</ul>
+</li>
+</ul>
+<p>Zoom the canvas (image wrapper) with a relative ratio.</p>
+<pre><code class="lang-js">$().cropper(&#39;zoom&#39;, 0.1);
+$().cropper(&#39;zoom&#39;, -0.1);
+</code></pre>
+<h3 id="zoomto-ratio-">zoomTo(ratio)</h3>
+<ul>
+<li><strong>ratio</strong>:<ul>
+<li>Type: <code>Number</code></li>
+</ul>
+</li>
+</ul>
+<p>Zoom the canvas (image wrapper) to an absolute ratio.</p>
+<pre><code class="lang-js">$().cropper(&#39;zoomTo&#39;, 1); // 1:1 (canvasData.width === canvasData.naturalWidth)
+</code></pre>
+<h3 id="rotate-degree-">rotate(degree)</h3>
+<ul>
+<li><strong>degree</strong>:<ul>
+<li>Type: <code>Number</code></li>
+<li>Rotate right: requires a positive number (degree &gt; 0)</li>
+<li>Rotate left: requires a negative number (degree &lt; 0)</li>
+</ul>
+</li>
+</ul>
+<p>Rotate the image with a relative degree.</p>
+<blockquote>
+<p>Requires <a href="http://caniuse.com/transforms2d">CSS3 2D Transforms</a> support (IE 9+).</p>
+</blockquote>
+<pre><code class="lang-js">$().cropper(&#39;rotate&#39;, 90);
+$().cropper(&#39;rotate&#39;, -90);
+</code></pre>
+<h3 id="rotateto-degree-">rotateTo(degree)</h3>
+<ul>
+<li><strong>degree</strong>:<ul>
+<li>Type: <code>Number</code></li>
+</ul>
+</li>
+</ul>
+<p>Rotate the image to an absolute degree.</p>
+<h3 id="scale-scalex-scaley-">scale(scaleX[, scaleY])</h3>
+<ul>
+<li><p><strong>scaleX</strong>:</p>
+<ul>
+<li>Type: <code>Number</code></li>
+<li>Default: <code>1</code></li>
+<li>The scaling factor to apply on the abscissa of the image.</li>
+<li>When equal to <code>1</code> it does nothing.</li>
+</ul>
+</li>
+<li><p><strong>scaleY</strong> (optional):</p>
+<ul>
+<li>Type: <code>Number</code></li>
+<li>The scaling factor to apply on the ordinate of the image.</li>
+<li>If not present, its default value is <code>scaleX</code>.</li>
+</ul>
+</li>
+</ul>
+<p>Scale the image.</p>
+<blockquote>
+<p>Requires <a href="http://caniuse.com/transforms2d">CSS3 2D Transforms</a> support (IE 9+).</p>
+</blockquote>
+<pre><code class="lang-js">$().cropper(&#39;scale&#39;, -1); // Flip both horizontal and vertical
+$().cropper(&#39;scale&#39;, -1, 1); // Flip horizontal
+$().cropper(&#39;scale&#39;, 1, -1); // Flip vertical
+</code></pre>
+<h3 id="scalex-scalex-">scaleX(scaleX)</h3>
+<ul>
+<li><strong>scaleX</strong>:<ul>
+<li>Type: <code>Number</code></li>
+<li>Default: <code>1</code></li>
+<li>The scaling factor to apply on the abscissa of the image.</li>
+<li>When equal to <code>1</code> it does nothing.</li>
+</ul>
+</li>
+</ul>
+<p>Scale the abscissa of the image.</p>
+<h3 id="scaley-scaley-">scaleY(scaleY)</h3>
+<ul>
+<li><strong>scaleY</strong>:<ul>
+<li>Type: <code>Number</code></li>
+<li>Default: <code>1</code></li>
+<li>The scaling factor to apply on the ordinate of the image.</li>
+<li>When equal to <code>1</code> it does nothing.</li>
+</ul>
+</li>
+</ul>
+<p>Scale the ordinate of the image.</p>
+<h3 id="getdata-rounded-">getData([rounded])</h3>
+<ul>
+<li><p><strong>rounded</strong> (optional):</p>
+<ul>
+<li>Type: <code>Boolean</code></li>
+<li>Default: <code>false</code></li>
+<li>Set <code>true</code> to get rounded values.</li>
+</ul>
+</li>
+<li><p>(return value):</p>
+<ul>
+<li>Type: <code>Object</code></li>
+<li>Properties:<ul>
+<li><code>x</code>: the offset left of the cropped area</li>
+<li><code>y</code>: the offset top of the cropped area</li>
+<li><code>width</code>: the width of the cropped area</li>
+<li><code>height</code>: the height of the cropped area</li>
+<li><code>rotate</code>: the rotated degrees of the image</li>
+<li><code>scaleX</code>: the scaling factor to apply on the abscissa of the image</li>
+<li><code>scaleY</code>: the scaling factor to apply on the ordinate of the image</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>Output the final cropped area position and size data (base on the natural size of the original image).</p>
+<blockquote>
+<p>You can send the data to server-side to crop the image directly.</p>
+</blockquote>
+<p><img src="assets/img/data.jpg" alt="a schematic diagram of data&#39;s properties"></p>
+<h3 id="setdata-data-">setData(data)</h3>
+<ul>
+<li><strong>data</strong>:<ul>
+<li>Type: <code>Object</code></li>
+<li>Properties: See the <a href="#getdatarounded"><code>getData</code></a> method.</li>
+</ul>
+</li>
+</ul>
+<p>Change the cropped area position and size with new data (base on the original image).</p>
+<blockquote>
+<p><strong>Note:</strong> This method only available when the <code>viewMode</code> option great than or equal to <code>1</code>.</p>
+</blockquote>
+<h3 id="getcontainerdata-">getContainerData()</h3>
+<ul>
+<li>(return  value):<ul>
+<li>Type: <code>Object</code></li>
+<li>Properties:<ul>
+<li><code>width</code>: the current width of the container</li>
+<li><code>height</code>: the current height of the container</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>Output the container size data.</p>
+<p><img src="assets/img/layers.jpg" alt="a schematic diagram of cropper&#39;s layers"></p>
+<h3 id="getimagedata-">getImageData()</h3>
+<ul>
+<li>(return  value):<ul>
+<li>Type: <code>Object</code></li>
+<li>Properties:<ul>
+<li><code>left</code>: the offset left of the image</li>
+<li><code>top</code>: the offset top of the image</li>
+<li><code>width</code>: the width of the image</li>
+<li><code>height</code>: the height of the image</li>
+<li><code>naturalWidth</code>: the natural width of the image</li>
+<li><code>naturalHeight</code>: the natural height of the image</li>
+<li><code>aspectRatio</code>: the aspect ratio of the image</li>
+<li><code>rotate</code>: the rotated degrees of the image if rotated</li>
+<li><code>scaleX</code>: the scaling factor to apply on the abscissa of the image if scaled</li>
+<li><code>scaleY</code>: the scaling factor to apply on the ordinate of the image if scaled</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>Output the image position, size and other related data.</p>
+<h3 id="getcanvasdata-">getCanvasData()</h3>
+<ul>
+<li>(return  value):<ul>
+<li>Type: <code>Object</code></li>
+<li>Properties:<ul>
+<li><code>left</code>: the offset left of the canvas</li>
+<li><code>top</code>: the offset top of the canvas</li>
+<li><code>width</code>: the width of the canvas</li>
+<li><code>height</code>: the height of the canvas</li>
+<li><code>naturalWidth</code>: the natural width of the canvas (read only)</li>
+<li><code>naturalHeight</code>: the natural height of the canvas (read only)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>Output the canvas (image wrapper) position and size data.</p>
+<pre><code class="lang-js">var imageData = $().cropper(&#39;getImageData&#39;);
+var canvasData = $().cropper(&#39;getCanvasData&#39;);
+
+if (imageData.rotate % 180 === 0) {
+  console.log(canvasData.naturalWidth === imageData.naturalWidth); // true
+}
+</code></pre>
+<h3 id="setcanvasdata-data-">setCanvasData(data)</h3>
+<ul>
+<li><strong>data</strong>:<ul>
+<li>Type: <code>Object</code></li>
+<li>Properties:<ul>
+<li><code>left</code>: the new offset left of the canvas</li>
+<li><code>top</code>: the new offset top of the canvas</li>
+<li><code>width</code>: the new width of the canvas</li>
+<li><code>height</code>: the new height of the canvas</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>Change the canvas (image wrapper) position and size with new data.</p>
+<h3 id="getcropboxdata-">getCropBoxData()</h3>
+<ul>
+<li>(return  value):<ul>
+<li>Type: <code>Object</code></li>
+<li>Properties:<ul>
+<li><code>left</code>: the offset left of the crop box</li>
+<li><code>top</code>: the offset top of the crop box</li>
+<li><code>width</code>: the width of the crop box</li>
+<li><code>height</code>: the height of the crop box</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>Output the crop box position and size data.</p>
+<h3 id="setcropboxdata-data-">setCropBoxData(data)</h3>
+<ul>
+<li><strong>data</strong>:<ul>
+<li>Type: <code>Object</code></li>
+<li>Properties:<ul>
+<li><code>left</code>: the new offset left of the crop box</li>
+<li><code>top</code>: the new offset top of the crop box</li>
+<li><code>width</code>: the new width of the crop box</li>
+<li><code>height</code>: the new height of the crop box</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>Change the crop box position and size with new data.</p>
+<h3 id="getcroppedcanvas-options-">getCroppedCanvas([options])</h3>
+<ul>
+<li><p><strong>options</strong> (optional):</p>
+<ul>
+<li>Type: <code>Object</code></li>
+<li>Properties:<ul>
+<li><code>width</code>: the destination width of the output canvas</li>
+<li><code>height</code>: the destination height of the output canvas</li>
+<li><code>fillColor</code>: a color to fill any alpha values in the output canvas</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>(return  value):</p>
+<ul>
+<li>Type: <code>HTMLCanvasElement</code></li>
+<li>A canvas drawn the cropped image.</li>
+</ul>
+</li>
+<li><p>Browser support:</p>
+<ul>
+<li>Basic image: requires <a href="http://caniuse.com/canvas">Canvas</a> support (IE 9+).</li>
+<li>Rotated image: requires <a href="http://caniuse.com/transforms2d">CSS3 2D Transforms</a> support (IE 9+).</li>
+<li>Cross-origin image: requires HTML5 <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_settings_attributes">CORS settings attributes</a> support (IE 11+).</li>
+</ul>
+</li>
+</ul>
+<p>Get a canvas drawn the cropped image. If it is not cropped, then returns the whole canvas.</p>
+<blockquote>
+<p>After then, you can display the canvas as an image directly, or use <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toDataURL">HTMLCanvasElement.toDataURL</a> to get a Data URL, or use <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toBlob">HTMLCanvasElement.toBlob</a> to get a blob and upload it to server with <a href="https://developer.mozilla.org/en-US/docs/Web/API/FormData">FormData</a> if the browser supports these APIs.</p>
+</blockquote>
+<pre><code class="lang-js">$().cropper(&#39;getCroppedCanvas&#39;);
+
+$().cropper(&#39;getCroppedCanvas&#39;, {
+  width: 160,
+  height: 90
+});
+
+// Upload cropped image to server if the browser supports `HTMLCanvasElement.toBlob`
+$().cropper(&#39;getCroppedCanvas&#39;).toBlob(function (blob) {
+  var formData = new FormData();
+
+  formData.append(&#39;croppedImage&#39;, blob);
+
+  $.ajax(&#39;/path/to/upload&#39;, {
+    method: &quot;POST&quot;,
+    data: formData,
+    processData: false,
+    contentType: false,
+    success: function () {
+      console.log(&#39;Upload success&#39;);
+    },
+    error: function () {
+      console.log(&#39;Upload error&#39;);
+    }
+  });
+});
+</code></pre>
+<h3 id="setaspectratio-aspectratio-">setAspectRatio(aspectRatio)</h3>
+<ul>
+<li><strong>aspectRatio</strong>:<ul>
+<li>Type: <code>Number</code></li>
+<li>Requires a positive number.</li>
+</ul>
+</li>
+</ul>
+<p>Change the aspect ratio of the crop box.</p>
+<h3 id="setdragmode-mode-">setDragMode([mode])</h3>
+<ul>
+<li><strong>mode</strong> (optional):<ul>
+<li>Type: <code>String</code></li>
+<li>Default: <code>&#39;none&#39;</code></li>
+<li>Options: <code>&#39;none&#39;</code>, <code>&#39;crop&#39;</code>, <code>&#39;move&#39;</code></li>
+</ul>
+</li>
+</ul>
+<p>Change the drag mode.</p>
+<p><strong>Tips:</strong> You can toggle the &quot;crop&quot; and &quot;move&quot; mode by double click on the cropper.</p>
+<p><a href="#table-of-contents">⬆ back to top</a></p>
+<h2 id="events">Events</h2>
+<h3 id="build-cropper">build.cropper</h3>
+<p>This event fires when a cropper instance starts to load an image.</p>
+<h3 id="built-cropper">built.cropper</h3>
+<p>This event fires when a cropper instance has built completely.</p>
+<h3 id="cropstart-cropper">cropstart.cropper</h3>
+<ul>
+<li><p><strong>event.originalEvent</strong>:</p>
+<ul>
+<li>Type: <code>Event</code></li>
+<li>Options: <code>mousedown</code>, <code>touchstart</code> and <code>pointerdown</code></li>
+</ul>
+</li>
+<li><p><strong>event.action</strong>:</p>
+<ul>
+<li>Type: <code>String</code></li>
+<li>Options:<ul>
+<li><code>&#39;crop&#39;</code>: create a new crop box</li>
+<li><code>&#39;move&#39;</code>: move the canvas (image wrapper)</li>
+<li><code>&#39;zoom&#39;</code>: zoom in / out the canvas (image wrapper) by touch.</li>
+<li><code>&#39;e&#39;</code>: resize the east side of the crop box</li>
+<li><code>&#39;w&#39;</code>: resize the west side of the crop box</li>
+<li><code>&#39;s&#39;</code>: resize the south side of the crop box</li>
+<li><code>&#39;n&#39;</code>: resize the north side of the crop box</li>
+<li><code>&#39;se&#39;</code>: resize the southeast side of the crop box</li>
+<li><code>&#39;sw&#39;</code>: resize the southwest side of the crop box</li>
+<li><code>&#39;ne&#39;</code>: resize the northeast side of the crop box</li>
+<li><code>&#39;nw&#39;</code>: resize the northwest side of the crop box</li>
+<li><code>&#39;all&#39;</code>: move the crop box (all directions)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>This event fires when the canvas (image wrapper) or the crop box starts to change.</p>
+<pre><code class="lang-js">$().on(&#39;cropstart.cropper&#39;, function (e) {
+  console.log(e.type); // cropstart
+  console.log(e.namespace); // cropper
+  console.log(e.action); // ...
+  console.log(e.originalEvent.pageX);
+
+  // Prevent to start cropping, moving, etc if necessary
+  if (e.action === &#39;crop&#39;) {
+    e.preventDefault();
+  }
+});
+</code></pre>
+<h3 id="cropmove-cropper">cropmove.cropper</h3>
+<ul>
+<li><p><strong>event.originalEvent</strong>:</p>
+<ul>
+<li>Type: <code>Event</code></li>
+<li>Options: <code>mousemove</code>, <code>touchmove</code> and <code>pointermove</code>.</li>
+</ul>
+</li>
+<li><p><strong>event.action</strong>: the same as &quot;cropstart.cropper&quot;.</p>
+</li>
+</ul>
+<p>This event fires when the canvas (image wrapper) or the crop box is changing.</p>
+<h3 id="cropend-cropper">cropend.cropper</h3>
+<ul>
+<li><p><strong>event.originalEvent</strong>:</p>
+<ul>
+<li>Type: <code>Event</code></li>
+<li>Options: <code>mouseup</code>, <code>touchend</code>, <code>touchcancel</code>, <code>pointerup</code> and <code>pointercancel</code>.</li>
+</ul>
+</li>
+<li><p><strong>event.action</strong>: the same as &quot;cropstart.cropper&quot;.</p>
+</li>
+</ul>
+<p>This event fires when the canvas (image wrapper) or the crop box stops to change.</p>
+<h3 id="crop-cropper">crop.cropper</h3>
+<ul>
+<li><strong>event.x</strong></li>
+<li><strong>event.y</strong></li>
+<li><strong>event.width</strong></li>
+<li><strong>event.height</strong></li>
+<li><strong>event.rotate</strong></li>
+<li><strong>event.scaleX</strong></li>
+<li><strong>event.scaleY</strong></li>
+</ul>
+<blockquote>
+<p>About these properties, see the <a href="#getdatarounded"><code>getData</code></a> method.</p>
+</blockquote>
+<p>This event fires when the canvas (image wrapper) or the crop box changed.</p>
+<h3 id="zoom-cropper">zoom.cropper</h3>
+<ul>
+<li><p><strong>event.originalEvent</strong>:</p>
+<ul>
+<li>Type: <code>Event</code></li>
+<li>Options: <code>wheel</code>, <code>touchmove</code>.</li>
+</ul>
+</li>
+<li><p><strong>event.oldRatio</strong>:</p>
+<ul>
+<li>Type: <code>Number</code></li>
+<li>The old (current) ratio of the canvas</li>
+</ul>
+</li>
+<li><p><strong>event.ratio</strong>:</p>
+<ul>
+<li>Type: <code>Number</code></li>
+<li>The new (next) ratio of the canvas (<code>canvasData.width / canvasData.naturalWidth</code>)</li>
+</ul>
+</li>
+</ul>
+<p>This event fires when a cropper instance starts to zoom in or zoom out its canvas (image wrapper).</p>
+<pre><code class="lang-js">$().on(&#39;zoom.cropper&#39;, function (e) {
+
+  // Zoom in
+  if (e.ratio &gt; e.oldRatio) {
+
+    // Prevent zoom in
+    e.preventDefault();
+  }
+
+  // Zoom out
+  // ...
+});
+</code></pre>
+<p><a href="#table-of-contents">⬆ back to top</a></p>
+<h2 id="no-conflict">No conflict</h2>
+<p>If you have to use other plugin with the same namespace, just call the <code>$.fn.cropper.noConflict</code> method to revert to it.</p>
+<pre><code class="lang-html">&lt;script src=&quot;other-plugin.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;cropper.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+  $.fn.cropper.noConflict();
+  // Code that uses other plugin&#39;s &quot;$().cropper&quot; can follow here.
+&lt;/script&gt;
+</code></pre>
+<h2 id="browser-support">Browser support</h2>
+<ul>
+<li>Chrome (latest)</li>
+<li>Firefox (latest)</li>
+<li>Safari (latest)</li>
+<li>Opera (latest)</li>
+<li>Edge (latest)</li>
+<li>Internet Explorer 8+</li>
+</ul>
+<p>As a jQuery plugin, you also need to see the <a href="http://jquery.com/browser-support/">jQuery Browser Support</a>.</p>
+<h2 id="contributing">Contributing</h2>
+<p>Please read through our <a href="CONTRIBUTING.md">contributing guidelines</a>.</p>
+<h2 id="versioning">Versioning</h2>
+<p>Maintained under the <a href="http://semver.org/">Semantic Versioning guidelines</a>.</p>
+<h2 id="license">License</h2>
+<p><a href="http://opensource.org/licenses/MIT">MIT</a> © <a href="http://chenfengyuan.com">Fengyuan Chen</a></p>
+<h2 id="related-projects">Related projects</h2>
+<ul>
+<li><a href="https://github.com/koorgoo/ngCropper">ngCropper</a> by @koorgoo</li>
+<li><a href="https://github.com/alexisnomine/ngCropper">ngCropper</a> by @alexisnomine</li>
+<li><a href="https://github.com/roadmanfong/react-cropper">react-cropper</a> by @roadmanfong</li>
+<li><a href="https://github.com/lapanoid/redux-cropper">redux-cropper</a> @lapanoid</li>
+<li><a href="https://github.com/jonblum/meteor-cropper">meteor-cropper</a> @jonblum</li>
+<li><a href="https://github.com/anilmaurya/ember-cli-cropper">ember-cli-cropper</a> @anilmaurya</li>
+<li><a href="https://github.com/mhretab/ember-cli-image-cropper">ember-cli-image-cropper</a> @mhretab</li>
+</ul>
+<p><a href="#table-of-contents">⬆ back to top</a></p>

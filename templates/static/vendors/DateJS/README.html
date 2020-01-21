@@ -1,0 +1,46 @@
+<h1 id="datejs-evolved">DateJS: Evolved</h1>
+<p>The JavaScript Date Library<br><a href="https://travis-ci.org/abritinthebay/datejs"><img src="https://travis-ci.org/abritinthebay/datejs.svg?branch=master" alt="Build Status"></a>
+<a href="http://badge.fury.io/js/datejs"><img src="https://badge.fury.io/js/datejs.svg" alt="NPM version"></a>
+<a href="https://codeclimate.com/github/abritinthebay/datejs"><img src="https://codeclimate.com/github/abritinthebay/datejs.svg" alt="Code Climate"></a>
+<a href="https://codeclimate.com/github/abritinthebay/datejs"><img src="https://codeclimate.com/github/abritinthebay/datejs/badges/coverage.svg" alt="Test Coverage"></a></p>
+<p><a href="https://nodei.co/npm/datejs/"><img src="https://nodei.co/npm/datejs.png?downloadRank=true" alt="NPM"></a></p>
+<h2 id="what-is-it-">What is it?</h2>
+<p>DateJS extends the built-in JavaScript Date object to add much better parsing, internationalization support, and all the functions and syntactic sugar you could wish for.</p>
+<h3 id="background">Background</h3>
+<p>Date JS was started by Geoffrey McGill in 2007, he abandoned it on May 13th 2008; leaving the Google Code repository stagnant and with many bugs unresolved. </p>
+<p>This fork was started improve and maintain DateJS. To keep what is still the most full featured JavaScript Date library alive, maintained, and improved. Currently we&#39;re on track towards a 1.0 release - having fixed almost all the existing bugs and added several new features, improved parsing, and many other changes.</p>
+<h3 id="how-to-install-use">How to Install/Use</h3>
+<p>DateJS supports running either your regular web browser as a client library or Node.js.</p>
+<h4 id="in-node-js">In Node.js</h4>
+<p>Installation is as easy as running:</p>
+<pre><code>npm install datejs
+</code></pre><h4 id="for-a-browser">For a Browser</h4>
+<p>If you use <a href="http://bower.io/">Bower</a> to manage your frontend packages then it&#39;s also really simple:</p>
+<pre><code>bower install datejs
+</code></pre><p>Otherwise...</p>
+<ul>
+<li>For production environments include <a href="https://github.com/abritinthebay/datejs/blob/master/build/production/date.min.js">the production ready minified file from the Build directory</a> on your page. </li>
+<li>For debugging (eg, in development) include <a href="https://github.com/abritinthebay/datejs/blob/master/build/date.js">the unminified and fully commented version</a></li>
+</ul>
+<h4 id="international-language-versions">International Language Versions</h4>
+<p>In Node.js you can just call <code>Date.i18n.setLanguage</code> with the IETF appropriate code (e.g. &quot;de-DE&quot;, or &quot;es-MX&quot;) and DateJS will load the file automatically. For the browser DateJS has langauge support in one of two ways:</p>
+<ol>
+<li>Either download the appropriate file from <a href="https://github.com/abritinthebay/datejs/blob/master/build/">the Build directory of your choice</a>. Files are named after the IETF code the load (i.e. <code>date-es-MX.js</code> loads Mexican Spanish).</li>
+<li>Or set <code>Date.Config.i18n</code> to the location of <a href="https://github.com/abritinthebay/datejs/blob/master/build/i18n/">the internationalization files</a> on your server and DateJS will dynamically load the files by script element insertion. </li>
+</ol>
+<p>DateJS will always support loading US English via <code>Date.i18n.setLanguage(&quot;en-US&quot;)</code> no matter what other language is specifically loaded. So you can always support both your localization and the English speaking world.</p>
+<h2 id="file-structure">File Structure</h2>
+<ul>
+<li><code>build</code> Output from the Grunt powered build process<ul>
+<li><code>development</code> Non-minified files with full comments. Suitable for development environments.</li>
+<li><code>production</code> Fully minified (by Google&#39;s Closure Compiler) files suitable for production.  </li>
+</ul>
+</li>
+<li><code>src</code> All the source files used to build the final files.<ul>
+<li><code>core</code> The main DateJS source files.</li>
+<li><code>i18n</code> Internationalization files. Language specifics (days of the week, regex formats,etc). Organized by IETF language tag (eg - en-US, etc).</li>
+</ul>
+</li>
+<li><code>specs</code> Unit Tests written using <a href="http://pivotal.github.io/jasmine/">Jasmine</a>. Code coverage is calculated by <a href="http://blanketjs.org/">BlanketJS</a>. </li>
+<li><code>tests</code> Orginal unit tests for 2008 project. <em>Deprecated</em></li>
+</ul>

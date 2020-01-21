@@ -1,0 +1,116 @@
+<hr>
+<p>title: &quot;ZipObject API&quot;
+layout: default</p>
+<h2 id="section-api">section: api</h2>
+<p>This represents an entry in the zip file. If the entry comes from an existing
+archive previously <a href="{{site.baseurl}}/documentation/api_jszip/load.html">loaded</a>, the content
+will be automatically decompressed/converted first.</p>
+<h3 id="attributes">Attributes</h3>
+<table>
+<thead>
+<tr>
+<th>attribute name</th>
+<th>type</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>the absolute path of the file</td>
+</tr>
+<tr>
+<td><code>dir</code></td>
+<td>boolean</td>
+<td>true if this is a directory</td>
+</tr>
+<tr>
+<td><code>date</code></td>
+<td>date</td>
+<td>the last modification date</td>
+</tr>
+<tr>
+<td><code>comment</code></td>
+<td>string</td>
+<td>the comment for this file</td>
+</tr>
+<tr>
+<td><code>unixPermissions</code></td>
+<td>16 bits number</td>
+<td>The UNIX permissions of the file, if any.</td>
+</tr>
+<tr>
+<td><code>dosPermissions</code></td>
+<td>6 bits number</td>
+<td>The DOS permissions of the file, if any.</td>
+</tr>
+<tr>
+<td><code>options</code></td>
+<td>object</td>
+<td>the options of the file. The available options are :</td>
+</tr>
+<tr>
+<td><code>options.base64</code></td>
+<td>boolean</td>
+<td><strong>Deprecated</strong>, see <a href="{{site.baseurl}}/documentation/api_jszip/file_data.html">file(name, data [,options])</a></td>
+</tr>
+<tr>
+<td><code>options.binary</code></td>
+<td>boolean</td>
+<td><strong>Deprecated</strong>, see <a href="{{site.baseurl}}/documentation/api_jszip/file_data.html">file(name, data [,options])</a></td>
+</tr>
+<tr>
+<td><code>options.dir</code></td>
+<td>boolean</td>
+<td><strong>Deprecated</strong>, use <code>dir</code>. True if this is a directory</td>
+</tr>
+<tr>
+<td><code>options.date</code></td>
+<td>date</td>
+<td><strong>Deprecated</strong>, use <code>date</code>. See <a href="{{site.baseurl}}/documentation/api_jszip/file_data.html">file(name, data [,options])</a></td>
+</tr>
+<tr>
+<td><code>options.compression</code></td>
+<td>compression</td>
+<td>see <a href="{{site.baseurl}}/documentation/api_jszip/file_data.html">file(name, data [,options])</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="getters">Getters</h3>
+<table>
+<thead>
+<tr>
+<th>method</th>
+<th>return type</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>asText()</code></td>
+<td>string</td>
+<td>the content as an unicode string.</td>
+</tr>
+<tr>
+<td><code>asBinary()</code></td>
+<td>string</td>
+<td>the content as binary string.</td>
+</tr>
+<tr>
+<td><code>asArrayBuffer()</code></td>
+<td>ArrayBuffer</td>
+<td>need a <a href="{{site.baseurl}}/documentation/api_jszip/support.html">compatible browser</a>.</td>
+</tr>
+<tr>
+<td><code>asUint8Array()</code></td>
+<td>Uint8Array</td>
+<td>need a <a href="{{site.baseurl}}/documentation/api_jszip/support.html">compatible browser</a>.</td>
+</tr>
+<tr>
+<td><code>asNodeBuffer()</code></td>
+<td>nodejs Buffer</td>
+<td>need <a href="{{site.baseurl}}/documentation/api_jszip/support.html">nodejs</a>.</td>
+</tr>
+</tbody>
+</table>

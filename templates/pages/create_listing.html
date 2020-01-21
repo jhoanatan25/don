@@ -1,0 +1,19 @@
+{% extends 'base/base.html' %}
+{% load replace %}
+{% block content %}
+	<script>
+	setTimeout(function(){menu("#sell_my_car")},500);
+	</script>
+	<div class="page-outer">
+		<div class="create_listing">
+			<h2>¿Que estás vendiendo?</h2>
+			<div class="images">
+				{% for obj in body_styles%}
+					<a href="/create_listing/{{obj.description|replace}}"><label class="checkbox" for="Style{{ forloop.counter }}"><img src="{{obj.image.url}}" alt="">{{obj.description}}</label></a>
+					{%empty%}
+					<h3>Lo sentimos, has alcanzado el número máximo de autos que puedes vender. <a href="/become">¡Actualízate ya!</a></h3>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+{% endblock %}

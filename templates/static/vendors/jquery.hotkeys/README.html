@@ -1,0 +1,81 @@
+<h1 id="jquery-hotkeys-build-status-https-secure-travis-ci-org-jeresig-jquery-hotkeys-png-http-travis-ci-org-jeresig-jquery-hotkeys-">jQuery.Hotkeys <a href="http://travis-ci.org/jeresig/jquery.hotkeys"><img src="https://secure.travis-ci.org/jeresig/jquery.hotkeys.png" alt="Build Status"></a></h1>
+<h1 id="about">About</h1>
+<p><strong>jQuery Hotkeys</strong> is a plug-in that lets you easily add and remove handlers for keyboard events anywhere in your code supporting almost any key combination.</p>
+<p>This plugin is based off of the plugin by Tzury Bar Yochay: <a href="https://github.com/tzuryby/jquery.hotkeys">jQuery.hotkeys</a></p>
+<p>The syntax is as follows:</p>
+<pre><code class="lang-javascript">$(expression).bind(types, keys, handler);
+$(expression).unbind(types, handler);
+
+$(document).bind(&#39;keydown&#39;, &#39;ctrl+a&#39;, fn);
+
+// e.g. replace &#39;$&#39; sign with &#39;EUR&#39;
+$(&#39;input.foo&#39;).bind(&#39;keyup&#39;, &#39;$&#39;, function(){
+  this.value = this.value.replace(&#39;$&#39;, &#39;EUR&#39;);
+});
+</code></pre>
+<p>Syntax when wanting to use jQuery&#39;s <code>on()</code>/<code>off</code> methods:</p>
+<pre><code class="lang-javascript">$(expression).on(types, null, keys, handler);
+$(expression).off(types, handler);
+
+$(document).on(&#39;keydown&#39;, null, &#39;ctrl+a&#39;, fn);
+
+// e.g. replace &#39;$&#39; sign with &#39;EUR&#39;
+$(&#39;input.foo&#39;).on(&#39;keyup&#39;, null, &#39;$&#39;, function(){
+  this.value = this.value.replace(&#39;$&#39;, &#39;EUR&#39;);
+});
+</code></pre>
+<h2 id="example">Example</h2>
+<p><a href="https://rawgit.com/jeresig/jquery.hotkeys/master/test-static-01.html">Example</a></p>
+<h2 id="event-types">Event Types</h2>
+<p>Supported types are <code>&#39;keydown&#39;</code>, <code>&#39;keyup&#39;</code> and <code>&#39;keypress&#39;</code></p>
+<h2 id="jquery-compatibility">jQuery Compatibility</h2>
+<p>Works with jQuery 1.4.2 and newer.</p>
+<p>It is known to be working with all the major browsers on all available platforms (Win/Mac/Linux)</p>
+<ul>
+<li>IE 6/7/8+</li>
+<li>FF 1.5/2/3+</li>
+<li>Opera-9+</li>
+<li>Safari-3+</li>
+<li>Chrome-0.2+</li>
+</ul>
+<h2 id="browserify-compatibility">Browserify Compatibility</h2>
+<p>If you want to include this module in a Browserified project, just add it to node_modules and require it.</p>
+<pre><code class="lang-javascript">require(&#39;jquery.javascript&#39;);
+</code></pre>
+<p>This will work if jQuery is global (ex. served from a CDN). If it&#39;s not, you need to <a href="https://github.com/thlorenz/browserify-shim#a-expose-global-variables-via-global">shim it</a>:</p>
+<pre><code class="lang-javascript">{
+  &quot;browserify-shim&quot;: {
+    &quot;jquery&quot;: &quot;global:jQuery&quot;
+  }
+}
+</code></pre>
+<h2 id="notes">Notes</h2>
+<p>Modifiers are not case sensitive (<code>Ctrl</code> == <code>ctrl</code> == <code>cTRL</code>)</p>
+<p>If you want to use more than one modifier (e.g. <code>alt+ctrl+z</code>) you should define them by an alphabetical order e.g. alt+ctrl+shift</p>
+<p>Hotkeys aren&#39;t tracked if you&#39;re inside of an input element (unless you explicitly bind the hotkey directly to the input). This helps to avoid conflict with normal user typing.</p>
+<p>You can use namespacing by adding a suffix to the event type (e.g. <code>keyup.toggle</code>)</p>
+<h2 id="hotkeys-within-inputs">Hotkeys within inputs</h2>
+<p>Hotkeys aren&#39;t tracked if the user is focused within an input element or any element that has <code>contenteditable=&quot;true&quot;</code> unless you bind the hotkey directly to the element. This helps to avoid conflict with normal user typing.
+If you don&#39;t want this, you can change the booleans of the following to suit:</p>
+<ul>
+<li><code>jQuery.hotkeys.options.filterInputAcceptingElements</code></li>
+<li><code>jQuery.hotkeys.options.filterContentEditable</code></li>
+<li><code>jQuery.hotkeys.options.filterTextInputs</code> (deprecated, will be removed in a later version)</li>
+</ul>
+<h3 id="meta-and-hyper-keys">Meta and Hyper Keys</h3>
+<p>Meta and hyper keys don&#39;t register on <code>keyup</code> in any browser tested.</p>
+<h4 id="chrome-33-0-1750-117">Chrome 33.0.1750.117</h4>
+<p>Meta key registers on <code>keydown</code> event.
+Hyper key registers on <code>keydown</code> event.</p>
+<h4 id="firefox-27-0-1-and-safari-7-0-1">Firefox 27.0.1 and Safari 7.0.1</h4>
+<p>Meta key registers on <code>keydown</code> and <code>keypress</code> events.
+Hyper key registers on <code>keydown</code> and <code>keypress</code> events.</p>
+<h4 id="opera-19-0">Opera 19.0</h4>
+<p>Meta key doesn&#39;t register at all :(
+Hyper key registers on <code>keydown</code> and <code>keypress</code> events.</p>
+<h4 id="tl-dr">TL;DR</h4>
+<p>Bind to <code>keydown</code> event for meta and hyper keys, but meta key does not work in Opera ;)</p>
+<h3 id="addendum">Addendum</h3>
+<p>Firefox is the most liberal one in the manner of letting you capture all short-cuts even those that are built-in in the browser such as <code>Ctrl-t</code> for new tab, or <code>Ctrl-a</code> for selecting all text. You can always bubble them up to the browser by returning <code>true</code> in your handler.</p>
+<p>Others, (IE) either let you handle built-in short-cuts, but will add their functionality after your code has executed. Or (Opera/Safari) will <em>not</em> pass those events to the DOM at all.</p>
+<p><em>So, if you bind <code>Ctrl-Q</code> or <code>Alt-F4</code> and your Safari/Opera window is closed don&#39;t be surprised.</em></p>

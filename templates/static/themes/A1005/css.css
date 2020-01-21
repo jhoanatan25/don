@@ -1,0 +1,1722 @@
+.text-left {
+  text-align: left;
+}
+@media print {
+  .noim {
+    display: none;
+  }
+}
+.price {
+  display: flex;
+}
+.price .special {
+  text-decoration: line-through;
+  margin-right: 1em;
+}
+.imprimir {
+  display: none;
+}
+#shareM {
+  border-top: 0;
+  margin-top: 0;
+  padding-top: 0;
+  margin: auto;
+}
+#shareM .modal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1em;
+}
+#shareM .modal-content a {
+  color: #fff;
+  padding: 0 1em;
+  line-height: 2em;
+  margin: 0.1em;
+  background: #dd4b39;
+  width: 200px;
+  text-align: center;
+}
+#shareM .modal-content a.facebook {
+  background: #3b5998;
+}
+#shareM .modal-content a.twitter {
+  background: #55acee;
+}
+#shareM .modal-content a.share-post .googleplus {
+  background: #dd4b39;
+}
+#shareM .modal-content .btn {
+  margin-top: 1em;
+}
+.detail p {
+  padding: 0;
+}
+.detail .slide3 img {
+  height: 350px !important;
+  width: auto;
+  margin: 0 auto;
+}
+.detail .redes {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0;
+  margin: 0;
+  padding: 0 2em;
+}
+.detail .redes img {
+  width: 40px;
+  height: 40px;
+  margin-left: 1em;
+}
+.detail .barra {
+  background: barras;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2em;
+  padding: 0.5em 1em;
+  font-size: 1.2em;
+  color: #337ab7;
+}
+.detail .barra strong {
+  color: rojo_oscuro;
+  margin-left: 0.5em;
+}
+.detail .barra div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.detail .barra img {
+  height: 30px;
+  width: 30px;
+  margin-right: 10px;
+}
+.detail .page {
+  padding: 1em;
+}
+.detail .page .titulo {
+  display: flex;
+  align-items: center;
+  border-top: 5px solid #eee;
+  border-bottom: 2px solid #eee;
+  margin-top: 1em;
+}
+.detail .page .titulo .glyphicon {
+  font-size: 1.5em;
+  margin-right: 0.5em;
+}
+.detail .page .titulo p {
+  width: 100%;
+}
+.detail .page .titulo a {
+  margin-left: 1em;
+}
+.detail .page .titulo img {
+  height: 40px;
+  width: 40px;
+  margin-right: 1em;
+}
+.detail .page .titulo .dos {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 2em;
+}
+.detail .page .titulo .dos h4 {
+  display: flex;
+}
+.detail .page .titulo .dos h4 strong {
+  margin-right: 1em;
+}
+.detail .page .body {
+  margin-top: 1em;
+}
+.detail .page .body .box {
+  margin-bottom: 1em;
+}
+.detail .page .body .box img {
+  padding: 0;
+  height: 50px;
+  width: 50px;
+  float: left;
+  margin-right: 1em;
+}
+.detail .page .body .box .tex {
+  padding: 1em;
+  box-shadow: 2px 2px 5px #999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.detail .page .body .box .tex p {
+  margin: 0;
+}
+.detail .page .centrar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.detail .page .centrar .btn {
+  padding: 0;
+  padding-left: 1em;
+  background: azul;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.detail .page .centrar .btn i {
+  padding: 1em;
+}
+.detail .page form {
+  margin-top: 1em;
+}
+.detail .page form .input-group {
+  margin-bottom: 1em;
+}
+.detail .page ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 1em;
+  font-size: 1.2em;
+}
+.detail .page .cont {
+  margin-top: 1em;
+}
+.detail .page .cont .gp {
+  margin-top: 1em;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.detail .page .cont .gp img {
+  margin-right: 1em;
+  height: 60px;
+  width: 5 0px;
+}
+.detail .page .slide {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.detail .page .slide .thumbnail h3 {
+  margin: 0;
+  text-align: center;
+  margin-top: -1.06em;
+  font-size: 2em;
+  background: rgba(50,50,50,0.8);
+  position: relative;
+  color: #fff;
+  font-weight: 200;
+}
+.detail .page .abajo {
+  flex-direction: inherit;
+}
+.detail .page .abajo .thumbnail {
+  width: 300px;
+  margin-right: 15px;
+}
+.detail .page .titulos {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.detail .page .titulos strong {
+  color: azul;
+}
+.detail .page .photo .thumbnail {
+  border: none;
+}
+.detail .page .photo .thumbnail:hover img {
+  opacity: 0.8;
+}
+.detail .page .photo .mini-thumbnail {
+  padding: 0 1em;
+}
+.detail .page .detail h1 {
+  text-align: center;
+  color: azul;
+  text-decoration: underline;
+}
+.detail .page .detail .more_size {
+  font-size: 1.5em;
+}
+.detail .page .detail .list {
+  padding: 0 0.5em;
+}
+.detail .page .detail .list .lista li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.detail .page .des {
+  font-size: 1.2em;
+  text-align: justify;
+}
+.detail .page .more-marge {
+  margin-top: 2em;
+}
+.detail .page iframe {
+  width: 100%;
+}
+.detail .page .box_dealer {
+  text-align: center;
+  font-size: 18px;
+  border-top: 5px solid #eee;
+  border-bottom: 2px solid #eee;
+}
+.detail .page .box_dealer img {
+  width: 300px;
+}
+.detail .page .box_dealer p {
+  width: 100%;
+}
+.detail .page .publicidad {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 2em 3em 2em 3em;
+}
+.detail .page .publicidad img {
+  margin-bottom: 1em;
+  height: 750px;
+}
+@media print {
+  .imprimir {
+    display: block !important;
+  }
+  .ver {
+    display: block !important;
+  }
+  header,
+  footer {
+    display: none;
+  }
+  .detail .red,
+  .detail .barra {
+    display: none;
+  }
+  .detail .page {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  .detail .page .titulo,
+  .detail .page .slide2,
+  .detail .page form,
+  .detail .page .body,
+  .detail .page .publicidad,
+  .detail .page .verde,
+  .detail .page iframe {
+    display: none;
+  }
+  .detail .page .slide .carousel-control {
+    display: none;
+  }
+  .detail .page .box_dealer {
+    position: absolute;
+    bottom: 100%;
+    border-top: none;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    display: none;
+  }
+  .detail .page .box_dealer img {
+    width: 300px;
+    height: 60px;
+  }
+  .detail .page .box_dealer .tit,
+  .detail .page .box_dealer .cont {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+.financing {
+  padding: 1em;
+}
+.financing a {
+  text-decoration: none;
+  cursor: pointer;
+}
+.financing .title {
+  text-align: center;
+  color: azul2;
+}
+.financing .from_financing,
+.financing max-width 1550px,
+.financing margin auto,
+.financing margin-top 2em,
+.financing form {
+  width: 100%;
+}
+.financing .barra {
+  width: 100%;
+  margin-bottom: 1em;
+  background: #eee;
+  display: flex;
+  padding: 5px;
+  border-radius: 5px;
+  justify-content: center;
+}
+.financing .barra h4 {
+  margin-top: 5px;
+  margin-bottom: 0;
+  color: #000;
+}
+.financing .barra span {
+  background: #239b9a;
+  padding: 5px;
+  color: #fff;
+  text-align: right;
+  border-radius: 5px;
+  margin-right: 0.5em;
+}
+.financing .caja {
+  margin-bottom: 1em;
+}
+.financing .caja h4 {
+  height: 25px;
+}
+.financing .caja textarea,
+.financing .caja input,
+.financing .caja select {
+  border: 1px solid #239b9a;
+  background: #fff;
+  border-radius: 5px;
+  margin-left: 0;
+}
+.financing .caja .title.l {
+  width: 25%;
+}
+.financing .caja .title {
+  margin-left: 10px;
+  margin-top: 0;
+  background: #239b9a;
+  width: 20%;
+  border-radius: 5px 5px 0 0;
+}
+.financing .caja .title h3 {
+  text-align: center;
+  color: #fff;
+  font-size: 17px;
+  font-weight: normal;
+  text-shadow: none;
+  margin-bottom: 0;
+}
+.financing .caja .Referral,
+.financing .caja .Vehicle,
+.financing .caja .Contact,
+.financing .caja .Personal,
+.financing .caja .Previous,
+.financing .caja .Employment,
+.financing .caja .Disclaimer,
+.financing .caja .Employer,
+.financing .caja .Information {
+  background: #eee;
+  padding: 5px 1em 5px 1em;
+  border-radius: 5px;
+}
+.financing .caja .Referral input {
+  width: 100%;
+}
+.financing .caja .Vehicle select {
+  width: 33%;
+}
+.financing .caja .Vehicle input {
+  width: 50%;
+}
+.financing .caja .Contact .tres {
+  display: flex;
+}
+.financing .caja .Contact .tres .info {
+  width: 33%;
+  margin-right: 10px;
+}
+.financing .caja .Contact .tres .info input {
+  width: 100%;
+}
+.financing .caja .Contact .dos {
+  display: flex;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+.financing .caja .Contact .dos .info {
+  width: 50%;
+}
+.financing .caja .Contact .dos .info input {
+  width: 30%;
+}
+.financing .caja .Contact .dos .info .end {
+  width: 35%;
+}
+.financing .caja .Contact .dos .info1 {
+  width: 50%;
+  margin-right: 5px;
+}
+.financing .caja .Contact .dos .info1 input {
+  width: 100%;
+}
+.financing .caja .Contact .dos .info1 .dos .info {
+  margin-right: 5px;
+}
+.financing .caja .Personal .tres {
+  display: flex;
+}
+.financing .caja .Personal .tres .info {
+  margin-right: 10px;
+  width: 33%;
+}
+.financing .caja .Personal .tres .info input {
+  width: 100%;
+}
+.financing .caja .Personal .tres .info .tres input {
+  margin-right: 10px;
+}
+.financing .caja .Personal .cuatro {
+  display: flex;
+}
+.financing .caja .Personal .cuatro .info {
+  margin-right: 10px;
+  width: 25%;
+}
+.financing .caja .Personal .cuatro .info input,
+.financing .caja .Personal .cuatro .info select {
+  width: 100%;
+}
+.financing .caja .Previous .dos {
+  display: flex;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+.financing .caja .Previous .dos .info {
+  width: 50%;
+  margin-right: 1em;
+}
+.financing .caja .Previous .dos .info input {
+  width: 100%;
+}
+.financing .caja .Previous .cuatro {
+  display: flex;
+}
+.financing .caja .Previous .cuatro .info {
+  width: 25%;
+  margin-right: 1em;
+}
+.financing .caja .Previous .cuatro .info select,
+.financing .caja .Previous .cuatro .info input {
+  width: 100%;
+}
+.financing .caja .Employment .tres {
+  display: flex;
+}
+.financing .caja .Employment .tres .info {
+  margin-right: 1em;
+  width: 33%;
+}
+.financing .caja .Employment .tres .info input {
+  width: 100%;
+}
+.financing .caja .Employment .tres .info1 {
+  margin-right: 1em;
+  width: 33%;
+}
+.financing .caja .Employment .tres .info1 input {
+  width: 30%;
+}
+.financing .caja .Employment .tres .info1 .end {
+  width: 35%;
+}
+.financing .caja .Employment .cuatro {
+  display: flex;
+}
+.financing .caja .Employment .cuatro .info {
+  width: 25%;
+  margin-right: 1em;
+}
+.financing .caja .Employment .cuatro .info input {
+  width: 100%;
+}
+.financing .caja .Employment .uno {
+  width: 100%;
+}
+.financing .caja .Employment .uno textarea {
+  width: 100%;
+  height: 100px;
+}
+.financing .caja .Employer .dos {
+  margin: 0;
+  display: flex;
+}
+.financing .caja .Employer .dos .info {
+  margin-right: 1em;
+  width: 50%;
+}
+.financing .caja .Employer .dos .info input {
+  width: 100%;
+}
+.financing .caja .Employer .dos .info1 {
+  margin-right: 1em;
+  width: 50%;
+}
+.financing .caja .Employer .dos .info1 input {
+  width: 32%;
+}
+.financing .caja .Employer .tres {
+  display: flex;
+}
+.financing .caja .Employer .tres .info {
+  width: 33%;
+  margin-right: 1em;
+}
+.financing .caja .Employer .tres .info select,
+.financing .caja .Employer .tres .info input {
+  width: 100%;
+}
+.financing .caja .Information .tres {
+  display: flex;
+}
+.financing .caja .Information .tres .info {
+  width: 31%;
+  margin-right: 1em;
+}
+.financing .caja .Information .tres .info input {
+  width: 100%;
+}
+.financing .caja .Information .tres .info1 {
+  width: 31%;
+  margin-right: 1em;
+}
+.financing .caja .Information .tres .info1 input,
+.financing .caja .Information .tres .info1 select {
+  width: 31%;
+}
+.financing .caja .Information .dos {
+  display: flex;
+  margin: 0;
+}
+.financing .caja .Information .dos .info {
+  margin-right: 1em;
+  width: 50%;
+}
+.financing .caja .Information .dos .info input,
+.financing .caja .Information .dos .info select {
+  width: 100%;
+}
+.financing .caja .Information .dos .info1 {
+  margin-right: 1em;
+  width: 50%;
+}
+.financing .caja .Information .dos .info1 input {
+  width: 30%;
+}
+.financing .caja .Information .uno input {
+  width: 95%;
+}
+.financing .caja .Information .cuatro {
+  display: flex;
+}
+.financing .caja .Information .cuatro .info {
+  width: 24%;
+  margin-right: 1em;
+}
+.financing .caja .Information .cuatro .info input,
+.financing .caja .Information .cuatro .info select {
+  width: 100%;
+}
+.financing .caja .Information .cuatro .info h4 {
+  height: 40px;
+}
+.financing .caja .Disclaimer .checkbox label {
+  width: 200px;
+  padding-bottom: 0;
+  padding-top: 0;
+}
+.financing .no_view {
+  display: none;
+}
+.financing .view {
+  display: block;
+}
+.financing .boton {
+  display: flex;
+  justify-content: center;
+  margin-top: 1em;
+}
+.financing .boton a {
+  background: #56d181;
+  color: #fff;
+  padding: 0.5em 2em;
+  border-radius: 5px;
+}
+.contact_us {
+  color: #000;
+  padding: 1em;
+  background: #fff;
+}
+.contact_us h1 {
+  text-align: center;
+  margin: 1em;
+  margin-top: 3em;
+}
+.contact_us .email {
+  padding: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.contact_us .email img {
+  width: 100px;
+  height: 100px;
+}
+.contact_us .email h4 {
+  padding: 0.5em;
+}
+.contact_us .redes {
+  text-align: center;
+  padding: 1em;
+}
+.contact_us .redes .icon {
+  margin-top: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.contact_us .redes img {
+  height: 50px;
+  width: 50px;
+  margin: 2px;
+}
+.contact_us .info h3 {
+  margin: 1em;
+}
+.contact_us .titulo {
+  padding: 0 2em;
+}
+.contact_us .titulo h3 {
+  background: #4ea1b3;
+  color: #fff;
+  width: 300px;
+  padding: 0.1em 0.5em;
+  font-size: 1.5em;
+  text-align: center;
+  border-radius: 10px 10px 0 0;
+}
+.contact_us .cen {
+  display: flex;
+  width: 100%;
+}
+.contact_us .cen button {
+  margin: auto;
+  background: #4ea1b3;
+}
+.contact_us form {
+  background: #ececec;
+  padding: 1em;
+  border-radius: 10px;
+  margin: 0;
+}
+.contact_us .control-group.form-group {
+  padding: 0 1em;
+}
+.contact_us .control-group.form-group input {
+  margin: 0;
+}
+@media (max-width: 1024px) {
+  .content .from_financing .caja .title.l {
+    width: 35%;
+  }
+}
+@media (max-width: 992px) {
+  header img {
+    width: 100%;
+    height: 30px;
+  }
+}
+@media (max-width: 768px) {
+  .content .from_financing .caja .title {
+    width: 30%;
+  }
+  .content .from_financing .caja .title.l {
+    width: 45%;
+  }
+  .content .from_financing .caja .Vehicle .make select {
+    width: 30%;
+  }
+  .content .from_financing .caja .Vehicle .make input {
+    width: 100%;
+  }
+  .content .from_financing .caja .Contact .tres {
+    display: block;
+  }
+  .content .from_financing .caja .Contact .tres .info {
+    width: 100%;
+  }
+  .content .from_financing .caja .Contact .dos {
+    display: block;
+  }
+  .content .from_financing .caja .Contact .dos .info {
+    width: 100%;
+  }
+  .content .from_financing .caja .Contact .dos .info1 {
+    width: 100%;
+  }
+  .content .from_financing .caja .Personal .tres {
+    display: block;
+  }
+  .content .from_financing .caja .Personal .tres .info {
+    width: 100%;
+  }
+  .content .from_financing .caja .Personal .tres .info .tres {
+    display: flex;
+  }
+  .content .from_financing .caja .Personal .cuatro {
+    display: block;
+  }
+  .content .from_financing .caja .Personal .cuatro .info {
+    width: 100%;
+  }
+  .content .from_financing .caja .Previous .dos {
+    display: block;
+  }
+  .content .from_financing .caja .Previous .dos .info {
+    width: 100%;
+  }
+  .content .from_financing .caja .Previous .cuatro {
+    display: block;
+  }
+  .content .from_financing .caja .Previous .cuatro .info {
+    width: 100%;
+  }
+  .content .from_financing .caja .Employment .tres {
+    display: block;
+  }
+  .content .from_financing .caja .Employment .tres .info,
+  .content .from_financing .caja .Employment .tres .info1 {
+    width: 100%;
+  }
+  .content .from_financing .caja .Employment .cuatro {
+    display: block;
+  }
+  .content .from_financing .caja .Employment .cuatro .info {
+    width: 100%;
+  }
+  .content .from_financing .caja .Employer .dos {
+    display: block;
+  }
+  .content .from_financing .caja .Employer .dos .info,
+  .content .from_financing .caja .Employer .dos .info1 {
+    width: 100%;
+  }
+  .content .from_financing .caja .Employer .tres {
+    display: block;
+  }
+  .content .from_financing .caja .Employer .tres .info {
+    width: 100%;
+  }
+  .content .from_financing .caja .Information .tres {
+    display: block;
+  }
+  .content .from_financing .caja .Information .tres .info,
+  .content .from_financing .caja .Information .tres .info1 {
+    width: 100%;
+  }
+  .content .from_financing .caja .Information .dos {
+    display: block;
+  }
+  .content .from_financing .caja .Information .dos .info,
+  .content .from_financing .caja .Information .dos .info1 {
+    width: 100%;
+  }
+  .content .from_financing .caja .Information .cuatro {
+    display: block;
+  }
+  .content .from_financing .caja .Information .cuatro .info {
+    width: 100%;
+  }
+}
+@media (max-width: 425px) {
+  .content .from_financing .caja .title {
+    width: 55%;
+  }
+  .content .from_financing .caja .title.l {
+    width: 80%;
+  }
+}
+@media (max-width: 375px) {
+  .content .from_financing .caja .title {
+    width: 95%;
+  }
+  .content .from_financing .caja .title.l {
+    width: 95%;
+  }
+}
+header.row .head {
+  background: #7f7f7f;
+}
+header.row .head .page-outer.row .logotipo a.logo {
+  text-decoration: none;
+  width: 100%;
+}
+header.row .head .page-outer.row .logotipo a.logo img {
+  height: 90px;
+}
+header.row .head .page-outer.row .redes {
+  padding: 2em;
+}
+header.row .head .page-outer.row .redes a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 20px;
+}
+header.row .head .page-outer.row .redes a i {
+  margin-bottom: 10px;
+}
+header.row .head .page-outer.row .redes a:hover {
+  color: #4ea1b3;
+}
+header.row .head .page-outer.row .info {
+  padding: 2em;
+}
+header.row .head .page-outer.row .info i {
+  color: #fff;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+header.row .head .page-outer.row .info i.direccion {
+  font-size: 15px;
+}
+.btn-success {
+  background: #4ea1b3;
+}
+.contact_us {
+  padding: 1em;
+}
+.contact_us .email {
+  padding: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.contact_us .email img {
+  width: 100px;
+  height: 100px;
+}
+.contact_us .email h4 {
+  padding: 0.5em;
+}
+.contact_us .redes {
+  text-align: center;
+  padding: 1em;
+}
+.contact_us .redes .icon {
+  margin-top: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.contact_us .redes img {
+  height: 50px;
+  width: 50px;
+  margin: 2px;
+}
+.contact_us .info h3 {
+  margin: 1em;
+}
+.contact_us .titulo {
+  padding: 0 2em;
+}
+.contact_us .titulo h3 {
+  background: #4ea1b3;
+  color: #fff;
+  width: 300px;
+  padding: 0.1em 0.5em;
+  font-size: 1.5em;
+  text-align: center;
+  border-radius: 10px 10px 0 0;
+}
+.contact_us .cen {
+  display: flex;
+  width: 100%;
+}
+.contact_us .cen button {
+  margin: auto;
+  background: #4ea1b3;
+}
+.contact_us form {
+  background: #ececec;
+  padding: 1em;
+  border-radius: 10px;
+  margin: 0;
+}
+.contact_us .control-group.form-group {
+  padding: 0 1em;
+}
+.contact_us .control-group.form-group input {
+  margin: 0;
+}
+.top_men {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border-bottom: 2px solid #ddd;
+  margin: 10px 0;
+  padding: 10px 0;
+}
+.pad {
+  padding: 0 3em;
+  padding-top: 10px;
+}
+.back img {
+  width: 40px;
+  height: 40px;
+}
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 1em 0;
+}
+ul a {
+  color: #000;
+}
+ul a:hover {
+  color: #4ea1b3;
+}
+.contacto .grupo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.contacto .grupo img {
+  height: 60px;
+  width: 60px;
+}
+.contacto .grupo p {
+  width: 200px;
+  margin: 0;
+}
+.title_caja {
+  margin-top: 1em;
+  font-size: 1.2em;
+  border-bottom: 2px solid #ddd;
+  padding: 0.2em 0;
+}
+.title_caja2 {
+  text-align: center;
+  background: #4ea1b3;
+  border-bottom: none;
+  color: #fff;
+  padding: 0.5em;
+}
+.npad {
+  padding: 0;
+}
+.mtop {
+  margin-top: 10px;
+}
+.mtop textarea {
+  width: 100%;
+}
+.mtop .titb {
+  background: #eee;
+  width: 85px;
+  padding: 5px;
+  border-radius: 10px 10px 0 0px;
+}
+.body__cajas {
+  margin-top: 1em;
+}
+.body__cajas .box {
+  margin-bottom: 1em;
+}
+.body__cajas .box img {
+  padding: 0;
+  height: 40px;
+  width: 40px;
+  float: left;
+}
+.body__cajas .box .tex {
+  padding: 1em;
+  box-shadow: 2px 2px 5px #999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.body__cajas .box .tex p {
+  margin: 0;
+  padding: 0;
+}
+.boton_mega {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+.boton_mega button {
+  border-radius: 0;
+  background: #4ea1b3;
+  border-color: #4ea1b3;
+  padding: 1em 6em;
+  margin-bottom: 10px;
+}
+.boton_mega button:hover {
+  background: rgba(35,155,154,0.64);
+}
+.barra__car,
+.right {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.barra__car {
+  border-bottom: 2px solid #ddd;
+  padding: 0.1em 0.5em;
+  margin-bottom: 1em;
+}
+.barra__car .dir {
+  height: 41px;
+}
+.barra__car img {
+  height: 40px;
+  width: 40px;
+}
+.barra__car .btn__caja {
+  width: 40px;
+  height: 40px;
+  margin-left: 1em;
+}
+.barra__car select {
+  border: 1px solid;
+  width: auto;
+  border-radius: 5px;
+  height: 40px;
+}
+.box__cajas__cambiar {
+  padding: 0;
+  padding-right: 2em;
+}
+.listado__carros_no {
+  display: none;
+}
+.listado__carros .listado__carros_si {
+  display: none;
+}
+.listado__carros .listado__carros_no {
+  display: block;
+}
+.listado__carros .car {
+  margin-bottom: 2em;
+  border: solid 1px #4ea1b3;
+  box-shadow: 4px 4px 5px #999;
+  height: 200px;
+  margin-left: 1em;
+}
+.listado__carros .car .col {
+  margin: 0;
+  padding: 0;
+}
+.listado__carros .car a {
+  cursor: pointer;
+}
+.listado__carros .car .car__img {
+  position: relative;
+  font-size: 2em;
+  border-right: solid #4ea1b3 0.15em;
+  height: 100%;
+}
+.listado__carros .car .car__img img {
+  width: 100%;
+  height: 100%;
+}
+.listado__carros .car .car__img .favoritos {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: #808080;
+  z-index: 1000;
+}
+.listado__carros .car .car__info {
+  padding: 0 20px !important;
+  font-size: 1em;
+  height: 100px;
+}
+.listado__carros .car .car__info h3 {
+  padding: 10px 0 !important;
+  color: #4ea1b3;
+  height: 50px;
+}
+.listado__carros .car .car__info .car__info-caracteristicas {
+  height: 100px;
+}
+.listado__carros .car .car__info .car__info-caracteristicas strong {
+  color: #4ea1b3;
+  font-size: 0.9em;
+  height: 25px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.listado__carros .car .car__info .car__info-caracteristicas p {
+  font-size: 0.9em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.listado__carros .car .car__info .car__info-description {
+  height: 100px;
+}
+.listado__carros .car .car__info .car__info-description p {
+  height: 100%;
+  margin: 0;
+  text-align: justify;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 1em;
+}
+.listado__carros .car .car__info .car__links {
+  margin-top: 10px !important;
+  height: 50px;
+}
+.listado__carros .car .car__dealer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+}
+.listado__carros .car .car__dealer h3 {
+  text-align: center;
+  padding: 10px 0 !important;
+  height: 50px;
+}
+.listado__carros .car .car__dealer div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #f00;
+  height: 100px;
+  width: 100%;
+}
+.listado__carros .car .car__dealer div img {
+  width: 50px;
+  height: 50px;
+}
+.listado__carros .car .car__dealer a {
+  border: 1px solid #4ea1b3;
+  padding: 5px 10px;
+  border-radius: 5px;
+  text-align: center;
+}
+.listado__carros .car .car__dealer a:hover {
+  background: #4ea1b3;
+  color: #fff;
+}
+.listado__carros .car .car__dealer .tachar {
+  text-decoration: line-through;
+  color: #000;
+  font-weight: normal;
+}
+.listado__carros .car .car__dealer strong {
+  text-decoration: none;
+  color: #f00;
+}
+.redes__movil {
+  display: none;
+}
+.redes__movil img {
+  height: 40px;
+  width: 40px;
+}
+.modal {
+  z-index: 20000;
+}
+::-webkit-inner-spin-button {
+  display: none;
+}
+@media print {
+  .top_men,
+  .pad,
+  .barra__car,
+  .redes__movil,
+  .pagination,
+  .btn_det {
+    display: none !important;
+  }
+  .box__cajas__cambiar {
+    margin-bottom: 150px !important;
+  }
+  .in {
+    margin-bottom: 20px;
+  }
+}
+@media (max-width: 1256px) {
+  .listado__carros .car__dealer div {
+    height: 50% !important;
+  }
+}
+@media (max-width: 1152px) {
+  .redes__movil {
+    display: block;
+  }
+  .barra__car .right {
+    display: none;
+  }
+  .barra__car .redes {
+    display: none;
+  }
+  .listado__carros .listado__carros_no {
+    display: none;
+  }
+  .listado__carros .listado__carros_si {
+    display: block;
+  }
+}
+.content .cars {
+  max-width: 1366px;
+  margin: auto;
+}
+.content .cars .carro {
+  margin-bottom: 3em;
+}
+.content .cars .carro .thumbnail {
+  max-width: 100%;
+  border: 0;
+  box-shadow: none;
+}
+.content .cars .carro .thumbnail a {
+  background: transparent;
+  padding: 0;
+}
+.content .cars .carro .thumbnail a img {
+  height: 200px;
+}
+.content .cars .carro .thumbnail .caption {
+  border-bottom: 0;
+  height: 100%;
+  padding-left: 0;
+  padding-right: 0;
+}
+.content .cars .carro .thumbnail .caption .texto {
+  text-align: left;
+  padding-left: 0;
+}
+.content .cars .carro .thumbnail .caption .texto a h4 {
+  color: #000;
+  text-align: left;
+}
+.content .cars .carro .thumbnail .caption .price {
+  background: #4ea1b3;
+  margin-top: 15px;
+  text-align: center;
+  padding-right: 0;
+}
+.content .cars .carro .thumbnail .caption .price h4 {
+  color: #fff;
+}
+.content .cars .carro .thumbnail .caption .detail {
+  padding: 0;
+  border-bottom: 1px solid #4d5c57;
+}
+.content .cars .carro .thumbnail .caption .detail a {
+  color: #4ea1b3;
+  text-align: right;
+}
+.content .cars .carro .thumbnail .caption .detail a p {
+  margin-bottom: 0;
+}
+.content .cars .carro .thumbnail .caption .extra {
+  padding: 0;
+}
+.content .cars .carro .thumbnail .caption .extra h5 {
+  color: #4d5c57;
+  width: 100%;
+}
+.content .cars .carro.special .thumbnail .caption .price {
+  margin-top: 0;
+}
+.content .cars .carro.special .thumbnail .caption .price .special {
+  font-size: 12px;
+  text-decoration: line-through;
+}
+/*---------------------------------------OUR TEAM----------------------------------------------------*/
+.our .tit {
+  color: #4ea1b3;
+  margin-top: 10px;
+  border: 1px solid #c6c6c6;
+  padding: 0.431em;
+  border-right: none;
+  border-left: none;
+  font-size: 1.45em;
+  font-weight: 700;
+}
+.our .cajas {
+  padding: 10px;
+  margin: 0;
+  background: #fff;
+}
+.our .caja {
+  background-color: #ececec;
+  padding: 0.625em;
+  border: 1px solid #c6c6c6;
+  display: flex;
+  border-radius: 10px;
+}
+.our .caja .info {
+  width: 100%;
+}
+.our .caja .info .tit {
+  margin: 0;
+  border-top: none;
+  color: #000;
+}
+.our .caja .info p {
+  padding: 0;
+  padding-left: 10px;
+}
+.our .caja .img {
+  background: #fff;
+  border: 1px solid #c6c6c6;
+  padding: 10px;
+  max-width: 154px;
+}
+.our .caja .img img {
+  height: 170px;
+}
+/*--------------------------------BLOG------------------------------------------*/
+.blog {
+  border: 1px solid #eee;
+  padding: 0;
+  border-radius: 5px;
+  font-size: 16px;
+}
+.blog a {
+  background: transparent;
+}
+.blog .no_ver {
+  display: none;
+}
+.blog .back {
+  text-align: right;
+}
+.blog .back img {
+  width: 40px;
+  height: 40px;
+}
+.blog .date {
+  padding: 0.5em;
+  border-top: 1px dashed #eee;
+  border-bottom: 1px dashed #eee;
+}
+.blog img {
+  width: 100%;
+}
+.blog .thumbnail {
+  border-radius: 0;
+  border: none;
+  border-bottom: 1px solid #eee;
+  margin: 0.5em;
+  padding: 0.5em 0;
+  box-shadow: none;
+  max-width: 100%;
+}
+.blog .pl {
+  padding-left: 0;
+}
+.blog .caption {
+  border-bottom: none;
+  text-align: left;
+  height: 60px;
+  font-weight: 0;
+}
+.blog .caption a {
+  width: 100%;
+  color: #4ea1b3;
+  background: #fff;
+  padding: 0;
+  text-align: left;
+  font-size: 1em;
+  font-weight: none;
+}
+.blog .caption a:hover {
+  color: reverse(#4ea1b3);
+}
+.blog .caption .date {
+  padding: 0.5em;
+  border-top: 1px dashed #eee;
+  border-bottom: 1px dashed #eee;
+}
+.blog .caption h3 {
+  margin: 0;
+}
+.blog .caption h5 {
+  color: rojo_vino;
+}
+.blog .caption i {
+  color: #eee;
+  margin-right: 0.5em;
+}
+.blog__buscadors {
+  padding: 0 2em;
+}
+.blog__buscadors .btn {
+  background: #4ea1b3;
+  color: reverse(#4ea1b3);
+}
+.blog__buscadors .cajas {
+  border-radius: 5px;
+  border: 1px solid #eee;
+  margin-bottom: 1em;
+  background: #fff;
+}
+.blog__buscadors .cajas h4 {
+  text-align: left;
+}
+.blog__buscadors .cajas a {
+  width: 100%;
+  color: #4ea1b3;
+  background: #fff;
+  padding: 0;
+  text-align: left;
+  font-size: 1em;
+  font-weight: 0;
+}
+.blog__buscadors .cajas form {
+  padding: 0.5em 0 1.5em 1.5em;
+}
+.blog__buscadors .cajas form .pl {
+  padding-left: 0;
+}
+.blog__buscadors .cajas form .pr {
+  padding-right: 0;
+}
+.blog__buscadors .cajas form input {
+  width: 100%;
+  height: 34px;
+  font-size: 16px;
+  padding: 5px 10px;
+  background: #fff;
+  border: 1px solid #000;
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-left: 0;
+/* WebKit */
+/* Firefox 18- */
+/* Firefox 19+ */
+/* IE 10+ */
+}
+.blog__buscadors .cajas form input::-webkit-input-placeholder {
+  color: #eee;
+}
+.blog__buscadors .cajas form input:-moz-placeholder {
+  color: #eee;
+}
+.blog__buscadors .cajas form input::-moz-placeholder {
+  color: #eee;
+}
+.blog__buscadors .cajas form input:-ms-input-placeholder {
+  color: #eee;
+}
+.blog__buscadors .cajas form .btn {
+  border-radius: 0;
+}
+.blog__buscadors .cajas .thumbnail {
+  border-radius: 0;
+  border: none;
+  border-bottom: 1px solid #eee;
+  margin: 0.5em;
+  padding: 0.5em 0;
+  box-shadow: none;
+}
+.blog__buscadors .cajas .thumbnail img {
+  width: 100%;
+}
+.blog__buscadors .cajas .pl {
+  padding-left: 0;
+  padding-right: 0;
+}
+.blog__buscadors .cajas .caption {
+  border: none;
+  text-align: left;
+}
+.blog__buscadors .cajas .caption h4 {
+  margin: 0;
+}
+.blog__buscadors .cajas .caption h5 {
+  color: rojo_vino;
+}
+.blog__buscadors .cajas .caption i {
+  color: #eee;
+  margin-right: 0.5em;
+}
+.row {
+  margin-left: 0;
+  margin-right: 0;
+}
+.blog__encabezado {
+  margin-top: 2em;
+  padding-left: 2em;
+}
+.blog__encabezado .tit {
+  padding: 0.5em 1em;
+  margin: 0;
+  background: #eee;
+  width: 100%;
+  margin-bottom: 1em;
+  font-size: 16px;
+}
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px !important;
+  color: #4ea1b3;
+}
+.pagination .btn-success {
+  font-size: 20px !important;
+  background: azul_marino !important;
+}
+/*--------------------------------------------TESTIMONIAL-------------------------------------------------*/
+.testimonial p {
+  text-align: center;
+}
+.testimonial .start {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+.testimonial .start div {
+  border-bottom: 3px solid #4ea1b3;
+}
+.testimonial .start .glyphicon {
+  color: #eee;
+  font-size: 14px;
+}
+.testimonial .start .glyphicon.active {
+  color: #ff0;
+}
+.testimonial .tes {
+  text-align: center;
+  color: #4d5c57;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.testimonial .tes p {
+  width: 600px;
+}
+.testimonial h2 {
+  text-align: center;
+}
+.testimonial h4 {
+  text-align: center;
+  color: #4ea1b3;
+}
+.testimonial .carousel-indicators {
+  display: none;
+}
+.testimonial .carousel-inner>.item>img {
+  width: 60px;
+  height: 60px;
+  margin: auto;
+  border: 2px solid #eee;
+  border-radius: 50%;
+}
+.testimonial .carousel-control {
+  border: 4px solid #eee;
+  border-radius: 50%;
+  height: 60px;
+  width: 60px;
+}
+.testimonial .carousel-control .glyphicon {
+  top: 20px;
+  color: #eee;
+}
+.testimonial .carousel-control .glyphicon-chevron-left {
+  left: 22px;
+}
+.testimonial .carousel-control .glyphicon-chevron-right {
+  left: 10px;
+}
+header .collapse.navbar-collapse.navbar-ex1-collapse {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+}
+.navbar-inverse.sell_or_trade {
+  background: #eee;
+  border-bottom: 0;
+  padding-top: 0;
+  padding-bottom: 10px;
+}
+.navbar-nav li {
+  border-left: 1px solid #4d5c57;
+  color: #000 !important;
+}
+.navbar-nav li a {
+  padding: 5px 10px !important;
+  color: #000 !important;
+}
+.navbar-nav li a:hover {
+  background: #4d5c57 !important;
+  color: #fff !important;
+}
+.trade {
+  max-width: 1366px;
+  margin: auto;
+}
+.trade .title {
+  border-bottom: 1px solid #4d5c57;
+  margin-top: 10px;
+}
+.trade .sub_title .imagen img {
+  width: 100%;
+}
+.trade .sub_title .texto h2 {
+  margin-top: 1em;
+}
+.trade .formulario .titulo {
+  background: #4ea1b3;
+  border-radius: 10px 10px 0 0;
+  margin-left: 2em;
+}
+.trade .formulario .titulo h4 {
+  text-align: center;
+  color: #fff;
+}
+.trade .formulario .caja {
+  border: 2px solid #eee;
+  border-radius: 10px;
+  margin-bottom: 2em;
+}
+.trade .formulario .caja select,
+.trade .formulario .caja input {
+  margin-left: 0px;
+  width: 100%;
+  border-radius: 5px;
+}
+.trade .formulario .caja h4 {
+  height: 10px;
+}
+.trade .formulario .caja .tres .izq {
+  padding-left: 0;
+}
+.trade .formulario .caja .tres .der {
+  padding-right: 0;
+}
+@media (max-width: 767px) {
+  .trade .formulario .caja .tres .izq {
+    padding-left: 15px;
+  }
+  .trade .formulario .caja .tres .der {
+    padding-right: 15px;
+  }
+}

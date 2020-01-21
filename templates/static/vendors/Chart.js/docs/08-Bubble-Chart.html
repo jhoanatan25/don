@@ -1,0 +1,125 @@
+<hr>
+<p>title: Bubble Chart</p>
+<h2 id="anchor-bubble-chart">anchor: bubble-chart</h2>
+<h3 id="introduction">Introduction</h3>
+<p>A bubble chart is used to display three dimensions of data at the same time. The location of the bubble is determined by the first two dimensions and the corresponding horizontal and vertical axes. The third dimension is represented by the size of the individual bubbles. </p>
+<p><div class="canvas-holder">
+    <canvas width="250" height="125"></canvas>
+</div>
+<br></p>
+<h3 id="example-usage">Example Usage</h3>
+<pre><code class="lang-javascript">// For a bubble chart
+var myBubbleChart = new Chart(ctx,{
+    type: &#39;bubble&#39;,
+    data: data,
+    options: options
+});
+</code></pre>
+<h3 id="data-structure">Data Structure</h3>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>data</td>
+<td><code>Array&lt;BubbleDataObject&gt;</code></td>
+<td>The data to plot as bubbles. See <a href="#bubble-chart-data-format">Data format</a></td>
+</tr>
+<tr>
+<td>label</td>
+<td><code>String</code></td>
+<td>The label for the dataset which appears in the legend and tooltips</td>
+</tr>
+<tr>
+<td>backgroundColor</td>
+<td><code>Color Array&lt;Color&gt;</code></td>
+<td>The fill color of the bubbles.</td>
+</tr>
+<tr>
+<td>borderColor</td>
+<td><code>Color or Array&lt;Color&gt;</code></td>
+<td>The stroke color of the bubbles.</td>
+</tr>
+<tr>
+<td>borderWidth</td>
+<td><code>Number or Array&lt;Number&gt;</code></td>
+<td>The stroke width of bubble in pixels.</td>
+</tr>
+<tr>
+<td>hoverBackgroundColor</td>
+<td><code>Color or Array&lt;Color&gt;</code></td>
+<td>The fill color of the bubbles when hovered.</td>
+</tr>
+<tr>
+<td>hoverBorderColor</td>
+<td><code>Color or Array&lt;Color&gt;</code></td>
+<td>The stroke color of the bubbles when hovered.</td>
+</tr>
+<tr>
+<td>hoverBorderWidth</td>
+<td><code>Number or Array&lt;Number&gt;</code></td>
+<td>The stroke width of the bubbles when hovered.</td>
+</tr>
+<tr>
+<td>hoverRadius</td>
+<td><code>Number or Array&lt;Number&gt;</code></td>
+<td>Additional radius to add to data radius on hover.</td>
+</tr>
+</tbody>
+</table>
+<p>An example data object using these attributes is shown below. This example creates a single dataset with 2 different bubbles.</p>
+<pre><code class="lang-javascript">var data = {
+    datasets: [
+        {
+            label: &#39;First Dataset&#39;,
+            data: [
+                {
+                    x: 20,
+                    y: 30,
+                    r: 15
+                },
+                {
+                    x: 40,
+                    y: 10,
+                    r: 10
+                }
+            ],
+            backgroundColor:&quot;#FF6384&quot;,
+            hoverBackgroundColor: &quot;#FF6384&quot;,
+        }]
+};
+</code></pre>
+<h3 id="data-object">Data Object</h3>
+<p>Data for the bubble chart is passed in the form of an object. The object must implement the following interface. It is important to note that the radius property, <code>r</code> is <strong>not</strong> scaled by the chart. It is the raw radius in pixels of the bubble that is drawn on the canvas.</p>
+<pre><code class="lang-javascript">{
+    // X Value
+    x: &lt;Number&gt;,
+
+    // Y Value
+    y: &lt;Number&gt;,
+
+    // Radius of bubble. This is not scaled.
+    r: &lt;Number&gt;
+}
+</code></pre>
+<h3 id="chart-options">Chart Options</h3>
+<p>The bubble chart has no unique configuration options. To configure options common to all of the bubbles, the point element options are used. </p>
+<p>For example, to give all bubbles a 1px wide black border, the following options would be used.</p>
+<pre><code class="lang-javascript">new Chart(ctx,{
+    type:&quot;bubble&quot;,
+    options: {
+        elements: {
+            points: {
+                borderWidth: 1,
+                borderColor: &#39;rgb(0, 0, 0)&#39;
+            }
+        }
+    }
+});
+</code></pre>
+<p>We can also change the default values for the Bubble chart type. Doing so will give all bubble charts created after this point the new defaults. The default configuration for the bubble chart can be accessed at <code>Chart.defaults.bubble</code>.</p>

@@ -1,0 +1,149 @@
+{% extends 'base/base_backend.html' %}
+{% block content %}
+{% load humanize %}
+<div class="conten">
+  <div class="row">
+    <div class="col-lg-12 contenedor_title" >
+      <h1 class="page-header">Favoritos</h1>
+	  </div>
+  </div>
+  <div class="row barra">
+    <div class="home">
+      <div class="col col-lg-2 col-md-3 col-xs-6">
+        <h5>Ordenar por</h5>
+        <select id="make" name="make">
+          <option value="Make">Make</option>
+          <option value="Any Make">Any Make</option>
+        </select>
+      </div>
+      <div class="col col-lg-2 col-md-3 col-xs-6">
+        <h5>Condición</h5>
+        <div class="btn-group" role="group">
+          <button id="allc" type="button" class="btn btn-default active">Todos</button>
+          <button id="used" type="button" class="btn btn-default ">Usados</button>
+        </div>
+      </div>
+      <div class="col col-lg-4 col-md-5 col-xs-l2">
+        <h5>Días en mercado</h5>
+        <div class="btn-group" role="group">
+          <button id="alld" type="button" class="btn btn-default active">Todos</button>
+          <button id="ran0" type="button" class="btn btn-default">0-30</button>
+          <button id="ran30" type="button" class="btn btn-default">31-60</button>
+          <button id="ran60" type="button" class="btn btn-default">61+</button>
+        </div>
+      </div>
+      <div class="col col-lg-2 col-md-6">
+        <h5>Posted</h5>
+        <div class="btn-group" role="group">
+          <button id="allp" type="button" class="btn btn-default active">Todos</button>
+          <button id="yes" type="button" class="btn btn-default">Si</button>
+          <button id="no" type="button" class="btn btn-default">No</button>
+        </div>
+      </div>
+      <div class="col col-lg-2 col-md-6 print">
+        <a href="#"><i class="fa fa-print fa-fw"></i>Printables</a>
+      </div>
+    </div>
+  </div>
+  {% for obj in cars %}
+      <div class="row barra2 col col-xs-12">
+        {% for id, im in all_photos.items %}
+        {% if id == obj.id%}
+        {% for i in im %}
+        {% if forloop.counter < 2%}
+        <div class="col col-md-5 col-xs-12">
+          <img src="{{i.image.url}}">
+        </div>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+        {% endfor %}
+        <div class="col col-md-7 col-xs-12 textocarro">
+          <div class="linea col-xs-12">
+              <div class="col-sm-6">
+                <a target="_blank" href="/detail/{{obj.id}}"><h4>{{ obj.model.maker}} {{obj.model}}</h4></a>
+              </div>
+              <div class="col-sm-6 price">
+                <h4>${{ obj.price | intcomma}}</h4>
+              </div>
+          </div>
+          <div class="infocarros">
+            <div class="col col-md-4 col-sm-6 col-xs-12">
+              <div class="texto">
+                <h4>Cantidad #</h4>
+                <h4 class="end">{{obj.stock_number}}</h4>
+              </div>
+              <div class="texto">
+                <h4>Vistas</h4>
+                <h4 class="end">90</h4>
+              </div>
+            </div>
+            <div class="col col-md-4 col-sm-6 col-xs-12">
+              <div class="texto">
+                <h4>Impresiones</h4>
+                <h4 class="end">1.508</h4>
+              </div>
+              <div class="texto">
+                <h4>Millas</h4>
+                <h4 class="end">{{obj.mileage}}</h4>
+              </div>
+            </div>
+            <div class="col col-md-4 col-sm-6 col-xs-12">
+              <div class="texto">
+                <h4>Líderes</h4>
+                <h4 class="end">1</h4>
+              </div>
+              <div class="texto">
+                <h4>Días en mercado</h4>
+                <h4 class="end">50</h4>
+              </div>
+            </div>
+          </div>
+        </div>          
+      <!-- Small modal -->
+        <div id="shareM" class="modal fade bd-example-modal-sm {{obj.id}}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+              <h4>¿Esta seguro que desea borrar el auto?</h4>
+              <a href="/dashboard/delete/{{obj.id}}" class="btn btn-danger bf" ><i class="glyphicon glyphicon-trash"></i> Borrar</a>
+              <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-sign-out"></i> Cancelar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row col-xs-12 bontones_inve">
+        <div class="botones col col-sm-4 col-xs-12">
+          <a href="/dashboard/edit/{{obj.id}}" class="btn btn-primary bf"><i class="fa fa-pencil fa-fw"></i> Editar</a>
+        </div>
+        <div class="botones col col-sm-4 col-xs-12">
+          <a href="/dashboard/sold/{{obj.id}}" class="btn btn-success bf"><i class="glyphicon glyphicon-usd"></i> Marcar como vendido</a>
+        </div>
+        <div class="botones col col-sm-4 col-xs-12">
+          <a data-toggle="modal" data-target=".bd-example-modal-sm.{{obj.id}}"   class="btn btn-danger bf"><i class="glyphicon glyphicon-trash"></i> Borrar Vehiculo</a>
+        </div>
+      </div>
+  {% endfor %}
+</div>
+<script  type="text/javascript">
+function sleep (time) {
+  return new Promise((resolve) => setTimeout(resolve, time));
+}
+
+function detail(id) {
+  var win = window.open('/detail/' + id, '_blank');
+  win.focus();
+}
+function unlike(id){
+	url = "/unlike?id=" + id
+	var xmlHttp = new XMLHttpRequest();
+  xmlHttp.onreadystatechange = function(){
+    if (this.readyState == 4 && this.status == 201){
+      location.reload();
+      alert("unLiked!");
+    }
+  };
+  xmlHttp.open("GET", url, true);
+  xmlHttp.send(null);
+}
+</script>
+{% endblock %}

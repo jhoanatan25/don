@@ -1,0 +1,35 @@
+from django.conf.urls import url,include
+from .views import *
+from blog import views
+
+urlpatterns =[
+	url(r'^$',Backend, name= 'backend'),
+	url(r'^Inventory',Inventory, name= 'inventory'),
+    url(r'^edit/(?P<id>[\w.@+-]+)/$',edit_car, name= 'edit_car'),
+    url(r'^edit/(?P<id>[\w.@+-]+)/(?P<username>[\w.@+-]+)/$',edit_car, name= 'edit_car'),
+	url(r'^edit_user/(?P<username>[\w.@+-]+)/$',edit_user, name= 'edit_user'),
+	url(r'^delete/(?P<id>[\w.@+-]+)/$',delete_car, name= 'delete_car'),
+	url(r'^sold/(?P<id>[\w.@+-]+)/$',sold_car, name= 'sold_car'),
+    url(r'^delete/(?P<id>[\w.@+-]+)/(?P<username>[\w.@+-]+)/$',delete_car, name= 'delete_car'),
+	url(r'^sold/(?P<id>[\w.@+-]+)/(?P<username>[\w.@+-]+)/$',sold_car, name= 'sold_car'),
+    url(r'^add_inventory/$',add_inventory,name='add inventory'),
+	url(r'^add_inventory/(?P<body>[\w.@+-]+)/$',add_inventory,name='add inventory'),
+    url(r'^my_favourites',my_favourites,name='My Favourites'),
+	url(r'^inventory_analysis',inventory_analysis,name='Inventory Analysis'),
+	url(r'^website',website,name='website'),
+	url(r'^profile',profile,name='profile'),
+	url(r'^all_users/(?P<type>[\w.@+-]+)/$',all_users, name= 'all_users'),
+	url(r'^all_users/$',all_users, name= 'all_users'),
+    url(r'^sold_inventory',sold_inventory,name='sold inventory'),
+	url(r'^new/(?P<type>[\w.@+-]+)/$',new,name='new user'),
+    url(r'^new/$',new,name='new user'),
+    url(r'^manage/(?P<username>[\w.@+-]+)/$',manage,name='manage'),
+	url(r'^slide/$',slideFunction,name='slideFunction'),
+	url(r'^slide/(?P<id>[\w.@+-]+)/$',slideFunction,name='slideFunction'),
+	url(r'^logo',logo,name='logo'),
+	url(r'^plans',plans_function,name='plans'),
+	url(r'^blog', include('blog.urls',namespace="blog")),
+	url(r'^manager',manager, name= 'manager'),
+	url(r'^editterms',editterms, name= 'editterms'),
+	url(r'^Edit_Company_Information',Edit_Company_Information, name= 'Edit_Company_Information'),
+]

@@ -1,0 +1,151 @@
+{% extends 'base/base_backend.html' %}
+{% load replace %}
+{% block content %}
+{%if message%}
+<script>
+  swal(
+    'Mensaje',
+    '{{message}}',
+    'success'
+  )
+</script>
+{%endif%}
+<div class="conten">
+  {%if not error%}
+  <div class="barra arriba">
+    <a class="back" href="javascript:history.back(-1);"><div class="back"><img src="/static/icon/arrows.png"></div></a>
+    <form class="blog row"  method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <h1>{{title}}</h1>
+      <div class="col-sm-8">
+        <div class="col-xs-12">
+          <h2>{{ form.title_1.label_tag }}</h2>
+          {{ form.title_1.errors }}
+    			{{ form.title_1 }}
+          <h2>{{ form.url_1.label_tag }}</h2>
+          {{ form.url_1.errors }}
+    			{{ form.url_1 }}
+        </div>
+        <div class="col-xs-12">
+          <h2>{{ form.title_2.label_tag }}</h2>
+          {{ form.title_2.errors }}
+    			{{ form.title_2 }}
+          <h2>{{ form.url_2.label_tag }}</h2>
+          {{ form.url_2.errors }}
+    			{{ form.url_2 }}
+        </div>
+        <div class="col-xs-12">
+          <h2>{{ form.title_3.label_tag }}</h2>
+          {{ form.title_3.errors }}
+    			{{ form.title_3 }}
+          <h2>{{ form.url_3.label_tag }}</h2>
+          {{ form.url_3.errors }}
+    			{{ form.url_3 }}
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <h1 class="center">{{ form.image.label_tag }}</h1>
+        {{ form.image.errors }}
+        <div class="upload">
+          {{ form.image }}
+          <!--<input name="img" id="img" type=file class="file" accept="image/*"> el input debe ser asi-->
+        </div>
+        <output id="list"></output>
+        <div class="cont_limpiar">
+          <button type="button" onclick="limpiar()" class="btn btn-warning limpiar"><i class="glyphicon glyphicon-trash"></i> Limpiar</button>
+        </div>
+      </div>
+      <div>
+      </div>
+      <div class="col-xs-12 separar">
+        <div class="col-md-6 cf">
+          <button type="submit" class="btn btn-primary bf">Guardar</button>
+        </div>
+      </form>
+        <div class="col-md-6 cf">
+          <form action="/dashboard">
+            <button type="button" class="btn btn-danger bf">Cancelar</button>
+          </form>
+        </div>
+      </div>
+
+  </div>
+  {% endif %}
+</div>
+<script type="text/javascript">
+
+
+function handleFileSelect(evt) {
+var files = evt.target.files; // FileList object
+
+// Loop through the FileList and render image files as thumbnails.
+for (var i = 0, f; f = files[i]; i++) {
+
+// Only process image files.
+if (!f.type.match('image.*')) {
+continue;
+}
+
+var reader = new FileReader();
+
+// Closure to capture the file information.
+reader.onload = (function(theFile) {
+return function(e) {
+  // Render thumbnail.
+  var span = document.createElement('span');
+  span.classList.toggle("imagen_list");
+  span.innerHTML = ['<img class="thumb" src="', e.target.result,
+                    '" title="', escape(theFile.name), '"/>'].join('');
+  document.getElementById('list').insertBefore(span, null);
+};
+})(f);
+
+// Read in the image file as a data URL.
+reader.readAsDataURL(f);
+}
+}
+
+document.getElementById('img').addEventListener('change', handleFileSelect, false);
+
+
+function limpiar() {
+
+        $(".imagen_list").remove();
+        var input = $('#img');
+        var clon = input.clone();  // Creamos un clon del elemento original
+        input.replaceWith(clon);   // Y sustituimos el original por el clon
+
+        function handleFileSelect(evt) {
+        var files = evt.target.files; // FileList object
+
+        // Loop through the FileList and render image files as thumbnails.
+        for (var i = 0, f; f = files[i]; i++) {
+
+        // Only process image files.
+        if (!f.type.match('image.*')) {
+        continue;
+        }
+
+        var reader = new FileReader();
+
+        // Closure to capture the file information.
+        reader.onload = (function(theFile) {
+        return function(e) {
+          // Render thumbnail.
+          var span = document.createElement('span');
+          span.classList.toggle("imagen_list");
+          span.innerHTML = ['<img class="thumb" src="', e.target.result,
+                            '" title="', escape(theFile.name), '"/>'].join('');
+          document.getElementById('list').insertBefore(span, null);
+        };
+        })(f);
+
+        // Read in the image file as a data URL.
+        reader.readAsDataURL(f);
+        }
+        }
+
+        document.getElementById('img').addEventListener('change', handleFileSelect, false);
+    }
+</script>
+{% endblock %}

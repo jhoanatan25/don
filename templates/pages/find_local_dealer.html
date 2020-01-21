@@ -1,0 +1,100 @@
+{% extends 'base/base.html' %}
+{% block content %}
+	<div class="page-outer">
+		<div class="find_load_dealer">
+			<div class="title">
+				<h1>Buscar Distribuidor</h1>
+			</div>
+			<div class="search_box">
+				<div class="arriba">
+					<div class="tex">
+						<p>¿Has estado en un concesionario últimamente?</p>
+						<p>Escribe una reseña</p>
+					</div>
+				</div>
+				<div class="abajo">
+					<div class="cuatro">
+						<div class="dos">
+							<div class="box">
+								<select name="" id="">
+									<option value="">Seleccionar Distribuidor</option>
+									<option value="">Kevin</option>
+									<option value="">Ramon</option>
+									<option value="">Dealer_User</option>
+									<option value="">Todos</option>
+								</select>
+							</div>
+							<div class="box">
+								<select name="" id="">
+									<option value="">Seleccionar Milla</option>
+									<option value="">10 millas</option>
+									<option value="">20 millas</option>
+									<option value="">30 millas</option>
+									<option value="">40 millas</option>
+									<option value="">50 millas</option>
+									<option value="">60 millas</option>
+									<option value="">70 millas</option>
+									<option value="">Todas</option>
+								</select>
+							</div>
+						</div>
+						<div class="dos">
+							<div class="box">
+								<input type="text " class="black" placeholder="Codigo Postal">
+							</div>
+							<div class="box">
+								 <a href="/find_local_search" class="btn">Buscar</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="info row">
+				<div class="centrar col col-xs-12">
+					<h2 class="title">Explorar concesionarios cercanos.</h2>
+					<h4>Encuentre Distribuidores en su área, lea o revise los comentarios correctos.</h4>
+					<h4>!Hacemos que sea fácil de explorar antes de empezar a conducir!</h4>
+				</div>
+				<div class="centrar col col-sm-4 imagen">
+					<img src="/static/images/Find_Local1.png">
+					<div class="texto">
+						<h4>Leer y escribir comentarios</h4>
+						<h4>acerca de distribuidor local.</h4>
+					</div>
+				</div>
+				<div class="centrar col col-sm-4 imagen">
+					<img src="/static/images/Find_Local2.png">
+					<div class="texto">
+						<h4>Obtenga indicaciones e información de contacto.</h4>
+					</div>
+				</div>
+				<div class="centrar col col-sm-4 imagen">
+					<img src="/static/images/Find_Local3.png">
+					<div class="texto">
+						<h4>Buscar inventario visitando</h4>
+						<h4>Distribuidores.</h4>
+					</div>
+				</div>
+				<div class="centrar col col-xs-12 textos">
+					<h3>No se olvide de revisar estos enlaces populares.</h3>
+					<h4>Nuestras secciones de guía de compra y revisión de tarjetas pueden proporcionar dinero y dinero</h4>
+					<h4>ahorrar la información. Tome una mirada, usted no lo lamentará!</h4>
+				</div>
+			</div>
+			<section class="centrar bottom-box row">
+				<a href="/car_reviews" class="col-sm-6 col-md-3 bottom-box__box">
+					<img src="/static/images/Car_Review_Blog.jpg" alt="">
+					<h3>Comentarios de carros</h3>
+				</a>
+				<a href="/sell" class="col-sm-6 col-md-3 bottom-box__box">
+					<img src="/static/images/sell.jpg" alt="">
+					<h3>Vender tu carro</h3>
+				</a>
+				<a href="/buying_guide" class="col-sm-6 col-md-3 bottom-box__box">
+					<img src="/static/images/tips.jpg" alt="">
+					<h3>Guia de compras</h3>
+				</a>
+			</section>
+	</div>
+	</div>
+{% endblock %}

@@ -1,0 +1,67 @@
+<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</p>
+<h1 id="cars">cars</h1>
+<p>=======</p>
+<h1 id="django-on-openshift">Django on OpenShift</h1>
+<p>This git repository helps you get up and running quickly w/ a Django
+installation on OpenShift.  The Django project name used in this repo
+is &#39;myproject&#39; but you can feel free to change it.  Right now the
+backend is sqlite3 and the database runtime is found in
+<code>$OPENSHIFT_DATA_DIR/db.sqlite3</code>.</p>
+<p>Before you push this app for the first time, you will need to change
+the <a href="#admin-user-name-and-password">Django admin password</a>.
+Then, when you first push this
+application to the cloud instance, the sqlite database is copied from
+<code>wsgi/myproject/db.sqlite3</code> with your newly changed login
+credentials. Other than the password change, this is the stock
+database that is created when <code>python manage.py syncdb</code> is run with
+only the admin app installed.</p>
+<p>On subsequent pushes, a <code>python manage.py syncdb</code> is executed to make
+sure that any models you added are created in the DB.  If you do
+anything that requires an alter table, you could add the alter
+statements in <code>GIT_ROOT/.openshift/action_hooks/alter.sql</code> and then use
+<code>GIT_ROOT/.openshift/action_hooks/deploy</code> to execute that script (make
+sure to back up your database w/ <code>rhc app snapshot save</code> first :) )</p>
+<p>You can also turn on the DEBUG mode for Django application using the
+<code>rhc env set DEBUG=True --app APP_NAME</code>. If you do this, you&#39;ll get
+nicely formatted error pages in browser for HTTP 500 errors.</p>
+<p>Do not forget to turn this environment variable off and fully restart
+the application when you finish:</p>
+<pre><code>$ rhc env unset DEBUG
+$ rhc app stop &amp;&amp; rhc app start
+</code></pre><h2 id="running-on-openshift">Running on OpenShift</h2>
+<p>Create an account at <a href="https://www.openshift.com">https://www.openshift.com</a></p>
+<p>Install the RHC client tools if you have not already done so:</p>
+<pre><code>sudo gem install rhc
+rhc setup
+</code></pre><p>Select the version of python (2.7 or 3.3) and create a application</p>
+<pre><code>rhc app create django python-$VERSION
+</code></pre><p>Add this upstream repo</p>
+<pre><code>cd django
+git remote add upstream -m master git://github.com/openshift/django-example.git
+git pull -s recursive -X theirs upstream master
+</code></pre><p>Then push the repo upstream</p>
+<pre><code>git push
+</code></pre><p>Now, you have to create <a href="#admin-user-name-and-password">admin account</a>, so you 
+can setup your Django instance.</p>
+<p>That&#39;s it. You can now checkout your application at:</p>
+<pre><code>http://django-$yournamespace.rhcloud.com
+</code></pre><h2 id="admin-user-name-and-password">Admin user name and password</h2>
+<p>Use <code>rhc ssh</code> to log into python gear and run this command:</p>
+<pre><code>python $OPENSHIFT_REPO_DIR/wsgi/myproject/manage.py createsuperuser
+</code></pre><p>You should be now able to login at:</p>
+<pre><code>http://django-$yournamespace.rhcloud.com/admin/
+</code></pre><blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>a02f47f9adf555ad551546adc3bea37c5d88cf6c</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>

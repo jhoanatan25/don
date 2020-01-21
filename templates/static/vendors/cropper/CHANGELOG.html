@@ -1,0 +1,389 @@
+<h1 id="changelog">Changelog</h1>
+<h2 id="2-3-1-may-28-2016-">2.3.1 (May 28, 2016)</h2>
+<ul>
+<li>Improved the rotate and scale transform behaviour (#633, idea by afeibus).</li>
+<li>Improved the <code>getCroppedCanvas</code> method to return the whole canvas if it is not cropped (#666, PR by @vinnymac).</li>
+<li>Check cross origin setting when load image by XMLHTTPRequest (#669)</li>
+</ul>
+<h2 id="2-3-0-feb-22-2016-">2.3.0 (Feb 22, 2016)</h2>
+<ul>
+<li>Added a new parameter to the <code>replace</code> method for applying filters.</li>
+<li>Improved the image initializing for Safari (#120, #509).</li>
+<li>Fixed incorrect size limitation of the crop box.</li>
+<li>Fixed incorrect cropped canvas when scaleX or scaleY great than 1 (#598).</li>
+</ul>
+<h2 id="2-2-5-jan-18-2016-">2.2.5 (Jan 18, 2016)</h2>
+<ul>
+<li>Fixed crossOriginUrl undefined error when exists the <code>crossOrigin</code> property.</li>
+</ul>
+<h2 id="2-2-4-jan-1-2016-">2.2.4 (Jan 1, 2016)</h2>
+<ul>
+<li>Fixed a dimension bug in the &quot;getCroppedCanvas&quot; method.</li>
+<li>Added an example for cropping round image.</li>
+</ul>
+<h2 id="2-2-3-dec-28-2015-">2.2.3 (Dec 28, 2015)</h2>
+<ul>
+<li>Supports to zoom from event triggering point.</li>
+</ul>
+<h2 id="2-2-2-dec-24-2015-">2.2.2 (Dec 24, 2015)</h2>
+<ul>
+<li>Limit wheel speed to prevent zoom too fast</li>
+<li>Improve the <code>setCropBoxData</code> method</li>
+</ul>
+<h2 id="2-2-1-dec-12-2015-">2.2.1 (Dec 12, 2015)</h2>
+<ul>
+<li>Handle Data URL (Fixed #540: avoid to use XMLHttpRequest to open a Data URL)</li>
+<li>Handle ajax error when load ArrayBuffer</li>
+<li>Not to transform the image to base64 when Orientation equals to <code>1</code></li>
+</ul>
+<h2 id="2-2-0-dec-6-2015-">2.2.0 (Dec 6, 2015)</h2>
+<ul>
+<li>Added a new option: <code>checkOrientation</code> (#120, #509)</li>
+<li>Added a timestamp to the url of preview image (#531)</li>
+</ul>
+<h2 id="2-1-0-dec-2-2015-">2.1.0 (Dec 2, 2015)</h2>
+<ul>
+<li>Added new <code>restore</code> option</li>
+</ul>
+<h2 id="2-0-2-nov-30-2015-">2.0.2 (Nov 30, 2015)</h2>
+<ul>
+<li>Fixed #476: Floor the numerical parameters for <code>CanvasRenderingContext2D.drawImage</code></li>
+</ul>
+<h2 id="2-0-1-nov-18-2015-">2.0.1 (Nov 18, 2015)</h2>
+<ul>
+<li>Improved new crop box creating</li>
+</ul>
+<h2 id="2-0-0-nov-11-2015-">2.0.0 (Nov 11, 2015)</h2>
+<h3 id="common">Common</h3>
+<ul>
+<li>Supports four modes</li>
+<li>Supports three drag modes</li>
+<li>Improved the experience of cropping</li>
+<li>Makes the crop box&#39;s borders and handlers visible when overflow</li>
+<li>Fixed an issue of canvas limitation</li>
+<li>Fixed an issue of cropping</li>
+</ul>
+<h3 id="options">Options</h3>
+<ul>
+<li>Added <code>viewMode</code></li>
+<li>Added <code>dragMode</code></li>
+<li>Renamed <code>touchDragZoom</code> to <code>zoomOnTouch</code></li>
+<li>Renamed <code>mouseWheelZoom</code> to <code>zoomOnWheel</code></li>
+<li>Renamed <code>doubleClickToggle</code> to <code>toggleDragModeOnDblclick</code></li>
+<li>Renamed <code>checkImageOrigin</code> to <code>checkCrossOrigin</code></li>
+<li>Removed <code>strict</code> (supported by <code>viewMode: 1</code>)</li>
+<li>Removed <code>dragCrop</code> (supported by <code>dragMode: &#39;crop&#39;</code>)</li>
+</ul>
+<h3 id="methods">Methods</h3>
+<ul>
+<li>Added <code>moveTo</code></li>
+<li>Added <code>zoomTo</code></li>
+<li>Added <code>rotateTo</code></li>
+<li>Added <code>scaleX</code></li>
+<li>Added <code>scaleY</code></li>
+<li>Improved <code>getCanvasData</code> (added <code>naturalWidth</code> and <code>naturalHeight</code>)</li>
+</ul>
+<h3 id="events">Events</h3>
+<ul>
+<li>Improved <code>zoom</code> (changed <code>event.ratio</code> and added <code>event.oldRatio</code>)</li>
+</ul>
+<h2 id="1-0-0-oct-10-2015-">1.0.0 (Oct 10, 2015)</h2>
+<ul>
+<li>Improved canvas limitation</li>
+<li>Improved preview</li>
+<li>Improved test</li>
+<li>Fixed an error in the <code>clear</code> method (missed parameters)</li>
+<li>Fixed the issue of crop box limitation (#430)</li>
+</ul>
+<h2 id="1-0-0-rc-1-sep-5-2015-">1.0.0-rc.1 (Sep 5, 2015)</h2>
+<ul>
+<li>Moved from Less to Sass</li>
+<li>Fixed the issue of <code>destroy</code> method (#434)</li>
+<li>Fixed the issue on IE8 (#319)</li>
+<li>Added an example for customizing preview</li>
+<li>Added download button to documentation</li>
+<li>Added FAQ</li>
+</ul>
+<h2 id="0-11-1-aug-22-2015-">0.11.1 (Aug 22, 2015)</h2>
+<ul>
+<li>Optimize &quot;built&quot; and &quot;crop&quot; events</li>
+<li>Improve the starting speed (#422)</li>
+<li>Improve the building process (#428)</li>
+<li>Fix event issue on IE8 (#319)</li>
+</ul>
+<h2 id="0-11-0-aug-10-2015-">0.11.0 (Aug 10, 2015)</h2>
+<ul>
+<li>Improve <code>setCropBoxData</code> method (#385)</li>
+<li>Fix event issue on IE10 (#394)</li>
+<li>Optimize code (use <code>var</code> for per variable)</li>
+</ul>
+<h3 id="options">Options</h3>
+<ul>
+<li>Add &quot;scalable&quot; option</li>
+<li>Add &quot;wheelZoomRatio&quot; option</li>
+<li>Convert &quot;crop&quot; option to &quot;crop&quot; event</li>
+</ul>
+<h3 id="methods">Methods</h3>
+<ul>
+<li>Add &quot;scale&quot; method</li>
+<li>Improve &quot;move&quot; method (the <code>offsetY</code> parameter is optional now)</li>
+</ul>
+<h3 id="events">Events</h3>
+<ul>
+<li>Rename &quot;dragstart&quot; to &quot;cropstart&quot;</li>
+<li>Rename &quot;dragmove&quot; to &quot;cropmove&quot;</li>
+<li>Rename &quot;dragend&quot; to &quot;cropend&quot;</li>
+<li>Merge &quot;zoomin&quot; and &quot;zoomout&quot; to &quot;zoom&quot;</li>
+<li>Merge &quot;crop&quot; option and &quot;change&quot; event to &quot;crop&quot; event</li>
+</ul>
+<h2 id="0-10-1-jul-5-2015-">0.10.1 (Jul 5, 2015)</h2>
+<ul>
+<li>Add Pointer Events support (#328)</li>
+<li>Add RTL support (#342)</li>
+<li>Add one new option: &quot;center&quot; (#367)</li>
+<li>Allow cropper to grow vertically (#350)</li>
+</ul>
+<h2 id="0-10-0-jun-8-2015-">0.10.0 (Jun 8, 2015)</h2>
+<ul>
+<li>Add three new options: &quot;change&quot;, &quot;cropBoxMovable&quot;, &quot;doubleClickToggle&quot;</li>
+<li>Change &quot;movable&quot; option (only for image)</li>
+<li>Rename &quot;resizable&quot; to &quot;cropBoxResizable&quot;</li>
+<li>Add one new event: &quot;change.cropper&quot;</li>
+<li>Locking aspect ratio in &quot;free mode&quot; by holding shift key (#259)</li>
+<li>Sync drag mode to crop box when it is not movable (#300)</li>
+</ul>
+<h2 id="0-9-3-may-10-2015-">0.9.3 (May 10, 2015)</h2>
+<ul>
+<li>Add one new option: &quot;data&quot;</li>
+<li>Add two new methods: &quot;setData&quot; (#290, #296), &quot;crop&quot; (#275)</li>
+<li>Fix incorrect minWidth/Height size of canvas (#295)</li>
+<li>Fix the strict mode bug (#280)</li>
+<li>Fix the crop box resizing bug (#277)</li>
+</ul>
+<h2 id="0-9-2-apr-18-2015-">0.9.2 (Apr 18, 2015)</h2>
+<ul>
+<li>Improve strict mode to show full image</li>
+<li>Add two new options: &quot;minCanvasWidth&quot; and &quot;minCanvasHeight&quot;</li>
+<li>Reverse mouse wheeling zoom</li>
+<li>Fix incorrect cursor in disabled state</li>
+</ul>
+<h2 id="0-9-1-mar-21-2015-">0.9.1 (Mar 21, 2015)</h2>
+<ul>
+<li>Fix the touch zoom issue (#206)</li>
+<li>Fix the reset issue (#246)</li>
+</ul>
+<h2 id="0-9-0-mar-15-2015-">0.9.0 (Mar 15, 2015)</h2>
+<ul>
+<li>Wraps image with a virtual canvas (for zooming and rotating).</li>
+<li>Limits image position and size in strict mode.</li>
+<li>Supports multiple global croppers by default.</li>
+<li>Outputs cropped canvas for display or get Data URL or get Blob</li>
+<li>Identifies drag events with &quot;event.dragType&quot; property</li>
+<li>Added zoom events for controlling the canvas (image) size.</li>
+<li>Improved responsiveness for window resizing.</li>
+</ul>
+<h3 id="options-">Options:</h3>
+<ul>
+<li>Change &quot;minContainerWidth&quot; (default value: 300 -&gt; 200)</li>
+<li>Change &quot;minContainerHeight&quot; (default value: 150 -&gt; 100)</li>
+<li>Add &quot;strict&quot;</li>
+<li>Add &quot;zoomin&quot;</li>
+<li>Add &quot;zoomout&quot;</li>
+<li>remove &quot;global&quot;</li>
+</ul>
+<h3 id="methods-">Methods:</h3>
+<ul>
+<li>Change &quot;replace&quot; (not to change the original image any more)</li>
+<li>Change &quot;getImageData&quot; (move rotation-related properties to canvas data)</li>
+<li>Add &quot;getContainerData&quot;</li>
+<li>Add &quot;getCanvasData&quot;</li>
+<li>Add &quot;setCanvasData&quot;</li>
+<li>Add &quot;getCroppedCanvas&quot;</li>
+<li>Remove &quot;setImageData&quot; (replace with &quot;getCanvasData&quot;)</li>
+<li>Remove &quot;getDataURL&quot; (replace with &quot;getCroppedCanvas&quot;)</li>
+</ul>
+<h3 id="events-">Events:</h3>
+<ul>
+<li>Add &quot;event.dragType&quot; property to drag events</li>
+<li>Add &quot;zoomin.cropper&quot;</li>
+<li>Add &quot;zoomout.cropper&quot;</li>
+</ul>
+<h2 id="0-8-0-feb-19-2015-">0.8.0 (Feb 19, 2015)</h2>
+<ul>
+<li>Refactored source code.</li>
+<li>Compiles CSS with <a href="http://lesscss.org">Less</a> CSS preprocessors.</li>
+<li>Supports fixed container.</li>
+<li>Supports rotation with CSS3 2D Transforms.</li>
+</ul>
+<h3 id="options-">Options:</h3>
+<ul>
+<li>Change the default value of &quot;aspectRatio&quot;</li>
+<li>Rename &quot;done&quot; to &quot;crop&quot;</li>
+<li>Rename &quot;dashed&quot; to &quot;guides&quot;</li>
+<li>Rename &quot;multiple&quot; to &quot;global&quot;</li>
+<li>Add &quot;background&quot;</li>
+<li>Add &quot;highlight&quot;</li>
+<li>Add &quot;responsive&quot;</li>
+<li>Add &quot;mouseWheelZoom&quot;</li>
+<li>Add &quot;touchDragZoom&quot;</li>
+<li>Add &quot;minCropBoxWidth&quot;</li>
+<li>Add &quot;minCropBoxHeight&quot;</li>
+<li>Add &quot;minContainerWidth&quot;</li>
+<li>Add &quot;minContainerHeight&quot;</li>
+<li>Remove &quot;data&quot;</li>
+<li>Remove &quot;minWidth&quot;</li>
+<li>Remove &quot;minHeight&quot;</li>
+<li>Remove &quot;maxWidth&quot;</li>
+<li>Remove &quot;maxHeight&quot;</li>
+</ul>
+<h3 id="methods-">Methods:</h3>
+<ul>
+<li>Change &quot;reset&quot;</li>
+<li>Add &quot;setImageData&quot;</li>
+<li>Add &quot;getCropBoxData&quot;</li>
+<li>Add &quot;setCropBoxData&quot;</li>
+<li>Add &quot;move&quot;</li>
+<li>Remove &quot;setData&quot;</li>
+</ul>
+<h2 id="0-7-9-feb-19-2015-">0.7.9 (Feb 19, 2015)</h2>
+<ul>
+<li>Improve preview.</li>
+<li>Improve rotation.</li>
+<li>Improve responsiveness (#157).</li>
+<li>Enable to move the image when the size of the crop box is the same as the container&#39;s (#186).</li>
+</ul>
+<h2 id="0-7-8-feb-8-2015-">0.7.8 (Feb 8, 2015)</h2>
+<ul>
+<li>Add two new options: &quot;minContainerWidth&quot; and &quot;minContainerHeight&quot;.</li>
+<li>Improve three methods: &quot;setAspectRatio&quot;, &quot;destroy&quot; and &quot;disable&quot;.</li>
+<li>Improve mouse wheel zoom.</li>
+<li>Improve drag resizing.</li>
+</ul>
+<h2 id="0-7-7-jan-10-2015-">0.7.7 (Jan 10, 2015)</h2>
+<ul>
+<li>Fix a bug of &quot;dragCrop&quot; option.</li>
+<li>Add a timestamp to the url to bust cache when it&#39;s a cross-origin image (#148).</li>
+<li>Fix the issue of &quot;autoCropArea&quot; option (#144).</li>
+</ul>
+<h2 id="0-7-6-dec-20-2014-">0.7.6 (Dec 20, 2014)</h2>
+<ul>
+<li>Fix events binding bugs.</li>
+<li>Change the &quot;done&quot; option and the &quot;getData&quot; method (returns floating-point number) (#130).</li>
+<li>Fix the rotation issue after replace the image (#139).</li>
+</ul>
+<h2 id="0-7-5-nov-27-2014-">0.7.5 (Nov 27, 2014)</h2>
+<ul>
+<li>Reset the ratio when replace the image.</li>
+<li>Add a new option: &quot;checkImageOrigin&quot; (#119).</li>
+<li>Prevent to call the &quot;done&quot; option when it&#39;s disabled (#107).</li>
+<li>Improve the preview (#95).</li>
+</ul>
+<h2 id="0-7-4-nov-24-2014-">0.7.4 (Nov 24, 2014)</h2>
+<ul>
+<li>Improve &quot;getDataURL&quot; method, enable to customize the image sizes (#105).</li>
+<li>Fix the issue of destory (#101).</li>
+<li>Fix the issue of canvas (#106).</li>
+</ul>
+<h2 id="0-7-3-nov-15-2014-">0.7.3 (Nov 15, 2014)</h2>
+<ul>
+<li>Supports cross-origin image (#96, #97).</li>
+<li>Add a new option: &quot;autoCropArea&quot;.</li>
+<li>Improve &quot;movable&quot; option.</li>
+<li>Output rotation degree by &quot;getImageData&quot; method (#94).</li>
+</ul>
+<h2 id="0-7-2-nov-11-2014-">0.7.2 (Nov 11, 2014)</h2>
+<ul>
+<li>Fix the image rotation error in Firefox (#92).</li>
+</ul>
+<h2 id="0-7-1-nov-8-2014-">0.7.1 (Nov 8, 2014)</h2>
+<ul>
+<li>Rebuild &quot;rotate&quot; method (#88).</li>
+<li>Fix the issue of free ratio (#87).</li>
+<li>Improve &quot;getDataURL&quot; method (#86).</li>
+<li>Optimize event listeners.</li>
+</ul>
+<h2 id="0-7-0-oct-12-2014-">0.7.0 (Oct 12, 2014)</h2>
+<ul>
+<li>Supports zoom (#36, #79).</li>
+<li>Supports rotation (#1, #81).</li>
+<li>Add two new options: &quot;zoomable&quot; and &quot;rotatable&quot;.</li>
+<li>Add six new methods: &quot;enable&quot;, &quot;disable&quot;, &quot;zoom&quot;, &quot;rotate&quot;, &quot;getDataURL&quot; (#80) and &quot;setDragMode&quot;.</li>
+<li>Rename &quot;release&quot; method to &quot;clear&quot;.</li>
+<li>Rename &quot;setImgSrc&quot; method to &quot;replace&quot;.</li>
+<li>Rename &quot;getImgInfo&quot; method to &quot;getImageData&quot;.</li>
+<li>Some other improvements.</li>
+</ul>
+<h2 id="0-6-2-oct-11-2014-">0.6.2 (Oct 11, 2014)</h2>
+<ul>
+<li>Hide the modal when release the crop box.</li>
+<li>Improve touch events.</li>
+</ul>
+<h2 id="0-6-1-oct-3-2014-">0.6.1 (Oct 3, 2014)</h2>
+<ul>
+<li>Fix an event error.</li>
+</ul>
+<h2 id="0-6-0-sep-20-2014-">0.6.0 (Sep 20, 2014)</h2>
+<ul>
+<li>Add six new options: &quot;dashed&quot;, &quot;build&quot;, &quot;built&quot;, &quot;dragstart&quot;, &quot;dragmove&quot; and &quot;dragend&quot;.</li>
+<li>Add three new events: &quot;dragstart.cropper&quot;, &quot;dragmove.cropper&quot; and &quot;dragend.cropper&quot;.</li>
+<li>Remove an old event: &quot;render.cropper&quot;.</li>
+<li>Supports to toggle the dashed lines by &quot;dashed&quot; option (#68).</li>
+<li>Fix the issue of events (#71).</li>
+<li>Optimize the source code.</li>
+</ul>
+<h2 id="0-5-5-sep-8-2014-">0.5.5 (Sep 8, 2014)</h2>
+<ul>
+<li>Improve the render when the mouse out of the cropper container (#54).</li>
+</ul>
+<h2 id="0-5-4-aug-30-2014-">0.5.4 (Aug 30, 2014)</h2>
+<ul>
+<li>Fix typos: replace &quot;resizeable&quot; with &quot;resizable&quot; and &quot;moveable&quot; with &quot;movable&quot;.</li>
+</ul>
+<h2 id="0-5-3-aug-23-2014-">0.5.3 (Aug 23, 2014)</h2>
+<ul>
+<li>Fix the issue (#64) that the crop box could not move after multiple touches.</li>
+</ul>
+<h2 id="0-5-2-aug-16-2014-">0.5.2 (Aug 16, 2014)</h2>
+<ul>
+<li>Fix a bug of type checking in the options.</li>
+<li>Compress the cropper template string.</li>
+</ul>
+<h2 id="0-5-1-aug-12-2014-">0.5.1 (Aug 12, 2014)</h2>
+<ul>
+<li>Supports canvas (#55).</li>
+</ul>
+<h2 id="0-5-0-aug-10-2014-">0.5.0 (Aug 10, 2014)</h2>
+<ul>
+<li>Add a new option: &quot;multiple&quot;.</li>
+</ul>
+<p>...</p>
+<h2 id="0-4-0-jul-26-2014-">0.4.0 (Jul 26, 2014)</h2>
+<ul>
+<li>Add eight new options: &quot;autoCrop&quot;, &quot;dragCrop&quot;, &quot;moveable&quot;, &quot;resizeable&quot;, &quot;maxWidth&quot;, &quot;maxHeight&quot;, &quot;minWidth&quot; and &quot;minHeight&quot;.</li>
+<li>Add three new methods: &quot;reset&quot;, &quot;release&quot; and &quot;destroy&quot;.</li>
+<li>Add three new events: &quot;build.cropper&quot;, &quot;built.cropper&quot; and &quot;render.cropper&quot;.</li>
+<li>Remove two old methods: &quot;enable&quot; and &quot;disable&quot;.</li>
+<li>Remove three old events: &quot;dragstart&quot;, &quot;dragmove&quot; and &quot;dragend&quot;.</li>
+<li>Supports no conflict with the &quot;$.fn.cropper.noConflict&quot; method.</li>
+</ul>
+<p>...</p>
+<h2 id="0-3-0-may-18-2014-">0.3.0 (May 18, 2014)</h2>
+<ul>
+<li>Supports touch.</li>
+<li>Supports events.</li>
+<li>Add three events: &quot;dargstart&quot;, &quot;dargmove&quot; and &quot;dargend&quot;.</li>
+<li>Add a new method: &quot;setImgSrc&quot;.</li>
+</ul>
+<p>...</p>
+<h2 id="0-2-0-apr-23-2014-">0.2.0 (Apr 23, 2014)</h2>
+<ul>
+<li>Supports free ratio.</li>
+<li>Add a new option: &quot;data&quot;.</li>
+<li>Add four new methods: &quot;getData&quot;, &quot;setData&quot;, &quot;getImgInfo&quot; and &quot;setAspectRatio&quot;.</li>
+</ul>
+<p>...</p>
+<h2 id="0-1-0-feb-19-2014-">0.1.0 (Feb 19, 2014)</h2>
+<ul>
+<li>Supports four options: &quot;aspectRatio&quot;, &quot;done&quot;, &quot;modal&quot; and &quot;preview&quot;.</li>
+<li>Supports two methods: &quot;enable&quot; and &quot;disable&quot;.</li>
+</ul>

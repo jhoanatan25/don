@@ -1,0 +1,85 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+<script>
+  setTimeout(function(){menu("#")},500);
+</script>
+	<!-- content of the page-->
+		<section class="content">
+			<div action="" class="formulario">
+			</div>
+		</section>
+    <div class="row blog__encabezado">
+      <div class="row blog col col-sm-8">
+        <div class="col-xs-12">
+          <a href="javascript:history.back(-1);"><div class="back"><img src="/static/icon/arrows.png">Back Result</div></a>
+          <div class="thumbnail row">
+            <h3>{{article.title}}</h3>
+            <h5 class="date"><i class="glyphicon glyphicon-calendar"></i>{{article.created_at}}</h5>
+            {%if article.image%}
+              <a href="/post"><img src="{{article.image.url}}"></a>
+            {%else%}
+              <a href="/post"><img src="/static/images/toyota-gt86.jpg"></a>
+            {%endif%}
+            <div class="col col-xs-12">
+              <div class="caption">
+                <div id="comentario1" class="resumir">
+                  {{article.content}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="col col-sm-4 blog__buscadors">
+          <div class="cajas">
+            <h3 class="tit">Quick Search</h3>
+            <form class="row">
+              <div class="col col-xs-8 pr">
+                <input type="text" placeholder="Search What?">
+              </div>
+              <div class="col col-xs-4 pl">
+                  <button type="button" class="btn btn-primary"><i class="glyphicon glyphicon-search"></i>  Search</button>
+              </div>
+            </form>
+          </div>
+          <div class="cajas">
+            <h3 class="tit">Popular Posts</h3>
+            <!-- <div class="row">
+              <div class="col col-xs-12">
+                <div class="thumbnail row">
+                  <div class="col col-xs-4 pl">
+                    <a href="#"><img src="/static/images/toyota-gt86.jpg"></a>
+                  </div>
+                  <div class="col col-xs-8">
+                    <div class="caption">
+                      <h4><a href="#">Post 1</a></h4>
+                      <h5 class="date"><i class="glyphicon glyphicon-calendar"></i>17/09/2016</h5>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="col col-xs-12">
+                <div class="thumbnail row">
+                  <div class="col col-xs-4 pl">
+                    <a href="#"><img src="/static/images/toyota-gt86.jpg"></a>
+                  </div>
+                  <div class="col col-xs-8">
+                    <div class="caption">
+                      <h4><a href="#">Post 2</a></h4>
+                      <h5 class="date"><i class="glyphicon glyphicon-calendar"></i>15/09/2016</h5>
+                    </div>
+                  </div>
+                </div> -->
+
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+	</section>
+
+{% endblock%}

@@ -1,0 +1,472 @@
+{% extends 'base/base_backend.html' %}
+{% block content %}
+{% load replace %}
+{%if message%}
+<script>
+  swal(
+    'Mensaje',
+    '{{message}}',
+    'info'
+  )
+</script>
+{%endif%}
+<div class="conten">
+  <div class="create_user">
+    <div class="title">
+      <h1>{{title}}</h1>
+    </div>
+    <h2>Información personal</h2>
+    <form class="row" action="" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="from row">
+        <div class="info col col-xs-6">
+          {%if edit_user%}
+          <div style="display: none;" class="">
+          {%endif%}
+          <h5>{{ form.username.label_tag }}</h5>
+          {{ form.username.errors }}
+          {{ form.username }}
+          {%if edit_user%}
+          </div>
+          {%endif%}
+
+          <h5>{{ form.first_name.label_tag }}</h5>
+          {{ form.first_name.errors }}
+          {{ form.first_name }}
+
+          <h5>{{ form.email.label_tag }}</h5>
+          {{ form.email.errors }}
+          {{ form.email }}
+
+          <h5>{{ form.phone.label_tag }}</h5>
+          {{ form.phone.errors }}
+          {{ form.phone }}
+
+          <h5>{{ form.photo.label_tag }}</h5>
+          {{ form.photo.errors }}
+          <div class="ordenar_imagen">
+            <div class="upload left">
+              {{ form.photo }}
+            </div>
+            <output id="list" class="left"></output>
+            <div class="cont_limpiar">
+                        <button type="button" onclick="limpiar()" class="btn btn-warning limpiar"><i class="glyphicon glyphicon-trash"></i> Limpiar</button>
+                      </div>
+          </div>
+        </div>
+        <div class="photo">
+          {%if edit_user%}
+          <div style="display: none;" class="info col col-xs-6">
+          {%endif%}
+
+          <h5>{{ form.password.label_tag }}</h5>
+          {{ form.password.errors }}
+          {{ form.password }}
+
+          {%if edit_user%}
+          </div>
+          {%endif%}
+
+          <h5>{{ form.last_name.label_tag }}</h5>
+          {{ form.last_name.errors }}
+          {{ form.last_name }}
+
+          <h5>{{ form.address.label_tag }}</h5>
+          {{ form.address.errors }}
+          {{ form.address }}
+
+          <h5>{{ form.cell_phone.label_tag }}</h5>
+          {{ form.cell_phone.errors }}
+          {{ form.cell_phone }}
+
+          {%if show_selection%}
+            <div style="display: none;" class="">
+          {%endif%}
+            <h5>{{ form.user_type.label_tag }}</h5>
+            {{ form.user_type.errors }}
+            {{ form.user_type }}
+          {%if show_selection%}
+            </div>
+          {%endif%}
+        </div>
+      </div>
+      <div class="full">
+        <h5>{{ form.description.label_tag }}</h5>
+        {{ form.description.errors }}
+        {{ form.description }}
+      </div>
+      <h3><label for="">Schedules</label></h3>
+      <div class="horarios">
+        <div class="lunes">
+          <h5><label for="">Monday</label></h5>
+          <select name="" id="">
+            <option value="">7am</option>
+            <option value="">8am</option>
+            <option value="">9am</option>
+            <option value="">10am</option>
+            <option value="">11am</option>
+            <option value="">12pm</option>
+            <option value="">1pm</option>
+            <option value="">2pm</option>
+            <option value="">3pm</option>
+            <option value="">4pm</option>
+            <option value="">5pm</option>
+            <option value="">6pm</option>
+            <option value="">close</option>
+          </select>
+          <h6><label for="">to</label></h6>
+          <select name="" id="">
+            <option value="">6pm</option>
+            <option value="">5pm</option>
+            <option value="">4pm</option>
+            <option value="">3pm</option>
+            <option value="">2pm</option>
+            <option value="">1pm</option>
+            <option value="">12pm</option>
+            <option value="">11am</option>
+            <option value="">10am</option>
+            <option value="">9am</option>
+            <option value="">8am</option>
+            <option value="">7am</option>
+            <option value="">close</option>
+          </select>
+        </div>
+        <div class="martes">
+          <h5><label for="">Tuesday</label></h5>
+          <select name="" id="">
+            <option value="">7am</option>
+            <option value="">8am</option>
+            <option value="">9am</option>
+            <option value="">10am</option>
+            <option value="">11am</option>
+            <option value="">12pm</option>
+            <option value="">1pm</option>
+            <option value="">2pm</option>
+            <option value="">3pm</option>
+            <option value="">4pm</option>
+            <option value="">5pm</option>
+            <option value="">6pm</option>
+            <option value="">close</option>
+          </select>
+          <h6><label for="">to</label></h6>
+          <select name="" id="">
+            <option value="">6pm</option>
+            <option value="">5pm</option>
+            <option value="">4pm</option>
+            <option value="">3pm</option>
+            <option value="">2pm</option>
+            <option value="">1pm</option>
+            <option value="">12pm</option>
+            <option value="">11am</option>
+            <option value="">10am</option>
+            <option value="">9am</option>
+            <option value="">8am</option>
+            <option value="">7am</option>
+            <option value="">close</option>
+          </select>
+        </div>
+        <div class="miercoles">
+          <h5><label for="">Wednesday</label></h5>
+          <select name="" id="">
+            <option value="">7am</option>
+            <option value="">8am</option>
+            <option value="">9am</option>
+            <option value="">10am</option>
+            <option value="">11am</option>
+            <option value="">12pm</option>
+            <option value="">1pm</option>
+            <option value="">2pm</option>
+            <option value="">3pm</option>
+            <option value="">4pm</option>
+            <option value="">5pm</option>
+            <option value="">6pm</option>
+            <option value="">close</option>
+          </select>
+          <h6><label for="">to</label></h6>
+          <select name="" id="">
+            <option value="">6pm</option>
+            <option value="">5pm</option>
+            <option value="">4pm</option>
+            <option value="">3pm</option>
+            <option value="">2pm</option>
+            <option value="">1pm</option>
+            <option value="">12pm</option>
+            <option value="">11am</option>
+            <option value="">10am</option>
+            <option value="">9am</option>
+            <option value="">8am</option>
+            <option value="">7am</option>
+            <option value="">close</option>
+          </select>
+        </div>
+        <div class="jueves">
+          <h5><label for="">Thursday</label></h5>
+          <select name="" id="">
+            <option value="">7am</option>
+            <option value="">8am</option>
+            <option value="">9am</option>
+            <option value="">10am</option>
+            <option value="">11am</option>
+            <option value="">12pm</option>
+            <option value="">1pm</option>
+            <option value="">2pm</option>
+            <option value="">3pm</option>
+            <option value="">4pm</option>
+            <option value="">5pm</option>
+            <option value="">6pm</option>
+            <option value="">close</option>
+          </select>
+          <h6><label for="">to</label></h6>
+          <select name="" id="">
+            <option value="">6pm</option>
+            <option value="">5pm</option>
+            <option value="">4pm</option>
+            <option value="">3pm</option>
+            <option value="">2pm</option>
+            <option value="">1pm</option>
+            <option value="">12pm</option>
+            <option value="">11am</option>
+            <option value="">10am</option>
+            <option value="">9am</option>
+            <option value="">8am</option>
+            <option value="">7am</option>
+            <option value="">close</option>
+          </select>
+        </div>
+        <div class="viernes">
+          <h5><label for="">Friday</label></h5>
+          <select name="" id="">
+            <option value="">7am</option>
+            <option value="">8am</option>
+            <option value="">9am</option>
+            <option value="">10am</option>
+            <option value="">11am</option>
+            <option value="">12pm</option>
+            <option value="">1pm</option>
+            <option value="">2pm</option>
+            <option value="">3pm</option>
+            <option value="">4pm</option>
+            <option value="">5pm</option>
+            <option value="">6pm</option>
+            <option value="">close</option>
+          </select>
+          <h6><label for="">to</label></h6>
+          <select name="" id="">
+            <option value="">6pm</option>
+            <option value="">5pm</option>
+            <option value="">4pm</option>
+            <option value="">3pm</option>
+            <option value="">2pm</option>
+            <option value="">1pm</option>
+            <option value="">12pm</option>
+            <option value="">11am</option>
+            <option value="">10am</option>
+            <option value="">9am</option>
+            <option value="">8am</option>
+            <option value="">7am</option>
+            <option value="">close</option>
+          </select>
+        </div>
+        <div class="sabado">
+          <h5><label for="">Saturday</label></h5>
+          <select name="" id="">
+            <option value="">7am</option>
+            <option value="">8am</option>
+            <option value="">9am</option>
+            <option value="">10am</option>
+            <option value="">11am</option>
+            <option value="">12pm</option>
+            <option value="">1pm</option>
+            <option value="">2pm</option>
+            <option value="">3pm</option>
+            <option value="">4pm</option>
+            <option value="">5pm</option>
+            <option value="">6pm</option>
+            <option value="">close</option>
+          </select>
+          <h6><label for="">to</label></h6>
+          <select name="" id="">
+            <option value="">6pm</option>
+            <option value="">5pm</option>
+            <option value="">4pm</option>
+            <option value="">3pm</option>
+            <option value="">2pm</option>
+            <option value="">1pm</option>
+            <option value="">12pm</option>
+            <option value="">11am</option>
+            <option value="">10am</option>
+            <option value="">9am</option>
+            <option value="">8am</option>
+            <option value="">7am</option>
+            <option value="">close</option>
+          </select>
+        </div>
+        <div class="domingo">
+          <h5><label for="">Sunday</label></h5>
+          <select name="" id="">
+            <option value="">7am</option>
+            <option value="">8am</option>
+            <option value="">9am</option>
+            <option value="">10am</option>
+            <option value="">11am</option>
+            <option value="">12pm</option>
+            <option value="">1pm</option>
+            <option value="">2pm</option>
+            <option value="">3pm</option>
+            <option value="">4pm</option>
+            <option value="">5pm</option>
+            <option value="">6pm</option>
+            <option value="">close</option>
+          </select>
+          <h6><label for="">to</label></h6>
+          <select name="" id="">
+            <option value="">6pm</option>
+            <option value="">5pm</option>
+            <option value="">4pm</option>
+            <option value="">3pm</option>
+            <option value="">2pm</option>
+            <option value="">1pm</option>
+            <option value="">12pm</option>
+            <option value="">11am</option>
+            <option value="">10am</option>
+            <option value="">9am</option>
+            <option value="">8am</option>
+            <option value="">7am</option>
+            <option value="">close</option>
+          </select>
+        </div>
+      </div>
+      <h3><label for="">Redes sociales  </label></h3>
+      <div class="redes">
+        <div class="derch">
+          <h5>{{ form.facebook.label_tag }}</h5>
+          {{ form.facebook.errors }}
+          {{ form.facebook }}
+          <h5>{{ form.twitter.label_tag }}</h5>
+          {{ form.twitter.errors }}
+          {{ form.twitter }}
+          <h5>{{ form.pinterest.label_tag }}</h5>
+          {{ form.pinterest.errors }}
+          {{ form.pinterest }}
+        </div>
+        <div class="derch">
+          <h5>{{ form.google.label_tag }}</h5>
+          {{ form.google.errors }}
+          {{ form.google }}
+          <h5>{{ form.youtube.label_tag }}</h5>
+          {{ form.youtube.errors }}
+          {{ form.youtube }}
+          <h5>{{ form.instagram.label_tag }}</h5>
+          {{ form.instagram.errors }}
+          {{ form.instagram }}
+        </div>
+      </div>
+      <div class="botones">
+        <div class="btn-group">
+          <button type="submit" class="btn btn-primary bf">Save</button>
+        </div>
+       <div class="btn-group">
+          <button type="submit" class="btn btn-danger bf">Cancel</button>
+       </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<!-- Small modal -->
+<div id="shareM" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-sm">
+  <div class="modal-content">
+    <h4>Add your google map</h4>
+    <ol>
+      <li>Open <a class="link" href="//www.google.com/maps" target="_blank">Google&nbsp;Maps</a></li>
+      <li>Make sure the map, the Street View image or instructions on how to get you want to include appear on the map .</li>
+      <li>In the upper left corner , click Menu <i class="fa fa-navicon"></i></li>
+      <li>Click the options to <strong>share</strong> or <strong>embed</strong> the map .</li>
+      <li>At the top of the box that appears, select the option to <strong>insert the map .</strong></li>
+      <li>Choose the size of map you want, and copies everything it says on the box iframe .</li>
+      <li>Hit the field information , and ready and added your map .</li>
+    </ol>
+
+    <a href="//www.google.com/maps" class="btn btn-success bf" ><i class="glyphicon glyphicon-map-marker"></i>Google&nbsp;Maps</a>
+    <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-sign-out"></i> Close</button>
+  </div>
+
+</div>
+</div>
+<script type="text/javascript">
+
+  function handleFileSelect(evt) {
+  var files = evt.target.files; // FileList object
+
+  // Loop through the FileList and render image files as thumbnails.
+  for (var i = 0, f; f = files[i]; i++) {
+
+  // Only process image files.
+  if (!f.type.match('image.*')) {
+  continue;
+  }
+
+  var reader = new FileReader();
+
+  // Closure to capture the file information.
+  reader.onload = (function(theFile) {
+  return function(e) {
+    // Render thumbnail.
+    var span = document.createElement('span');
+    span.innerHTML = ['<img class="thumb" src="', e.target.result,
+                      '" title="', escape(theFile.name), '"/>'].join('');
+    document.getElementById("list").innerHTML="";
+    document.getElementById('list').insertBefore(span, null);
+  };
+  })(f);
+
+  // Read in the image file as a data URL.
+  reader.readAsDataURL(f);
+  }
+  }
+
+  document.getElementById('photo').addEventListener('change', handleFileSelect, false);
+  function limpiar() {
+
+  				$(".imagen_list").remove();
+          var input = $('#img');
+          var clon = input.clone();  // Creamos un clon del elemento original
+          input.replaceWith(clon);   // Y sustituimos el original por el clon
+
+  				function handleFileSelect(evt) {
+  				var files = evt.target.files; // FileList object
+
+  				// Loop through the FileList and render image files as thumbnails.
+  				for (var i = 0, f; f = files[i]; i++) {
+
+  				// Only process image files.
+  				if (!f.type.match('image.*')) {
+  				continue;
+  				}
+
+  				var reader = new FileReader();
+
+  				// Closure to capture the file information.
+  				reader.onload = (function(theFile) {
+  				return function(e) {
+  					// Render thumbnail.
+  					var span = document.createElement('span');
+  					span.classList.toggle("imagen_list");
+  					span.innerHTML = ['<img class="thumb" src="', e.target.result,
+  														'" title="', escape(theFile.name), '"/>'].join('');
+  					document.getElementById('list').insertBefore(span, null);
+  				};
+  				})(f);
+
+  				// Read in the image file as a data URL.
+  				reader.readAsDataURL(f);
+  				}
+  				}
+
+  				document.getElementById('img').addEventListener('change', handleFileSelect, false);
+      }
+
+</script>
+{% endblock %}

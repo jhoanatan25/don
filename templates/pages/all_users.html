@@ -1,0 +1,89 @@
+{% extends 'base/base_backend.html' %}
+{% load static %}
+{% block content %}
+<link href="{% static 'css/list.css' %}" rel='stylesheet' type='text/css'>
+{%if message%}
+<script>
+  swal(
+    'Mensaje',
+    '{{message}}',
+    'info'
+  )
+</script>
+{%endif%}
+<div class="conten">
+<div class="row">
+  <ul class="rolldown-list" id="myList">
+  {% for user in all_users %}
+    <li>
+      <div class="row ">
+        <div class="row">
+          <div class="col col-md-1">
+          {%if user.image%}
+          <img class="circimg" src="{{user.image.url}}">
+          {%else%}
+          <img class="circimg" src="{% static 'images/img.png' %}">
+          {% endif %}
+          </div>
+          <form action="" method="post">
+            {% csrf_token %}
+          <div class="row col-md-3">
+              <h4>{{user.username}}</h4>
+              {% if user.is_dealer%}
+                <select class="dropdown form-control" onchange="this.form.submit()" id="theme" name="theme">
+                  {%for theme in all_themes%}
+                        <option {%if user.utheme == theme or not user.utheme and theme.name == 'A1001' %} selected="selected" value="" {%else%} value="{{user.username}}|{{theme.name}}" {%endif%}>{{theme.name}}</option>
+                  {% endfor %}
+                </select>
+                <select class="dropdown form-control" onchange="this.form.submit()" id="plan" name="plan">
+                  {%for plan in plans%}
+                        <option {%if user.cars_to_sell == plan.number_of_cars %} selected="selected" {%endif%}value="{{user.username}}|{{plan.id}}">{{plan.name}} ({{plan.number_of_cars}} vehículos)</option>
+                        {%empty%}
+                        <option selected="selected" value="">No hay planes (El usuario puede vender la última cantidad de carros que se le asigno: {{user.cars_to_sell}})</option>
+                  {% endfor %}
+                </select>
+              {%endif%}
+          </div>
+          <div class="col-md-2">
+
+          </div>
+          <div class="col-md-6">
+            <div class="row ">
+              <div class="col-md-6">
+                <div >
+                  <button type="submit" id="manage" name="manage" value="{{user.username}}" class="btn btn-default" > Administrar carros </button>
+                </div>
+                <div >
+                  {% if not user.is_dealer%}
+                  <button type="submit" id="upgrade" name="upgrade" value="{{user.username}}" class="btn btn-default" > Ascender a distribuidor </button>
+                  {% else %}
+                  <button type="submit" id="down" name="down" value="{{user.username}}" class="btn btn-default" > Disminuir a vendedor</button>
+                  {%endif%}
+                </div>
+                </div>
+              <div class="col-md-6">
+
+                <div>
+                  <button type="submit" id="delete" name="delete" value="{{user.username}}" class="btn btn-danger" > Eliminar </button>
+                </div>
+                <div>
+                  <button type="submit" id="edit" name="edit" value="{{user.username}}" class="btn btn-warning" > Editar </button>
+                </div>
+              </div>
+
+              </div>
+          </div>
+          </form>
+          </div>
+    </div>
+
+    </li>
+  {% endfor %}
+</ul>
+
+
+
+</div>
+</div>
+{% load replace %}
+{% endblock %}

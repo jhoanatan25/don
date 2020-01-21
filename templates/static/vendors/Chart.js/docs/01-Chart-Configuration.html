@@ -1,0 +1,940 @@
+<hr>
+<p>title: Chart Configuration</p>
+<h2 id="anchor-chart-configuration">anchor: chart-configuration</h2>
+<p>Chart.js provides a number of options for changing the behaviour of created charts. These configuration options can be changed on a per chart basis by passing in an options object when creating the chart. Alternatively, the global configuration can be changed which will be used by all charts created after that point.</p>
+<h3 id="creating-a-chart-with-options">Creating a Chart with Options</h3>
+<p>To create a chart with configuration options, simply pass an object containing your configuration to the constructor. In the example below, a line chart is created and configured to not be responsive.</p>
+<pre><code class="lang-javascript">var chartInstance = new Chart(ctx, {
+    type: &#39;line&#39;,
+    data: data,
+    options: {
+        responsive: false
+    }
+});
+</code></pre>
+<h3 id="global-configuration">Global Configuration</h3>
+<p>This concept was introduced in Chart.js 1.0 to keep configuration DRY, and allow for changing options globally across chart types, avoiding the need to specify options for each instance, or the default for a particular chart type.</p>
+<p>Chart.js merges the options object passed to the chart with the global configuration using chart type defaults and scales defaults appropriately. This way you can be as specific as you would like in your individual chart configuration, while still changing the defaults for all chart types where applicable. The global general options are defined in <code>Chart.defaults.global</code>. The defaults for each chart type are discussed in the documentation for that chart type.</p>
+<p>The following example would set the hover mode to &#39;single&#39; for all charts where this was not overridden by the chart type defaults or the options passed to the constructor on creation.</p>
+<pre><code class="lang-javascript">Chart.defaults.global.hover.mode = &#39;single&#39;;
+
+// Hover mode is set to single because it was not overridden here
+var chartInstanceHoverModeSingle = new Chart(ctx, {
+    type: &#39;line&#39;,
+    data: data,
+});
+
+// This chart would have the hover mode that was passed in
+var chartInstanceDifferentHoverMode = new Chart(ctx, {
+    type: &#39;line&#39;,
+    data: data,
+    options: {
+        hover: {
+            // Overrides the global setting
+            mode: &#39;label&#39;
+        }
+    }
+})
+</code></pre>
+<h4 id="global-font-settings">Global Font Settings</h4>
+<p>There are 4 special global settings that can change all of the fonts on the chart. These options are in <code>Chart.defaults.global</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>defaultFontColor</td>
+<td>Color</td>
+<td>&#39;#666&#39;</td>
+<td>Default font color for all text</td>
+</tr>
+<tr>
+<td>defaultFontFamily</td>
+<td>String</td>
+<td>&quot;&#39;Helvetica Neue&#39;, &#39;Helvetica&#39;, &#39;Arial&#39;, sans-serif&quot;</td>
+<td>Default font family for all text</td>
+</tr>
+<tr>
+<td>defaultFontSize</td>
+<td>Number</td>
+<td>12</td>
+<td>Default font size (in px) for text. Does not apply to radialLinear scale point labels</td>
+</tr>
+<tr>
+<td>defaultFontStyle</td>
+<td>String</td>
+<td>&#39;normal&#39;</td>
+<td>Default font style. Does not apply to tooltip title or footer. Does not apply to chart title</td>
+</tr>
+</tbody>
+</table>
+<h3 id="common-chart-configuration">Common Chart Configuration</h3>
+<p>The following options are applicable to all charts. The can be set on the <a href="#chart-configuration-global-configuration">global configuration</a>, or they can be passed to the chart constructor.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>responsive</td>
+<td>Boolean</td>
+<td>true</td>
+<td>Resizes when the canvas container does.</td>
+</tr>
+<tr>
+<td>responsiveAnimationDuration</td>
+<td>Number</td>
+<td>0</td>
+<td>Duration in milliseconds it takes to animate to new size after a resize event.</td>
+</tr>
+<tr>
+<td>maintainAspectRatio</td>
+<td>Boolean</td>
+<td>true</td>
+<td>Maintain the original canvas aspect ratio <code>(width / height)</code> when resizing</td>
+</tr>
+<tr>
+<td>events</td>
+<td>Array[String]</td>
+<td><code>[&quot;mousemove&quot;, &quot;mouseout&quot;, &quot;click&quot;, &quot;touchstart&quot;, &quot;touchmove&quot;, &quot;touchend&quot;]</code></td>
+<td>Events that the chart should listen to for tooltips and hovering</td>
+</tr>
+<tr>
+<td>onClick</td>
+<td>Function</td>
+<td>null</td>
+<td>Called if the event is of type &#39;mouseup&#39; or &#39;click&#39;. Called in the context of the chart and passed an array of active elements</td>
+</tr>
+<tr>
+<td>legendCallback</td>
+<td>Function</td>
+<td><code>function (chart) { }</code></td>
+<td>Function to generate a legend. Receives the chart object to generate a legend from. Default implementation returns an HTML string.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="title-configuration">Title Configuration</h3>
+<p>The title configuration is passed into the <code>options.title</code> namespace. The global options for the chart title is defined in <code>Chart.defaults.global.title</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>display</td>
+<td>Boolean</td>
+<td>false</td>
+<td>Display the title block</td>
+</tr>
+<tr>
+<td>position</td>
+<td>String</td>
+<td>&#39;top&#39;</td>
+<td>Position of the title. Only &#39;top&#39; or &#39;bottom&#39; are currently allowed</td>
+</tr>
+<tr>
+<td>fullWidth</td>
+<td>Boolean</td>
+<td>true</td>
+<td>Marks that this box should take the full width of the canvas (pushing down other boxes)</td>
+</tr>
+<tr>
+<td>fontSize</td>
+<td>Number</td>
+<td>12</td>
+<td>Font size inherited from global configuration</td>
+</tr>
+<tr>
+<td>fontFamily</td>
+<td>String</td>
+<td>&quot;&#39;Helvetica Neue&#39;, &#39;Helvetica&#39;, &#39;Arial&#39;, sans-serif&quot;</td>
+<td>Font family inherited from global configuration</td>
+</tr>
+<tr>
+<td>fontColor</td>
+<td>Color</td>
+<td>&quot;#666&quot;</td>
+<td>Font color inherited from global configuration</td>
+</tr>
+<tr>
+<td>fontStyle</td>
+<td>String</td>
+<td>&#39;bold&#39;</td>
+<td>Font styling of the title. </td>
+</tr>
+<tr>
+<td>padding</td>
+<td>Number</td>
+<td>10</td>
+<td>Number of pixels to add above and below the title text</td>
+</tr>
+<tr>
+<td>text</td>
+<td>String</td>
+<td>&#39;&#39;</td>
+<td>Title text</td>
+</tr>
+</tbody>
+</table>
+<h4 id="example-usage">Example Usage</h4>
+<p>The example below would enable a title of &#39;Custom Chart Title&#39; on the chart that is created.</p>
+<pre><code class="lang-javascript">var chartInstance = new Chart(ctx, {
+    type: &#39;line&#39;,
+    data: data,
+    options: {
+        title: {
+            display: true,
+            text: &#39;Custom Chart Title&#39;
+        }
+    }
+})
+</code></pre>
+<h3 id="legend-configuration">Legend Configuration</h3>
+<p>The legend configuration is passed into the <code>options.legend</code> namespace. The global options for the chart legend is defined in <code>Chart.defaults.global.legend</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>display</td>
+<td>Boolean</td>
+<td>true</td>
+<td>Is the legend displayed</td>
+</tr>
+<tr>
+<td>position</td>
+<td>String</td>
+<td>&#39;top&#39;</td>
+<td>Position of the legend. Options are &#39;top&#39; or &#39;bottom&#39;</td>
+</tr>
+<tr>
+<td>fullWidth</td>
+<td>Boolean</td>
+<td>true</td>
+<td>Marks that this box should take the full width of the canvas (pushing down other boxes)</td>
+</tr>
+<tr>
+<td>onClick</td>
+<td>Function</td>
+<td><code>function(event, legendItem) {}</code></td>
+<td>A callback that is called when a click is registered on top of a label item</td>
+</tr>
+<tr>
+<td>labels</td>
+<td>Object</td>
+<td>-</td>
+<td>See the <a href="#chart-configuration-legend-label-configuration">Legend Label Configuration</a> section below.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="legend-label-configuration">Legend Label Configuration</h4>
+<p>The legend label configuration is nested below the legend configuration using the <code>labels</code> key.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>boxWidth</td>
+<td>Number</td>
+<td>40</td>
+<td>Width of coloured box</td>
+</tr>
+<tr>
+<td>fontSize</td>
+<td>Number</td>
+<td>12</td>
+<td>Font size inherited from global configuration</td>
+</tr>
+<tr>
+<td>fontStyle</td>
+<td>String</td>
+<td>&quot;normal&quot;</td>
+<td>Font style inherited from global configuration</td>
+</tr>
+<tr>
+<td>fontColor</td>
+<td>Color</td>
+<td>&quot;#666&quot;</td>
+<td>Font color inherited from global configuration</td>
+</tr>
+<tr>
+<td>fontFamily</td>
+<td>String</td>
+<td>&quot;&#39;Helvetica Neue&#39;, &#39;Helvetica&#39;, &#39;Arial&#39;, sans-serif&quot;</td>
+<td>Font family inherited from global configuration</td>
+</tr>
+<tr>
+<td>padding</td>
+<td>Number</td>
+<td>10</td>
+<td>Padding between rows of colored boxes</td>
+</tr>
+<tr>
+<td>generateLabels:</td>
+<td>Function</td>
+<td><code>function(chart) {  }</code></td>
+<td>Generates legend items for each thing in the legend. Default implementation returns the text + styling for the color box. See <a href="#chart-configuration-legend-item-interface">Legend Item</a> for details.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="legend-item-interface">Legend Item Interface</h4>
+<p>Items passed to the legend <code>onClick</code> function are the ones returned from <code>labels.generateLabels</code>. These items must implement the following interface.</p>
+<pre><code class="lang-javascript">{
+    // Label that will be displayed
+    text: String,
+
+    // Fill style of the legend box
+    fillStyle: Color,
+
+    // If true, this item represents a hidden dataset. Label will be rendered with a strike-through effect
+    hidden: Boolean,
+
+    // For box border. See https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineCap
+    lineCap: String,
+
+    // For box border. See https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/setLineDash
+    lineDash: Array[Number],
+
+    // For box border. See https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineDashOffset
+    lineDashOffset: Number,
+
+    // For box border. See https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineJoin
+    lineJoin: String,
+
+    // Width of box border 
+    lineWidth: Number,
+
+    // Stroke style of the legend box
+    strokeStyle: Color
+}
+</code></pre>
+<h4 id="example">Example</h4>
+<p>The following example will create a chart with the legend enabled and turn all of the text red in color.</p>
+<pre><code class="lang-javascript">var chartInstance = new Chart(ctx, {
+    type: &#39;bar&#39;,
+    data: data,
+    options: {
+        legend: {
+            display: true,
+            labels: {
+                fontColor: &#39;rgb(255, 99, 132)&#39;
+            }
+        }
+    }
+});
+</code></pre>
+<h3 id="tooltip-configuration">Tooltip Configuration</h3>
+<p>The title configuration is passed into the <code>options.tooltips</code> namespace. The global options for the chart tooltips is defined in <code>Chart.defaults.global.title</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>enabled</td>
+<td>Boolean</td>
+<td>true</td>
+<td>Are tooltips </td>
+</tr>
+<tr>
+<td>custom</td>
+<td>Function</td>
+<td>null</td>
+<td>See <a href="#chart-configuration-custom-tooltips">section</a> below</td>
+</tr>
+<tr>
+<td>mode</td>
+<td>String</td>
+<td>&#39;single&#39;</td>
+<td>Sets which elements appear in the tooltip. Acceptable options are <code>&#39;single&#39;</code> or <code>&#39;label&#39;</code>. <code>single</code> highlights the closest element. <code>label</code> highlights elements in all datasets at the same <code>X</code> value.</td>
+</tr>
+<tr>
+<td>backgroundColor</td>
+<td>Color</td>
+<td>&#39;rgba(0,0,0,0.8)&#39;</td>
+<td>Background color of the tooltip</td>
+</tr>
+<tr>
+<td>titleFontFamily</td>
+<td>String</td>
+<td>&quot;&#39;Helvetica Neue&#39;, &#39;Helvetica&#39;, &#39;Arial&#39;, sans-serif&quot;</td>
+<td>Font family for tooltip title inherited from global font family</td>
+</tr>
+<tr>
+<td>titleFontSize</td>
+<td>Number</td>
+<td>12</td>
+<td>Font size for tooltip title inherited from global font size</td>
+</tr>
+<tr>
+<td>titleFontStyle</td>
+<td>String</td>
+<td>&quot;bold&quot;</td>
+<td></td>
+</tr>
+<tr>
+<td>titleFontColor</td>
+<td>Color</td>
+<td>&quot;#fff&quot;</td>
+<td>Font color for tooltip title</td>
+</tr>
+<tr>
+<td>titleSpacing</td>
+<td>Number</td>
+<td>2</td>
+<td>Spacing to add to top and bottom of each title line.</td>
+</tr>
+<tr>
+<td>titleMarginBottom</td>
+<td>Number</td>
+<td>6</td>
+<td>Margin to add on bottom of title section</td>
+</tr>
+<tr>
+<td>bodyFontFamily</td>
+<td>String</td>
+<td>&quot;&#39;Helvetica Neue&#39;, &#39;Helvetica&#39;, &#39;Arial&#39;, sans-serif&quot;</td>
+<td>Font family for tooltip items inherited from global font family</td>
+</tr>
+<tr>
+<td>bodyFontSize</td>
+<td>Number</td>
+<td>12</td>
+<td>Font size for tooltip items inherited from global font size</td>
+</tr>
+<tr>
+<td>bodyFontStyle</td>
+<td>String</td>
+<td>&quot;normal&quot;</td>
+<td></td>
+</tr>
+<tr>
+<td>bodyFontColor</td>
+<td>Color</td>
+<td>&quot;#fff&quot;</td>
+<td>Font color for tooltip items.</td>
+</tr>
+<tr>
+<td>bodySpacing</td>
+<td>Number</td>
+<td>2</td>
+<td>Spacing to add to top and bottom of each tooltip item</td>
+</tr>
+<tr>
+<td>footerFontFamily</td>
+<td>String</td>
+<td>&quot;&#39;Helvetica Neue&#39;, &#39;Helvetica&#39;, &#39;Arial&#39;, sans-serif&quot;</td>
+<td>Font family for tooltip footer inherited from global font family.</td>
+</tr>
+<tr>
+<td>footerFontSize</td>
+<td>Number</td>
+<td>12</td>
+<td>Font size for tooltip footer inherited from global font size.</td>
+</tr>
+<tr>
+<td>footerFontStyle</td>
+<td>String</td>
+<td>&quot;bold&quot;</td>
+<td>Font style for tooltip footer.</td>
+</tr>
+<tr>
+<td>footerFontColor</td>
+<td>Color</td>
+<td>&quot;#fff&quot;</td>
+<td>Font color for tooltip footer.</td>
+</tr>
+<tr>
+<td>footerSpacing</td>
+<td>Number</td>
+<td>2</td>
+<td>Spacing to add to top and bottom of each footer line.</td>
+</tr>
+<tr>
+<td>footerMarginTop</td>
+<td>Number</td>
+<td>6</td>
+<td>Margin to add before drawing the footer</td>
+</tr>
+<tr>
+<td>xPadding</td>
+<td>Number</td>
+<td>6</td>
+<td>Padding to add on left and right of tooltip</td>
+</tr>
+<tr>
+<td>yPadding</td>
+<td>Number</td>
+<td>6</td>
+<td>Padding to add on top and bottom of tooltip</td>
+</tr>
+<tr>
+<td>caretSize</td>
+<td>Number</td>
+<td>5</td>
+<td>Size, in px, of the tooltip arrow</td>
+</tr>
+<tr>
+<td>cornerRadius</td>
+<td>Number</td>
+<td>6</td>
+<td>Radius of tooltip corner curves</td>
+</tr>
+<tr>
+<td>multiKeyBackground</td>
+<td>Color</td>
+<td>&quot;#fff&quot;</td>
+<td>Color to draw behind the colored boxes when multiple items are in the tooltip</td>
+</tr>
+<tr>
+<td>callbacks</td>
+<td>Object</td>
+<td></td>
+<td>See the <a href="#chart-configuration-tooltip-callbacks">callbacks section</a> below</td>
+</tr>
+</tbody>
+</table>
+<h4 id="tooltip-callbacks">Tooltip Callbacks</h4>
+<p>The tooltip label configuration is nested below the tooltip configuration using the <code>callbacks</code> key. The tooltip has the following callbacks for providing text. For all functions, &#39;this&#39; will be the tooltip object created from the Chart.Tooltip constructor. </p>
+<p>All functions are called with the same arguments: a <a href="#chart-configuration-tooltip-item-interface">tooltip item</a> and the data object passed to the chart. All functions must return either a string or an array of strings. Arrays of strings are treated as multiple lines of text.</p>
+<table>
+<thead>
+<tr>
+<th>Callback</th>
+<th>Arguments</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>beforeTitle</td>
+<td><code>Array[tooltipItem], data</code></td>
+<td>Text to render before the title</td>
+</tr>
+<tr>
+<td>title</td>
+<td><code>Array[tooltipItem], data</code></td>
+<td>Text to render as the title</td>
+</tr>
+<tr>
+<td>afterTitle</td>
+<td><code>Array[tooltipItem], data</code></td>
+<td>Text to render after the title</td>
+</tr>
+<tr>
+<td>beforeBody</td>
+<td><code>Array[tooltipItem], data</code></td>
+<td>Text to render before the body section</td>
+</tr>
+<tr>
+<td>beforeLabel</td>
+<td><code>tooltipItem, data</code></td>
+<td>Text to render before an individual label</td>
+</tr>
+<tr>
+<td>label</td>
+<td><code>tooltipItem, data</code></td>
+<td>Text to render for an individual item in the tooltip</td>
+</tr>
+<tr>
+<td>afterLabel</td>
+<td><code>tooltipItem, data</code></td>
+<td>Text to render after an individual label</td>
+</tr>
+<tr>
+<td>afterBody</td>
+<td><code>Array[tooltipItem], data</code></td>
+<td>Text to render after the body section</td>
+</tr>
+<tr>
+<td>beforeFooter</td>
+<td><code>Array[tooltipItem], data</code></td>
+<td>Text to render before the footer section</td>
+</tr>
+<tr>
+<td>footer</td>
+<td><code>Array[tooltipItem], data</code></td>
+<td>Text to render as the footer</td>
+</tr>
+<tr>
+<td>afterFooter</td>
+<td><code>Array[tooltipItem], data</code></td>
+<td>Text to render after the footer section</td>
+</tr>
+</tbody>
+</table>
+<h4 id="tooltip-item-interface">Tooltip Item Interface</h4>
+<p>The tooltip items passed to the tooltip callbacks implement the following interface.</p>
+<pre><code class="lang-javascript">{
+    // X Value of the tooltip as a string
+    xLabel: String,
+
+    // Y value of the tooltip as a string
+    yLabel: String,
+
+    // Index of the dataset the item comes from
+    datasetIndex: Number,
+
+    // Index of this data item in the dataset
+    index: Number
+}
+</code></pre>
+<h3 id="hover-configuration">Hover Configuration</h3>
+<p>The hover configuration is passed into the <code>options.hover</code> namespace. The global hover configuration is at <code>Chart.defaults.global.hover</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>mode</td>
+<td>String</td>
+<td>&#39;single&#39;</td>
+<td>Sets which elements hover. Acceptable options are <code>&#39;single&#39;</code>, <code>&#39;label&#39;</code>, or <code>&#39;dataset&#39;</code>. <code>single</code> highlights the closest element. <code>label</code> highlights elements in all datasets at the same <code>X</code> value. <code>dataset</code> highlights the closest dataset.</td>
+</tr>
+<tr>
+<td>animationDuration</td>
+<td>Number</td>
+<td>400</td>
+<td>Duration in milliseconds it takes to animate hover style changes</td>
+</tr>
+<tr>
+<td>onHover</td>
+<td>Function</td>
+<td>null</td>
+<td>Called when any of the events fire. Called in the context of the chart and passed an array of active elements (bars, points, etc)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="animation-configuration">Animation Configuration</h3>
+<p>The following animation options are available. The global options for are defined in <code>Chart.defaults.global.animation</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th style="text-align:center">Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>duration</td>
+<td style="text-align:center">Number</td>
+<td>1000</td>
+<td>The number of milliseconds an animation takes.</td>
+</tr>
+<tr>
+<td>easing</td>
+<td style="text-align:center">String</td>
+<td>&quot;easeOutQuart&quot;</td>
+<td>Easing function to use.</td>
+</tr>
+<tr>
+<td>onProgress</td>
+<td style="text-align:center">Function</td>
+<td>none</td>
+<td>Callback called on each step of an animation. Passed a single argument, an object, containing the chart instance and an object with details of the animation.</td>
+</tr>
+<tr>
+<td>onComplete</td>
+<td style="text-align:center">Function</td>
+<td>none</td>
+<td>Callback called at the end of an animation. Passed the same arguments as <code>onProgress</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="animation-callbacks">Animation Callbacks</h4>
+<p>The <code>onProgress</code> and <code>onComplete</code> callbacks are useful for synchronizing an external draw to the chart animation. The callback is passed an object that implements the following interface. An example usage of these callbacks can be found on <a href="https://github.com/chartjs/Chart.js/blob/master/samples/AnimationCallbacks/progress-bar.html">Github</a>. This sample displays a progress bar showing how far along the animation is.</p>
+<pre><code class="lang-javscript">{
+    // Chart object
+    chartInstance,
+
+    // Contains details of the on-going animation
+    animationObject,
+}
+</code></pre>
+<h4 id="animation-object">Animation Object</h4>
+<p>The animation object passed to the callbacks is of type <code>Chart.Animation</code>. The object has the following parameters.</p>
+<pre><code class="lang-javascript">{
+    // Current Animation frame number
+    currentStep: Number,
+
+    // Number of animation frames
+    numSteps: Number,
+
+    // Animation easing to use
+    easing: String,
+
+    // Function that renders the chart
+    render: Function,
+
+    // User callback
+    onAnimationProgress: Function,
+
+    // User callback
+    onAnimationComplete: Function
+}
+</code></pre>
+<h3 id="element-configuration">Element Configuration</h3>
+<p>The global options for elements are defined in <code>Chart.defaults.global.elements</code>.</p>
+<p>Options can be configured for four different types of elements; arc, lines, points, and rectangles. When set, these options apply to all objects of that type unless specifically overridden by the configuration attached to a dataset.</p>
+<h4 id="arc-configuration">Arc Configuration</h4>
+<p>Arcs are used in the polar area, doughnut and pie charts. They can be configured with the following options. The global arc options are stored in <code>Chart.defaults.global.elements.arc</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>backgroundColor</td>
+<td>Color</td>
+<td>&#39;rgba(0,0,0,0.1)&#39;</td>
+<td>Default fill color for arcs. Inherited from the global default </td>
+</tr>
+<tr>
+<td>borderColor</td>
+<td>Color</td>
+<td>&#39;#fff&#39;</td>
+<td>Default stroke color for arcs</td>
+</tr>
+<tr>
+<td>borderWidth</td>
+<td>Number</td>
+<td>2</td>
+<td>Default stroke width for arcs</td>
+</tr>
+</tbody>
+</table>
+<h4 id="line-configuration">Line Configuration</h4>
+<p>Line elements are used to represent the line in a line chart. The global line options are stored in <code>Chart.defaults.global.elements.line</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>tension</td>
+<td>Number</td>
+<td>0.4</td>
+<td>Default bezier curve tension. Set to <code>0</code> for no bezier curves.</td>
+</tr>
+<tr>
+<td>backgroundColor</td>
+<td>Color</td>
+<td>&#39;rgba(0,0,0,0.1)&#39;</td>
+<td>Default line fill color</td>
+</tr>
+<tr>
+<td>borderWidth</td>
+<td>Number</td>
+<td>3</td>
+<td>Default line stroke width</td>
+</tr>
+<tr>
+<td>borderColor</td>
+<td>Color</td>
+<td>&#39;rgba(0,0,0,0.1)&#39;</td>
+<td>Default line stroke color</td>
+</tr>
+<tr>
+<td>borderCapStyle</td>
+<td>String</td>
+<td>&#39;butt&#39;</td>
+<td>Default line cap style. See <a href="https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineCap">MDN</a></td>
+</tr>
+<tr>
+<td>borderDash</td>
+<td>Array</td>
+<td><code>[]</code></td>
+<td>Default line dash. See <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/setLineDash">MDN</a></td>
+</tr>
+<tr>
+<td>borderDashOffset</td>
+<td>Number</td>
+<td>0.0</td>
+<td>Default line dash offset. See <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineDashOffset">MDN</a></td>
+</tr>
+<tr>
+<td>borderJoinStyle</td>
+<td>String</td>
+<td>&#39;miter&#39;</td>
+<td>Default line join style. See <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineJoin">MDN</a></td>
+</tr>
+<tr>
+<td>fill</td>
+<td>Boolean</td>
+<td>true</td>
+<td>If true, the line is filled.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="point-configuration">Point Configuration</h4>
+<p>Point elements are used to represent the points in a line chart or a bubble chart. The global point options are stored in <code>Chart.defaults.global.elements.point</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>radius</td>
+<td>Number</td>
+<td>3</td>
+<td>Default point radius</td>
+</tr>
+<tr>
+<td>pointStyle</td>
+<td>String</td>
+<td>&#39;circle&#39;</td>
+<td>Default point style</td>
+</tr>
+<tr>
+<td>backgroundColor</td>
+<td>Color</td>
+<td>&#39;rgba(0,0,0,0.1)&#39;</td>
+<td>Default point fill color</td>
+</tr>
+<tr>
+<td>borderWidth</td>
+<td>Number</td>
+<td>1</td>
+<td>Default point stroke width</td>
+</tr>
+<tr>
+<td>borderColor</td>
+<td>Color</td>
+<td>&#39;rgba(0,0,0,0.1)&#39;</td>
+<td>Default point stroke color</td>
+</tr>
+<tr>
+<td>hitRadius</td>
+<td>Number</td>
+<td>1</td>
+<td>Extra radius added to point radius for hit detection</td>
+</tr>
+<tr>
+<td>hoverRadius</td>
+<td>Number</td>
+<td>4</td>
+<td>Default point radius when hovered</td>
+</tr>
+<tr>
+<td>hoverBorderWidth</td>
+<td>Number</td>
+<td>1</td>
+<td>Default stroke width when hovered</td>
+</tr>
+</tbody>
+</table>
+<h4 id="rectangle-configuration">Rectangle Configuration</h4>
+<p>Rectangle elements are used to represent the bars in a bar chart. The global rectangle options are stored in <code>Chart.defaults.global.elements.rectange</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>backgroundColor</td>
+<td>Color</td>
+<td>&#39;rgba(0,0,0,0.1)&#39;</td>
+<td>Default bar fill color</td>
+</tr>
+<tr>
+<td>borderWidth</td>
+<td>Number</td>
+<td>0</td>
+<td>Default bar stroke width</td>
+</tr>
+<tr>
+<td>borderColor</td>
+<td>Color</td>
+<td>&#39;rgba(0,0,0,0.1)&#39;</td>
+<td>Default bar stroke color</td>
+</tr>
+<tr>
+<td>borderSkipped</td>
+<td>String</td>
+<td>&#39;bottom&#39;</td>
+<td>Default skipped (excluded) border for rectangle. Can be one of <code>bottom</code>, <code>left</code>, <code>top</code>, <code>right</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="colors">Colors</h3>
+<p>When supplying colors to Chart options, you can use a number of formats. You can specify the color as a string in hexadecimal, RGB, or HSL notations. If a color is needed, but not specified, Chart.js will use the global default color. This color is stored at <code>Chart.defaults.global.defaultColor</code>. It is initially set to &#39;rgb(0, 0, 0, 0.1)&#39;;</p>
+<p>You can also pass a <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasGradient">CanvasGradient</a> object. You will need to create this before passing to the chart, but using it you can achieve some interesting effects.</p>
+<p>The final option is to pass a <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasPattern">CanvasPattern</a> object. For example, if you wanted to fill a dataset with a pattern from an image you could do the following.</p>
+<pre><code class="lang-javascript">var img = new Image();
+img.src = &#39;https://example.com/my_image.png&#39;;
+img.onload = function() {
+    var ctx = document.getElementById(&#39;canvas&#39;).getContext(&#39;2d&#39;);
+    var fillPattern = ctx.createPattern(img, &#39;repeat&#39;);
+
+    var chart = new Chart(ctx, {
+        data: {
+            labels: [&#39;Item 1&#39;, &#39;Item 2&#39;, &#39;Item 3&#39;],
+            datasets: [{
+                data: [10, 20, 30],
+                backgroundColor: fillPattern
+            }]
+        }
+    })
+}
+</code></pre>

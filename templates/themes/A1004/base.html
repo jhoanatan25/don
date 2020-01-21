@@ -1,0 +1,315 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Doncarros</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no">
+	<link rel="stylesheet" href="{% static 'themes/A1004/bootstrap.min.css' %}">
+	<link rel="stylesheet" href="{% static 'themes/A1004/bootstrap-theme.min.css' %}">
+	<link rel="stylesheet" href="{% static 'themes/A1004/font-awesome.css' %}">
+	<link rel="stylesheet" href="{% static 'themes/A1004/jquery-ui.css' %}">
+	<link rel="stylesheet" href="{% static 'themes/A1004/style.css' %}">
+	<link rel="stylesheet" href="{% static 'themes/A1004/font-awesome.min.css' %}">
+	<script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="paycalc" src="{% static 'js/paycalc.min.js' %}"></script>
+	<!-- Font slide-->
+	<link href='https://fonts.googleapis.com/css?family=Bitter' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Libre+Baskerville' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+	<!--Font Awesome-->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+	<link rel="icon" type="image/png" href="{% static 'images/icon.png' %}" />
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+	<link rel="stylesheet" href="http://jqueryui.com/resources/demos/style.css">
+
+	<!-- Librería jQuery requerida por los plugins de JavaScript -->
+  <script src="http://code.jquery.com/jquery.js"></script>
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
+	<!---->
+</head>
+<body class="container-fluid">
+	</div>
+		<div class="row">
+			<header>
+				<div class="head">
+					<div class="page-outer row">
+						<div class="col col-lg-5 col-sm-5 logotipo">
+							{% if owner.logo%}
+								<a class="logo" href="/">
+									<img src="{{owner.logo.url}}" alt="">
+								</a>
+							{% else %}
+								<a class="logo" href="/">
+									<img src="{% static 'images/upload_logo.png' %}" alt="">
+								</a>
+							{% endif %}
+						</div>
+						<div class="col col-lg-2 col-sm-2 redes">
+							{%if not dealer%}
+								<a href="#">
+									<i class="col col-lg-3 col-sm-6 fa fa-facebook-square" aria-hidden="true"></i>
+								</a>
+								<a href="#">
+									<i class="col col-lg-3 col-sm-6 fa fa-twitter-square" aria-hidden="true"></i>
+								</a>
+								<a href="#">
+									<i class="col col-lg-3 col-sm-6 fa fa-instagram" aria-hidden="true"></i>
+								</a>
+								<a href="#">
+									<i class="col col-lg-3 col-sm-6 fa fa-youtube-play" aria-hidden="true"></i>
+								</a>
+							{% else %}
+								{% if owner.facebook%}
+									<a href="{{owner.facebook}}" target="_blank">
+										<i class="col col-lg-3 col-sm-6 fa fa-facebook-square" aria-hidden="true"></i>
+									</a>
+								{% endif %}
+								{% if owner.twitter%}
+									<a href="{{owner.twitter}}" target="_blank">
+										<i class="col col-lg-3 col-sm-6 fa fa-twitter-square" aria-hidden="true"></i>
+									</a>
+								{% endif %}
+								{% if owner.instagram%}
+									<a href="{{owner.instagram}}" target="_blank">
+										<i class="col col-lg-3 col-sm-6 fa fa-instagram" aria-hidden="true"></i>
+									</a>
+								{% endif %}
+								{% if owner.youtube%}
+									<a href="{{owner.youtube}}" target="_blank">
+										<i class="col col-lg-3 col-sm-6 fa fa-youtube-play" aria-hidden="true"></i>
+									</a>
+								{% endif %}
+							{% endif %}
+						</div>
+						<div class="col col-lg-5 col-sm-5 info">
+							{%if not dealer%}
+								<i class="col col-lg-6 fa fa-phone-square" aria-hidden="true"> 534534534</i>
+								<i class="col col-lg-6 fa fa-map-marker direccion" aria-hidden="true"> 1355 Market Street, Suite 900 San Francisco, CA 94103</i>
+							{% else %}
+								<i class="col col-lg-6 fa fa-phone-square" aria-hidden="true"> {{owner.phone}}</i>
+								<i class="col col-lg-6 fa fa-map-marker direccion" aria-hidden="true"> {{owner.address}}</i>
+							{% endif %}
+						</div>
+					</div>
+				</div>			
+				<div class="logo navbar-header">
+					<button onclick="desmenu()" type="button" class="navbar-toggle" data-toggle="collapse"
+							data-target=".navbar-ex1-collapse">
+						<span class="sr-only">Desplegar navegación</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				</div>
+			</header>
+			<nav class="navbar navbar-default navbar-inverse " role="navigation">
+			  	<div class="page-outer">
+			  		<!-- El logotipo y el icono que despliega el menú se agrupan
+	  		       	para mostrarlos mejor en los dispositivos móviles -->
+		  			<div class="logo navbar-header">
+			    		<button onclick="desmenu()" type="button" class="navbar-toggle" data-toggle="collapse"
+			            data-target=".navbar-ex1-collapse">
+			      			<span class="sr-only">Desplegar navegación</span>
+			      			<span class="icon-bar"></span>
+			      			<span class="icon-bar"></span>
+			      			<span class="icon-bar"></span>
+			    		</button>
+		  			</div>
+			  		<!-- Agrupar los enlaces de navegación, los formularios y cualquier
+	  		       	otro elemento que se pueda ocultar al minimizar la barra-->
+	  				<div id="menuDes" class="no-view collapse navbar-collapse navbar-ex1-collapse" aria-expanded="false">
+						<ul class="nav navbar-nav">
+	  				  		<li id="home"  class="option active"><a href="/dealer/{{name_page}}" >Inicio</a></li>
+	                		<li id="specials" class="option" ><a href="/dealer/{{name_page}}/specials">Ofertas Especiales</a></li>
+							<li id="inventory" class="option" ><a  href="/dealer/{{name_page}}/inventory">Inventario</a></li>
+	                		<li id="blog" class="option"><a href="/dealer/{{name_page}}/blog">Noticias y Blogs</a></li>
+	                		<li id="contact_us" class="option" ><a  href="/dealer/{{name_page}}/contact_us">Contactanos</a></li>
+	  					</ul>
+	  				</div>
+			  	</div>
+			</nav>
+<div class="page-outer">
+{% block content %}
+{% endblock %}
+</div>
+<footer class="col-xs-12">
+	<div class="page-outer">
+	{%if not dealer%}
+	<div class="col-xs-12 col-sm-4 col-md-3 col-lg-3  hours">
+		<h3 class="col-xs-12 text-center">Horas de trabajo</h3>
+		<strong class="col-xs-6">Lunes</strong><div class="col-xs-6">8 am a 7 pm</div>
+		<strong class="col-xs-6">Martes</strong><div class="col-xs-6">8 am a 9 pm</div>
+		<strong class="col-xs-6">Miercoles</strong><div class="col-xs-6">8 am a 9 pm</div>
+		<strong class="col-xs-6">Jueves</strong><div class="col-xs-6">8 am a 9 pm</div>
+		<strong class="col-xs-6">Viernes</strong><div class="col-xs-6">8 am a 9 pm</div>
+		<strong class="col-xs-6">Sabado</strong><div class="col-xs-6">8 am a 9 pm</div>
+		<strong class="col-xs-6">Domingo</strong><div class="col-xs-6">Cerrado</div>
+	</div>
+	<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4  contacts-us">
+		<h3 class="col-xs-12 text-center">Nuestros Contactos</h3>
+		<div class="col-xs-12 address">
+			<div class="col-xs-2 iconos"><i class="fa fa-home" aria-hidden="true"></i></div>
+			<div class="col-xs-10">
+			<strong class="col-xs-12">Información de dirección 1:</strong>
+			<p class="col-xs-12 text-justify">1355 Market Street, Suite 900 San Francisco, CA 94103</p>
+			</div>
+		</div>
+		<div class="col-xs-12 phone-address">
+			<div class="col-xs-2 iconos"><i class="fa fa-phone" aria-hidden="true"></i></div>
+			<div class="col-xs-10">
+				<strong class="col-xs-2">Teléfono:</strong>
+				<p class="col-xs-10">(123)-456-7890</p>
+				<strong class="col-xs-2">Fax:</strong>
+				<p class="col-xs-10">(123)-456-7890</p>
+			</div>
+		</div>
+		<div class="col-xs-12 email">
+			<div class="col-xs-2 iconos"><i class="fa fa-envelope" aria-hidden="true"></i></div>
+			<div class="col-xs-10">
+				<strong class="col-xs-2">Correo:</strong>
+				<p class="col-xs-10">tucarroonline@gmail.com</p>
+			</div>
+		</div>
+		<div class="col-xs-12 social-media">
+			<div class="col-xs-4 col-sm-2 iconos"><i class="fa fa-twitter-square" aria-hidden="true"></i></div>
+			<div class="col-xs-4 col-sm-2 iconos"><i class="fa fa-facebook-square" aria-hidden="true"></i></div>
+			<div class="col-xs-4 col-sm-2 iconos"><i class="fa fa-rss-square" aria-hidden="true"></i></div>
+		</div>
+	</div>
+	<div class="col-xs-12 col-sm-4 col-md-5 col-lg-5  welcome">
+		<h3 class="col-xs-12 text-center">Bienvenido</h3>
+		<p class="div-col-xs-12 text-justify">Dealer is founded on trust, integrity, and respect. We are proud to offer these values in our sales and business practices so our customers keep coming back. The vehicles on our lot have the best prices and quality in the area so come by and see us today!</p>
+	</div>
+	{% else %}
+	<div class="col-xs-12 col-sm-4 col-md-3 col-lg-3  hours">
+		<h3 class="col-xs-12 text-center">Horas de trabajo</h3>
+		<strong class="col-xs-6">Lunes</strong><div class="col-xs-6">8 am a 7 pm</div>
+		<strong class="col-xs-6">Martes</strong><div class="col-xs-6">8 am a 9 pm</div>
+		<strong class="col-xs-6">Miercoles</strong><div class="col-xs-6">8 am a 9 pm</div>
+		<strong class="col-xs-6">Jueves</strong><div class="col-xs-6">8 am a 9 pm</div>
+		<strong class="col-xs-6">Viernes</strong><div class="col-xs-6">8 am a 9 pm</div>
+		<strong class="col-xs-6">Sabado</strong><div class="col-xs-6">8 am a 9 pm</div>
+		<strong class="col-xs-6">Domingo</strong><div class="col-xs-6">Cerrado</div>
+	</div>
+	<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4  contacts-us">
+		<h3 class="col-xs-12 text-center">Nuestros Contactos</h3>
+		<div class="col-xs-12 address">
+			<div class="col-xs-2 iconos"><i class="fa fa-home" aria-hidden="true"></i></div>
+			<div class="col-xs-10">
+			<strong class="col-xs-12">Información de dirección 1:</strong>
+			<p class="col-xs-12 text-justify">{{owner.address}}</p>
+			</div>
+		</div>
+		<div class="col-xs-12 phone-address">
+			<div class="col-xs-2 iconos"><i class="fa fa-phone" aria-hidden="true"></i></div>
+			<div class="col-xs-10">
+				{% if owner.phone%}
+					<strong class="col-xs-2">Teléfono:</strong>
+					<p class="col-xs-10">{{owner.phone}}</p>
+				{% endif %}
+				{% if owner.cell_phone%}
+					<strong class="col-xs-2">Fax:</strong>
+					<p class="col-xs-10">{{owner.cell_phone}}</p>
+				{% endif %}
+			</div>
+		</div>
+		<div class="col-xs-12 email">
+			<div class="col-xs-2 iconos"><i class="fa fa-envelope" aria-hidden="true"></i></div>
+			<div class="col-xs-10">
+				<strong class="col-xs-2">Correo:</strong>
+				<p class="col-xs-10">{{owner.email}}</p>
+			</div>
+		</div>
+		<div class="col-xs-12 social-media">
+			{% if owner.facebook%}
+			<div class="col-xs-4 col-sm-2 iconos"><a href="{{owner.facebook}}" target="_blank"><i class="fa fa-facebook"></i></a></div>
+			{% endif %}
+			{% if owner.twitter%}
+			<div class="col-xs-4 col-sm-2 iconos"><a href="{{owner.twitter}}" target="_blank"><i class="fa fa-twitter"></i></a></div>
+			{% endif %}
+			{% if owner.pinterest%}
+			<div class="col-xs-4 col-sm-2 iconos"><a href="{{owner.pinterest}}" target="_blank"><i class="fa fa-pinterest"></i></a></div>
+			{% endif %}
+			{% if owner.google%}
+			<div class="col-xs-4 col-sm-2 iconos"><a href="{{owner.google}}" target="_blank"><i class="fa fa-google-plus"></i></a></div>
+			{% endif %}
+			{% if owner.youtube%}
+			<div class="col-xs-4 col-sm-2 iconos"><a href="{{owner.youtube}}" target="_blank"><i class="fa fa-youtube-play"></i></a></div>
+			{% endif %}
+			{% if owner.instagram%}
+			<div class="col-xs-4 col-sm-2 iconos"><a href="{{owner.instagram}}" target="_blank"><i class="fa fa-instagram"></i></a></div>
+			{% endif %}
+		</div>
+	</div>
+	<div class="col-xs-12 col-sm-4 col-md-5 col-lg-5  welcome">
+		<h3 class="col-xs-12 text-center">Bienvenido</h3>
+		<p class="div-col-xs-12 text-justify">{{owner.username}}, {{owner.description}}</p>
+	</div>
+	{% endif %}
+</div>
+</footer>
+</div>
+<!--Modal-->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+<div class="modal-dialog" role="document">
+<div class="modal-content">
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	<h4 class="modal-title" id="exampleModalLabel">Make an Offer</h4>
+</div>
+<div class="modal-body">
+	<form action="" class="row">
+<div class="form-group col-xs-12">
+	<label for="" class="control-label">I will like to offer you the following amount on this vehicle:</label>
+	<input type="text" placeholder="$ Price" class="form-control" id="recipient-name">
+</div>
+<div class="form-group col-xs-12">
+	<label for="" class="control-label">You are not obligations to purshase this vehicle by submitting an offer*</label>
+</div>
+		<div class="form-group col-xs-6">
+	<label for="" class="control-label">First Name*</label>
+	<input type="text" placeholder="First Name" class="form-control" id="first-name">
+</div>
+<div class="form-group col-xs-6">
+	<label for="" class="control-label">Last Name*</label>
+	<input type="text" placeholder="Last Name" class="form-control" id="last-name">
+</div>
+<div class="form-group col-xs-6">
+	<label for="" class="control-label">Email*</label>
+	<input type="text" placeholder="Email" class="form-control" id="email">
+</div>
+<div class="form-group col-xs-6">
+	<label for="" class="control-label">Phone*</label>
+	<input type="text" placeholder="Phone" class="form-control" id="phone">
+</div>
+<div class="checkbox col-xs-12">
+	<label>
+		<input type="checkbox"> Suscribe to our inventory alert?
+	</label>
+</div>
+<div class="form-group col-xs-6 col-xs-offset-3">
+	<button class="form-control btn" type="submit">
+	Send your offer <i class="fa fa-paper-plane" aria-hidden="true"></i>
+	</button>
+</div>
+<p class="col-xs-12 text-center">By chicking the "Send" button you agree to our <a href="#">Terms and Conditions</a></p>
+	</form>
+</div>
+</div>
+</div>
+</div>
+<script src="{% static 'css/themes/A1004/js/jquery.1.12.4.min.js' %}"></script>
+<script src="{% static 'css/themes/A1004/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'css/themes/A1004/js/1.12.0.jquery-ui.js' %}"></script>
+<script src="{% static 'css/themes/A1004/js/main.js' %}"></script>
+	<!-- Librería jQuery requerida por los plugins de JavaScript -->
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+
+    <!-- Todos los plugins JavaScript de Bootstrap -->
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+	<!-- Todos los plugins JavaScript de Bootstrap -->
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>

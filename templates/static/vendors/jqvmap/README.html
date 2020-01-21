@@ -1,0 +1,344 @@
+<p><img src="http://jqvmap.com/img/logo.png" alt="JQVMap" title="JQVMap"></p>
+<p>This project is a heavily modified version of <a href="https://github.com/bjornd/jvectormap">jVectorMap</a> as it was in April of 2012.  I chose to start fresh rather than fork their project as my intentions were to take it in such a different direction that it would become incompatibale with the original source, rendering it near impossible to merge our projects together without extreme complications.</p>
+<p><strong>Tests:</strong> <a href="https://circleci.com/gh/manifestinteractive/jqvmap/tree/master"><img src="https://circleci.com/gh/manifestinteractive/jqvmap/tree/master.svg?style=svg&amp;circle-token=7bce3b80868ea5ca32009a195c4436db91e5ea67" alt="Circle CI"></a></p>
+<h1 id="jquery-vector-map">jQuery Vector Map</h1>
+<p>To get started, all you need to do is include the JavaScript and CSS files for the map you want to load ( contained in the <code>./dist</code> folder ).</p>
+<h4 id="here-is-a-sample-html-page-for-loading-the-world-map-with-default-settings-">Here is a sample HTML page for loading the World Map with default settings:</h4>
+<pre><code class="lang-html">&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;JQVMap - World Map&lt;/title&gt;
+    &lt;link href=&quot;../dist/jqvmap.css&quot; media=&quot;screen&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot;&gt;
+
+    &lt;script type=&quot;text/javascript&quot; src=&quot;http://code.jquery.com/jquery-1.11.3.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script type=&quot;text/javascript&quot; src=&quot;../dist/jquery.vmap.js&quot;&gt;&lt;/script&gt;
+    &lt;script type=&quot;text/javascript&quot; src=&quot;../dist/maps/jquery.vmap.world.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+
+    &lt;script type=&quot;text/javascript&quot;&gt;
+    jQuery(document).ready(function() {
+      jQuery(&#39;#vmap&#39;).vectorMap({ map: &#39;world_en&#39; });
+    });
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div id=&quot;vmap&quot; style=&quot;width: 600px; height: 400px;&quot;&gt;&lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h1 id="making-it-pretty">Making it Pretty</h1>
+<p>While initializing a map you can provide parameters to change its look and feel.</p>
+<pre><code class="lang-js">jQuery(&#39;#vmap&#39;).vectorMap(
+{
+    map: &#39;world_en&#39;,
+    backgroundColor: &#39;#a5bfdd&#39;,
+    borderColor: &#39;#818181&#39;,
+    borderOpacity: 0.25,
+    borderWidth: 1,
+    color: &#39;#f4f3f0&#39;,
+    enableZoom: true,
+    hoverColor: &#39;#c9dfaf&#39;,
+    hoverOpacity: null,
+    normalizeFunction: &#39;linear&#39;,
+    scaleColors: [&#39;#b6d6ff&#39;, &#39;#005ace&#39;],
+    selectedColor: &#39;#c9dfaf&#39;,
+    selectedRegions: null,
+    showTooltip: true,
+    onRegionClick: function(element, code, region)
+    {
+        var message = &#39;You clicked &quot;&#39;
+            + region
+            + &#39;&quot; which has the code: &#39;
+            + code.toUpperCase();
+
+        alert(message);
+    }
+});
+</code></pre>
+<h2 id="more-examples">More Examples</h2>
+<p>You can see a variety of examples in the <code>./examples</code> folder.</p>
+<h2 id="configuration-settings">Configuration Settings</h2>
+<p><strong>map</strong> <em>&#39;world_en&#39;</em></p>
+<p>Map you want to load. Must include the javascript file with the name of the map you want. Available maps with this library are world_en, usa_en, europe_en and germany_en</p>
+<p><strong>backgroundColor</strong> <em>&#39;#a5bfdd&#39;</em></p>
+<p>Background color of map container in any CSS compatible format.</p>
+<p><strong>borderColor</strong> <em>&#39;#818181&#39;</em></p>
+<p>Border Color to use to outline map objects</p>
+<p><strong>borderOpacity</strong> <em>0.5</em></p>
+<p>Border Opacity to use to outline map objects ( use anything from 0-1, e.g. 0.5, defaults to 0.25 )</p>
+<p><strong>borderWidth</strong> <em>3</em></p>
+<p>Border Width to use to outline map objects ( defaults to 1 )</p>
+<p><strong>color</strong> <em>&#39;#f4f3f0&#39;</em></p>
+<p>Color of map regions.</p>
+<p><strong>colors</strong></p>
+<p>Colors of individual map regions. Keys of the colors objects are country codes according to ISO 3166-1 alpha-2 standard. Keys of colors must be in lower case.</p>
+<p><strong>enableZoom</strong> <em>boolean</em></p>
+<p>Whether to Enable Map Zoom ( true or false, defaults to true)</p>
+<p><strong>hoverColor</strong> <em>&#39;#c9dfaf&#39;</em></p>
+<p>Color of the region when mouse pointer is over it.</p>
+<p><strong>hoverColors</strong></p>
+<p>Colors of individual map regions when mouse pointer is over it. Keys of the colors objects are country codes according to ISO 3166-1 alpha-2 standard. Keys of colors must be in lower case.</p>
+<p><strong>hoverOpacity</strong> <em>0.5</em></p>
+<p>Opacity of the region when mouse pointer is over it.</p>
+<p><strong>normalizeFunction</strong> <em>&#39;linear&#39;</em></p>
+<p>This function can be used to improve results of visualizations for data with non-linear nature. Function gets raw value as the first parameter and should return value which will be used in calculations of color, with which particular region will be painted.</p>
+<p><strong>scaleColors</strong> <em>[&#39;#b6d6ff&#39;, &#39;#005ace&#39;]</em></p>
+<p>This option defines colors, with which regions will be painted when you set option values. Array scaleColors can have more then two elements. Elements should be strings representing colors in RGB hex format.</p>
+<p><strong>selectedColor</strong> <em>&#39;#333333&#39;</em></p>
+<p>Color for a region when you select it</p>
+<p><strong>selectedRegions</strong> <em>[&#39;MO&#39;, &#39;FL&#39;, &#39;OR&#39;]</em></p>
+<p>This is the Region that you are looking to have preselected (two letter ISO code, defaults to null ). See <a href="REGIONS.md">REGIONS.md</a></p>
+<p><strong>multiSelectRegion</strong> <em>boolean</em></p>
+<p>Whether to enable more than one region to be selected at a time.</p>
+<p><strong>showLabels</strong> <em>boolean</em></p>
+<p>Whether to show ISO Code Labels ( true or false, defaults to false )</p>
+<p><strong>showTooltip</strong> <em>boolean</em></p>
+<p>Whether to show Tooltips on Mouseover ( true or false, defaults to true )</p>
+<p><strong>onLoad</strong> <em>function(event, map)</em></p>
+<p>Callback function which will be called when map is loading, returning the map event and map details.</p>
+<p><strong>onLabelShow</strong> <em>function(event, label, code)</em></p>
+<p>Callback function which will be called before label is shown. Label DOM object and country code will be passed to the callback as arguments.</p>
+<p><strong>onRegionOver</strong> <em>function(event, code, region)</em></p>
+<p>Callback function which will be called when the mouse cursor enters the region path. Country code will be passed to the callback as argument.</p>
+<p><strong>onRegionOut</strong> <em>function(event, code, region)</em></p>
+<p>Callback function which will be called when the mouse cursor leaves the region path. Country code will be passed to the callback as argument.</p>
+<p><strong>onRegionClick</strong> <em>function(event, code, region)</em></p>
+<p>Callback function which will be called when the user clicks the region path. Country code will be passed to the callback as argument. This callback may be called while the user is moving the map. If you need to distinguish between a &quot;real&quot; click and a click resulting from moving the map, you can inspect <strong>$(event.currentTarget).data(&#39;mapObject&#39;).isMoving</strong>.</p>
+<p><strong>onRegionSelect</strong> <em>function(event, code, region)</em></p>
+<p>Callback function which will be called when the selects a region. Country code will be passed to the callback as argument.</p>
+<p><strong>onRegionDeselect</strong> <em>function(event, code, region)</em></p>
+<p>Callback function which will be called when the deselects a region. Country code will be passed to the callback as argument.</p>
+<p><strong>onResize</strong> <em>function(event, width, height)</em></p>
+<p>Callback function which will be called when the map is resized.  Return event, width &amp; height.</p>
+<p><strong>pins</strong> <em>{ &quot;pk&quot; : &quot;pk_pin_metadata&quot;, &quot;ru&quot; : &quot;ru_pin_metadata&quot;,    ... }</em></p>
+<p>This option defines pins, which will be placed on the regions. The JSON can have only one element against one country code. Elements should be strings containing the HTML or id of the pin (depends on the &#39;pinMode&#39; option explained next).</p>
+<p><strong>pinMode</strong> <em>content</em></p>
+<p>This option defines if the &quot;pins&quot; JSON contains the HTML strings of the pins or the ids of HTML DOM elements which are to be placed as pins.</p>
+<p>If the pin mode is &quot;content&quot; (or not specified) then the parameter &quot;pins&quot; contains the stringified html content to be placed as the pins.</p>
+<p>Example:</p>
+<pre><code class="lang-js">jQuery(&#39;#vmap&#39;).vectorMap({
+    map: &#39;world_en&#39;,
+    pins: { &quot;pk&quot; : &quot;\u003cimg src=\&quot;pk.png\&quot; /\u003e&quot; /*serialized &lt;img src=&quot;pk.png&quot; /&gt;*/, ... },
+    pinMode: &#39;content&#39;
+});
+</code></pre>
+<p>If the pin mode is &quot;id&quot; then the parameter &quot;pins&quot; contains the value of &quot;id&quot; attribute of the html (DOM) elements to be placed as pins.
+Example:</p>
+<pre><code class="lang-html">&lt;script&gt;
+  jQuery(&#39;#vmap&#39;).vectorMap({
+      map: &#39;world_en&#39;,
+      pins: { &quot;pk&quot; : &quot;pin_for_pk&quot;, &quot;ru&quot; : &quot;pin_for_ru&quot;, ... },
+      pinMode: &#39;id&#39;
+  });
+&lt;/script&gt;
+&lt;div style=&quot;display:none&quot;&gt;
+  &lt;img id=&quot;pin_for_pk&quot; src=&quot;pk.png&quot; /&gt;
+  &lt;div id=&quot;pin_for_ru&quot;&gt;...&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<p><em>Note:</em></p>
+<p>1) The pin is placed at the center of the rectangle bounding the country. So depending on the shape of the country, the pin might not land on the country itself. For instance, the pin for &#39;US&#39; lands in the center of Alaska and rest of the US, which happens to be in the ocean between them.</p>
+<p>2) If the &quot;pinMode&quot; is set to &quot;id&quot;, then the html DOM elements having those ids are NOT COPIED to the desired position, they are TRANSFERRED. This means that the elements will be removed from their original positions and placed on the map.</p>
+<h1 id="dynamic-updating">Dynamic Updating</h1>
+<p>Most of the options can be changed after initialization using the following code:</p>
+<pre><code class="lang-js">jQuery(&#39;#vmap&#39;).vectorMap(&#39;set&#39;, &#39;colors&#39;, {us: &#39;#0000ff&#39;});
+</code></pre>
+<p>Instead of colors can be used any parameter except callbacks. Callbacks can be added and deleted using standard jQuery patterns of working with events.
+You can define callback function when you initialize JQVMap:</p>
+<pre><code class="lang-js">jQuery(&#39;#vmap&#39;).vectorMap(
+{
+    onLoad: function(event, map)
+    {
+
+    },
+    onLabelShow: function(event, label, code)
+    {
+
+    },
+    onRegionOver: function(event, code, region)
+    {
+
+    },
+    onRegionOut: function(event, code, region)
+    {
+
+    },
+    onRegionClick: function(event, code, region)
+    {
+
+    },
+    onResize: function(event, width, height)
+    {
+
+    }
+});
+</code></pre>
+<p>Or later using standard jQuery mechanism:</p>
+<pre><code class="lang-js">jQuery(&#39;#vmap&#39;).bind(&#39;load.jqvmap&#39;,
+    function(event, map)
+    {
+
+    }
+);
+jQuery(&#39;#vmap&#39;).bind(&#39;labelShow.jqvmap&#39;,
+    function(event, label, code)
+    {
+
+    }
+);
+jQuery(&#39;#vmap&#39;).bind(&#39;regionMouseOver.jqvmap&#39;,
+    function(event, code, region)
+    {
+
+    }
+);
+jQuery(&#39;#vmap&#39;).bind(&#39;regionMouseOut.jqvmap&#39;,
+    function(event, code, region)
+    {
+
+    }
+);
+jQuery(&#39;#vmap&#39;).bind(&#39;regionClick.jqvmap&#39;,
+    function(event, code, region)
+    {
+
+    }
+);
+jQuery(&#39;#vmap&#39;).bind(&#39;resize.jqvmap&#39;,
+    function(event, width, height)
+    {
+
+    }
+);
+</code></pre>
+<p>Consider that fact that you can use standard features of jQuery events like event.preventDefault() or returning false from the callback to prevent default behavior of JQVMap (showing label or changing country color on hover). In the following example, when user moves mouse cursor over Canada label won&#39;t be shown and color of country won&#39;t be changed. At the same label for Russia will have custom text.</p>
+<pre><code class="lang-js">jQuery(&#39;#vmap&#39;).vectorMap(
+{
+    onLabelShow: function(event, label, code)
+    {
+        if (code == &#39;ca&#39;)
+        {
+            // Hide the label
+            event.preventDefault();
+        }
+        else if (code == &#39;ru&#39;)
+        {
+            // Plain TEXT labels
+            label.text(&#39;Bears, vodka, balalaika&#39;);
+        }
+        else if (code == &#39;us&#39;)
+        {
+            // HTML Based Labels. You can use any HTML you want, this is just an example
+            label.html(&#39;&lt;div class=&quot;map-tooltip&quot;&gt;&lt;h1 class=&quot;header&quot;&gt;Header&lt;/h1&gt;&lt;p class=&quot;description&quot;&gt;Some Description&lt;/p&gt;&lt;/div&gt;&#39;);
+        }
+    },
+    onRegionOver: function(event, code)
+    {
+        if (code == &#39;ca&#39;)
+        {
+            event.preventDefault();
+        }
+    },
+});
+</code></pre>
+<h1 id="data-visualization">Data Visualization</h1>
+<p>Here I want to demonstrate how visualization of some geographical-related data can be done using JQVMap. Let&#39;s visualize information about GDP in 2010 for every country. At first we need some data. Let it be site of International Monetary Fond. There we can get information in xsl format, which can be converted first to csv and then to json with any scripting language. Now we have file gdp-data.js with such content (globals are evil, I know, but just for the sake of simplification):</p>
+<pre><code class="lang-js">var gdpData = {&quot;af&quot;:16.63,&quot;al&quot;:11.58,&quot;dz&quot;:158.97,...};
+</code></pre>
+<p>Then connect it to the page and add some code to make visualization:</p>
+<pre><code class="lang-js">var max = 0,
+    min = Number.MAX_VALUE,
+    cc,
+    startColor = [200, 238, 255],
+    endColor = [0, 100, 145],
+    colors = {},
+    hex;
+
+//find maximum and minimum values
+for (cc in gdpData)
+{
+    if (parseFloat(gdpData[cc]) &gt; max)
+    {
+        max = parseFloat(gdpData[cc]);
+    }
+    if (parseFloat(gdpData[cc]) &lt; min)
+    {
+        min = parseFloat(gdpData[cc]);
+    }
+}
+
+//set colors according to values of GDP
+for (cc in gdpData)
+{
+    if (gdpData[cc] &gt; 0)
+    {
+        colors[cc] = &#39;#&#39;;
+        for (var i = 0; i&lt;3; i++)
+        {
+            hex = Math.round(startColor[i]
+                + (endColor[i]
+                - startColor[i])
+                * (gdpData[cc] / (max - min))).toString(16);
+
+            if (hex.length == 1)
+            {
+                hex = &#39;0&#39;+hex;
+            }
+
+            colors[cc] += (hex.length == 1 ? &#39;0&#39; : &#39;&#39;) + hex;
+        }
+    }
+}
+
+//initialize JQVMap
+jQuery(&#39;#vmap&#39;).vectorMap(
+{
+    colors: colors,
+    hoverOpacity: 0.7,
+    hoverColor: false
+});
+</code></pre>
+<h1 id="functions">Functions</h1>
+<p>There are seven functions that can be called on map container:</p>
+<p><strong>zoomIn()</strong> <em>Zoom one step in</em></p>
+<p>Usage:</p>
+<pre><code class="lang-js">jQuery(&#39;#vmap&#39;).vectorMap(&#39;zoomIn&#39;);
+</code></pre>
+<p><strong>zoomOut()</strong> <em>Zoom one step out</em></p>
+<p>Usage:</p>
+<pre><code class="lang-js">jQuery(&#39;#vmap&#39;).vectorMap(&#39;zoomOut&#39;);
+</code></pre>
+<p><strong>getPinId(cc)</strong> <em>Returns the html attribute &quot;id&quot; of the pin placed on the country whose country code is provided in &quot;cc&quot;.</em></p>
+<p>Usage:</p>
+<pre><code class="lang-js">var pinId = jQuery(&#39;#vmap&#39;).vectorMap(&#39;getPinId&#39;, &#39;pk&#39;);
+</code></pre>
+<p><strong>getPin(cc)</strong> <em>Returns stringified HTML of the pin placed on the country whose country code is provided in &quot;cc&quot;.</em></p>
+<p>Usage:</p>
+<pre><code class="lang-js">var pinContent = jQuery(&#39;#vmap&#39;).vectorMap(&#39;getPin&#39;, &#39;pk&#39;);
+</code></pre>
+<p><strong>getPins()</strong> <em>Returns an associative JSON string containing stringified HTML of all the pins.</em></p>
+<p>Usage:</p>
+<pre><code class="lang-js">var pins = jQuery(&#39;#vmap&#39;).vectorMap(&#39;getPins&#39;);
+</code></pre>
+<p><strong>removePin(cc)</strong> <em>Removes the pin from the country whose country code is specified in &quot;cc&quot;.</em></p>
+<p>Usage:</p>
+<pre><code class="lang-js">jQuery(&#39;#vmap&#39;).vectorMap(&#39;removePin&#39;, &#39;pk&#39;);
+</code></pre>
+<p><strong>removePins()</strong> <em>Removes all the pins from the map.</em></p>
+<p>Usage:</p>
+<pre><code class="lang-js">jQuery(&#39;#vmap&#39;).vectorMap(&#39;removePins&#39;);
+</code></pre>
+<h1 id="events">Events</h1>
+<p>There are three events which you can use to bind your own callbacks to:</p>
+<p><strong>drag</strong> <em>When the map is dragged, this event is triggered.</em></p>
+<p><strong>zoomIn</strong> <em>When the map is zoomed in, this event is triggered.</em></p>
+<p><strong>zoomOut</strong> <em>When the map is zoomed out, this event is triggered.</em></p>
+<p>You can bind your routines to any of these events by using jQuery on()
+For example:</p>
+<pre><code class="lang-js">//Do something when the map is dragged
+jQuery(&#39;#vmap&#39;).on(&#39;drag&#39;, function(event)
+{
+    console.log(&#39;The map is being dragged&#39;);
+    //Do something
+});
+</code></pre>
+<h1 id="custom-maps">Custom Maps</h1>
+<p>So you want to create your own maps, or change some existing ones.  Awesome.  Make sure to check out <a href="./create">./create/README.md</a> for details on how to do this.</p>

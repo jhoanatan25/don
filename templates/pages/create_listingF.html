@@ -1,0 +1,340 @@
+{% extends 'base/base.html' %}
+{% block content %}
+{% load replace %}
+<script type="text/javascript">
+window.onload = function() {
+$("#make").select2();
+$("#model").select2();
+$("#trim").select2({
+	tags: true,
+});
+$("#year").select2({
+	tags: true,
+});
+$("#transmission_type").select2();
+$("#drive_train").select2();
+$("#fuel_type").select2();
+$("#engine").select2();
+$("#doors").select2();
+$("#ext_colors").select2();
+$("#int_colors").select2();
+$("#drive").select2();
+$("#int_f").select2();
+};
+
+
+function changeModels(){
+	var maker = $( "#make option:selected" ).val();
+	$('#year').empty();
+	$('#year').append($('<option>').text("Seleccione el modelo").attr('value', -1));
+	$('#trim').empty();
+	$('#trim').append($('<option>').text("Seleccione el modelo").attr('value', -1));
+	$.ajax({
+	url:'/model',
+	type:'GET',
+	data: 'maker=' + maker,
+	dataType: 'json',
+	success: function( json ) {
+		$('#model').empty();
+		$('#model').append($('<option>').text("Seleccione el modelo").attr('value', -1));
+			$.each(json, function(id, value) {
+					$('#model').append($('<option>').text(value).attr('value', id));
+			});
+	}
+	});
+}
+function addInfo(){
+	var model = $( "#model option:selected" ).val();
+	$('#year').empty();
+	$('#year').append($('<option>').text("Seleccione trim").attr('value', -1));
+	$.ajax({
+		url:'/gettrim',
+		type:'GET',
+		data: 'model=' + model,
+		dataType: 'json',
+		success: function( json ) {
+			$('#trim').empty();
+			$('#trim').append($('<option>').text("Seleccione trim").attr('value', -1));
+			$.each(json, function(id, value) {
+				console.log(value);
+				$('#trim').append($('<option>').text(value).attr('value', id));
+			});
+		}
+	});
+}
+function bringYears(){
+	var model = $( "#model option:selected" ).val();
+	$.ajax({
+	url:'/getyear',
+	type:'GET',
+	data: 'model=' + model,
+	dataType: 'json',
+	success: function( json ) {
+		$('#year').empty();
+		$('#year').append($('<option>').text("Select year").attr('value', -1));
+			$.each(json, function(id, value) {
+					$('#year').append($('<option>').text(value).attr('value', id));
+			});
+	}
+	});
+}
+</script>
+<script>
+setTimeout(function(){menu("#sell_my_car")},500);
+</script>
+{% include 'pages/google_maps_modal.html' %}
+<div class="conten">
+<form role="form" action="" method="post" class="" enctype="multipart/form-data">
+	{% csrf_token %}
+	<div class="row barra arriba">
+		<form role="form" action="" method="post" class="from" enctype="multipart/form-data">
+			{% csrf_token %}
+		<div class="col-md-12 title">
+			<h2>Agregar Carro</h2>
+			<h4>Información</h4>
+		</div>
+		<div class="col col-lg-12 col-md-6">
+		<div class="col-md-6">
+
+
+			<h5>{{ form.makefield.label_tag }}</h5>
+			{{ form.makefield.errors }}
+			{{ form.makefield }}
+			<h5>{{ form.modelfield.label_tag }}</h5>
+			{{ form.modelfield.errors }}
+			{{ form.modelfield }}
+			<h5>{{ form.trim.label_tag }}</h5>
+			{{ form.trim.errors }}
+			{{ form.trim }}
+			<h5>{{ form.year.label_tag }}</h5>
+			{{ form.year.errors }}
+			{{ form.year }}
+			<h5>{{form.city_mpg.label_tag}}</h5>
+			{{ form.city_mpg.errors }}
+			{{form.city_mpg}}
+			<p><a href="#" onclick="$('#maps_modal').modal('show');">¿Cómo agregar esta información?</a></p>
+			<h5>{{form.latitude.label_tag}}</h5>
+			{{ form.latitude.errors }}
+			{{form.latitude}}
+			<h5>{{form.longitude.label_tag}}</h5>
+			{{ form.longitude.errors }}
+			{{form.longitude}}
+		</div>
+		<div class="col-md-6">
+			<h5>{{form.eng_des.label_tag}}</h5>
+			{{ form.end_des.errors }}
+			{{form.eng_des}}
+			<h5>{{form.transmission_type_in.label_tag}}</h5>
+			{{ form.transmission_type_in.errors }}
+				{{form.transmission_type_in}}
+			<h5>{{form.transmission_des.label_tag}}</h5>
+			{{ form.transmission_des.errors }}
+				{{form.transmission_des}}
+			<h5 id="sel">{{form.drive_train_in.label_tag}}</h5>
+			{{ form.drive_train_in.errors }}
+					{{form.drive_train_in}}
+			<h5 id="sel">{{form.fuel_type_in.label_tag}}</h5>
+			{{ form.fuel_type_in.errors }}
+					{{form.fuel_type_in}}
+			<h5 id="sel">{{form.high_mpg.label_tag}}</h5>
+			{{ form.high_mpg.errors }}
+					{{form.high_mpg}}
+		</div>
+
+		<div class="col-md-12 title2">
+			<h4>Especificaciones</h4>
+		</div>
+		<div class="col-md-6">
+			<h5 id="sel">{{form.engine_in.label_tag}}</h5>
+			{{ form.engine_in.errors }}
+					{{form.engine_in}}
+				<h5 id="sel">{{form.doors.label_tag}}</h5>
+				{{ form.doors.errors }}
+						{{form.doors}}
+				<h5 id="sel">{{form.ext_c.label_tag}}</h5>
+				{{ form.ext_c.errors }}
+						{{form.ext_c}}
+				<h5 id="sel">{{form.ext_c_des.label_tag}}</h5>
+				{{ form.ext_c_des.errors }}
+						{{form.ext_c_des}}
+		</div>
+		<div class="col-md-6">
+				<h5 id="sel">{{form.drive.label_tag}}</h5>
+				{{ form.drive.errors }}
+						{{form.drive}}
+				<h5 id="sel">{{form.int_f.label_tag}}</h5>
+				{{ form.int_f.errors }}
+						{{form.int_f}}
+				<h5 id="sel">{{form.int_c_des.label_tag}}</h5>
+				{{ form.int_c_des.errors }}
+						{{form.int_c_des}}
+				<h5 id="sel">{{form.int_c.label_tag}}</h5>
+				{{ form.int_c.errors }}
+						{{form.int_c}}
+		</div>
+		<div class="col-md-12 title2">
+			<h4>Información Estandar</h4>
+		</div>
+		<div class="col-md-6">
+			<h5 id="sel">{{form.condition.label_tag}}*</h5>
+			{{ form.condition.errors }}
+				{{form.condition}}
+			<h5 id="sel">{{form.price.label_tag}}*</h5>
+			{{ form.price.errors }}
+				{{form.price}}
+			<h5 id="sel">{{form.stock_n.label_tag}}</h5>
+			{{ form.stock_n.errors }}
+				{{form.stock_n}}
+		</div>
+		<div class="col-md-6">
+			<h5 id="sel">{{form.mileage.label_tag}}</h5>
+			{{ form.mileage.errors }}
+				{{form.mileage}}
+			{%if is_dealer %}
+					<h5 id="sel">{{form.off_price.label_tag}}</h5>
+					{{ form.off_price.errors }}
+			<div class="input-group colxs-12">
+				<span class="input-group-addon">$</span>
+				{{form.off_price}}
+			</div>
+			{% endif %}
+		</div>
+		<div class="col-md-12 title3">
+			{{ form.photo.errors }}
+			<h4>{{ form.photo.label_tag }}</h4>
+		</div>
+		<div class="container col-xs-12">
+					<div class="upload">
+						{{ form.photo }}
+					</div>
+					<output id="list"></output>
+					<div class="cont_limpiar">
+						<button type="button" onclick="limpiar()" class="btn btn-warning limpiar"><i class="glyphicon glyphicon-trash"></i> Limpiar</button>
+					</div>
+
+		</div>
+		 <div class="col-md-12 title2">
+			<h4>Información Adicional</h4>
+		</div>
+		<div class="col-lg-12 add">
+			<h5>{{form.Convenience_Comfort.label}}</h5>
+			{{ form.Convenience_Comfort.errors }}
+			<div>
+				{% for check in form.Convenience_Comfort %}
+					{{ check.tag }}
+					<label name="Convenience_Comfort" for="{{ check.id_for_label }}">{{ check.choice_label }}</label>
+				{% endfor %}
+			</div>
+			<h5>{{form.Entertainment_Technology.label}}</h5>
+			{{ form.Entertainment_Technology.errors }}
+			<div>
+				{% for check in form.Entertainment_Technology %}
+					{{ check.tag }}
+					<label name="Entertainment_Technology" for="{{ check.id_for_label }}">{{ check.choice_label }}</label>
+				{% endfor %}
+			</div>
+			<h5>{{form.Luxury.label}}</h5>
+			{{ form.Luxury.errors }}
+			<div>
+				{% for check in form.Luxury %}
+					{{ check.tag }}
+					<label name="Luxury" for="{{ check.id_for_label }}">{{ check.choice_label }}</label>
+				{% endfor %}
+			</div>
+			<h5>{{form.Miscellaneous.label}}</h5>
+			{{ form.Miscellaneous.errors }}
+			<div>
+				{% for check in form.Miscellaneous %}
+					{{ check.tag }}
+					<label name="Miscellaneous" for="{{ check.id_for_label }}">{{ check.choice_label }}</label>
+				{% endfor %}
+			</div>
+		</div>
+		<div class="col-md-6 cf">
+			<button type="submit" class="btn btn-success bf">Guardar</button>
+		</div>
+	</form>
+<div class="col-md-6 cf">
+	<form action="/create_listing">
+		<button type="submit" class="btn btn-danger bf">Cancelar</button>
+	</form>
+</div>
+</div>
+
+<script type="text/javascript">
+
+
+function handleFileSelect(evt) {
+var files = evt.target.files; // FileList object
+
+// Loop through the FileList and render image files as thumbnails.
+for (var i = 0, f; f = files[i]; i++) {
+
+// Only process image files.
+if (!f.type.match('image.*')) {
+continue;
+}
+
+var reader = new FileReader();
+
+// Closure to capture the file information.
+reader.onload = (function(theFile) {
+return function(e) {
+	// Render thumbnail.
+	var span = document.createElement('span');
+	span.classList.toggle("imagen_list");
+	span.innerHTML = ['<img class="thumb" src="', e.target.result,
+										'" title="', escape(theFile.name), '"/>'].join('');
+	document.getElementById('list').insertBefore(span, null);
+};
+})(f);
+
+// Read in the image file as a data URL.
+reader.readAsDataURL(f);
+}
+}
+
+document.getElementById('img').addEventListener('change', handleFileSelect, false);
+
+
+function limpiar() {
+
+				$(".imagen_list").remove();
+        var input = $('#img');
+        var clon = input.clone();  // Creamos un clon del elemento original
+        input.replaceWith(clon);   // Y sustituimos el original por el clon
+
+				function handleFileSelect(evt) {
+				var files = evt.target.files; // FileList object
+
+				// Loop through the FileList and render image files as thumbnails.
+				for (var i = 0, f; f = files[i]; i++) {
+
+				// Only process image files.
+				if (!f.type.match('image.*')) {
+				continue;
+				}
+
+				var reader = new FileReader();
+
+				// Closure to capture the file information.
+				reader.onload = (function(theFile) {
+				return function(e) {
+					// Render thumbnail.
+					var span = document.createElement('span');
+					span.classList.toggle("imagen_list");
+					span.innerHTML = ['<img class="thumb" src="', e.target.result,
+														'" title="', escape(theFile.name), '"/>'].join('');
+					document.getElementById('list').insertBefore(span, null);
+				};
+				})(f);
+
+				// Read in the image file as a data URL.
+				reader.readAsDataURL(f);
+				}
+				}
+
+				document.getElementById('img').addEventListener('change', handleFileSelect, false);
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,93 @@
+<hr>
+<p>title: Getting started</p>
+<h2 id="anchor-getting-started">anchor: getting-started</h2>
+<h3 id="download-chart-js">Download Chart.js</h3>
+<p>To download a zip, go to <a href="https://github.com/chartjs/Chart.js">Chart.js on Github</a> and choose the version that is right for your application.</p>
+<ul>
+<li><a href="https://raw.githubusercontent.com/chartjs/Chart.js/master/dist/Chart.js">Standard build</a> (~31kB gzipped)</li>
+<li><a href="https://raw.githubusercontent.com/chartjs/Chart.js/master/dist/Chart.bundle.js">Bundled with Moment.js</a> (~45kB gzipped)</li>
+<li><a href="https://cdnjs.com/libraries/Chart.js">CDN Versions</a></li>
+</ul>
+<p>To install via npm / bower:</p>
+<pre><code class="lang-bash">npm install chart.js --save
+</code></pre>
+<pre><code class="lang-bash">bower install Chart.js --save
+</code></pre>
+<h3 id="selecting-the-correct-build">Selecting the Correct Build</h3>
+<p>Chart.js provides two different builds that are available for your use. The <code>Chart.js</code> and <code>Chart.min.js</code> files include Chart.js and the accompanying color parsing library. If this version is used and you require the use of the time axis, <a href="http://momentjs.com/">Moment.js</a> will need to be included before Chart.js.</p>
+<p>The <code>Chart.bundle.js</code> and <code>Chart.bundle.min.js</code> builds include Moment.js in a single file. This version should be used if you require time axes and want a single file to include, select this version. Do not use this build if your application already includes Moment.js. If you do, Moment.js will be included twice, increasing the page load time and potentially introducing version issues.</p>
+<h3 id="installation">Installation</h3>
+<p>To import Chart.js using an old-school script tag:</p>
+<pre><code class="lang-html">&lt;script src=&quot;Chart.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+    var myChart = new Chart({...})
+&lt;/script&gt;
+</code></pre>
+<p>To import Chart.js using an awesome module loader:</p>
+<pre><code class="lang-javascript">
+// Using CommonJS
+var Chart = require(&#39;src/chart.js&#39;)
+var myChart = new Chart({...})
+
+// ES6
+import Chart from &#39;src/chart.js&#39;
+let myChart = new Chart({...})
+
+// Using requirejs
+require([&#39;path/to/Chartjs&#39;], function(Chart){
+ var myChart = new Chart({...})
+})
+</code></pre>
+<h3 id="creating-a-chart">Creating a Chart</h3>
+<p>To create a chart, we need to instantiate the <code>Chart</code> class. To do this, we need to pass in the node, jQuery instance, or 2d context of the canvas of where we want to draw the chart. Here&#39;s an example.</p>
+<pre><code class="lang-html">&lt;canvas id=&quot;myChart&quot; width=&quot;400&quot; height=&quot;400&quot;&gt;&lt;/canvas&gt;
+</code></pre>
+<pre><code class="lang-javascript">// Any of the following formats may be used
+var ctx = document.getElementById(&quot;myChart&quot;);
+var ctx = document.getElementById(&quot;myChart&quot;).getContext(&quot;2d&quot;);
+var ctx = $(&quot;#myChart&quot;);
+</code></pre>
+<p>Once you have the element or context, you&#39;re ready to instantiate a pre-defined chart-type or create your own!</p>
+<p>The following example instantiates a bar chart showing the number of votes for different colors and the y-axis starting at 0.</p>
+<pre><code class="lang-html">&lt;canvas id=&quot;myChart&quot; width=&quot;400&quot; height=&quot;400&quot;&gt;&lt;/canvas&gt;
+&lt;script&gt;
+var ctx = document.getElementById(&quot;myChart&quot;);
+var myChart = new Chart(ctx, {
+    type: &#39;bar&#39;,
+    data: {
+        labels: [&quot;Red&quot;, &quot;Blue&quot;, &quot;Yellow&quot;, &quot;Green&quot;, &quot;Purple&quot;, &quot;Orange&quot;],
+        datasets: [{
+            label: &#39;# of Votes&#39;,
+            data: [12, 19, 3, 5, 2, 3],
+            backgroundColor: [
+                &#39;rgba(255, 99, 132, 0.2)&#39;,
+                &#39;rgba(54, 162, 235, 0.2)&#39;,
+                &#39;rgba(255, 206, 86, 0.2)&#39;,
+                &#39;rgba(75, 192, 192, 0.2)&#39;,
+                &#39;rgba(153, 102, 255, 0.2)&#39;,
+                &#39;rgba(255, 159, 64, 0.2)&#39;
+            ],
+            borderColor: [
+                &#39;rgba(255,99,132,1)&#39;,
+                &#39;rgba(54, 162, 235, 1)&#39;,
+                &#39;rgba(255, 206, 86, 1)&#39;,
+                &#39;rgba(75, 192, 192, 1)&#39;,
+                &#39;rgba(153, 102, 255, 1)&#39;,
+                &#39;rgba(255, 159, 64, 1)&#39;
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+<p>It&#39;s that easy to get started using Chart.js! From here you can explore the many options that can help you customise your charts with scales, tooltips, labels, colors, custom actions, and much more.</p>

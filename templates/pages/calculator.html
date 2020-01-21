@@ -1,0 +1,255 @@
+{% extends 'base/base.html' %}
+{% load replace %}
+{% load static %}
+{% block content %}
+
+<script type="text/javascript">
+
+
+function ValidaEmail(email) {
+var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+return regex.test(email);
+}
+
+function next(){
+    if (
+      $("#fname").val().length > 0
+      && ValidaEmail($("#email").val()) == true
+      && $("#state").val()!="no"
+      && $("#lname").val().length > 0
+      && $("#address").val().length > 0
+      && $("#city").val().length > 0
+      && $("#zip").val().length > 0
+      && $("#phone").val().length == 11
+    ) {
+            document.getElementById("con1").style.display = "none";
+    document.getElementById("con2").style.display = "block";
+      }
+  else {
+    alert("Llene todos los campos");
+  }
+
+  }
+
+function next2(){
+      if (
+     $("#vehicle_make").val()==""
+      && $("#vehicle_model").val()==""
+    ) {
+             document.getElementById("con2").style.display = "none";
+    document.getElementById("con3").style.display = "block";
+      }
+  else {
+    alert("Llene todos los campos");
+  }
+
+  }
+
+function c1() {
+  if (
+      $("#fname").val().length > 0
+      && ValidaEmail($("#email").val()) == true
+      && $("#state").val()!="no"
+      && $("#lname").val().length > 0
+      && $("#address").val().length > 0
+      && $("#city").val().length > 0
+      && $("#zip").val().length > 0
+      && $("#phone").val().length == 11
+    ) {
+        document.getElementById("check").style.display = "block";
+        document.getElementById("b1").disabled = false;
+      }
+  else {
+    document.getElementById("check").style.display = "none";
+    document.getElementById("b1").disabled = true;
+  }
+}
+
+setInterval('c1()',100);
+
+function c2() {
+  if (
+      $("#vehicle_make").val()==""
+      && $("#vehicle_model").val()==""
+    ) {
+        document.getElementById("check2").style.display = "none";
+    document.getElementById("b2").disabled = true;
+      }
+  else {
+        document.getElementById("check2").style.display = "block";
+        document.getElementById("b2").disabled = false;
+
+  }
+}
+
+setInterval('c2()',100);
+
+function c3() {
+  if (
+      $("#down_payment").val().length > 0
+      && $("#monthly_gross").val()!="no"
+      && $("#monthly_rent").val()!="no"
+      && $("#current_employer").val().length > 0
+      && $("#years_in_residence").val().length > 0
+      && $("#salesperson").val().length > 0
+    ) {
+        document.getElementById("check3").style.display = "block";
+        document.getElementById("b3").disabled = false;
+      }
+  else {
+    document.getElementById("check3").style.display = "none";
+    document.getElementById("b3").disabled = true;
+  }
+}
+
+setInterval('c3()',100);
+
+</script>
+
+<div class="approved">
+  <div class="cont" id="con1">
+    <h2>Bienvenido,</h2>
+    <h3>¡Empecemos!</h3>
+    <form class="form" >
+      <input required class="black" type="text" id="fname" name="fname" placeholder="Nombre*" >
+      <input required class="black" type="text" id="lname" name="lname" placeholder="Apellido*" >
+      <input required class="black" type="text" id="address" name="address" placeholder="Dirección*" >
+      <input required class="black" type="text" id="city" name="city" placeholder="Ciudad*" >
+      <div class="control-group">
+        <select id="state" name="state">
+          <option value="no" selected="selected">Estado*</option>
+          <option value="">Estado1</option>
+          <option value="">Estado2</option>
+        </select>
+        <input required class="black" type="number" id="zip" name="zip" placeholder="Codigo de Área*" >
+      </div>
+      <input required class="black" type="email" id="email" name="email" placeholder="Correo*" >
+      <input required class="black" type="tel" id="phone" name="phone" placeholder="Telefono*" >
+      <div class="control-group control2">
+        <a id="b1"  class="btn-next" disabled="disabled" href="javascript:next()" >Siguiente</a>
+        <i id="check" class="glyphicon glyphicon-ok"></i>
+      </div>
+    </form>
+  </div>
+  <div class="cont" id="con2" >
+    <h2> Cuéntanos sobre el vehículo que te gustaría comprar.</h2>
+    <h3> Marca y modelo, por favor</h3>
+    <form class="form" >
+      <div class="control-group">
+        <span class="type_label">Tipo*</span>
+        <label class="radio inline">
+          <input type="radio" name="type_new_used" id="type_new" value="new" checked="checked"> Nuevo
+        </label>
+        <label class="radio inline">
+          <input type="radio" name="type_new_used" id="type_used" value="used"> Usado
+        </label>
+      </div>
+      <div class="control-group">
+        <label class="control-label" for="vehicle_make">Marca*</label>
+        <div class="controls">
+          <select name="vehicle_make" id="vehicle_make" class="input error">
+            <option value="">Seleccionar</option>
+            <option value="20">Ford</option>
+          </select>
+          <label for="vehicle_make" generated="true" class="error"></label>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label" for="vehicle_make">Modelo*</label>
+        <div class="controls">
+          <select name="vehicle_model" id="vehicle_model" class="input error">
+            <option value="">Seleccionar</option>
+            <option value="20">Ford</option>
+          </select>
+          <label for="vehicle_model" generated="true" class="error"></label>
+        </div>
+      </div>
+      <div class="control-group control2">
+        <a id="b2" href="javascript:next2()" disabled="disabled" class="btn-next" disabled="disabled" >Siguiente</a>
+        <i id="check2" class="glyphicon glyphicon-ok"></i>
+      </div>
+    </form>
+  </div>
+
+  <div class="cont" id="con3" >
+    <h2> ¡Casi terminamos!</h2>
+    <h3> Tenemos algunas preguntas adicionales.</h3>
+    <form class="form" >
+      <input class="black" type="text" id="down_payment" name="down_payment" placeholder="Pago inicial">
+      <input class="black" type="text" id="current_employer" name="current_employer" placeholder="Vendedor">
+      <div class="control-group">
+        <span class="type_label">Tipo*</span>
+        <label class="radio inline check">
+          <input type="checkbox" name="type_Self" id="type_Self" value="Self"> Vendedor Independiente
+        </label>
+        <label class="radio inline">
+          <input type="checkbox" name="type_Currently" id="Currently" value="Currently"> Empleado
+        </label>
+      </div>
+      <div class="control-group">
+        <span class="type_label">Ofrecer</span>
+        <label class="radio inline">
+          <input type="radio" name="type_trade_yes" id="type_trade_yes" value="yes" >Si
+        </label>
+        <label class="radio inline">
+          <input type="radio" name="type_trade_no" id="type_trade_no" value="no" checked="checked"> No
+        </label>
+      </div>
+      <div class="control-group">
+        <span class="type_label">Alquilar o Comprar</span>
+        <label class="radio inline">
+          <input type="radio" name="type_Rent" id="type_Rent" value="yes" >Alquilar
+        </label>
+        <label class="radio inline">
+          <input type="radio" name="type_own" id="type_own" value="no" checked="checked"> Comprar
+        </label>
+      </div>
+
+       <div class="control-group">
+      <select class="selt" id="monthly_gross" name="monthly_gross">
+        <option value="">Dinero Mensual</option>
+        <option value="500 - 800">500 - 800</option>
+        <option value="850 - 1100">850 - 1100</option>
+        <option value="1100 - 1500">1100 - 1500</option>
+        <option value="1500 - 2000">1500 - 2000</option>
+        <option value="2000 - 2500 ">2000 - 2500 </option>
+        <option value="2500 - 3000 ">2500 - 3000 </option>
+        <option value="3000 - 4000">3000 - 4000</option>
+        <option value="4000 - 6000  ">4000 - 6000  </option>
+        <option value="6000 - 8000">6000 - 8000</option>
+        <option value="8000 - 10000">8000 - 10000</option>
+        <option value="Over 10000">Mayor 10000</option>
+      </select>
+        </div>
+        <div class="control-group">
+      <select class="selt" id="monthly_rent" name="monthly_rent">
+        <option value="">Hipoteca</option>
+        <option value="0 - 499">0 - 499</option>
+        <option value="500 - 800">500 - 800</option>
+        <option value="800 - 1200">800 - 1200</option>
+        <option value="1200 - 1600">1200 - 1600</option>
+        <option value="1600 - 2100">1600 - 2100</option>
+        <option value="2100 - 2500">2100 - 2500</option>
+        <option value="2500 - 3000">2500 - 3000</option>
+        <option value="3500 - 4000">3500 - 4000</option>
+        <option value="4500 - 5000">4500 - 5000</option>
+        <option value="Over 5000">mayor 5000</option>
+      </select>
+       </div>
+      <input class="black" type="text" id="years_in_residence" name="years_in_residence" placeholder="Years In Current Home">
+      <div class="control-group">
+        <span class="type_label">Tipo*</span>
+        <label class="radio inline check">
+          <input type="checkbox" name="co-signer" id="co-signer" value="Self">  Tendo un co-signer
+        </label>
+      </div>
+      <input class="black" type="text" id="salesperson" name="salesperson" placeholder="Salesperson worked with">
+
+      <div class="control-group control2">
+        <button id="b3" type="submit" class="btn-next" disabled="disabled" >Enviar</button>
+        <i id="check3" class="glyphicon glyphicon-ok"></i>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,27 @@
+<h1 id="test-guide">Test Guide</h1>
+<h2 id="functional-test">Functional Test</h2>
+<p>Open <code>./*.html</code> files in Web Browsers.</p>
+<h2 id="unit-test">Unit Test</h2>
+<h3 id="rendering-relevant">Rendering-relevant</h3>
+<p>Our test strategy is to compare the rendered canvas of current version with last release version. The comparison can either based on the <em>content</em> of rendered canvas, or the <em>stack</em> of canvas operations.</p>
+<p>When a test case fails, it doesn&#39;t necessary to be a bug since the rendering method may be changed intentionally in a commit. So in this case, we output the rendering result of both versions and the diff result.</p>
+<p>Make sure <code>../dist/echarts.js</code> is the built based on current source files by:</p>
+<pre><code class="lang-bash">cd ../build
+npm install
+bash build.sh
+</code></pre>
+<p>By default, we compare current version with last release version. To run the test, you should first download last release using:</p>
+<pre><code class="lang-bash">cd ../test/ut
+./configure
+</code></pre>
+<p>which will download <code>echart.js</code> of last release into <code>./ut/tmp/oldEcharts.js</code>.</p>
+<p>Then, open <code>./ut/ui.html</code> in Web Browsers.</p>
+<h4 id="compare-current-with-a-specific-release">Compare current with a specific release</h4>
+<p>If one argument is passed, we take it as the hash code of a release and compare current version with <code>/dist/echarts.js</code> of the that version.</p>
+<pre><code class="lang-bash"># this compares current `/dist/echarts.js` with that of v3.1.6
+./configure 3724a16
+</code></pre>
+<h4 id="compare-arbitrary-two-commits">Compare arbitrary two commits</h4>
+<p>Since <code>/dist/echarts.js</code> is only the build result of release versions, to compare arbitrary versions, you need to checkout specific commits and build the source files. Put the build results as <code>./tmp/oldEcharts.js</code> and <code>./tmp/newEcharts.js</code> will work.</p>
+<h3 id="rendering-irrelevant">Rendering-irrelevant</h3>
+<p>Open <code>./ut.html</code> files in Web Browsers.</p>

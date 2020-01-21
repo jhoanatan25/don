@@ -1,0 +1,31 @@
+{% extends 'base/base_backend.html' %}
+{% block content %}
+{% load image_at %}
+{%if message%}
+<script>
+  swal(
+    'Mensaje',
+    '{{message}}',
+    'info'
+  )
+</script>
+{%endif%}
+<h1>{{client}}'s cars:</h1>
+<div class="templates">
+{% for car in all_cars %}
+<div class="caja-template zoom">
+  <img src="{{cars_photos|image_at:car.id}}">
+    <form class="" action="" method="post">
+      {% csrf_token %}
+    <div class="centrar">
+        <p>{{ car.model.maker}} {{car.model}}</p>
+        <button type="submit" id="delete" name="delete" value="{{car.owner.username}}|{{car.id}}" class="btn btn-danger" > Borrar </button>
+        <button type="submit" id="sold" name="sold" value="{{car.owner.username}}|{{car.id}}" class="btn btn-success" > Marcar como {%if car.sold%}disponible{%else%}comprado{%endif%}  </button>
+        <button type="submit" id="edit" name="edit" value="{{car.owner.username}}|{{car.id}}" class="btn btn-warning" > Editar </button>
+        </div>
+    </form>
+  </div>
+{% endfor %}
+</div>
+{% load replace %}
+{% endblock %}

@@ -1,0 +1,13 @@
+#!/bin/bash
+echo "Uploading to openshift"
+cd ../cars4driver/wsgi/cars4driver
+rm -rf *
+cp -al ~/Documents/Work/domtecno/carsn/* ~/Documents/Work/domtecno/cars4driver/wsgi/cars4driver
+rm -rf venv
+git add -A
+git commit -m "Uploading"
+git push
+cd ~/Documents/domtecno/carsn
+
+
+

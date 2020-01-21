@@ -1,0 +1,53 @@
+<h3 id="installation">Installation</h3>
+<p>You can also use <a href="http://bower.io">bower</a> to install the component:</p>
+<pre><code>$ bower install jquery.easy-pie-chart
+</code></pre><h3 id="jquery">jQuery</h3>
+<p>To use the easy pie chart plugin you need to load the current version of jQuery (&gt; 1.6.4) and the source of the plugin.</p>
+<pre><code class="lang-html">&lt;div class=&quot;chart&quot; data-percent=&quot;73&quot; data-scale-color=&quot;#ffb400&quot;&gt;73%&lt;/div&gt;
+
+&lt;script src=&quot;https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;/path/to/jquery.easy-pie-chart.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+    $(function() {
+        $(&#39;.chart&#39;).easyPieChart({
+            //your options goes here
+        });
+    });
+&lt;/script&gt;
+</code></pre>
+<h3 id="vanilla-js">Vanilla JS</h3>
+<p>If you don&#39;t want to use jQuery, implement the Vanilla JS version without any dependencies.</p>
+<pre><code class="lang-html">&lt;div class=&quot;chart&quot; data-percent=&quot;73&quot;&gt;73%&lt;/div&gt;
+
+&lt;script src=&quot;/path/to/easy-pie-chart.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+    var element = document.querySelector(&#39;.chart&#39;);
+    new EasyPieChart(element, {
+        // your options goes here
+    });
+&lt;/script&gt;
+</code></pre>
+<h3 id="angularjs">AngularJS</h3>
+<pre><code class="lang-html">&lt;div ng-controller=&quot;chartCtrl&quot;&gt;
+    &lt;div easypiechart options=&quot;options&quot; percent=&quot;percent&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script src=&quot;https://ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;../dist/angular.easypiechart.min.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+    var app = angular.module(&#39;app&#39;, [&#39;easypiechart&#39;]);
+    app.controller(&#39;chartCtrl&#39;, [&#39;$scope&#39;, function ($scope) {
+        $scope.percent = 65;
+        $scope.options = {
+            animate:{
+                duration:0,
+                enabled:false
+            },
+            barColor:&#39;#2C3E50&#39;,
+            scaleColor:false,
+            lineWidth:20,
+            lineCap:&#39;circle&#39;
+        };
+    }]);
+&lt;/script&gt;
+</code></pre>

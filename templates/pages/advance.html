@@ -1,0 +1,709 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+	<div class="pages">
+	<!--Script menu -->
+	<script>
+	setTimeout(function(){menu("#car_finder")},500);
+	</script>
+	<!-- content of the page-->
+		<section class="content advace_content">
+			<form action="" class="formulario">
+				<div class="col col-xs-12">
+					<h1>Personaliza los detalles específicos de tu búsqueda.</h1>
+					<h3 class="sub">¿Buscas detalles específicos en un coche? Complete todos los detalles que está buscando y le ahorraremos tiempo mostrándole una búsqueda personalizada con lo que usted especifica.</h3>
+					<img class="banner-img" src="/static/images/banner.png" alt="">
+				</div>
+				<div class="">
+					<div class="col-xs-12 row">
+						<div class="dos col col-sm-6">
+							<h4>Provincias:</h4>
+							<div class="Npd">
+								<select class="dropdown" id="Provincias" name="Provincias">
+									<option value="">Todas las Provincias</option>
+									<option value="Azua">Azua</option>
+									<option value="Bahoruco">Bahoruco</option>
+									<option value="Barahona">Barahona</option>
+									<option value="Dajabón">Dajabón</option>
+									<option value="Distrito_Nacional">Distrito Nacional</option>
+									<option value="Duarte">Duarte</option>
+									<option value="Elías_Piña">Elías Piña</option>
+									<option value="El_Seibo">El Seibo</option>
+									<option value="Espaillat">Espaillat</option>
+									<option value="Hato_Mayor">Hato Mayor</option>
+									<option value="Hermanas_Mirabal">Hermanas Mirabal</option>
+									<option value="Independencia">Independencia</option>
+									<option value="La_Altagracia">La Altagracia</option>
+									<option value="La_Romana">La Romana</option>
+									<option value="La_Vega">La Vega</option>
+									<option value="María_Trinidad_Sánchez">María Trinidad Sánchez</option>
+									<option value="Monseñor_Nouel">Monseñor Nouel</option>
+									<option value="Monte_Cristi">Monte Cristi</option>
+									<option value="Monte_Plata">Monte Plata</option>
+									<option value="Pedernales">Pedernales</option>
+									<option value="Peravia">Peravia</option>
+									<option value="Puerto_Plata">Puerto Plata</option>
+									<option value="Samaná">Samaná</option>
+									<option value="Sánchez_Ramírez">Sánchez Ramírez</option>
+									<option value="San_Cristóbal">San Cristóbal</option>
+									<option value="San_José_de_Ocoa">San José de Ocoa</option>
+									<option value="San_Juan">San Juan</option>
+									<option value="San_Pedro_de_Macorís">San Pedro de Macorís</option>
+									<option value="Santiago">Santiago</option>
+									<option value="Santiago_Rodríguez">Santiago Rodríguez</option>
+									<option value="Santo_Domingo">Santo Domingo</option>
+									<option value="Valverde">Valverde</option>
+								</select>
+							</div>
+						</div>
+						<div class="seletc_smal col col-sm-6">
+							<div class="col col-lg-3 col-sm-6">
+								<h4>Condición:</h4>
+							</div>
+
+							<div class="col col-lg-3 col-sm-6">
+								<input type="checkbox" name="Condition" id="New">
+								<label class="checkbox" for="New">Nuevo</label>
+							</div>
+
+							<div class="col col-lg-3 col-sm-6">
+								<input type="checkbox" name="Condition" id="Used">
+								<label class="checkbox" for="Used">Usado</label>
+							</div>
+
+							<div class="col col-lg-3 col-sm-6">
+								<input type="checkbox" name="Condition" id="Certified">
+								<label class="checkbox" for="Certified">Certificado</label>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="col-xs-6 dropdown">
+							<h3 class="col-xs-12 sin-margin">Marca:</h3>
+							<select class="col-xs-10 col-xs-offset-1" id="make" name="make">
+								<option selected="selected">Marca</option>
+								{% for obj in  makers%}
+								<option value="{{ obj.description }}">{{ obj.description }}</option>
+								{% endfor %}
+							</select>
+						</div>
+						<div class="col-xs-6 dropdown">
+							<h3 class="col-xs-12 sin-margin">Modelo:</h3>
+							<select class="col-xs-10 col-xs-offset-1" id="Model" name="Model">
+								<option value="Model">Modelo</option>
+								<option value="Model 1">Modelo 1</option>
+								<option value="Model 2">Modelo 2</option>
+								<option value="Model 3">Modelo 3</option>
+							</select>
+						</div>
+						<div class="col-xs-6 dropdown">
+							<h3 class="col-xs-12">Trim:</h3>
+		  					<select name="Trim" id="Trim" class="col-xs-10 col-xs-offset-1">
+		  						<option value="Trim">Cualquier Trim</option>
+		  						<option value="Trim1">Trim 1</option>
+		  						<option value="Trim2">Trim 2</option>
+		  						<option value="Trim3">Trim 3</option>
+		  						<option value="Trim4">Trim 4</option>
+		  						<option value="Trim5">Trim 5</option>
+		  					</select>
+	  					</div>
+	  					<div class="col-xs-6 dropdown">
+	  						<h3 class="col-xs-12">Kilometraje:</h3>
+		  					<select name="Mileage" id="Mileage" class="col-xs-10 col-xs-offset-1">
+		  						<option value="Mileage">Cualquier Kilometraje</option>
+		  						<option value="Mileage 1">Debajo 15000</option>
+		  						<option value="Mileage 2">Debajo 30000</option>
+		  						<option value="Mileage 3">Debajo 45000</option>
+		  						<option value="Mileage 5">Debajo 75000</option>
+		  						<option value="Mileage 6">Debajo 100000</option>
+		  						<option value="Mileage 7">Debajo 150000</option>
+		  						<option value="Mileage 8">Debajo 200000</option>
+		  						<option value="Mileage 9">Mas de 200000</option>
+		  					</select>
+	  					</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="col-md-11">
+							<h3 class="col-md-12 text-center price__titulo">Precio:</h3>
+							<select class="price col-md-5" name="price_low" id="price_low">
+								<option selected value="0">0</option>
+								<option value="1000">1000</option>
+								<option value="5000">5000</option>
+								<option value="10000">10000</option>
+								<option value="20000">20000</option>
+								<option value="30000">30000</option>
+								<option value="40000">40000</option>
+								<option value="50000">50000</option>
+								<option value="60000">60000</option>
+								<option value="70000">70000</option>
+								<option value="80000">80000</option>
+								<option value="90000">90000</option>
+								<option value="100000">100000</option>
+							</select>
+							<h4 class="col-md-2 text-center">hasta</h4>
+							<select class="price col-md-5" name="price_high" id="price_high">
+								<option value="1000">1000</option>
+								<option value="5000">5000</option>
+								<option value="10000">10000</option>
+								<option value="20000">20000</option>
+								<option value="30000">30000</option>
+								<option value="40000">40000</option>
+								<option value="50000">50000</option>
+								<option value="60000">60000</option>
+								<option value="70000">70000</option>
+								<option value="80000">80000</option>
+								<option value="90000">90000</option>
+								<option selected value="100000">100000</option>
+							</select>
+						</div>
+						<div class="col-md-11">
+							<h3 class="col-md-12 text-center">Años:</h3>
+							<select class="year col-md-5" name="price_low" id="price_low">
+								<option selected value="2000">2000</option>
+								<option value="2001">2001</option>
+								<option value="2002">2002</option>
+								<option value="2003">2003</option>
+								<option value="2004">2004</option>
+								<option value="2005">2005</option>
+								<option value="2006">2006</option>
+								<option value="2007">2007</option>
+								<option value="2008">2008</option>
+								<option value="2009">2009</option>
+								<option value="2010">2010</option>
+								<option value="2011">2011</option>
+								<option value="2012">2012</option>
+								<option value="2013">2013</option>
+								<option value="2014">2014</option>
+								<option value="2015">2015</option>
+								<option value="2016">2016</option>
+							</select>
+							<h4 class="col-md-2 text-center">hasta</h4>
+							<select class="year col-md-5" name="price_high" id="price_high">
+								<option value="2001">2001</option>
+								<option value="2002">2002</option>
+								<option value="2003">2003</option>
+								<option value="2004">2004</option>
+								<option value="2005">2005</option>
+								<option value="2006">2006</option>
+								<option value="2007">2007</option>
+								<option value="2008">2008</option>
+								<option value="2009">2009</option>
+								<option value="2010">2010</option>
+								<option value="2011">2011</option>
+								<option value="2012">2012</option>
+								<option value="2013">2013</option>
+								<option value="2014">2014</option>
+								<option value="2015">2015</option>
+								<option selected value="2016">2016</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12 style-cars">
+						<h1 class="text-center">Estilo:</h1>
+						<div class="body">
+							<div class="tag1 view">
+								<form class="" action="/search" id="body_forms" method="post">
+								<div class="images">
+								 {% csrf_token %}
+									<input type="hidden" name="type" value="simple">
+									<input type='hidden' id= 'body' name='body' value='' />
+									{% for obj in  body_styles %}
+									<div class="col col-lg-2 col-sm-4 ">
+										<a onclick="submitBodySearch({{obj.id}});"><label class="checkbox" ><img src="{{obj.image.url}}" alt="">{{obj.description}}</label></a>
+									</div>
+									{% if forloop.counter == 6 %}
+									</div>
+									<div id="morecars" class="collapse images">
+									{% endif %}
+									{% endfor %}
+								</div>
+								<span class="btn btn-link show-all" data-toggle="collapse" onclick="show_all()" data-target="#morecars"><hr><p id="text-show-all">Mostrar más<i class="fa fa-chevron-down" aria-hidden="true"></i></p><hr></span>
+							</form>
+						</div>
+						</div>
+					</div>
+				</div>
+				<h1>Especificaciones:</h1>
+				<div class="row">
+					<div class="col-md-3">
+						<h3>Motor:</h3>
+						<div>
+							<div class="dosAdvance">
+								<input type="checkbox" name="Engine" id="Engine1">
+								<label class="checkbox" for="Engine1">3 Cilindros</label>
+							</div>
+
+							<div class="dosAdvance">
+								<input type="checkbox" name="Engine" id="Engine2">
+								<label class="checkbox" for="Engine2">4 Cilindros</label>
+							</div>
+
+							<div class="dosAdvance">
+								<input type="checkbox" name="Engine" id="Engine3">
+								<label class="checkbox" for="Engine3">5 Cilindros</label>
+							</div>
+
+							<div class="dosAdvance">
+								<input type="checkbox" name="Engine" id="Engine4">
+								<label class="checkbox" for="Engine4">6 Cilindros</label>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<h3>Especificaciones</h3>
+						<div>
+							<div class="dosAdvance">
+								<input type="checkbox" name="Fuel_Economy" id="Fuel_Economy1">
+								<label class="checkbox" for="Fuel_Economy1">40+ MPG (Mejor)</label>
+							</div>
+
+							<div class="dosAdvance">
+								<input type="checkbox" name="Fuel_Economy" id="Fuel_Economy2">
+								<label class="checkbox" for="Fuel_Economy2">31 - 40 MPG (Alto)</label>
+							</div>
+
+							<div class="dosAdvance">
+								<input type="checkbox" name="Fuel_Economy" id="Fuel_Economy3">
+								<label class="checkbox" for="Fuel_Economy3">21 - 30 MPG (Promedio)</label>
+							</div>
+
+							<div class="dosAdvance">
+								<input type="checkbox" name="Fuel_Economy" id="Fuel_Economy4">
+								<label class="checkbox" for="Fuel_Economy4">10 - 20 MPG (Bajo)</label>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<h3>Puertas:</h3>
+						<div>
+							<div class="dosAdvance">
+								<input type="checkbox" name="Doors" id="Doors1">
+								<label class="checkbox" for="Doors1">2 Puertas</label>
+							</div>
+
+							<div class="dosAdvance">
+								<input type="checkbox" name="Doors" id="Doors2">
+								<label class="checkbox" for="Doors2">3 Puertas</label>
+							</div>
+
+							<div class="dosAdvance">
+								<input type="checkbox" name="Doors" id="Doors3">
+								<label class="checkbox" for="Doors3">4 Puertas</label>
+							</div>
+
+							<div class="dosAdvance">
+								<input type="checkbox" name="Doors" id="Doors4">
+								<label class="checkbox" for="Doors4">5 Puertas</label>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<h3>Tipo Combustible:</h3>
+						<div>
+							<div class="dosAdvance">
+								<input type="checkbox" name="Full_Type" id="Full_Type1">
+								<label class="checkbox" for="Full_Type1">Gasolina</label>
+							</div>
+
+							<div class="dosAdvance">
+								<input type="checkbox" name="Full_Type" id="Full_Type2">
+								<label class="checkbox" for="Full_Type2">Gasoil</label>
+							</div>
+
+							<div class="dosAdvance">
+								<input type="checkbox" name="Full_Type" id="Full_Type3">
+								<label class="checkbox" for="Full_Type3">Hibrida</label>
+							</div>
+
+							<div class="dosAdvance">
+								<input type="checkbox" name="Full_Type" id="Full_Type4">
+								<label class="checkbox" for="Full_Type4">Electrico</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-3">
+						<h3>Transmisión:</h3>
+						<div>
+
+							<div class="dosAdvance">
+								<input type="checkbox" name="Transmission" id="Transmission1">
+								<label class="checkbox" for="Transmission1">Automatico</label>
+							</div>
+
+							<div class="dosAdvance">
+								<input type="checkbox" name="Transmission" id="Transmission2">
+								<label class="checkbox" for="Transmission2">Manual</label>
+							</div>
+
+						</div>
+					</div>
+					<div class="col-md-3">
+						<h3>Tracción:</h3>
+						<div>
+
+							<div class="dosAdvance">
+								<input type="checkbox" name="Drive" id="Drive1">
+								<label class="checkbox" for="Drive1">Tracción delantera</label>
+							</div>
+
+							<div class="dosAdvance">
+								<input type="checkbox" name="Drive" id="Drive2">
+								<label class="checkbox" for="Drive2">Tracción trasera</label>
+							</div>
+
+							<div class="dosAdvance">
+								<input type="checkbox" name="Drive" id="Drive3">
+								<label class="checkbox" for="Drive3">AWD/4WD</label>
+							</div>
+
+						</div>
+					</div>
+					<div class="col-md-3 more_hide">
+						<h3>Color exterior:</h3>
+						<div class="des" id="External_color_des">
+
+							<div class="dosAdvance">
+								<input type="checkbox" name="External_color" id="External_color1">
+								<label class="checkbox" for="External_color1">Negro</label>
+							</div>
+
+							<div class="dosAdvance">
+								<input type="checkbox" name="External_color" id="External_color2">
+								<label class="checkbox" for="External_color2">Azul</label></a>
+							</div>
+
+							<div class="dosAdvance">
+								<input type="checkbox" name="External_color" id="External_color3">
+								<label class="checkbox" for="External_color3">Marrón</label>
+							</div>
+
+							<div id="External_color_des_more" class="no-view">
+
+								<div class="dosAdvance">
+									<input type="checkbox" name="External_color" id="External_color4">
+									<label class="checkbox" for="External_color4">Dorado</label>
+								</div>
+
+								<div class="dosAdvance">
+									<input type="checkbox" name="External_color" id="External_color5">
+									<label class="checkbox" for="External_color5">Gris</label>
+								</div>
+
+								<div class="dosAdvance">
+									<input type="checkbox" name="External_color" id="External_color6">
+									<label class="checkbox" for="External_color6">Verde</label>
+								</div>
+
+								<div class="dosAdvance">
+									<input type="checkbox" name="External_color" id="External_color7">
+									<label class="checkbox" for="External_color7">Crema</label>
+								</div>
+
+								<div class="dosAdvance">
+									<input type="checkbox" name="External_color" id="External_color8">
+									<label class="checkbox" for="External_color8">Rojo</label>
+								</div>
+
+								<div class="dosAdvance">
+									<input type="checkbox" name="External_color" id="External_color9">
+									<label class="checkbox" for="External_color9">Plateado</label>
+								</div>
+
+								<div class="dosAdvance">
+									<input type="checkbox" name="External_color" id="External_color10">
+									<label class="checkbox" for="External_color10">Blanco</label>
+								</div>
+
+								<div class="dosAdvance">
+									<input type="checkbox" name="External_color" id="External_color11">
+									<label class="checkbox" for="External_color11">Morado</label>
+								</div>
+
+								<div class="dosAdvance">
+									<input type="checkbox" name="External_color" id="External_color12">
+									<label class="checkbox" for="External_color12">Naranja</label></a>
+								</div>
+
+							</div>
+						</div>
+						<a id="External_color_des_more_btn" onclick="more('#External_color_des_more','#External_color_des_more_btn')">Mostrar más</a>
+							<!-- hide-->
+					</div>
+					<div class="col-md-3 more_hide">
+						<h3>Color interior:</h3>
+						<div class="des" id="interior_color_des">
+
+							<div class="dosAdvance">
+								<input type="checkbox" name="interior_color" id="interior_color1">
+								<label class="checkbox" for="interior_color1">Negro</label>
+							</div>
+
+							<div class="dosAdvance">
+								<input type="checkbox" name="interior_color" id="interior_color2">
+								<label class="checkbox" for="interior_color2">Azul</label></a>
+							</div>
+
+							<div class="dosAdvance">
+								<input type="checkbox" name="interior_color" id="interior_color3">
+								<label class="checkbox" for="interior_color3">Marón</label>
+							</div>
+
+							<div id="interior_color_des_more" class="no-view">
+
+								<div class="dosAdvance">
+									<input type="checkbox" name="interior_color" id="interior_color4">
+									<label class="checkbox" for="interior_color4">Dorado</label>
+								</div>
+
+								<div class="dosAdvance">
+									<input type="checkbox" name="interior_color" id="interior_color5">
+									<label class="checkbox" for="interior_color5">Gris</label>
+								</div>
+
+								<div class="dosAdvance">
+									<input type="checkbox" name="interior_color" id="interior_color6">
+									<label class="checkbox" for="interior_color6">Verde</label>
+								</div>
+
+								<div class="dosAdvance">
+									<input type="checkbox" name="interior_color" id="interior_color7">
+									<label class="checkbox" for="interior_color7">Crema</label>
+								</div>
+
+								<div class="dosAdvance">
+									<input type="checkbox" name="interior_color" id="interior_color8">
+									<label class="checkbox" for="interior_color8">Rojo</label>
+								</div>
+
+								<div class="dosAdvance">
+									<input type="checkbox" name="interior_color" id="interior_color9">
+									<label class="checkbox" for="interior_color9">Plateado</label>
+								</div>
+
+								<div class="dosAdvance">
+									<input type="checkbox" name="interior_color" id="interior_color10">
+									<label class="checkbox" for="interior_color10">Blanco</label>
+								</div>
+
+								<div class="dosAdvance">
+									<input type="checkbox" name="interior_color" id="interior_color11">
+									<label class="checkbox" for="interior_color11">Morado</label>
+								</div>
+
+								<div class="dosAdvance">
+									<input type="checkbox" name="interior_color" id="interior_color12">
+									<label class="checkbox" for="interior_color12">Naranja</label></a>
+								</div>
+
+							</div>
+						</div>
+						<a id="interior_color_des_more_btn" onclick="more('#interior_color_des_more','#interior_color_des_more_btn')">Mostrar más</a>
+							<!-- hide-->
+					</div>
+				</div>
+				<h1>Caracteristicas</h1>
+				<div class="row">
+					<div class="col-md-3 more_hide">
+						<h3>Comodidad:</h3>
+						<div class="des" id="Convenience_Comfort_des">
+
+							<div class="dosAdvance">
+								<input type="checkbox" name="Convenience_Comfort" id="Convenience_Comfort1">
+								<label class="checkbox" for="Convenience_Comfort1">Asientos de 3 fila</label>
+							</div>
+
+							<div class="dosAdvance">
+								<input type="checkbox" name="Convenience_Comfort" id="Convenience_Comfort2">
+								<label class="checkbox" for="Convenience_Comfort2">Cámara de respaldo</label>
+							</div>
+
+							<div class="dosAdvance">
+								<input type="checkbox" name="Convenience_Comfort" id="Convenience_Comfort3">
+								<label class="checkbox" for="Convenience_Comfort3">Control de velocidad</label>
+							</div>
+
+						<div id="Convenience_Comfort_des_more" class="no-view">
+
+						<div class="dosAdvance">
+							<input type="checkbox" name="Convenience_Comfort" id="Convenience_Comfort4">
+							<label class="checkbox" for="Convenience_Comfort4">Entrada sin llave</label>
+						</div>
+
+						<div class="dosAdvance">
+							<input type="checkbox" name="Convenience_Comfort" id="Convenience_Comfort5">
+							<label class="checkbox" for="Convenience_Comfort5">Control climatico</label>
+						</div>
+
+						<div class="dosAdvance">
+							<input type="checkbox" name="Convenience_Comfort" id="Convenience_Comfort6">
+							<label class="checkbox" for="Convenience_Comfort6">Cerraduras eléctricas</label>
+						</div>
+
+						<div class="dosAdvance">
+							<input type="checkbox" name="Convenience_Comfort" id="Convenience_Comfort7">
+							<label class="checkbox" for="Convenience_Comfort7">Ventanas eléctricas</label>
+						</div>
+
+						<div class="dosAdvance">
+							<input type="checkbox" name="Convenience_Comfort" id="Convenience_Comfort8">
+							<label class="checkbox" for="Convenience_Comfort8">Controles de dirección</label>
+						</div>
+						</div>
+						</div>
+						<a id="Convenience_Comfort_des_more_btn" onclick="more('#Convenience_Comfort_des_more','#Convenience_Comfort_des_more_btn')">Mostrar más</a>
+							<!-- hide-->
+					</div>
+					<div class="col-md-3 more_hide">
+						<h3>Entretenimiento y Tecnología:</h3>
+						<div class="des" id="Entertainment_Technology_des">
+
+							<div class="dosAdvance">
+								<input type="checkbox" name="Entertainment_Technology" id="Entertainment_Technology1">
+								<label class="checkbox" for="Entertainment_Technology1">Bluetooth, manos libres</label>
+							</div>
+
+							<div class="dosAdvance">
+								<input type="checkbox" name="Entertainment_Technology" id="Entertainment_Technology2">
+								<label class="checkbox" for="Entertainment_Technology2">Reproductor de CD</label>
+							</div>
+
+							<div class="dosAdvance">
+								<input type="checkbox" name="Entertainment_Technology" id="Entertainment_Technology3">
+								<label class="checkbox" for="Entertainment_Technology3">Reproductor de DVD</label>
+							</div>
+
+							<div id="Entertainment_Technology_des_more" class="no-view">
+								<div class="dosAdvance">
+									<input type="checkbox" name="Entertainment_Technology" id="Entertainment_Technology4">
+									<label class="checkbox" for="Entertainment_Technology4">Navegación</label>
+								</div>
+
+							<div class="dosAdvance">
+								<input type="checkbox" name="Entertainment_Technology" id="Entertainment_Technology5">
+								<label class="checkbox" for="Entertainment_Technology5">Audio portátil</label>
+							</div>
+
+							<div class="dosAdvance">
+								<input type="checkbox" name="Entertainment_Technology" id="Entertainment_Technology6">
+								<label class="checkbox" for="Entertainment_Technology6">Audio Premium</label>
+							</div>
+
+							<div class="dosAdvance">
+								<input type="checkbox" name="Entertainment_Technology" id="Entertainment_Technology7">
+								<label class="checkbox" for="Entertainment_Technology7">Sistema de Seguridad</label>
+							</div>
+
+							</div>
+						</div>
+						<a id="Entertainment_Technology_des_more_btn" onclick="more('#Entertainment_Technology_des_more','#Entertainment_Technology_des_more_btn')">Mostrar más</a>
+							<!-- hide-->
+					</div>
+					<div class="col-md-3 more_hide">
+						<h3>Lujos:</h3>
+						<div class="des" id="Luxury_des">
+
+							<div class="dosAdvance">
+								<input type="checkbox" name="Luxury" id="Luxury1">
+								<label class="checkbox" for="Luxury1">Asientos con calefacción</label>
+							</div>
+
+							<div class="dosAdvance">
+								<input type="checkbox" name="Luxury" id="Luxury2">
+								<label class="checkbox" for="Luxury2">Asientos de piel</label>
+							</div>
+
+							<div class="dosAdvance">
+								<input type="checkbox" name="Luxury" id="Luxury3">
+								<label class="checkbox" for="Luxury3">Ruedas Premium</label>
+							</div>
+
+							<div id="Luxury_des_more" class="no-view">
+
+							<div class="dosAdvance">
+								<input type="checkbox" name="Luxury" id="Luxury4">
+								<label class="checkbox" for="Luxury4">Techo solar</label>
+							</div>
+
+							</div>
+						</div>
+						<a id="Luxury_des_more_btn" onclick="more('#Luxury_des_more','#Luxury_des_more_btn')">Mostrar más</a>
+							<!-- hide-->
+					</div>
+					<div class="col-md-3">
+						<h3>Diverso:</h3>
+						<div>
+
+							<div class="dosAdvance">
+								<input type="checkbox" name="Miscellaneous" id="Miscellaneous1">
+								<label class="checkbox" for="Miscellaneous1">Discapacidad Equipada</label>
+							</div>
+
+							<div class="dosAdvance">
+								<input type="checkbox" name="Miscellaneous" id="Miscellaneous2">
+								<label class="checkbox" for="Miscellaneous2">Kit de elevación</label>
+							</div>
+
+							<div class="dosAdvance">
+								<input type="checkbox" name="Miscellaneous" id="Miscellaneous3">
+								<label class="checkbox" for="Miscellaneous3">Enganche de remolque</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-3">
+						<h3>Vendedores:</h3>
+						<div>
+
+							<div class="dosAdvance">
+								<input type="checkbox" name="Sellers" id="Sellers1">
+								<label class="checkbox" for="Sellers1">Solo Distribuidores</label>
+							</div>
+
+							<div class="dosAdvance">
+								<input type="checkbox" name="Sellers" id="Sellers2">
+								<label class="checkbox" for="Sellers2">Solo Vendedores</label>
+							</div>
+
+							<div class="dosAdvance">
+								<input type="checkbox" name="Sellers" id="Sellers3">
+								<label class="checkbox" for="Sellers3">Oferta instantánea en efectivo</label>
+							</div>
+
+						</div>
+					</div>
+					<div class="col-md-3">
+						<h3>Características del listado:</h3>
+						<div>
+
+							<div class="dosAdvance">
+								<input type="checkbox" name="Listing_Features" id="Listing_Features1">
+								<label class="checkbox" for="Listing_Features1">Precio</label>
+							</div>
+
+							<div class="dosAdvance">
+								<input type="checkbox" name="Listing_Features" id="Listing_Features2">
+								<label class="checkbox" for="Listing_Features2">Fotos</label>
+							</div>
+
+							<div class="dosAdvance">
+								<input type="checkbox" name="Listing_Features" id="Listing_Features3">
+								<label class="checkbox" for="Listing_Features3">Oferta instantánea en efectivo</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="buscar_advance">
+					<button type="button" onclick="clic('search.html')" class="btn col-md-offset-5 col-md-2 btn-danger Search">
+					 	<span class="glyphicon glyphicon-search" aria-hidden="true"></span> Buscar
+					</button>	
+				</div>
+
+			</form>
+		</section>
+	</div>
+{% endblock%}

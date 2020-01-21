@@ -1,0 +1,741 @@
+gris_oscuro = #444
+azul_oscuro = #233140
+azul_medio = #2c3e50
+azul =#006e9e
+rojo_vino = rgb(180, 56, 73)
+rojo_trans = rgba(180, 56, 73,0.7)
+azul_marino = #337ab7
+azul_trans = rgba(51, 122, 183, 0.8)
+azul_trans2 = rgba(51, 122, 183, 0.3)
+azul_btn =#19b9e7
+rojo = #d9534f
+gris_claro = #ddd
+rojo_oscuro = #c72931
+barras = #f5f5f5
+action-color = #64dd17
+action-color-hover = #b2ff59
+blanco = #fff
+
+//-----------------------------
+gris_oscuro2 =#4D5C57
+azul_claro =#4EA1B3
+azul_claro_tran =rgba(78, 161, 179, 0.8)
+gris_oscuro3 =#7F7F7F
+
+.breadcrumb
+	margin-top: 8em
+.centrar
+	display flex
+	flex-direction row
+	align-items center
+	justify-content center
+.login-fixed
+	width 100%
+	margin 0
+	padding 0
+	background: gray
+	display none
+	z-index 999999
+	position fixed
+	top 6.5em
+	padding 2em 0
+	.sign-up
+	.sign-in
+		h3
+		h4
+			color white
+		input
+			margin .5em 0
+			padding .5em 2em
+			font-size: 1.2em
+.sell-my-car
+.dealers
+	h3
+		color white
+	a
+		color white
+		font-size: 1.2em
+.line-small
+	width 2px
+	background white
+	height auto
+	margin 15px
+.line-big
+	width 3px
+	background white
+	height auto
+	margin -15px 15px
+.forgot
+	color white
+.btn-danger
+	background rojo_vino
+.title
+	margin-top 1em
+	margin-bottom 0
+	color azul_marino
+	text-shadow 1px 1px 1px black
+	font-size: 3em
+	font-family Lato,sans-serif
+	a
+		margin-top: -0.5em
+.titleC
+	margin-top: 0
+	margin-bottom: 0.5em !important
+
+.carousel-control.left
+.carousel-control.right
+	background-image none
+body
+	a
+		cursor pointer !important
+		&:hover
+			text-decoration none
+
+option
+	padding 1em
+
+.page-outer
+	height: 100%
+	max-width 1550px
+	margin auto
+	background: transparent
+.Npd
+	padding 0
+
+#option
+	display none !important
+
+#margin-left
+	margin-left -1em
+
+#no-top
+	margin-top 1em
+
+.dropdown
+	.btn
+		font-size 14px !important
+	.dropdown-menu
+		li
+			a
+				padding 1em
+				font-size 14px
+
+input
+	font-size 14px !important
+
+header
+	margin 0
+	margin-right 0px !important
+	margin-left 0px !important
+	.head
+		background: gris_oscuro3
+		padding: 1em 3em
+		color: white
+		text-align: right;
+		span
+			margin-left: 1em
+	.navbar-inverse
+		padding 20px 0px 0 0
+		background-color gris_oscuro2
+		border-color rgba(255,255,255,0.9)
+		border-bottom 10px solid azul_claro
+		border-radius: 0
+		border-top: none
+		border-left: none
+		border-right: none
+		position fixed
+		z-index 1000
+		width 100%
+		display flex /*ojo*/
+		.page-outer
+			width: 100%
+			background transparent
+			display flex
+
+		a
+			color white !important
+			font-size 1.2em
+		.active
+			a
+				background-color azul_claro  !important
+				border-color azul_claro  !important
+				color white !important
+		li
+			a
+				&:hover
+					background-color azul_claro_tran  !important
+					border-color azul_claro_tran  !important
+					color white !important
+
+		.navbar-brand
+			padding 0
+			margin-left 0em
+			img
+				width 320px
+				height 90px
+				margin-top -0.9em
+		.navbar-right
+			margin-right 0
+
+		.collapse
+			width 70%
+		.sign-in_sign-up
+			position absolute
+			top 10px
+			right 20px
+			color #337ab7
+			border 0px
+			background transparent
+
+		.navbar-nav
+			display flex
+			height 50px
+			line-height 60px
+			margin 0
+			margin-top 0.3em
+			//overflow-x auto
+			white-space nowrap
+			width 100%
+			&>li
+				&>a
+					padding 0.9em 1.4em !important
+					text-align center
+			&>.open
+				&>a
+					background-color rojo_trans !important
+					color white !important
+		.navbar-toggle
+			background-color azul !important
+			&:hover
+				background-color rojo_trans !important
+
+	.fixed
+		position fixed
+		z-index 10000
+		width 100%
+		top 0
+
+
+
+.trin
+	border-right: 100px solid #428bca
+	border-top: 20px solid #f0ad4e
+	border-bottom: 50px solid #d9534f
+
+.content
+	margin-top: 2em
+	.head
+		background: gris_oscuro3
+		padding: 1em 3em
+		color: white
+		span
+			margin-left: 1em
+		.Npd
+			text-align: center;
+.banner
+	img
+		width: 100%
+		height: 450px
+	.box
+		position: absolute;
+		top: 200px;
+		z-index: 2000;
+		left: 50px;
+		font-weight: 600;
+		color: white;
+		border-top: 3px solid;
+		border-bottom: 3px solid;
+		padding: 1em;
+form
+	margin-top: 1em
+	margin-bottom: 4em
+	padding: 0 2em
+	h1
+	h2
+	h3
+		margin-bottom: 1em
+		text-align: left;
+		margin-top: 1em
+.no-view
+	display: none;
+.view
+	display: block;
+.dos
+	display: flex;
+	margin-bottom: 3em;
+	margin-top: 2em;
+.dropdown
+	h3
+		text-align: center;
+.price2
+	margin-left: 0
+.title
+	margin-top: 1em
+
+	font-size: 3.5em
+	color: azul_claro
+p
+	padding: 1em
+iframe
+	width: 100%
+	padding: 1em
+	
+input[type=checkbox]
+input[type=radio]
+	height: 20px;
+	width: 20px;
+label
+	display: inline-block !important;
+
+
+input[type="radio"]
+input[type="checkbox"]
+	display none
+.chico
+	width: 100px
+label
+	font-weight normal
+	width 185px
+	color black
+	padding 5px 15px 5px 25px
+	display inline-block !important
+	position relative !important
+	font-size 1em
+	cursor pointer
+	-webkit-transition all 0.3s ease
+	-o-transition all 0.3s ease
+	transition all 0.3s ease
+	&:hover
+		background azul_trans2
+		border-radius 5%
+	&.radio
+	&.checkbox
+		&:before
+			content ""
+			width 15px
+			height 15px
+			display inline-block !important
+			background none
+			border 2px solid #647079
+			border-radius 50%
+			position absolute !important
+			left 3px
+			top 8px
+	&.checkbox
+		&:before
+			border-radius 10%
+
+input[type="radio"]:checked + label
+input[type="checkbox"]:checked +label
+	padding 5px 15px
+	background azul_claro
+	color white
+	border-radius 5%
+	&:before
+		display none !important
+.input-group
+	input
+		margin: 0
+select
+input
+	background: transparent;
+	border: 3px solid azul_claro;
+	font-size: 14px;
+	height: 30px;
+	padding: 5px;
+	width: 120px;
+	margin-top: 0.5em
+	margin-bottom: 0.5em
+	margin-left: 1em
+	&:focus
+		outline: none;
+	option
+		color: black
+.cars
+	margin-top: 2em
+.price
+	max-width: 350px
+	margin: auto;
+	margin-top: 0.5em
+	font-size: 1.3em
+	color: rojo_vino
+.priceS
+	font-size: 0.9em
+	text-decoration:line-through
+	position: absolute;
+	left: 130px
+.thumbnail
+	padding: 0
+	max-width: 350px
+	border: 3px solid azul_claro
+	border-radius: 0
+	box-shadow 3px 3px 0px #999
+	margin: auto;
+	img
+		height: 200px
+		width: 100%
+	.caption
+		border-bottom: 3px solid azul_claro
+		text-align: center;
+	a
+		width: 100%
+		color: white
+		background: azul_claro
+		padding: 0.5em 1em;
+		text-align: center;
+		font-size: 1.3em;
+		font-weight: 600;
+		&:hover
+			background: azul_claro_tran
+
+h1
+h2
+h3
+	margin: 0
+
+footer
+	width 100%
+	color #fff !important
+	background-color #f5f5f5
+	.top
+		background white url('/static/images/footer.png') no-repeat center center
+		width 100%
+		height 450px
+		background-size cover
+		max-width 1550px
+		margin auto
+		margin-bottom -150px
+		.contact
+			background red
+			bottom 10%
+			left 10%
+		.redes
+			background red
+			bottom 10%
+			right 10%
+	.footer-above
+		background-color #021739
+		.container
+			width 100%
+			padding 2em 0
+			.footer-col
+				h3
+					margin 1em 0
+				.cont
+					display inline-block
+					margin 0 auto
+					div
+						text-align left
+						span
+							text-align left
+					.lo
+						text-align center
+						margin-top 10px
+				ul
+					margin 1em 0
+					.redes
+						font-size 2em
+						padding 0.4em
+						&:hover
+							color rojo_vino
+				.become
+					font-size 3em
+					color rojo_vino
+					&:hover
+						color azul
+
+
+	.footer-below
+		//padding 25px 0
+		background azul_claro
+		#fecha
+			font-weight normal
+		.titulo
+			    color white
+			    margin-bottom 3px
+			    margin-top 1em
+			    padding 10px 0px 6px
+			    border-bottom 1px solid white
+		p
+			text-align: justify;
+			margin 0
+		.left
+			text-align: left;
+			margin-top: 0.5em
+		.separar
+			padding 1em 0
+		.redes
+			text-align: left
+			font-size: 1.5em
+			a:hover
+				color gray
+		.become-footer
+			text-align: right
+			a
+				font-size: 1.5em
+				text-align: right
+				color:rojo_vino
+				&:hover
+					color gray
+		ul
+			list-style none
+			padding 0
+			margin 0
+			li
+				text-align left
+				margin: 0.5em 0
+				a
+					color white
+					font-size 1.1em
+					&:hover
+						color gray
+				.glyphicon
+					&:before
+						font-size: 1.5em
+		.cont
+			span
+				margin: 10px 0
+	.footer-1
+		background #2a2a2a
+/*--------------------------------reponsive-----------------------------------------*/
+	@media (max-width: 1140px)
+		.content
+			margin-top: 5em
+		header
+			.navbar-collapse
+				position absolute
+				left 0
+				top 60px
+				background white
+				color white
+			.navbar-inverse
+				padding-top 0.5em !important
+				padding-bottom 0.5em !important
+				display block !important
+				.collapse
+					width 100% !important
+					border-top 1px solid black !important
+					margin-top 1em !important
+				.view
+					display block !important
+				.no-view
+					display none !important
+				.navbar-header
+					float none !important
+				.navbar-toggle
+					display block !important
+					z-index 10	!important
+				.navbar-nav
+					flex-direction column !important
+					height 100%	!important
+
+
+	/*---------------------SM--------------------------------*/
+	@media (max-width: 992px)
+		header
+			.navbar-inverse
+				z-index: 10000
+				top 0
+			img
+				width 140px
+				height 30px
+
+		.bottom-box
+			margin-top 10em
+
+		.middle-border
+			display none
+
+		.search_by
+			.body
+				.cont-list
+					.list
+						ul
+							li
+								a
+									font-size 14px
+
+	/*  ----------------------------XS---------------------------------------------*/
+	@media (max-width: 768px)
+		footer
+			.footer-below
+				.left
+					text-align: center;
+		header
+			.navbar-brand
+				img
+					width 350px !important
+					height 80px !important
+					margin-top -1em  !important
+		header
+
+			.navbar-brand
+				padding 0
+				margin-left 1em
+				img
+					width 200px
+					height 50px
+			.navbar-right
+				margin-right 0
+
+			.navbar-nav
+				&>li
+
+					&>a
+						line-height 0px
+			.fixed
+				.navbar-brand
+					img
+						width 250px !important
+						height 70px !important
+						margin-top -0.5em !important
+	@media (max-width: 430px)
+		header
+			.navbar-brand
+				img
+					width 250px !important
+					margin-top -1em !important
+
+	@media (max-width: 345px)
+		header
+			.navbar-brand
+				img
+					width 200px !important
+					height 80px !important
+					margin-top -1em  !important
+
+/*---------------------------------fonts fontello-------------------------------------*/
+
+	@font-face
+		font-family 'fonts'
+		src url('/static/fonts/fontello.eot?27292979')
+		src url('/static/fonts/fontello.eot?27292979#iefix') format('embedded-opentype'),
+		   url('/static/fonts/fontello.woff2?27292979') format('woff2'),
+		   url('/static/fonts/fontello.woff?27292979') format('woff'),
+		   url('/static/fonts/fontello.ttf?27292979') format('truetype'),
+		   url('/static/fonts/fontello.svg?27292979#fontello') format('svg')
+		font-weight normal
+		font-style normal
+
+	@font-face
+		font-family 'Effra'
+		font-style normal
+		font-weight normal
+		src local('Effra'), url('/static/fonts/Effra_Std_Rg.woff') format('woff')
+
+/*---------------------------------Icon-------------------------------------*/
+	.icon-twitter:before
+		font-family fonts
+		content: '\e800'
+
+	.icon-mail:before
+		font-family fonts
+		content: '\e801'
+
+	.icon-user:before
+		font-family fonts
+		content: '\e802'
+
+	.icon-phone:before
+		font-family fonts
+		content: '\e803'
+
+	.icon-facebook:before
+		font-family fonts
+		content: '\e804'
+
+	.icon-flickr:before
+		font-family fonts
+		content: '\e805'
+
+	.icon-gplus:before
+		font-family fonts
+		content: '\e806'
+
+	.icon-instagram:before
+		font-family fonts
+		content: '\e807'
+
+	.icon-whatsapp:before
+		font-family fonts
+		content: '\e808'
+
+	.icon-youtube:before
+		font-family fonts
+		content: '\e809'
+
+	.icon-users:before
+		font-family fonts
+		content: '\e80a'
+
+	.icon-calendar:before
+		font-family fonts
+		content: '\e80b'
+
+	.icon-home:before
+		font-family fonts
+		content: '\e80c'
+
+	.icon-edit:before
+		font-family fonts
+		content: '\e80d'
+
+	.icon-location:before
+		font-family fonts
+		content: '\e80e'
+
+	.icon-paper-plane-empty:before
+		font-family fonts
+		content: '\e80f'
+
+	.icon-clock:before
+		font-family fonts
+		content: '\e810'
+
+	.icon-github-circled:before
+		font-family fonts
+		content: '\e811'
+
+	.icon-skype:before
+		font-family fonts
+		content: '\e812'
+
+	.icon-vine:before
+		font-family fonts
+		content: '\e813'
+
+	::-webkit-scrollbar-track {
+	  background-color: azul_trans2
+	}
+	::-webkit-scrollbar-track-piece {
+	  background-color: rgba(1,1,1,0)
+	}
+	::-webkit-scrollbar {
+	  width: 8px
+	  height: 6px
+	  background-color: rgba(1,1,1,0)
+	}
+	::-webkit-scrollbar-thumb {
+	  background-color: rgba(61,61,61,0.5)
+	}
+/*
+.container {
+	display: flex;
+	flex-direction: row | row-reverse | column | column-reverse;
+	justify-content: flex-start | flex-end | center | space-between | space-around;
+	align-items: flex-start | flex-end | center | baseline | stretch;
+
+	align-content: flex-start | flex-end | center | space-between | space-around | stretch;
+	flex-wrap: nowrap | wrap | wrap-reverse;
+	flex-flow: <‘flex-direction’> || <‘flex-wrap’>
+}
+.item {
+	align-self: auto | flex-start | flex-end | center | baseline | stretch;
+	order: <integer>; //para ordenar los elementos sin importar como esta en el HTML
+	flex-basis: <length> | auto;//le damos un tamaño fijo a un elemento y los demas se ordenan en base a el
+
+	flex-shrink: <number>;
+	flex-grow: <number>;//no tan util para que ocupe el espacio de la suma de los otros elementos
+	flex: none | [ <'flex-grow'> <'flex-shrink'>? || <'flex-basis'> ]
+}
+*/

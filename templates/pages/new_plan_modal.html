@@ -1,0 +1,49 @@
+<div class="container">
+  <div class="modal fade" id="plan_modal" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4>Crear plan nuevo</h4>
+        </div>
+
+        <div class="modal-body">
+          <div class="card-wrapper"></div>
+          <div class="panel panel-default credit-card-box">
+            <div class="panel-body">
+          <form action="/dashboard/plans" method="POST" enctype="multipart/form-data" class="form-inline">
+            <div class="form-group">
+              {% csrf_token %}
+              <div class="row">
+                {{ plan_form.name.label_tag }}
+                {{ plan_form.name.errors }}
+                {{ plan_form.name }}
+              </div>
+              <div class="row">
+                {{ plan_form.image.label_tag }}
+                {{ plan_form.image.errors }}
+                {{ plan_form.image }}
+              </div>
+              <div class="row">
+                {{ plan_form.number_of_cars.label_tag }}
+                {{ plan_form.number_of_cars.errors }}
+                {{ plan_form.number_of_cars }}
+              </div>
+              <div class="row">
+                {{ plan_form.price.label_tag }}
+                {{ plan_form.price.errors }}
+                {{ plan_form.price }}
+              </div>
+            </div>
+            <button  class="btn btn-success submit btn-lg btn-block" type="submit">Agregar</button>
+          </form>
+
+          </div>
+      </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  </div>

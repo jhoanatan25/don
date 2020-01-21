@@ -1,0 +1,529 @@
+{% extends 'themes/A1004/base.html' %}
+{% block content %}
+{% load static %}
+{% load image_at %}
+<script type="text/javascript">
+function changeModels(){
+	var maker = $( "#make option:selected" ).val();
+	$('#year').empty();
+	$('#year').append($('<option>').text("Select model").attr('value', -1));
+	$('#trim').empty();
+	$('#trim').append($('<option>').text("Select model").attr('value', -1));
+	$.ajax({
+	url:'/model',
+	type:'GET',
+	data: 'maker=' + maker,
+	dataType: 'json',
+	success: function( json ) {
+		$('#model').empty();
+		$('#model').append($('<option>').text("Select model").attr('value', -1));
+			$.each(json, function(id, value) {
+					$('#model').append($('<option>').text(value).attr('value', id));
+			});
+	}
+	});
+}
+function addInfo(){
+	var model = $( "#model option:selected" ).val();
+	$('#year').empty();
+	$('#year').append($('<option>').text("Select trim").attr('value', -1));
+	$.ajax({
+		url:'/gettrim',
+		type:'GET',
+		data: 'model=' + model + "&user={{owner}}",
+		dataType: 'json',
+		success: function( json ) {
+			$('#trim').empty();
+			$('#trim').append($('<option>').text("Select trim").attr('value', -1));
+			$.each(json, function(id, value) {
+				console.log(value);
+				$('#trim').append($('<option>').text(value).attr('value', id));
+			});
+		}
+	});
+}
+function bringYears(){
+	var model = $( "#model option:selected" ).val();
+	$.ajax({
+	url:'/getyear',
+	type:'GET',
+	data: 'model=' + model,
+	dataType: 'json',
+	success: function( json ) {
+		$('#year').empty();
+		$('#year').append($('<option>').text("Select year").attr('value', -1));
+			$.each(json, function(id, value) {
+					$('#year').append($('<option>').text(value).attr('value', id));
+			});
+	}
+	});
+}
+function like(id){
+  url = "/like?id=" + id
+  var xmlHttp = new XMLHttpRequest();
+  xmlHttp.onreadystatechange = function(){
+    if (this.readyState == 4 && this.status == 201){
+      alert("Liked!");
+    }
+  };
+  xmlHttp.open("GET", url, true);
+  xmlHttp.send(null);
+}
+</script>
+	<div class="col-xs-12 slider visible-md visible-lg">
+		<img src="{%static 'themes/A1004/img/slider.jpg'%}" alt="">
+		<h3 class="col-xs-12">
+			<div class="col-xs-6 text-left">{{owner.email}}</div>
+			<div class="col-xs-6 text-right">
+				{% if owner.phone%}
+					{{owner.phone}}
+				{% else %}
+					{{owner.cell_phone}}
+				{% endif %}
+			</div>
+		</h3>
+	</div>
+	<section class="busqueda row page-outer col-xs-12">
+		<form class="Search" enctype="multipart/form-data" action="" method="get">
+	    <div class="head page-outer">
+        <div class="Npd col-md-2 col-sm-4">
+            {%if not dealer%}
+            <select class="dropdown" id="milles" name="Make">
+              <option value="0">Marca</option>
+              <option value="1">Marca 2</option>
+              <option value="2">Marca 3</option>
+              <option value="3">Marca 4</option>
+              <option value="4">Marca 5</option>
+              <option value="5">Marca 6</option>
+              <option value="6">Marca 7</option>
+              <option value="7">Marca 8</option>
+              <option value="8">Marca 9</option>
+              <option value="9">Marca 10</option>
+            </select>
+            {% else %}
+              {{ form.makefield.errors }}
+              {{ form.makefield.label_tag }}
+              {{ form.makefield }}
+            {% endif %}
+        </div>
+        <div class="Npd col-md-2 col-sm-4">
+          {%if not dealer%}
+            <select class="dropdown" id="milles" name="Select Model">
+              <option value="0">Modelo</option>
+              <option value="1">Modelo 2</option>
+              <option value="2">Modelo 3</option>
+              <option value="3">Modelo 4</option>
+              <option value="4">Modelo 5</option>
+              <option value="5">Modelo 6</option>
+              <option value="6">Modelo 7</option>
+              <option value="7">Modelo 8</option>
+              <option value="8">Modelo 9</option>
+              <option value="9">Modelo 10</option>
+            </select>
+            {% else %}
+              {{ form.modelfield.errors }}
+              {{ form.modelfield.label_tag }}
+              {{ form.modelfield }}
+            {% endif %}
+        </div>
+        <div class="Npd col-md-2 col-sm-4">
+          {%if not dealer%}
+            <select class="dropdown" id="trim" name="Select Model">
+              <option value="0">Trim</option>
+              <option value="1">Trim 2</option>
+            </select>
+            {% else %}
+              {{ form.trim.errors }}
+              {{ form.trim.label_tag }}
+              {{ form.trim }}
+            {% endif %}
+        </div>
+        <div class="Npd col-md-2 col-sm-4">
+          {%if not dealer%}
+          <select class="dropdown" id="year" name="year">
+            <option value="year">Año</option>
+            <option value="2016">2016</option>
+            <option value="2015">2015</option>
+            <option value="2014">2014</option>
+            <option value="2013">2013</option>
+            <option value="2012">2012</option>
+            <option value="2011">2011</option>
+            <option value="2010">2010</option>
+            <option value="2009">2009</option>
+            <option value="2008">2008</option>
+          </select>
+          {% else %}
+            {{ form.year.errors }}
+            {{ form.year.label_tag }}
+            {{ form.year }}
+          {% endif %}
+        </div>
+        <div class="Npd col-md-2 col-sm-4">
+          <select class="dropdown" id="milles" name="milles">
+            <option value="0">Millas</option>
+            <option value="10">10 Millas</option>
+            <option value="25">25 Millas</option>
+            <option value="50">50 Millas</option>
+            <option value="75">75 Millas</option>
+            <option value="100">100 Millas</option>
+            <option value="200">200 Millas</option>
+            <option value="300">300 Millas</option>
+            <option value="500">500 Millas</option>
+            <option value="0">Otra Milla</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-success Search col col-md-2 col-sm-4" aria-label="center Align">Busqueda</button>
+	    </div>
+	  </form>
+	</section>
+	<div class="cars page-outer row">
+    {%if not dealer%}
+    <div class="col-xs-12 col-sm-6 col-md-3 carro">
+      <div class="thumbnail row">
+        <a href="#"><img src="{%static 'images/smart_fortwo.jpg'%}"></a>
+        <div class="col col-xs-12 caption">
+          <div class="col col-xs-8 texto">
+            <h4>2016</h4>
+            <a href="#"><h4>Toyota Camry XSE</h4></a>
+          </div>
+          <div class="col col-xs-4 price">
+            <h4>$25.000</h4>
+          </div>
+          <div class="col col-xs-12 detail">
+            <a href="#">
+              <p>Ver detalles del vehículo</p>
+            </a>
+          </div>
+          <div class="col col-xs-12 extra">
+            <div class="col col-xs-3">
+              <h5>Automático</h5>
+            </div>
+            <div class="col col-xs-3">
+              <h5>FWD</h5>
+            </div>
+            <div class="col col-xs-3">
+              <h5>Cuero</h5>
+            </div>
+            <div class="col col-xs-3">
+              <h5>Negro</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-3 carro">
+      <div class="thumbnail row">
+        <a href="#"><img src="{%static 'images/smart_fortwo.jpg'%}"></a>
+        <div class="col col-xs-12 caption">
+          <div class="col col-xs-8 texto">
+            <h4>2016</h4>
+            <a href="#"><h4>Toyota Camry XSE</h4></a>
+          </div>
+          <div class="col col-xs-4 price">
+            <h4>$25.000</h4>
+          </div>
+          <div class="col col-xs-12 detail">
+            <a href="#">
+              <p>Ver detalles del vehículo</p>
+            </a>
+          </div>
+          <div class="col col-xs-12 extra">
+            <div class="col col-xs-3">
+              <h5>Automático</h5>
+            </div>
+            <div class="col col-xs-3">
+              <h5>FWD</h5>
+            </div>
+            <div class="col col-xs-3">
+              <h5>Cuero</h5>
+            </div>
+            <div class="col col-xs-3">
+              <h5>Negro</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-3 carro">
+      <div class="thumbnail row">
+        <a href="#"><img src="{%static 'images/smart_fortwo.jpg'%}"></a>
+        <div class="col col-xs-12 caption">
+          <div class="col col-xs-8 texto">
+            <h4>2016</h4>
+            <a href="#"><h4>Toyota Camry XSE</h4></a>
+          </div>
+          <div class="col col-xs-4 price">
+            <h4>$25.000</h4>
+          </div>
+          <div class="col col-xs-12 detail">
+            <a href="#">
+              <p>Ver detalles del vehículo</p>
+            </a>
+          </div>
+          <div class="col col-xs-12 extra">
+            <div class="col col-xs-3">
+              <h5>Automático</h5>
+            </div>
+            <div class="col col-xs-3">
+              <h5>FWD</h5>
+            </div>
+            <div class="col col-xs-3">
+              <h5>Cuero</h5>
+            </div>
+            <div class="col col-xs-3">
+              <h5>Negro</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-3 carro">
+      <div class="thumbnail row">
+        <a href="#"><img src="{%static 'images/smart_fortwo.jpg'%}"></a>
+        <div class="col col-xs-12 caption">
+          <div class="col col-xs-8 texto">
+            <h4>2016</h4>
+            <a href="#"><h4>Toyota Camry XSE</h4></a>
+          </div>
+          <div class="col col-xs-4 price">
+            <h4>$25.000</h4>
+          </div>
+          <div class="col col-xs-12 detail">
+            <a href="#">
+              <p>Ver detalles del vehículo</p>
+            </a>
+          </div>
+          <div class="col col-xs-12 extra">
+            <div class="col col-xs-3">
+              <h5>Automático</h5>
+            </div>
+            <div class="col col-xs-3">
+              <h5>FWD</h5>
+            </div>
+            <div class="col col-xs-3">
+              <h5>Cuero</h5>
+            </div>
+            <div class="col col-xs-3">
+              <h5>Negro</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-3 carro">
+      <div class="thumbnail row">
+        <a href="#"><img src="{%static 'images/smart_fortwo.jpg'%}"></a>
+        <div class="col col-xs-12 caption">
+          <div class="col col-xs-8 texto">
+            <h4>2016</h4>
+            <a href="#"><h4>Toyota Camry XSE</h4></a>
+          </div>
+          <div class="col col-xs-4 price">
+            <h4>$25.000</h4>
+          </div>
+          <div class="col col-xs-12 detail">
+            <a href="#">
+              <p>Ver detalles del vehículo</p>
+            </a>
+          </div>
+          <div class="col col-xs-12 extra">
+            <div class="col col-xs-3">
+              <h5>Automático</h5>
+            </div>
+            <div class="col col-xs-3">
+              <h5>FWD</h5>
+            </div>
+            <div class="col col-xs-3">
+              <h5>Cuero</h5>
+            </div>
+            <div class="col col-xs-3">
+              <h5>Negro</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-3 carro">
+      <div class="thumbnail row">
+        <a href="#"><img src="{%static 'images/smart_fortwo.jpg'%}"></a>
+        <div class="col col-xs-12 caption">
+          <div class="col col-xs-8 texto">
+            <h4>2016</h4>
+            <a href="#"><h4>Toyota Camry XSE</h4></a>
+          </div>
+          <div class="col col-xs-4 price">
+            <h4>$25.000</h4>
+          </div>
+          <div class="col col-xs-12 detail">
+            <a href="#">
+              <p>Ver detalles del vehículo</p>
+            </a>
+          </div>
+          <div class="col col-xs-12 extra">
+            <div class="col col-xs-3">
+              <h5>Automático</h5>
+            </div>
+            <div class="col col-xs-3">
+              <h5>FWD</h5>
+            </div>
+            <div class="col col-xs-3">
+              <h5>Cuero</h5>
+            </div>
+            <div class="col col-xs-3">
+              <h5>Negro</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-3 carro">
+      <div class="thumbnail row">
+        <a href="#"><img src="{%static 'images/smart_fortwo.jpg'%}"></a>
+        <div class="col col-xs-12 caption">
+          <div class="col col-xs-8 texto">
+            <h4>2016</h4>
+            <a href="#"><h4>Toyota Camry XSE</h4></a>
+          </div>
+          <div class="col col-xs-4 price">
+            <h4>$25.000</h4>
+          </div>
+          <div class="col col-xs-12 detail">
+            <a href="#">
+              <p>Ver detalles del vehículo</p>
+            </a>
+          </div>
+          <div class="col col-xs-12 extra">
+            <div class="col col-xs-3">
+              <h5>Automático</h5>
+            </div>
+            <div class="col col-xs-3">
+              <h5>FWD</h5>
+            </div>
+            <div class="col col-xs-3">
+              <h5>Cuero</h5>
+            </div>
+            <div class="col col-xs-3">
+              <h5>Negro</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-3 carro">
+      <div class="thumbnail row">
+        <a href="#"><img src="{%static 'images/smart_fortwo.jpg'%}"></a>
+        <div class="col col-xs-12 caption">
+          <div class="col col-xs-8 texto">
+            <h4>2016</h4>
+            <a href="#"><h4>Toyota Camry XSE</h4></a>
+          </div>
+          <div class="col col-xs-4 price">
+            <h4>$25.000</h4>
+          </div>
+          <div class="col col-xs-12 detail">
+            <a href="#">
+              <p>Ver detalles del vehículo</p>
+            </a>
+          </div>
+          <div class="col col-xs-12 extra">
+            <div class="col col-xs-3">
+              <h5>Automático</h5>
+            </div>
+            <div class="col col-xs-3">
+              <h5>FWD</h5>
+            </div>
+            <div class="col col-xs-3">
+              <h5>Cuero</h5>
+            </div>
+            <div class="col col-xs-3">
+              <h5>Negro</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    {% else %}
+      {%if cars|length > 0%}
+      {% for obj in cars %}
+        <div class="col-xs-12 col-sm-6 col-md-3 carro">
+          <div class="thumbnail row">
+            <a href="/dealer/{{name_page}}/detail/{{obj.id}}"><img src="{{cars_photos|image_at:obj.id}}"></a>
+            <div class="col col-xs-12 caption">
+              <div class="col col-xs-8 texto">
+                <h4>{{obj.model.year}}</h4>
+                <a href="/dealer/{{name_page}}/detail/{{obj.id}}"><h4>{{ obj.model.maker}} {{obj.model}}</h4></a>
+              </div>
+              <div class="col col-xs-4 price">
+                <h4>${{ obj.price}}</h4>
+              </div>
+              <div class="col col-xs-12 detail">
+                <a href="/dealer/{{name_page}}/detail/{{obj.id}}">
+                  <p>Ver detalles del vehículo</p>
+                </a>
+              </div>
+              <div class="col col-xs-12 extra">
+                <div class="col col-xs-3">
+                  <h5>{{ obj.transmission}}</h5>
+                </div>
+                <div class="col col-xs-3">
+                  <h5>{{ obj.drive}}</h5>
+                </div>
+                <div class="col col-xs-3">
+                  <h5>{{ obj.body_s}}</h5>
+                </div>
+                <div class="col col-xs-3">
+                   {% if obj.exterior_color %}
+                  <h5>{{ obj.exterior_color}}</h5>
+                  {% else %}
+                    <h5>None</h5>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+      <div class="row">
+      <form class="col-xs-12 centrar" action="" method="get">
+      <ul class="pagination">
+        {% if current_page  > 1%}
+        <li>
+          <button style="border:none; padding: 10px;" type="submit" id="page" name="page" value="{{current_page|add:'-1'}}" >
+            <span aria-hidden="true">&laquo;</span>
+          </button>
+        </li>
+        {% endif %}
+        {% for i in max_pages_range %}
+          <li>
+          <button
+          {% if forloop.counter == current_page %}
+            class="btn btn-success"
+          {% endif %}
+          style="border:none; padding: 10px;" type="submit" id="page" name="page" value="{{forloop.counter}}" > {{forloop.counter}}</button>
+          </li>
+        {% endfor %}
+        {%else%}
+        <h1>No results :(</h1>
+        {%endif%}
+        {%if get_info%}
+          {%for info_key, info_value in get_info.items%}
+          {%if info_value%}
+            <input type="hidden" name="{{info_key}}" value="{{info_value}}">
+          {%endif%}
+          {%endfor%}
+        {%endif%}
+        {% if current_page < max_pages %}
+        <li>
+          <button style="border:none; padding: 10px;" type="submit" id="page" name="page" value="{{current_page|add:'1'}}" >
+            <span aria-hidden="true">&raquo;</span>
+          </button>
+        </li>
+
+        {% endif %}
+      </ul>
+    </form>
+    </div>
+    {% endif %}
+  </div>
+{% endblock%}

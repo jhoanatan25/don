@@ -1,0 +1,40 @@
+<h3 id="jquery">jQuery</h3>
+<pre><code class="lang-javascript">$(function() {
+    // instantiate the plugin
+    ...
+    // update
+    $(&#39;.chart&#39;).data(&#39;easyPieChart&#39;).update(40);
+    ...
+    // disable animation
+    $(&#39;.chart&#39;).data(&#39;easyPieChart&#39;).disableAnimation();
+    ...
+    // enable animation
+    $(&#39;.chart&#39;).data(&#39;easyPieChart&#39;).enableAnimation();
+});
+</code></pre>
+<h3 id="vanilla-js">Vanilla JS</h3>
+<pre><code class="lang-javascript">// instantiate the plugin
+var chart = new EasyPieChart(element, options);
+// update
+chart.update(40);
+// disable animation
+chart.disableAnimation();
+// enable animation
+chart.enableAnimation();
+</code></pre>
+<h5 id="using-a-gradient">Using a gradient</h5>
+<pre><code class="lang-javascript">new EasyPieChart(element, {
+  barColor: function(percent) {
+    var ctx = this.renderer.ctx();
+    var canvas = this.renderer.canvas();
+    var gradient = ctx.createLinearGradient(0,0,canvas.width,0);
+        gradient.addColorStop(0, &quot;#ffe57e&quot;);
+        gradient.addColorStop(1, &quot;#de5900&quot;);
+    return gradient;
+  }
+});
+</code></pre>
+<h3 id="angularjs">AngularJS</h3>
+<p>For a value binding you need to add the <code>percent</code> attribute and bind it to your controller.</p>
+<h3 id="requirejs">RequireJS</h3>
+<p>When using <a href="http://requirejs.org">RequireJS</a> you can define your own name. Examples can be found in the <code>demo/requirejs.html</code>.</p>

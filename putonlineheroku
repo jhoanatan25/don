@@ -1,0 +1,12 @@
+#!/bin/bash
+echo "Uploading to heroku"
+cd ../timboaltambo
+rm -rf *
+cp -al ~/Documents/Work/domtecno/carsnew/* ~/Documents/Work/domtecno/timboaltambo
+rm -rf venv
+
+git add -A
+git commit -m "Uploading"
+git push
+#cd ~/Documents/domtecno/carsn
+

@@ -1,0 +1,202 @@
+color1 = #3b5999
+color2 = #5D4037
+color3 = #fff
+/*Clases Generales que se repiten*/
+.vertical
+	display flex
+	flex-wrap wrap
+	align-items center
+.zoom
+	transition: 0.5s ease;
+	&:hover
+		transform: scale(1.4)
+.btn
+	background-image none !important
+	background color2
+	border none
+	color white
+/*css etiquetas*/
+header
+	background: color1
+	z-index: 2
+nav
+	@extends .vertical	
+img
+	width: 100%
+	height: auto
+section
+	margin-top 4em
+	padding 0 !important
+footer
+	display flex
+	align-items space-between
+	flex-wrap wrap
+	background: linear-gradient(color1,color1, #222)
+	color color3
+/*BEM (Block, Element, Modific)*/
+.slider
+	position: relative
+	padding 0
+	margin-top -90px
+	h3
+		position: absolute
+		bottom 0
+		color color3
+		background: rgba(0,0,0,0.5)
+		margin-bottom 0
+		padding 0.5em 0
+.iconos
+	font-size: 1.8em
+	text-align: center
+.menu
+	width 75%
+	display flex
+	justify-content space-between
+	li
+		width 12%
+		a
+			color color3
+			padding 10px 0
+			font-size: 1.2em
+	&>li.active>a
+		background color2
+		color color3
+	&>li>a:hover
+		background color3
+		color color1
+aside
+	margin-top 4em
+	padding 0 !important
+	&>div
+		margin 0.5em
+		padding-bottom 1em
+		&>strong
+			margin-bottom 0.5em
+		p
+			margin 0
+	.vertical
+		margin-bottom 1em
+.search-options
+.condition-type
+	ul
+		list-style-type: none
+		li:before
+			content '-'
+.date-time
+	top 0
+	text-align: center
+	
+.title
+	font-size: 1.5em
+	color color3
+	background color1
+	
+.visit
+	.calendar
+		margin-bottom 1em
+	.time
+		margin-bottom 2em
+	.contact-info
+		margin-bottom 2em
+		> form>input
+			margin 0.5em 0
+.customer-tools
+	*
+		padding 0
+	strong
+		text-align: center
+.contact-us-car-finder
+.vehicle-information-car-finder
+	label
+		width 30%
+		text-align: right
+	input
+		width 60%
+		display inline-block
+	span
+		display inline-block
+		font-size: 2em
+		margin-left 1%
+		
+.container-cars
+	> div
+		margin-bottom 2em
+	.box-car
+		padding 0
+		img
+			height: 200px
+			padding 0
+			border-bottom 3px color1 solid
+			margin-bottom 1em
+		h4
+			margin-top 0
+		.price
+			color color1
+			margin-bottom 0
+			margin-top 0
+			font-size 1.4em
+			padding 0.5em 1em 0.5em 15px
+			font-weight: 700
+		.make
+			border none
+			padding 0.5em 1em
+			color color3
+			border color1 solid 1px
+			background color1
+			font-weight: 700
+		.tachado
+			top 120px
+			color color3
+			background color1
+			right 10px
+			position: absolute
+			border-radius 20px
+			font-size 1em
+			text-decoration line-through
+		.oferta
+			top 155px
+			padding 0.2em 0
+			color color1
+			background color3
+			border: solid 2px color1
+			right 10px
+			position: absolute
+			border-radius 20px
+			font-size 1.2em
+.border
+	border 2px solid color1
+			
+/*Footer*/
+.hours
+.contacts-us
+.welcome
+	*
+		padding 0
+.contacts-us>div
+	margin 0.5em 0
+.contacts-us p
+	margin 0
+.address
+.phone-address
+.hours
+.email
+	@extends .vertical
+.hours
+	strong
+	div
+		text-align: center
+.social-media
+	.iconos
+		text-align: center
+		font-size: 2.5em
+.menu-footer
+	display flex
+	justify-content space-between
+	list-style: none
+	width 70%
+	margin 0 auto
+	padding 2em 0
+	font-size: 1.2em
+	li
+		a
+			color color1

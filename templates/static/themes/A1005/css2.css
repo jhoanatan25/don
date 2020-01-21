@@ -1,0 +1,396 @@
+.page-outer {
+  max-width: 1366px;
+  margin: auto;
+}
+.content .Search .centrar {
+  max-width: 1366px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  margin-top: 1em;
+}
+.content .Search .centrar .Npd select {
+  width: 100%;
+  padding: 3px;
+  border: 1px solid #4ea1b3;
+  border-radius: 5px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.content .Search .centrar .Npd label {
+  display: none;
+}
+.content .Search .centrar .btn {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border: 1px solid #4ea1b3;
+}
+.content .cars {
+  max-width: 1366px;
+  margin: auto;
+  margin-top: 2em;
+}
+.content .cars .carro {
+  margin-bottom: 3em;
+}
+.content .cars .carro .thumbnail {
+  max-width: 100%;
+  border: 0;
+  box-shadow: none;
+}
+.content .cars .carro .thumbnail a {
+  background: transparent;
+  padding: 0;
+}
+.content .cars .carro .thumbnail a img {
+  height: 200px;
+}
+.content .cars .carro .thumbnail .caption {
+  border-bottom: 0;
+  height: 100%;
+  padding-left: 0;
+  padding-right: 0;
+}
+.content .cars .carro .thumbnail .caption .texto {
+  text-align: left;
+  padding-left: 0;
+}
+.content .cars .carro .thumbnail .caption .texto a h4 {
+  color: #000;
+  text-align: left;
+}
+.content .cars .carro .thumbnail .caption .price {
+  text-align: center;
+  padding: 1px;
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+  text-shadow: 0 1px 0 #4ea1b3;
+  line-height: 56px;
+  border-left: 12px solid transparent;
+  border-bottom: 35px solid #4ea1b3;
+  height: 0;
+  display: inline-block;
+}
+.content .cars .carro .thumbnail .caption .price .dos {
+  display: flex;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.content .cars .carro .thumbnail .caption .price h4 {
+  color: #fff;
+  font-size: 15px;
+}
+.content .cars .carro .thumbnail .caption .price2 {
+  border-left: 18px solid transparent;
+  border-bottom: 70px solid #4ea1b3;
+}
+.content .cars .carro .thumbnail .caption .detail {
+  padding: 0;
+  border-bottom: 1px solid #4d5c57;
+}
+.content .cars .carro .thumbnail .caption .detail a {
+  color: #4ea1b3;
+  text-align: right;
+}
+.content .cars .carro .thumbnail .caption .detail a p {
+  margin-bottom: 0;
+}
+.content .cars .carro .thumbnail .caption .extra {
+  padding: 0;
+}
+.content .cars .carro .thumbnail .caption .extra h5 {
+  color: #4d5c57;
+  width: 100%;
+}
+.content .cars .carro.special {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+.content .cars .carro.special .thumbnail .caption .price {
+  margin-top: 0;
+}
+.content .cars .carro.special .thumbnail .caption .price .special {
+  font-size: 10px;
+  text-decoration: line-through;
+  margin-right: 0;
+}
+.content .cars .carro.special .thumbnail .caption .price h4 {
+  font-size: 12px;
+  margin-right: 5px;
+}
+.specials {
+  margin-top: 2em;
+}
+.specials .email {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.specials .email .titulo {
+  font-size: 20px;
+  font-weight: 900;
+}
+.specials .email img {
+  width: 100px;
+  height: 100px;
+}
+.specials .email h4 {
+  padding: 0.5em;
+}
+.specials .redes {
+  text-align: center;
+  padding: 1em;
+}
+.specials .redes .titulo {
+  font-weight: 700;
+}
+.specials .redes .icon {
+  margin-top: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.specials .redes img {
+  height: 50px;
+  width: 50px;
+  margin: 2px;
+}
+.specials .redes .redes {
+  font-weight: 700;
+}
+.specials .info h3 {
+  margin: 1em;
+}
+.specials .titulo h3 {
+  background: #4ea1b3;
+  color: #fff;
+  width: 300px;
+  padding: 0.1em 0.5em;
+  font-size: 1.5em;
+  text-align: center;
+  border-radius: 10px 10px 0 0;
+}
+.specials .cen button {
+  width: 100%;
+  background: #4ea1b3;
+  border: 1px solid #4ea1b3;
+  padding: 0.5em;
+}
+.specials form {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+.specials form .input-group {
+  width: 100%;
+  margin-bottom: 10px;
+}
+.specials form .input-group textarea {
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid gris_claro;
+}
+.specials .borde {
+  border-bottom: 1px solid gris_claro;
+  margin-bottom: 1em;
+}
+.specials .cars {
+  margin-top: 0;
+}
+.specials .call .imagen img {
+  width: 100%;
+  height: 80px;
+}
+.specials .call .texto {
+  margin-top: 5px;
+}
+.specials .call .texto h4 {
+  color: #4ea1b3;
+}
+.specials .carros {
+  text-align: center;
+}
+.specials .carros h4 {
+  color: #4d5c57;
+  font-weight: 600;
+}
+.specials .carros img {
+  width: 100%;
+  height: 180px;
+}
+.specials .carros a h4 {
+  color: azul_claro;
+}
+.content_cal {
+  max-width: 320px;
+}
+.content_cal p {
+  position: inherit;
+  color: #000;
+}
+.content_cal .calc_info {
+  margin-top: 5px;
+  padding: 10px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  border: 1px solid #c6c6c6;
+  background-color: #fff;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#e5e5e5));
+  background-image: -webkit-linear-gradient(top, #fff, #e5e5e5);
+  background-image: -moz-linear-gradient(top, #fff, #e5e5e5);
+  background-image: -ms-linear-gradient(top, #fff, #e5e5e5);
+  background-image: -o-linear-gradient(top, #fff, #e5e5e5);
+}
+.content_cal .tabbed_top-header {
+  color: #fff;
+  height: 18px;
+  font-size: 16px;
+  line-height: 18px;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  background: #4ea1b3;
+  border-radius: 5px 5px 0 0;
+  margin: 0;
+}
+.content_cal .form fieldset {
+  padding: 5px;
+  border: 1px solid #c6c6c6;
+  background-color: #ececec;
+  border-radius: 0 0 5px 5px;
+}
+.content_cal .form fieldset input,
+.content_cal .form fieldset select {
+  width: 100%;
+  margin: 0;
+  border: 1px solid #000;
+  background: #fff;
+}
+.content_cal .form fieldset .calculate_button {
+  margin-top: 5px;
+  border: none;
+  background: #4ea1b3;
+  color: #fff;
+}
+.collapse.navbar-collapse.navbar-ex1-collapse {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+}
+.collapse.navbar-collapse.navbar-ex1-collapse .navbar-inverse.sell_or_trade {
+  background: gris_claro;
+  border-bottom: 0;
+  padding-top: 0;
+  padding-bottom: 10px;
+}
+.collapse.navbar-collapse.navbar-ex1-collapse .navbar-nav li {
+  border-left: 1px solid #4d5c57;
+  color: #000 !important;
+}
+.collapse.navbar-collapse.navbar-ex1-collapse .navbar-nav li a {
+  padding: 5px 10px !important;
+  color: #000 !important;
+}
+.collapse.navbar-collapse.navbar-ex1-collapse .navbar-nav li a:hover {
+  background: #4d5c57 !important;
+  color: #fff !important;
+  color: #fff;
+}
+.collapse.navbar-collapse.navbar-ex1-collapse .navbar-nav i {
+  background: #2d54a8;
+  color: #76ff03;
+  padding: 10px;
+  font-size: 18px;
+  top: 0px;
+  margin-left: 10px;
+  display: none;
+}
+.collapse.navbar-collapse.navbar-ex1-collapse .navbar-nav h2 {
+  color: #fcfcfc;
+  line-height: 22px;
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+.collapse.navbar-collapse.navbar-ex1-collapse .navbar-nav h3 {
+  color: #3c75e0;
+  font-size: 15px;
+  margin-bottom: 10px;
+  line-height: 15px;
+  font-weight: normal;
+}
+.collapse.navbar-collapse.navbar-ex1-collapse .navbar-nav input {
+  margin: 5px 0;
+  width: 100%;
+  padding: 5px;
+  background: #fff;
+  border: none;
+}
+.collapse.navbar-collapse.navbar-ex1-collapse .navbar-nav select {
+  border: none;
+}
+.collapse.navbar-collapse.navbar-ex1-collapse .navbar-nav label,
+.collapse.navbar-collapse.navbar-ex1-collapse .navbar-nav span {
+  color: #fff;
+  margin-right: 10px;
+  width: 160px;
+}
+.collapse.navbar-collapse.navbar-ex1-collapse .navbar-nav .radio.inline {
+  display: flex;
+  width: 100%;
+  margin: 0;
+  font-size: 12px;
+}
+.collapse.navbar-collapse.navbar-ex1-collapse .navbar-nav .radio.inline input {
+  width: 45px;
+}
+.collapse.navbar-collapse.navbar-ex1-collapse .navbar-nav .radio.inline.check input {
+  width: 22px;
+}
+.collapse.navbar-collapse.navbar-ex1-collapse .navbar-nav .control-group.control2 {
+  justify-content: flex-start;
+}
+.collapse.navbar-collapse.navbar-ex1-collapse .navbar-nav .control-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.collapse.navbar-collapse.navbar-ex1-collapse .navbar-nav .control-group .selt {
+  width: 100%;
+}
+.collapse.navbar-collapse.navbar-ex1-collapse .navbar-nav .control-group .input.error {
+  width: 160px;
+}
+.collapse.navbar-collapse.navbar-ex1-collapse .navbar-nav .control-group input {
+  width: 45%;
+  margin-left: 10%;
+}
+.collapse.navbar-collapse.navbar-ex1-collapse .navbar-nav .control-group select {
+  width: 45%;
+  height: 34px;
+  margin: 5px 0;
+  background: #fff;
+}
+.collapse.navbar-collapse.navbar-ex1-collapse {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+}
+.collapse.navbar-collapse.navbar-ex1-collapse .navbar-inverse.sell_or_trade {
+  background: gris_claro;
+  border-bottom: 0;
+  padding-top: 0;
+  padding-bottom: 10px;
+}
+.collapse.navbar-collapse.navbar-ex1-collapse .navbar-nav li {
+  border-left: 1px solid #4d5c57;
+  color: #000 !important;
+}
+.collapse.navbar-collapse.navbar-ex1-collapse .navbar-nav li a {
+  padding: 5px 10px !important;
+  color: #000 !important;
+}
+.collapse.navbar-collapse.navbar-ex1-collapse .navbar-nav li a:hover {
+  background: #4d5c57 !important;
+  color: #fff !important;
+}

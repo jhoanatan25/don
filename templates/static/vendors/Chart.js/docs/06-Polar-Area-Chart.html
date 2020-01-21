@@ -1,0 +1,179 @@
+<hr>
+<p>title: Polar Area Chart</p>
+<h2 id="anchor-polar-area-chart">anchor: polar-area-chart</h2>
+<h3 id="introduction">Introduction</h3>
+<p>Polar area charts are similar to pie charts, but each segment has the same angle - the radius of the segment differs depending on the value.</p>
+<p>This type of chart is often useful when we want to show a comparison data similar to a pie chart, but also show a scale of values for context.</p>
+<div class="canvas-holder">
+    <canvas width="250" height="125"></canvas>
+</div>
+
+<h3 id="example-usage">Example Usage</h3>
+<pre><code class="lang-javascript">new Chart(ctx, {
+    data: data,
+    type: &#39;polarArea&#39;,
+    options: options
+});
+</code></pre>
+<h3 id="data-structure">Data Structure</h3>
+<p>The following options can be included in a polar area chart dataset to configure options for that specific dataset.</p>
+<p>Some properties are specified as arrays. The first value applies to the first bar, the second value to the second bar, and so on.</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>data</td>
+<td><code>Array&lt;Number&gt;</code></td>
+<td>The data to plot as bars</td>
+</tr>
+<tr>
+<td>label</td>
+<td><code>String</code></td>
+<td>The label for the dataset which appears in the legend and tooltips</td>
+</tr>
+<tr>
+<td>backgroundColor</td>
+<td><code>Array&lt;Color&gt;</code></td>
+<td>The fill color of the arcs. See <a href="#getting-started-colors">Colors</a></td>
+</tr>
+<tr>
+<td>borderColor</td>
+<td><code>Array&lt;Color&gt;</code></td>
+<td>Arc border color</td>
+</tr>
+<tr>
+<td>borderWidth</td>
+<td><code>Array&lt;Number&gt;</code></td>
+<td>Border width of arcs in pixels</td>
+</tr>
+<tr>
+<td>hoverBackgroundColor</td>
+<td><code>Array&lt;Color&gt;</code></td>
+<td>Arc background color when hovered</td>
+</tr>
+<tr>
+<td>hoverBorderColor</td>
+<td><code>Array&lt;Color&gt;</code></td>
+<td>Arc border color when hovered</td>
+</tr>
+<tr>
+<td>hoverBorderWidth</td>
+<td><code>Array&lt;Number&gt;</code></td>
+<td>Border width of arc when hovered</td>
+</tr>
+</tbody>
+</table>
+<p>An example data object using these attributes is shown below.</p>
+<pre><code class="lang-javascript">var data = {
+    datasets: [{
+        data: [
+            11,
+            16,
+            7,
+            3,
+            14
+        ],
+        backgroundColor: [
+            &quot;#FF6384&quot;,
+            &quot;#4BC0C0&quot;,
+            &quot;#FFCE56&quot;,
+            &quot;#E7E9ED&quot;,
+            &quot;#36A2EB&quot;
+        ],
+        label: &#39;My dataset&#39; // for legend
+    }],
+    labels: [
+        &quot;Red&quot;,
+        &quot;Green&quot;,
+        &quot;Yellow&quot;,
+        &quot;Grey&quot;,
+        &quot;Blue&quot;
+    ]
+};
+</code></pre>
+<p>As you can see, for the chart data you pass in an array of objects, with a value and a colour. The value attribute should be a number, while the color attribute should be a string. Similar to CSS, for this string you can use HEX notation, RGB, RGBA or HSL.</p>
+<h3 id="chart-options">Chart Options</h3>
+<p>These are the customisation options specific to Polar Area charts. These options are merged with the <a href="#global-chart-configuration">global chart configuration options</a>, and form the options of the chart.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>scale</td>
+<td>Object</td>
+<td><a href="#scales">See Scales</a> and <a href="#scales-radial-linear-scale">Defaults for Radial Linear Scale</a></td>
+<td>Options for the one scale used on the chart. Use this to style the ticks, labels, and grid.</td>
+</tr>
+<tr>
+<td><em>scale</em>.type</td>
+<td>String</td>
+<td>&quot;radialLinear&quot;</td>
+<td>As defined in <a href="#scales-radial-linear-scale">&quot;Radial Linear&quot;</a>.</td>
+</tr>
+<tr>
+<td><em>scale</em>.lineArc</td>
+<td>Boolean</td>
+<td>true</td>
+<td>When true, lines are circular.</td>
+</tr>
+<tr>
+<td><em>animation</em>.animateRotate</td>
+<td>Boolean</td>
+<td>true</td>
+<td>If true, will animate the rotation of the chart.</td>
+</tr>
+<tr>
+<td><em>animation</em>.animateScale</td>
+<td>Boolean</td>
+<td>true</td>
+<td>If true, will animate scaling the chart.</td>
+</tr>
+<tr>
+<td><em>legend</em>.<em>labels</em>.generateLabels</td>
+<td>Function</td>
+<td><code>function(data) {}</code></td>
+<td>Returns labels for each the legend</td>
+</tr>
+<tr>
+<td><em>legend</em>.onClick</td>
+<td>Function</td>
+<td>function(event, legendItem) {} `</td>
+<td>Handles clicking an individual legend item</td>
+</tr>
+<tr>
+<td>legendCallback</td>
+<td>Function</td>
+<td><code>function(chart)</code></td>
+<td>Generates the HTML legend via calls to <code>generateLegend</code></td>
+</tr>
+</tbody>
+</table>
+<p>You can override these for your <code>Chart</code> instance by passing a second argument into the <code>PolarArea</code> method as an object with the keys you want to override.</p>
+<p>For example, we could have a polar area chart with a black stroke on each segment like so:</p>
+<pre><code class="lang-javascript">new Chart(ctx, {
+    data: data,
+    type: &quot;polarArea&quot;,
+    options: {
+        elements: {
+            arc: {
+                borderColor: &quot;#000000&quot;
+            }
+        }
+    }
+});
+// This will create a chart with all of the default options, merged from the global config,
+// and the PolarArea chart defaults but this particular instance will have `elements.arc.borderColor` set to `&quot;#000000&quot;`.
+</code></pre>
+<p>We can also change these defaults values for each PolarArea type that is created, this object is available at <code>Chart.defaults.polarArea</code>.</p>

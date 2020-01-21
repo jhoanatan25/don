@@ -1,0 +1,104 @@
+{% extends 'base/base.html' %}
+{% block content %}
+<script>
+  setTimeout(function(){menu("#contact_us")},500);
+</script>
+<div class="contact_us">
+  <div class="tiC">
+    <div class="title">
+  		<h1>Contáctenos</h1>
+  	</div>
+  </div>
+
+
+	<form name="sentMessage" id="contactForm" novalidate class="row">
+    <p class="padd">Necesita ayuda, tiene una pregunta o desea informarse sobre nuestros servicios. Por favor llene el formulario de abajo y le atenderemos lo antes posible.</p>
+		<div class="control-group form-group col-sm-6">
+			<div class="controls">
+				<div class="input-group margin-bottom-sm">
+					<span class="input-group-addon "><i class="fa fa-user fa-fw red" aria-hidden="true"></i></span>
+					<input placeholder="Nombres" type="text" class="form-control" id="name" required data-validation-required-message="required.">
+				</div>
+				<p class="help-block"></p>
+			</div>
+		</div>
+        <div class="control-group form-group col-sm-6">
+			<div class="controls">
+				<div class="input-group margin-bottom-sm">
+					<span class="input-group-addon "><i class="fa fa-user fa-fw red" aria-hidden="true"></i></span>
+					<input  placeholder="Apellidos" type="text" class="form-control" id="name2" required data-validation-required-message="required.">
+				</div>
+				<p class="help-block"></p>
+			</div>
+        </div>
+        <div class="control-group form-group col-sm-6">
+			<div class="controls">
+				<div class="input-group margin-bottom-sm">
+					<span class="input-group-addon"><i class="fa fa-envelope-o fa-fw red" aria-hidden="true"></i></span>
+					<input placeholder="Correo Electronico" type="Email" class="form-control" id="email" required data-validation-required-message="required.">
+				</div>
+			</div>
+        </div>
+        <div class="control-group form-group col-sm-6">
+			<div class="controls">
+				<div class="input-group margin-bottom-sm">
+					<span class="input-group-addon"><i class="fa fa-phone fa-fw red" aria-hidden="true"></i></span>
+					<input placeholder="Teléfono" type="tel" class="form-control" id="phone" required data-validation-required-message="required.">
+				</div>
+			</div>
+        </div>
+        <div class="control-group form-group col-sm-6">
+			<div class="controls">
+				<div class="input-group margin-bottom-sm">
+					<span class="input-group-addon "><i class="fa fa-user fa-fw red" aria-hidden="true"></i></span>
+					<input placeholder="Nombre del Distribuidor" type="text" class="form-control" id="dealer" required data-validation-required-message="required.">
+				</div>
+				<p class="help-block"></p>
+			</div>
+        </div>
+        <div class="control-group form-group col-sm-6">
+			<div class="controls">
+				<div class="input-group margin-bottom-sm">
+					<span style="font-size: 17px" class="input-group-addon "><i class="glyphicon glyphicon-globe red" aria-hidden="true"></i></span>
+					<input placeholder="Sitio Web" type="text" class="form-control" id="web" required data-validation-required-message="required.">
+				</div>
+				<p class="help-block"></p>
+			</div>
+        </div>
+        <div class="control-group form-group " style="padding: 0 1em;">
+			<div class="controls">
+				<div class="input-group margin-bottom-sm">
+					<span class="input-group-addon"><i class="fa fa-file-text-o fa-fw red" aria-hidden="true"></i></span>
+					<textarea placeholder="¿Cómo puede ayudarle?" rows="10" cols="100" class="form-control" id="message" required data-validation-required-message="Please enter your message" maxlength="999" style="resize:none"></textarea>
+				</div>
+			</div>
+        </div>
+        <div id="success"></div>
+        <!-- For success/fail messages -->
+        <div class ="cen">
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </div>
+    </form>
+    <div class="dos">
+        <div class="caja">
+        	<h4 class="end">Comuníquese con nosotros a través de las redes sociales en:</h4>
+        	<div class="redes tam">
+        		<div class="dobles">
+        			<a href="#"><img src="/static/icon/facebook.png" alt="Facebook"></a>
+        			<a href="#"><img src="/static/icon/twitter.ico" alt="Twitter"></a>
+        		</div>
+        		<div class="dobles">
+        			<a href="#"><img src="/static/icon/Instagram.png" alt="Instagram"></a>
+        			<a href="#"><img src="/static/icon/Google.png" alt="Google Plus"></a>
+        		</div>
+        	</div>
+        	<p>Siga con nosotros para mantenerse al día con nuestros últimos eventos y noticias.</p>
+        </div>
+        <div class="caja" >
+        	<h4 class="end">Unete a Dominio.com</h4>
+    		  <div class="tam"><a href="/become"><img src="/static/images/sell.png" alt="Become Dealer"></a></div>
+        	<p>Deje que cada comprador de autos encuentre su inventario en la web con nuestra gran plataforma de distribuidores de última generación.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

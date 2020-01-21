@@ -1,0 +1,304 @@
+<p><img src="http://jqvmap.com/img/logo.png" alt="JQVMap" title="JQVMap"></p>
+<h1 id="creating-custom-maps-for-jqvmaps">Creating Custom Maps for JQVMaps</h1>
+<p>Special thanks again to <a href="http://jvectormap.com">jvectormap</a> for creating the base converter for this.  I have flushed out the documentation a little more for any Python newbies out there ( like myself ).</p>
+<p>Creating maps is actually a bit of work, and should really only be done by those familiar with Python &amp; a Terminal Window, as these are the tools you will need to create maps.  If you are OK with this, here is what you need to know to get started:</p>
+<h2 id="requirements">Requirements</h2>
+<h4 id="overview-">Overview:</h4>
+<p>You will need to have the following installed:</p>
+<ol>
+<li><a href="https://www.python.org/downloads/">Python</a> <em>( 2.7+ )</em></li>
+<li><a href="http://trac.osgeo.org/gdal/wiki/DownloadingGdalBinaries">GDAL</a> <em>( OS Binary )</em></li>
+<li><a href="https://pypi.python.org/pypi/GDAL/">GDAL</a> <em>( Python Package )</em></li>
+<li><a href="https://pypi.python.org/pypi/Shapely/1.2.16">Shapely</a> <em>( Python Package )</em></li>
+<li><a href="http://code.gustavonarea.net/booleano/index.html">Booleano</a> <em>( Python Package )</em></li>
+</ol>
+<h2 id="installing-software-">Installing Software:</h2>
+<h4 id="step-1-">Step #1:</h4>
+<p>Download &amp; Install Python by clicking one of the Download Python buttons on the <a href="https://www.python.org/downloads/">Python Website</a>.  We are using <code>v2.7.10</code>.</p>
+<h4 id="step-2-">Step #2:</h4>
+<p>Open a Terminal window and make sure Python installed correctly by typing the following:</p>
+<pre><code class="lang-bash">which pip
+</code></pre>
+<p>which should return something like ( if it did not, you did not install Python correctly ):</p>
+<pre><code>/Library/Frameworks/Python.framework/Versions/2.7/bin/pip
+</code></pre><p>You may also wish to update PIP to disable upgrade warnings in the future:</p>
+<pre><code class="lang-bash">pip install --upgrade pip
+</code></pre>
+<h4 id="step-3-">Step #3:</h4>
+<p>Now we need to install the <a href="http://trac.osgeo.org/gdal/wiki/DownloadingGdalBinaries">GDAL/OGR binaries</a> and follow the steps they layout for your designated OS.</p>
+<p><strong>OSX:</strong></p>
+<p>Download and install the <a href="http://www.kyngchaos.com/files/software/frameworks/GDAL_Complete-1.11.dmg">GDAL 1.11 Complete</a> Package.</p>
+<p>Alternatively, If you have <a href="http://brew.sh/">Homebew</a> installed, you can run the following, though I personally had issues with it working 100%</p>
+<pre><code class="lang-bash">brew update
+brew install gdal
+</code></pre>
+<p><strong>Windows:</strong></p>
+<p>You should be able to run <a href="http://www.maptools.org/ms4w/index.phtml?page=downloads.html">Maptools</a> custom <a href="http://www.maptools.org/dl/ms4w/ms4w-3.0.6-setup.exe">MS4W installer</a> to get everything you need.</p>
+<h4 id="step-4-">Step #4:</h4>
+<p>With Python &amp; GDAL Binaries installed, we can now install the required Python packages via the following Terminal Commands:</p>
+<pre><code class="lang-bash">sudo easy_install GDAL
+pip install shapely
+pip install booleano
+</code></pre>
+<p>Note: If you have issues installing a Python Package, please visit the links in the Requirements Overview for detailed install instructions.</p>
+<h2 id="downloading-map-sources">Downloading Map Sources</h2>
+<p>Before you can create custom maps, you need to download the vector data from the source.  You will need to use a search engine to find the Shapefile for the map you want to create.  This can usually be done by just searching for something like &quot;New York Shapefile&quot; or &quot;Syria Shapefile&quot; in Google.</p>
+<p>Once you have the Shapefile you want, just download it and copy the unzipped directory of files you want to the <code>./create/source</code> folder in this project.</p>
+<p>If you would like to test the sample map config files we have in this project, you will need to download the following ( which are also good sources for maps in general ):</p>
+<ol>
+<li><p><a href="http://naciscdn.org/naturalearth/packages/natural_earth_vector.zip">SHP/GeoDB Vector Themes</a> from <a href="http://www.naturalearthdata.com/downloads/">Natural Earth</a>.  Unzip the <code>natural_earth_vector.zip</code> file and copy the entire <code>natural_earth_vector</code> folder to the <code>./create/source</code> folder in this project. <strong>TIP:</strong> If you plan on using this source, <code>code_field</code> is <code>iso_a3</code> and <code>name_field</code> is <code>name_long</code>.</p>
+</li>
+<li><p><a href="http://www.gadm.org/country">Global Administrative Areas</a> has an updated Shapefile for pretty much every country.  Just select the <code>Country</code> you want ( for this example, <code>Syria</code> ) and set <code>File format</code> to <code>Shapefile</code> and press the <code>OK</code> button to download.  This will take you to a download page.  Click the <code>download</code> link and save the zip file.  For this example, unzip the <code>SYR_adm_shp.zip</code> file and copy the entire <code>SYR_adm_shp</code> folder to the <code>./create/source</code> folder in this project. <strong>TIP:</strong> If you plan on using this source, <code>code_field</code> is <code>ISO</code> and <code>name_field</code> is <code>NAME_ENGLI</code>.</p>
+</li>
+<li><p><a href="http://www.nyc.gov/html/dcp/download/bytes/nybb_15d.zip">New York - Borough Boundaries (Clipped to Shoreline)</a> from the <a href="http://www.nyc.gov/html/dcp/html/bytes/districts_download_metadata.shtml">NYC.gov</a> website.  Unzip the <code>nybb_15d.zip</code> file and copy the entire <code>nybb_15d</code> folder to the <code>./create/source</code> folder in this project.</p>
+</li>
+</ol>
+<h2 id="creating-maps">Creating Maps</h2>
+<h4 id="setup-environment">Setup Environment</h4>
+<p>As detected by <a href="https://github.com/andreasspeck">@andreasspeck</a> you will need to add the following Environmental Variable to create more complex maps without issues.  In a Terminal Window, run the following command before attempting to create a map:</p>
+<pre><code class="lang-bash">export OGR_ENABLE_PARTIAL_REPROJECTION=TRUE
+</code></pre>
+<p>If you plan on creating multiple maps in the future, you may wish to just add that line above to your profile by editing your <code>.bash_profile</code>, <code>.profile</code> or <code>.zshrc</code> file ( whatever you are using OS ).</p>
+<p>If you choose to edit your profile, make sure you run the source command to add it to your current Terminal session.</p>
+<pre><code class="lang-bash">source .bash_profile
+</code></pre>
+<h4 id="map-configurations">Map Configurations</h4>
+<p>You can create a custom JSON file and save it in the <code>./create/config</code> folder.</p>
+<p>A sample <code>my-map.json</code> configuration file would look something like this:</p>
+<pre><code class="lang-json">[
+  {
+    &quot;name&quot;: &quot;read_data&quot;,
+    &quot;file_name&quot;: &quot;./source/some-folder/some-file.shp&quot;
+  },
+  {
+    &quot;name&quot;: &quot;write_data&quot;,
+    &quot;format&quot;: &quot;jqvmap&quot;,
+    &quot;file_name&quot;: &quot;./output/jquery.vmap.my-map.js&quot;,
+    &quot;params&quot;: {
+      &quot;code_field&quot;: &quot;iso_column&quot;,
+      &quot;name_field&quot;: &quot;name_column&quot;,
+      &quot;name&quot;: &quot;my-map&quot;
+    }
+  }
+]
+</code></pre>
+<p>You will need to pay special attention to what the <code>code_field</code> and <code>name_field</code> parameters are, as these are what are used in the map creator.  These are usually found along side your <code>.shp</code> file as either an <code>.csv</code> file or <code>.xml</code>. You might need to use a DBF Viewer to view the <code>.dbf</code> file if a CSV &amp; XML don&#39;t exists.</p>
+<p>For <code>code_field</code> you are just looking for the column name that has the ISO Code ( 2-3 letters ).</p>
+<p>For <code>name_field</code> you are just looking for the column name that has the ISO Name ( English Name ).</p>
+<p>Once you have created a config file, and set the <code>file_name</code> for <code>read_data</code> and <code>write_data</code>, you can run the following command in a Terminal Window.</p>
+<pre><code class="lang-bash">cd /path/to/jqvmap/create
+python jqvmap.py config/my-map.json
+</code></pre>
+<p>The map creator will output the new JQVMap files into the <code>./create/output</code> folder.</p>
+<h4 id="sample-map-configurations">Sample Map Configurations</h4>
+<p>We have already setup a few custom config files for you to play with. With a Terminal Window open, run the following commands ( make sure to change <code>/path/to/jqvmap</code> to wherever you have this project installed. ):</p>
+<pre><code class="lang-bash">cd /path/to/jqvmap/create
+python jqvmap.py config/continent.json
+python jqvmap.py config/new-york.json
+python jqvmap.py config/syria.json
+</code></pre>
+<h4 id="map-configuration-json-options-">Map Configuration JSON Options:</h4>
+<p>The following are the complete list of JSON configuration options for you to use. Make sure to look at the samples in the config folder to get an idea on how to use these with your map.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Config</th>
+<th>Option</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>read_data</code></td>
+<td></td>
+<td></td>
+<td>Read geometries from GIS data file</td>
+</tr>
+<tr>
+<td></td>
+<td><code>file_name</code></td>
+<td></td>
+<td>The name of the file to read</td>
+</tr>
+<tr>
+<td></td>
+<td><code>longitude0</code></td>
+<td></td>
+<td>Central meridian coordinate</td>
+</tr>
+<tr>
+<td></td>
+<td><code>projection</code></td>
+<td></td>
+<td>The map projection to use, currently implemented projections are <code>merc</code> (Mercator), <code>mill</code> (Miller Cylindrical), <code>aea</code> (Albers Equal Area) &amp; <code>lcc</code> (Lambert Conformal Conic)</td>
+</tr>
+<tr>
+<td><code>write_data</code></td>
+<td></td>
+<td></td>
+<td>Writes geometries to file</td>
+</tr>
+<tr>
+<td></td>
+<td><code>file_name</code></td>
+<td></td>
+<td>The name of the file to write</td>
+</tr>
+<tr>
+<td></td>
+<td><code>format</code></td>
+<td></td>
+<td>Format of data to write, <code>jqvmap</code> for JQVMap compatible format, no value for OGR format</td>
+</tr>
+<tr>
+<td></td>
+<td><code>params</code></td>
+<td></td>
+<td>Hash with parameters to supply to writer, the following parameters are used in case of jqvmap format:</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><code>code_field</code></td>
+<td>Name of field to use as a region code</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><code>name_field</code></td>
+<td>Name of field to use as a region name</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><code>name</code></td>
+<td>Map base name</td>
+</tr>
+<tr>
+<td><code>union</code></td>
+<td></td>
+<td></td>
+<td>Merges geometries with the same value for one field</td>
+</tr>
+<tr>
+<td></td>
+<td><code>by</code></td>
+<td></td>
+<td>The name of the field to merge geometries by</td>
+</tr>
+<tr>
+<td><code>join_data</code></td>
+<td></td>
+<td></td>
+<td>Adds or rewrites properties for geoemtry based on equal values in another field, works similar to JOIN operation from SQL</td>
+</tr>
+<tr>
+<td></td>
+<td><code>data</code></td>
+<td></td>
+<td>This could raw data to join or file name of CSv file with data to load</td>
+</tr>
+<tr>
+<td></td>
+<td><code>fields</code></td>
+<td></td>
+<td>Array describing fields, which data contains</td>
+</tr>
+<tr>
+<td></td>
+<td><code>on</code></td>
+<td></td>
+<td>Field to match to join data</td>
+</tr>
+<tr>
+<td><code>remove</code></td>
+<td></td>
+<td></td>
+<td>Removes geometries and their properties based on logical expression</td>
+</tr>
+<tr>
+<td></td>
+<td><code>where</code></td>
+<td></td>
+<td>Expression to evaluate for each geometry</td>
+</tr>
+<tr>
+<td><code>remove_fields</code></td>
+<td></td>
+<td></td>
+<td>Removes fields and associated properties</td>
+</tr>
+<tr>
+<td></td>
+<td><code>fields</code></td>
+<td></td>
+<td>Array with field names to remove</td>
+</tr>
+<tr>
+<td><code>remove_other_fields</code></td>
+<td></td>
+<td></td>
+<td>Removes all fields and associated properties except the ones provided</td>
+</tr>
+<tr>
+<td></td>
+<td><code>fields</code></td>
+<td></td>
+<td>Array with field names to preserve</td>
+</tr>
+<tr>
+<td><code>buffer</code></td>
+<td></td>
+<td></td>
+<td>Removes (erosion) or adds (dilation) zone around every geoemtry</td>
+</tr>
+<tr>
+<td></td>
+<td><code>distance</code></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><code>resolution</code></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>simplify_adjancent_polygons</code></td>
+<td></td>
+<td></td>
+<td>Simplifies polygons taking topology into account (shared borders remain shared after operation)</td>
+</tr>
+<tr>
+<td></td>
+<td><code>tolerance</code></td>
+<td></td>
+<td>Simplification tolerance</td>
+</tr>
+<tr>
+<td><code>intersect_rect</code></td>
+<td></td>
+<td></td>
+<td>Cuts out everything beyond boubdaries of supplied rectangle</td>
+</tr>
+<tr>
+<td></td>
+<td><code>rect</code></td>
+<td></td>
+<td>Array with four values, defining left-top and right-bottom corners of rectange</td>
+</tr>
+<tr>
+<td><code>remove_small_polygons</code></td>
+<td></td>
+<td></td>
+<td>Removes polygons which area is less than supplied value</td>
+</tr>
+<tr>
+<td></td>
+<td><code>minimal_area</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>

@@ -1,0 +1,741 @@
+{% extends 'base/base_backend.html' %}
+{% block content %}
+{% load humanize %}
+{% load static %}
+    <div class="conten">
+<!-- -------------------------------------Home admin------------------------------ -->
+        {%if is_admin%}
+        <div class="row">
+          <div class="col col-sm-3">
+            <div class="cajas_home grande">
+              <div class="title">
+
+                <img src="{% static 'icon/user.png' %}" alt="">
+              </div>
+              <ul>
+                <li>¡Hola {{ username }}!</li>
+                <li><a href="/dashboard/add_inventory/"><i class="fa fa-car"></i> Su plan actual permite vender {{userobj.cars_to_sell}} vehículos</a></li>
+                <li><a href="/dashboard/Inventory"><i class="fa fa-car"></i> Ha publicado {{cars|length}} vehículos</a></li>
+                <li><a href="/logout">Cerrar sesión</a></li>
+              </ul>
+            </div>
+            <div class="cajas_home">
+              <div class="title">
+
+                <img src="{% static 'icon/printer.png' %}" alt="">Imprimibles y agregar creación
+              </div>
+              <div class="row gp">
+                <div class="col col-sm-6">
+                  <a href="#">
+                    <div class="image">
+
+                      <img src="{% static 'icon/form.png'%}" alt="" />
+                      <p>Administrar formularios</p>
+
+                    </div>
+                  </a>
+                </div>
+                <div class="col col-sm-6">
+                  <a href="#">
+                    <div class="image">
+
+                      <img src="{% static 'icon/marketing.png' %}" alt="" />
+                      <p>Publicidad</p>
+
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col col-sm-6">
+            <div class="cajas_home grande">
+              <div class="title">
+                <img src="{% static 'icon/car.png' %}" alt="">Distribuidores y usuarios
+              </div>
+              <div class="row gp">
+                <div class="col col-sm-2">
+                  <a href="/dashboard/new/dealer">
+                    <div class="image">
+                      <img src="/static/icon/addD.png" alt="" />
+                      <p>Crear usuario</p>
+                    </div>
+                  </a>
+                </div>
+                <div class="col col-sm-2">
+                  <a href="/dashboard/all_users/dealer">
+                    <div class="image">
+                      <img src="{% static 'icon/searchD.png' %}" alt="" />
+                      <p>Búsqueda de distribuidores</p>
+                    </div>
+                  </a>
+                </div>
+                <div class="col col-sm-2">
+                  <a href="/dashboard/add_inventory">
+                    <div class="image">
+                      <img src="{% static 'icon/addcar.png' %}" alt="" />
+                      <p>Agregar inventario</p>
+                    </div>
+                  </a>
+                </div>
+                <div class="col col-sm-2">
+                  <a href="/dashboard/Inventory">
+                    <div class="image">
+                      <img src="{% static 'icon/live.png' %}" alt="" />
+                      <p>Inventario publicado</p>
+                    </div>
+                  </a>
+                </div>
+                <div class="col col-sm-2">
+                  <a href="/dashboard/all_users/dealer/">
+                    <div class="image">
+                      <img src="{% static 'icon/suspended3.png' %}" alt="" />
+                      <p>Distribuidores suspendidos</p>
+                    </div>
+                  </a>
+                </div>
+                <div class="col col-sm-2">
+                  <a href="/dashboard/all_users/dealer/">
+                    <div class="image">
+                      <img src="{% static 'icon/trash.png' %}" alt="" />
+                      <p>Dealers eliminados</p>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div class="row gp">
+                <div class="col col-sm-2">
+                  <a href="/dashboard/new/private">
+                    <div class="image">
+                      <img src="{% static 'icon/addU.png' %}" alt="" />
+                      <p>Agregar usuario privado</p>
+                    </div>
+                  </a>
+                </div>
+                <div class="col col-sm-2">
+                  <a href="/dashboard/all_users/private">
+                    <div class="image">
+                      <img src="{% static 'icon/searchU.png' %}" alt="" />
+                      <p>Búsqueda de usuarios</p>
+                    </div>
+                  </a>
+                </div>
+                <div class="col col-sm-2">
+                  <a href="/dashboard/Inventory">
+                    <div class="image">
+                      <img src="{% static 'icon/searchCar.png' %}" alt="" />
+                      <p>Búsqueda de inventarios</p>
+                    </div>
+                  </a>
+                </div>
+                <div class="col col-sm-2">
+                  <a href="/dashboard/all_users/private/">
+                    <div class="image">
+                      <img src="{% static 'icon/suspended2.png' %}" alt="" />
+                      <p>Usuarios suspendidos</p>
+                    </div>
+                  </a>
+                </div>
+                <div class="col col-sm-2">
+                  <a href="/dashboard/all_users/private/">
+                    <div class="image">
+                      <img src="{% static 'icon/suspended.png' %}" alt="" />
+                      <p>Usuarios eliminados</p>
+                    </div>
+                  </a>
+                </div>
+                <div class="col col-sm-2">
+                  <a href="/dashboard/my_favourites">
+                    <div class="image">
+
+                      <img src="{% static 'icon/like.png' %}" alt="" />
+                      <p>Favoritos</p>
+
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="cajas_home">
+              <div class="title">
+                <img src="{%static 'icon/web.png' %}" alt="">Configuración del sitio
+              </div>
+              <div class="row gp">
+                <div class="col col-sm-2">
+                  <a href="/dashboard/website">
+                    <div class="image">
+                      <img src="{% static 'icon/Setting.png' %}" alt="" />
+                      <p>Configuraciones del sitio</p>
+                    </div>
+                  </a>
+                </div>
+
+                <div class="col col-sm-2">
+
+                  <a href="/dashboard/blog/new">
+                    <div class="image">
+                      <img src="{% static 'icon/blog.png' %}" alt="" />
+                      <p>Manejo del blog</p>
+                    </div>
+                  </a>
+                </div>
+                <div class="col col-sm-2">
+                  <a href="/dashboard/editterms">
+                    <div class="image">
+                      <img src="/static/icon/terms.png" alt="" />
+                      <p>Terms and Conditions</p>
+                    </div>
+                  </a>
+                </div>
+                <div class="col col-sm-2">
+                  <a href="/dashboard/Edit_Company_Information">
+                    <div class="image">
+                      <img src="/static/icon/terms.png" alt="" />
+                      <p>Company Information</p>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col col-sm-3">
+            <div class="cajas_home grande">
+              <div class="title">
+                <img src="{% static 'icon/user.png' %}" alt="">Perfil
+              </div>
+              <div class="row gp">
+                <div class="col col-sm-6">
+                  <a href="/dashboard/profile">
+                    <div class="image">
+                      <img src="{% static 'icon/pencil.png' %}" alt="" />
+                      <p>Editar perfil</p>
+                    </div>
+                  </a>
+                </div>
+                <div class="col col-sm-6">
+                  <a href="#">
+                    <div class="image">
+                      <img src="{% static 'icon/users.png' %}" alt="" />
+                      <p>Administrar usuarios</p>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="cajas_home">
+              <div class="title">
+                <img src="{% static 'icon/social.png' %}" alt="">Redes sociales
+              </div>
+              <div class="row gp social">
+                <div class="col col-sm-2">
+                  <a href="#">
+                    <div class="image social">
+                      <img src="/static/icon/facebook.png" alt="" />
+                    </div>
+                  </a>
+                </div>
+                <div class="col col-sm-2">
+                  <a href="#">
+                    <div class="image social">
+                      <img src="/static/icon/Instagram.png" alt="" />
+                    </div>
+                  </a>
+                </div>
+                <div class="col col-sm-2">
+                  <a href="#">
+                    <div class="image social">
+                      <img src="/static/icon/twitter.ico" alt="" />
+                    </div>
+                  </a>
+                </div>
+                <div class="col col-sm-2">
+                  <a href="#">
+                    <div class="image social">
+                      <img src="/static/icon/Google.png" alt="" />
+                    </div>
+                  </a>
+                </div>
+                <div class="col col-sm-2">
+                  <a href="#">
+                    <div class="image social">
+                      <img src="/static/icon/youtube.png" alt="" />
+                    </div>
+                  </a>
+                </div>
+                <div class="col col-sm-2">
+                  <a href="#">
+                    <div class="image social">
+                      <img src="/static/icon/pinterest.ico" alt="" />
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+<!-- -------------------------------------Home dealer------------------------------ -->
+{%else %}
+  {%if is_dealer%}
+<div class="row">
+  <div class="col col-sm-3">
+    <div class="cajas_home">
+      <div class="title">
+
+        <img src="{% static 'icon/user.png' %}" alt="">
+      </div>
+      <ul>
+        <li>¡Hola {{ username }}!</li>
+        <li><a href="/dashboard/add_inventory/"><i class="fa fa-car"></i> Su plan actual permite vender {{userobj.cars_to_sell}} vehículos</a></li>
+        <li><a href="/dashboard/Inventory"><i class="fa fa-car"></i> Ha publicado {{cars|length}} vehículos</a></li>
+        <li><a href="/logout">Cerrar sesión</a></li>
+      </ul>
+    </div>
+    <div class="cajas_home">
+      <div class="title">
+
+        <img src="{% static 'icon/printer.png' %}" alt="">Imprimibles
+      </div>
+      <div class="row gp">
+        <div class="col col-sm-6">
+          <a href="#">
+            <div class="image">
+
+              <img src="{% static 'icon/form.png' %}" alt="" />
+              <p>Administrar formularios</p>
+            </div>
+          </a>
+        </div>
+        <div class="col col-sm-6">
+          <a href="#">
+            <div class="image">
+
+              <img src="{% static 'icon/marketing.png' %}" alt="" />
+              <p>Publicidad</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col col-sm-6 reponsive__colum">
+    <div class="cajas_home ">
+      <div class="title">
+
+        <img src="{% static 'icon/car.png' %}" alt="">Inventario
+      </div>
+      <div class="row gp">
+        <div class="col col-sm-2">
+          <a href="/dashboard/add_inventory/">
+            <div class="image">
+
+              <img src="{% static 'icon/addcar.png' %}" alt="" />
+              <p>Agregar inventario</p>
+            </div>
+          </a>
+        </div>
+        <div class="col col-sm-2">
+          <a href="/dashboard/Inventory">
+            <div class="image">
+
+              <img src="{% static 'icon/live.png' %}" alt="" />
+              <p>Inventario publicado</p>
+            </div>
+          </a>
+        </div>
+        <div class="col col-sm-2">
+          <a href="/dashboard/sold_inventory">
+            <div class="image">
+
+              <img src="{% static 'icon/sold.png' %}" alt="" />
+              <p>Inventario vendido</p>
+            </div>
+          </a>
+        </div>
+        <div class="col col-sm-2">
+          <a href="/dashboard/Inventory">
+            <div class="image">
+
+              <img src="{% static 'icon/like.png' %}" alt="" />
+              <p>Favoritos</p>
+            </div>
+          </a>
+        </div>
+        <div class="col col-sm-2">
+          <a href="/dashboard/Inventory">
+            <div class="image">
+
+              <img src="{% static 'icon/searchCar.png' %}" alt="" />
+              <p>Búsqueda de inventario</p>
+            </div>
+          </a>
+        </div>
+        <div class="col col-sm-2">
+          <a href="#">
+            <div class="image">
+
+              <img src="{% static 'icon/export.png' %}" alt="" />
+              <p>Exportar inventario</p>
+
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="cajas_home">
+      <div class="title">
+
+        <img src="{% static 'icon/web.png' %}" alt="">Configuración del sitio
+
+      </div>
+      <div class="row gp">
+        <div class="col col-sm-12">
+          <a href="/dashboard/website">
+            <div class="image">
+
+              <img src="{% static 'icon/Setting.png' %}" alt="" />
+              <p>Configuración del sitio</p>
+            </div>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="col col-sm-3">
+    <div class="cajas_home">
+      <div class="title">
+        <img src="/static/icon/user.png" alt="">Profile
+      </div>
+      <div class="row gp">
+        <div class="col col-sm-6">
+          <a href="/dashboard/profile">
+            <div class="image">
+
+              <img src="{% static 'icon/pencil.png' %}" alt="" />
+              <p>Editar perfil</p>
+            </div>
+          </a>
+        </div>
+        <div class="col col-sm-6">
+          <a href="#">
+            <div class="image">
+
+              <img src="{% static 'icon/users.png' %}" alt="" />
+              <p>Administrar usuarios</p>
+
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="cajas_home">
+      <div class="title">
+
+        <img src="{% static 'icon/social.png' %}" alt="">Redes sociales
+
+      </div>
+      <div class="row gp social">
+        <div class="col col-sm-2">
+          <a href="#">
+            <div class="image social">
+              <img src="/static/icon/facebook.png" alt="" />
+            </div>
+          </a>
+        </div>
+        <div class="col col-sm-2">
+          <a href="#">
+            <div class="image social">
+              <img src="/static/icon/Instagram.png" alt="" />
+            </div>
+          </a>
+        </div>
+        <div class="col col-sm-2">
+          <a href="#">
+            <div class="image social">
+              <img src="/static/icon/twitter.ico" alt="" />
+            </div>
+          </a>
+        </div>
+        <div class="col col-sm-2">
+          <a href="#">
+            <div class="image social">
+              <img src="/static/icon/Google.png" alt="" />
+            </div>
+          </a>
+        </div>
+        <div class="col col-sm-2">
+          <a href="#">
+            <div class="image social">
+              <img src="/static/icon/youtube.png" alt="" />
+            </div>
+          </a>
+        </div>
+        <div class="col col-sm-2">
+          <a href="#">
+            <div class="image social">
+              <img src="/static/icon/pinterest.ico" alt="" />
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  {%else%}
+<!-- -------------------------------------Home private seller------------------------------ -->
+<div class="row">
+  <div class="col col-sm-3">
+    <div class="cajas_home">
+      <div class="title">
+        <img src="/static/icon/user.png" alt="">
+      </div>
+      <ul>
+        <li>¡Hola {{ username }}!</li>
+        <li><a href="/dashboard/add_inventory/"><i class="fa fa-car"></i> Su plan actual permite vender {{userobj.cars_to_sell}} vehículos</a></li>
+        <li><a href="/dashboard/Inventory"><i class="fa fa-car"></i> Ha publicado {{cars|length}} vehículos</a></li>
+        <li><a href="/logout">Cerrar sesión</a></li>
+      </ul>
+    </div>
+    <div class="cajas_home">
+      <div class="title">
+
+        <img src="{% static 'icon/printer.png' %}" alt="">Imprimibles y agregar creación
+
+      </div>
+      <div class="row gp rela">
+        <a href="#" class="notD col col-sm-12">
+          <p>Área restrindida para distribuidores.</p>
+          <p><strong>¿Quiere ser distribuidor?</strong></p>
+          <p>Haga click aquí para saber más.</p>
+        </a>
+        <div class="col col-sm-6">
+            <div class="image opaco">
+
+              <img src="{% static 'icon/form.png' %}" alt="" />
+              <p>Administrar formularios</p>
+
+            </div>
+        </div>
+        <div class="col col-sm-6">
+            <div class="image opaco">
+
+              <img src="{% static 'icon/marketing.png' %}" alt="" />
+              <p>Publicidad</p>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col col-sm-6 reponsive__colum">
+    <div class="cajas_home ">
+      <div class="title">
+        <img src="/static/icon/car.png" alt="">Inventario
+      </div>
+      <div class="row gp rela">
+        <a href="#" class="notD right col col-sm-4">
+          <p>Área restrindida para distribuidores.</p>
+          <p><strong>¿Quiere ser distribuidor?</strong></p>
+          <p>Haga click aquí para saber más.</p>
+        </a>
+        <div class="col col-sm-2">
+          <a href="/dashboard/add_inventory/">
+            <div class="image">
+
+              <img src="{% static 'icon/addcar.png' %}" alt="" />
+              <p>Agregar inventario</p>
+
+            </div>
+          </a>
+        </div>
+        <div class="col col-sm-2">
+          <a href="/dashboard/Inventory">
+            <div class="image">
+
+              <img src="{% static 'icon/live.png' %}" alt="" />
+              <p>Inventario publicado</p>
+
+            </div>
+          </a>
+        </div>
+        <div class="col col-sm-2">
+          <a href="/dashboard/sold_inventory">
+            <div class="image">
+
+              <img src="{% static 'icon/sold.png' %}" alt="" />
+              <p>Inventario vendido</p>
+
+            </div>
+          </a>
+        </div>
+        <div class="col col-sm-2">
+          <a href="/dashboard/my_favourites">
+            <div class="image">
+
+              <img src="{% static 'icon/like.png' %}" alt="" />
+              <p>Favoritos</p>
+
+            </div>
+          </a>
+        </div>
+        <div class="col col-sm-2">
+            <div class="image opaco">
+
+              <img src="{% static 'icon/searchCar.png' %}" alt="" />
+              <p>Búsqueda de inventario</p>
+
+            </div>
+        </div>
+        <div class="col col-sm-2">
+            <div class="image opaco">
+
+              <img src="{% static 'icon/export.png' %}" alt="" />
+              <p>Exportar inventario</p>
+
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="cajas_home">
+      <div class="title">
+
+        <img src="{% static 'icon/web.png' %}" alt="">Configuración del sitio
+
+      </div>
+      <div class="row gp rela">
+        <a href="#" class="notD center col col-sm-4">
+          <p>Área restrindida para distribuidores.</p>
+          <p><strong>¿Quiere ser distribuidor?</strong></p>
+          <p>Haga click aquí para saber más.</p>
+        </a>
+        <div class="col col-sm-2">
+          <a href="/dashboard/website">
+            <div class="image opaco">
+
+              <img src="{% static 'icon/Setting.png' %}" alt="" />
+              <p>Configuración del sitio</p>
+            </div>
+          </a>
+        </div>
+        <div class="col col-sm-2">
+          <a href="#">
+            <div class="image opaco">
+
+              <img src="{% static 'icon/analytics.png' %}" alt="" />
+              <p>Análitica</p>
+
+            </div>
+          </a>
+        </div>
+        <div class="col col-sm-2">
+          <a href="#">
+            <div class="image opaco">
+
+              <img src="{% static 'icon/like.png' %}" alt="" />
+              <p>Testimonios y revisiones</p>
+
+            </div>
+          </a>
+        </div>
+        <div class="col col-sm-2">
+          <a href="#">
+            <div class="image opaco">
+
+              <img src="{% static 'icon/seo.png' %}" alt="" />
+              <p>Configuraciones SEO</p>
+
+            </div>
+          </a>
+        </div>
+        <div class="col col-sm-2">
+          <a href="/dashboard/website">
+            <div class="image opaco">
+
+              <img src="{% static 'icon/domain.png' %}" alt="" />
+              <p>Administración de dominio</p>
+
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col col-sm-3">
+    <div class="cajas_home">
+      <div class="title">
+
+        <img src="{% static 'icon/user.png' %}" alt="">Perfil
+
+      </div>
+      <div class="row gp">
+        <div class="col col-sm-12">
+          <a href="/dashboard/profile">
+            <div class="image">
+
+              <img src="{% static 'icon/pencil.png' %}" alt="" />
+              <p>Editar perfil</p>
+
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="cajas_home">
+      <div class="title">
+
+        <img src="{% static 'icon/social.png' %}" alt="">Redes sociales
+
+      </div>
+      <div class="row gp social">
+        <div class="col col-xs-2">
+          <a href="#">
+            <div class="image social">
+              <img src="/static/icon/facebook.png" alt="" />
+            </div>
+          </a>
+        </div>
+        <div class="col col-xs-2">
+          <a href="#">
+            <div class="image social">
+              <img src="/static/icon/Instagram.png" alt="" />
+            </div>
+          </a>
+        </div>
+        <div class="col col-xs-2">
+          <a href="#">
+            <div class="image social">
+              <img src="/static/icon/twitter.ico" alt="" />
+            </div>
+          </a>
+        </div>
+        <div class="col col-xs-2">
+          <a href="#">
+            <div class="image social">
+              <img src="/static/icon/Google.png" alt="" />
+            </div>
+          </a>
+        </div>
+        <div class="col col-xs-2">
+          <a href="#">
+            <div class="image social">
+              <img src="/static/icon/youtube.png" alt="" />
+            </div>
+          </a>
+        </div>
+        <div class="col col-xs-2">
+          <a href="#">
+            <div class="image social">
+              <img src="/static/icon/pinterest.ico" alt="" />
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{%endif %}
+
+{%endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,175 @@
+<hr>
+<p>title: Pie &amp; Doughnut Charts</p>
+<h2 id="anchor-doughnut-pie-chart">anchor: doughnut-pie-chart</h2>
+<h3 id="introduction">Introduction</h3>
+<p>Pie and doughnut charts are probably the most commonly used chart there are. They are divided into segments, the arc of each segment shows the proportional value of each piece of data.</p>
+<p>They are excellent at showing the relational proportions between data.</p>
+<p>Pie and doughnut charts are effectively the same class in Chart.js, but have one different default value - their <code>cutoutPercentage</code>. This equates what percentage of the inner should be cut out. This defaults to <code>0</code> for pie charts, and <code>50</code> for doughnuts.</p>
+<p>They are also registered under two aliases in the <code>Chart</code> core. Other than their different default value, and different alias, they are exactly the same.</p>
+<div class="canvas-holder half">
+    <canvas width="250" height="125"></canvas>
+</div>
+
+<p><div class="canvas-holder half">
+    <canvas width="250" height="125"></canvas>
+</div>
+<br></p>
+<h3 id="example-usage">Example Usage</h3>
+<pre><code class="lang-javascript">// For a pie chart
+var myPieChart = new Chart(ctx,{
+    type: &#39;pie&#39;,
+    data: data,
+    options: options
+});
+</code></pre>
+<pre><code class="lang-javascript">// And for a doughnut chart
+var myDoughnutChart = new Chart(ctx, {
+    type: &#39;doughnut&#39;,
+    data: data,
+    options: options
+});
+</code></pre>
+<h3 id="data-structure">Data Structure</h3>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>data</td>
+<td><code>Array&lt;Number&gt;</code></td>
+<td>The data to plot as bars</td>
+</tr>
+<tr>
+<td>label</td>
+<td><code>String</code></td>
+<td>The label for the dataset which appears in the legend and tooltips</td>
+</tr>
+<tr>
+<td>backgroundColor</td>
+<td><code>Array&lt;Color&gt;</code></td>
+<td>The fill color of the arcs. See <a href="#getting-started-colors">Colors</a></td>
+</tr>
+<tr>
+<td>borderColor</td>
+<td><code>Array&lt;Color&gt;</code></td>
+<td>Arc border color</td>
+</tr>
+<tr>
+<td>borderWidth</td>
+<td><code>Array&lt;Number&gt;</code></td>
+<td>Border width of arcs in pixels</td>
+</tr>
+<tr>
+<td>hoverBackgroundColor</td>
+<td><code>Array&lt;Color&gt;</code></td>
+<td>Arc background color when hovered</td>
+</tr>
+<tr>
+<td>hoverBorderColor</td>
+<td><code>Array&lt;Color&gt;</code></td>
+<td>Arc border color when hovered</td>
+</tr>
+<tr>
+<td>hoverBorderWidth</td>
+<td><code>Array&lt;Number&gt;</code></td>
+<td>Border width of arc when hovered</td>
+</tr>
+</tbody>
+</table>
+<p>An example data object using these attributes is shown below.</p>
+<pre><code class="lang-javascript">var data = {
+    labels: [
+        &quot;Red&quot;,
+        &quot;Blue&quot;,
+        &quot;Yellow&quot;
+    ],
+    datasets: [
+        {
+            data: [300, 50, 100],
+            backgroundColor: [
+                &quot;#FF6384&quot;,
+                &quot;#36A2EB&quot;,
+                &quot;#FFCE56&quot;
+            ],
+            hoverBackgroundColor: [
+                &quot;#FF6384&quot;,
+                &quot;#36A2EB&quot;,
+                &quot;#FFCE56&quot;
+            ]
+        }]
+};
+</code></pre>
+<p>For a pie chart, datasets need to contain an array of data points. The data points should be a number, Chart.js will total all of the numbers and calculate the relative proportion of each. You can also add an array of background colors. The color attributes should be a string. Similar to CSS, for this string you can use HEX notation, RGB, RGBA or HSL.</p>
+<h3 id="chart-options">Chart Options</h3>
+<p>These are the customisation options specific to Pie &amp; Doughnut charts. These options are merged with the <a href="#global-chart-configuration">global chart configuration options</a>, and form the options of the chart.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cutoutPercentage</td>
+<td>Number</td>
+<td>50 - for doughnut, 0 - for pie</td>
+<td>The percentage of the chart that is cut out of the middle.</td>
+</tr>
+<tr>
+<td>rotation</td>
+<td>Number</td>
+<td>-0.5 * Math.PI</td>
+<td>Starting angle to draw arcs from</td>
+</tr>
+<tr>
+<td>circumference</td>
+<td>Number</td>
+<td>2 * Math.PI</td>
+<td>Sweep to allow arcs to cover</td>
+</tr>
+<tr>
+<td><em>animation</em>.animateRotate</td>
+<td>Boolean</td>
+<td>true</td>
+<td>If true, will animate the rotation of the chart.</td>
+</tr>
+<tr>
+<td><em>animation</em>.animateScale</td>
+<td>Boolean</td>
+<td>false</td>
+<td>If true, will animate scaling the Doughnut from the centre.</td>
+</tr>
+<tr>
+<td><em>legend</em>.<em>labels</em>.generateLabels</td>
+<td>Function</td>
+<td><code>function(chart) {}</code></td>
+<td>Returns a label for each item to be displayed on the legend.</td>
+</tr>
+<tr>
+<td><em>legend</em>.onClick</td>
+<td>Function</td>
+<td>function(event, legendItem) {} `</td>
+<td>Handles clicking an individual legend item</td>
+</tr>
+</tbody>
+</table>
+<p>You can override these for your <code>Chart</code> instance by passing a second argument into the <code>Doughnut</code> method as an object with the keys you want to override.</p>
+<p>For example, we could have a doughnut chart that animates by scaling out from the centre like so:</p>
+<pre><code class="lang-javascript">new Chart(ctx,{
+    type:&quot;doughnut&quot;,
+    animation:{
+        animateScale:true
+    }
+});
+// This will create a chart with all of the default options, merged from the global config,
+// and the Doughnut chart defaults but this particular instance will have `animateScale` set to `true`.
+</code></pre>
+<p>We can also change these default values for each Doughnut type that is created, this object is available at <code>Chart.defaults.doughnut</code>. Pie charts also have a clone of these defaults available to change at <code>Chart.defaults.pie</code>, with the only difference being <code>cutoutPercentage</code> being set to 0.</p>

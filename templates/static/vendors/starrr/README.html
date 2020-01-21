@@ -1,0 +1,48 @@
+<h1 id="starrr">starrr</h1>
+<p>1-5 (or 1-<code>n</code>) star rating in &lt; 75 lines of code.</p>
+<h2 id="requirements">Requirements</h2>
+<ul>
+<li>jQuery</li>
+</ul>
+<h2 id="usage">Usage</h2>
+<h3 id="create-the-stars">Create the stars</h3>
+<pre><code class="lang-html">&lt;div class=&#39;starrr&#39;&gt;&lt;/div&gt;
+</code></pre>
+<pre><code class="lang-js">$(&#39;.starrr&#39;).starrr()
+</code></pre>
+<h3 id="with-an-existing-rating">With an existing rating</h3>
+<pre><code class="lang-js">$(&#39;.starrr&#39;).starrr({
+  rating: 4
+})
+</code></pre>
+<h3 id="with-more-than-5-stars">With more than 5 stars</h3>
+<pre><code class="lang-js">$(&#39;.starrr&#39;).starrr({
+  max: 10
+})
+</code></pre>
+<h3 id="read-only">Read-only</h3>
+<pre><code class="lang-js">$(&#39;.starrr&#39;).starrr({
+  readOnly: true
+})
+</code></pre>
+<h3 id="do-something-with-the-rating-">Do something with the rating...</h3>
+<pre><code class="lang-js">$(&#39;.starrr&#39;).starrr({
+  change: function(e, value){
+    alert(&#39;new rating is &#39; + value)
+  }
+})
+</code></pre>
+<p>Or if you prefer events:</p>
+<pre><code class="lang-js">$(&#39;.starrr&#39;).on(&#39;starrr:change&#39;, function(e, value){
+  alert(&#39;new rating is &#39; + value)
+})
+</code></pre>
+<h2 id="developing">Developing</h2>
+<ul>
+<li><code>npm install</code></li>
+<li><code>npm install -g grunt-cli</code></li>
+<li>Make changes in <code>src/</code></li>
+<li>Run <code>grunt</code> to compile them</li>
+</ul>
+<h2 id="license">License</h2>
+<p>MIT</p>

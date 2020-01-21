@@ -1,0 +1,550 @@
+{% extends 'themes/A1019/base.html' %}
+{% block content %}
+{% load static %}
+{% load image_at %}
+<script>
+setTimeout(function(){menu("#inventory")},500);
+</script>
+
+<div id="shareM" class="modal fade bd-example-modal-sm-2 " tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <h1>Compartir</h1>
+      <a href="javascript:facebook()" class="facebook" target="_blank">
+         <i class="fa fa-facebook"></i> Facebook
+     </a>
+
+     <a href="javascript:twitter()" class="twitter" target="_blank">
+         <i class="fa fa-twitter"></i> Twitter
+     </a>
+
+     <a href="javascript:google()" class="googleplus" target="_blank">
+         <i class="fa fa-google-plus"></i> Google+
+     </a>
+      <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+    </div>
+
+  </div>
+</div>
+<div class="content">
+<div class="page-outer">
+<div class="imprimir in">
+  <h2>Vendedor :{{owner.username}}</h2>
+</div>
+<div class="top_men">
+  <a href="javascript:history.back(-1);"><div class="back"><img src="{% static 'icon/arrows.png'%}"> Regresar</div></a>
+  <a href="javascript:window.print()" ><div class="back"><img src="{% static 'icon/printer.png'%}"> Imprimir</div></a>
+  <a href="#" data-toggle="modal" data-target=".bd-example-modal-sm-2"><div class="back"><img src="{% static 'icon/connect.png'%}"> Compartir</div></a>
+  {%if not dealer%}
+  <div class="back">Llamar: <strong>12344566</strong> </div>
+  {%else%}
+  <div class="back">Llamar: <strong>{{owner.phone}}</strong> </div>
+  {%endif%}
+</div>
+
+  <div class="row">
+    <div class="col col-sm-4 pad">
+    {%if not dealer%}
+    <div class="title_caja">
+    </div>
+    Herramientas
+    <div class="body__cajas row">
+        <a  data-toggle="modal" data-target=".bd-example-modal-sm-9">
+            <div class=" box col-md-6">
+                <div class="tex">
+                    <img src="{% static 'icon/time.png'%}">
+                    <p>Agendar Cita</p>
+                </div>
+            </div>
+        </a>
+        <a href="/dealer/{{name_page}}/direction">
+            <div class=" box col-md-6">
+                <div class="tex">
+                    <img src="{% static 'icon/gps.png'%}">
+                    <p>Dirección</p>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="boton_mega">
+      <button type="button" class="btn btn-primary">Pre-Aprovado<i class="glyphicon glyphicon-chevron-right"></i></button>
+    </div>
+    <div class="title_caja">
+      Contactanos
+    </div>
+    <div class="contacto">
+      <div class="grupo"><img src="{% static 'icon/email.png'%}"><p>123113123123 <br> Correo</p></div>
+      <div class="grupo"><img src="{% static 'icon/gps.png'%}"><p>Dirección <br>San Cristobal</p></div>
+    </div>
+    <div class="title_caja title_caja2">
+      ¡Visitanos!
+    </div>
+    <div>
+      <p>Llene los detalles a continuación y háganos saber cuándo le gustaría visitarnos.</p>
+      <div class="input-group">
+        <input type="date" class="form-control">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+      </div>
+      <div class="input-group mtop">
+        <input type="time" class="form-control">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+      </div>
+    </div>
+    <div class="title_caja">
+      Información de Contacto
+    </div>
+    <form   method="post" class="npad">
+      <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+        <input type="text" class="form-control" placeholder="Nombre">
+      </div>
+      <div class="input-group mtop">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+        <input type="text" class="form-control" placeholder="Apellido">
+      </div>
+      <div class="input-group mtop">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+        <input type="email" class="form-control" placeholder="Correo">
+      </div>
+      <div class="input-group mtop">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+        <input type="tel" class="form-control" placeholder="Número">
+      </div>
+      <div class="mtop">
+        <div class="titb">Comentarios</div>
+        <textarea name="name" rows="8" cols="40"></textarea>
+      </div>
+      <div class="boton_mega mtop">
+        <button type="button" class="btn btn-primary">Enviar <i class="glyphicon glyphicon-send"></i></button>
+      </div>
+    </form>
+    {%else%}
+      <div class="title_caja">
+        Herramientas
+      </div>
+      <div class="body__cajas row">
+          <a  data-toggle="modal" data-target=".bd-example-modal-sm-9">
+              <div class=" box col-md-6">
+                  <div class="tex">
+                      <img src="{% static 'icon/time.png'%}">
+                      <p>Agregar Cita</p>
+                  </div>
+              </div>
+          </a>
+          <a href="/dealer/{{name_page}}/direction">
+              <div class=" box col-md-6">
+                  <div class="tex">
+                      <img src="{% static 'icon/gps.png'%}">
+                      <p>Dirección</p>
+                  </div>
+              </div>
+          </a>
+      </div>
+      <div class="boton_mega">
+        <button type="button" class="btn btn-primary">Pre-Aprovado<i class="glyphicon glyphicon-chevron-right"></i></button>
+      </div>
+      <div class="title_caja">
+        Contactanos
+      </div>
+      <div class="contacto">
+        <div class="grupo"><img src="{% static 'icon/email.png'%}"><p>
+          					{% if owner.phone%}
+        		  				{{owner.phone}}
+        	  				{% else %}
+        			  			{{owner.cell_phone}}
+        				  	{% endif %}
+                    <br>
+                     {{owner.email}}
+                   </p></div>
+        <div class="grupo"><img src="{% static 'icon/gps.png'%}"><p>{{owner.username}} address <br>{{owner.address}}</p></div>
+      </div>
+
+      <div class="title_caja title_caja2">
+      </div>
+      !Visitanos¡
+      <div>
+        <p>Llene los detalles a continuación y háganos saber cuándo le gustaría visitarnos.</p>
+        <div class="input-group">
+          <input type="date" class="form-control">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+        </div>
+        <div class="input-group mtop">
+          <input type="time" class="form-control">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+        </div>
+      </div>
+      <div class="title_caja">
+        Información de Contacto
+      </div>
+      <form   method="post" class="npad">
+        <div class="input-group">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+          <input type="text" class="form-control" placeholder="Nombre">
+        </div>
+        <div class="input-group mtop">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+          <input type="text" class="form-control" placeholder="Apellido">
+        </div>
+        <div class="input-group mtop">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+          <input type="email" class="form-control" placeholder="Correo">
+        </div>
+        <div class="input-group mtop">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+          <input type="tel" class="form-control" placeholder="Télefono">
+        </div>
+        <div class="mtop">
+          <div class="titb">Comentarios</div>
+          <textarea name="name" rows="8" cols="40"></textarea>
+        </div>
+        <div class="boton_mega mtop">
+          <button type="button" class="btn btn-primary">Enviar <i class="glyphicon glyphicon-send"></i></button>
+        </div>
+      </form>
+    {%endif%}
+    </div>
+    <div class="col col-sm-8 cars page-outer row">
+      <div class="redes__movil">
+        <a href="{{owner.facebook}}" target="_blank"><img src="{% static 'icon/facebook.png'%}" alt="Facebook"></a>
+        <a href="{{owner.twitter}}" target="_blank"><img src="{% static 'icon/twitter.ico'%}" alt="Twitter"></a>
+        <a href="{{owner.google}}" target="_blank"><img src="{% static 'icon/Instagram.png'%}" alt="Instagram"></a>
+        <a href="{{owner.instagram}}" target="_blank"><img src="{% static 'icon/Google.png'%}" alt="Google Plus"></a>
+      </div>
+      <div class="barra__car col-xs-12">
+        <div class="redes">
+          <a href="{{owner.facebook}}" target="_blank"><img src="{% static 'icon/facebook.png'%}" alt="Facebook"></a>
+          <a href="{{owner.twitter}}" target="_blank"><img src="{% static 'icon/twitter.ico'%}" alt="Twitter"></a>
+          <a href="{{owner.google}}" target="_blank"><img src="{% static 'icon/Instagram.png'%}" alt="Instagram"></a>
+          <a href="{{owner.instagram}}" target="_blank"><img src="{% static 'icon/Google.png'%}" alt="Google Plus"></a>
+        </div>
+
+        <button type="button" class="btn btn-primary dir"><i class="glyphicon glyphicon-map-marker"></i> Dirección</button>
+        <div>
+          <select class="dropdown" id="result" name="result">
+            <option value="1">Resultado por pagina 10</option>
+            <option value="2">Resultado por pagina 20</option>
+            <option value="3">Resultado por pagina 50</option>
+            <option value="4">Resultado por pagina 100</option>
+            </select>
+        </div>
+        <div>
+          <select class="dropdown" id="filter" name="filter">
+              <option value="" >
+                Ordenar por
+              </option>
+              <option
+              {% if filter == 1%}
+                selected="selected"
+              {%endif%}
+              value="1">Fecha: Nuevo a viejo</option>
+              <option
+              {% if filter == 2%}
+                selected="selected"
+              {%endif%}
+              value="2">Fecha: Viejo a Nuevo</option>
+              <option
+              {% if filter == 3%}
+                selected="selected"
+              {%endif%}
+              value="3">Año: Nuevo a Viejo</option>
+              <option
+              {% if filter == 4%}
+                selected="selected"
+              {%endif%}
+              value="4">Año: Viejo a Nuevo</option>
+              <option
+              {% if filter == 5%}
+                selected="selected"
+              {%endif%}
+              value="5">Precio : Alto a Bajo</option>
+              <option
+              {% if filter == 6%}
+                selected="selected"
+              {%endif%}
+              value="6">Precio : Bajo to Alto</option>
+            </select>
+        </div>
+        <div class="right">
+          <button onclick="listas()" id="list" type="button" class="btn__caja btn btn-default active" aria-label="Left Align">
+              <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+          </button>
+          <button onclick="cajas()" id="box" type="button" class="btn__caja btn btn-default inactive " aria-label="Left Align">
+              <span class="glyphicon glyphicon-th" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+
+      {%if not dealer%}
+      <div class="box__cajas__cambiar col-xs-12 carro listado__carros">
+        <div class="thumbnail row listado__carros_si">
+          <a href="#"><img src="{% static 'images/smart_fortwo.jpg'%}"></a>
+          <div class="col col-xs-12 caption">
+            <div class="col col-xs-8 texto">
+              <h4>2016</h4>
+              <a href="#"><h4>Toyota Camry XSE</h4></a>
+            </div>
+            <div class="col col-xs-4 price">
+              <h4>$25.000</h4>
+            </div>
+            <div class="col col-xs-12 detail">
+              <a href="#">
+                <p>Detalles</p>
+              </a>
+            </div>
+            <div class="col col-xs-12 extra">
+              <div class="col col-xs-3">
+                <h5>Automatico</h5>
+              </div>
+              <div class="col col-xs-3">
+                <h5>FWD</h5>
+              </div>
+              <div class="col col-xs-3">
+                <h5>Cuero</h5>
+              </div>
+              <div class="col col-xs-3">
+                <h5>Negro</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-------------------------------------- listadoooo -------------------------------------- -->
+        <div class="row car listado__carros_no">
+        <div class="car__img col col-sm-3">
+            <a target="_blank" href="#"><img src="{% static 'images/smart_fortwo.jpg'%}"></a>
+            </div>
+        <div class="car__info col col-sm-7 row">
+          <h3 class="col col-sm-12"><a class="ver" target="_blank" href="#">Carro</a>
+          </h3>
+          <div class="row col col-sm-8 car__info-caracteristicas" id="1">
+            <div class="row col col-sm-6">
+              <strong class="col col-sm-8">Condición:</strong>
+              <p class="col col-sm-4 ">Nuevo</p>
+              <strong class="col col-sm-8 ">Km:</strong>
+              <p class="col col-sm-4 ">100</p>
+              <strong class="col col-sm-8 ">Combustible:</strong>
+              <p class="col col-sm-4 ">Flex Fuel</p>
+              <strong class="col col-sm-8 ">Tranmisión:</strong>
+              <p class="col col-sm-4 ">Automatico</p>
+            </div>
+            <div class="row col col-sm-6">
+              <strong class="col col-sm-8">Estilo:</strong>
+              <p class="col col-sm-4 ">Coupe</p>
+              <strong class="col col-sm-8">Tración: </strong>
+              <p class="col col-sm-4 ">Tración Delantera</p>
+              <strong class="col col-sm-8">Color Esterior:</strong>
+              <p class="col col-sm-4 ">Naranja</p>
+              <strong class="col col-sm-8">Color Interior:</strong>
+              <p class="col col-sm-4 ">Negro</p>
+            </div>
+          </div>
+          <div class="col col-sm-4 car__info-description no-list">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          </div>
+          <div class="row col col-sm-12 car__links">
+            <a target="_blank" href="#" class="col col-sm-7" style="text-align:center;">Detalles</a>
+            <a target="_blank" href="#" class="col col-sm-5" style="text-align:center;">Vendedor</a>
+          </div>
+        </div>
+
+        <div class="car__dealer col-sm-2">
+
+          <p class="col col-sm-12">Precio: <strong class="tachar">$ 3,000</strong></p>
+          <p class="col col-sm-12"><strong>Oferta $ 1,200</strong></p>
+            <div class="car__dealer__caja"><img src="{% static 'icon/hand.png'%}"></div>
+            <a data-toggle="modal" data-target=".bd-example2-modal-sm">Tu Oferta</a>
+        </div>
+
+      </div>
+        <!-------------------------------------- listadoooo -------------------------------------- -->
+      </div>
+
+      {% else %}
+        <!-------------------------------------- parte dealer -------------------------------------- -->
+        {% for obj in cars %}
+        <div class="box__cajas__cambiar col-xs-12 carro listado__carros">
+          <div class="thumbnail row listado__carros_si">
+          <a href="/dealer/{{name_page}}/detail/{{obj.id}}"><img src="{{cars_photos|image_at:obj.id}}"></a>
+          <div class="col col-xs-12 caption">
+            <div class="col col-xs-8 texto">
+              <h4>{{obj.model.year}}</h4>
+              <a href="/dealer/{{name_page}}/detail/{{obj.id}}"><h4>{{ obj.model.maker}} {{obj.model}}</h4></a>
+            </div>
+            <div class="col col-xs-4 price">
+              <h4>${{ obj.price}}</h4>
+            </div>
+            <div class="col col-xs-12 detail">
+              <a href="/dealer/{{name_page}}/detail/{{obj.id}}">
+                <p>Detalles</p>
+              </a>
+            </div>
+            <div class="col col-xs-12 extra">
+              <div class="col col-xs-3">
+                <h5>{{ obj.transmission}}</h5>
+              </div>
+              <div class="col col-xs-3">
+                <h5>{{ obj.drive}}</h5>
+              </div>
+              <div class="col col-xs-3">
+                <h5>{{ obj.body_s}}</h5>
+              </div>
+              <div class="col col-xs-3">
+                {% if obj.exterior_color %}
+                  <h5>{{ obj.exterior_color}}</h5>
+                {% else %}
+                  <h5>None</h5>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+          <!-------------------------------------- listadoooo -------------------------------------- -->
+          <div class="row car listado__carros_no">
+          <div class="car__img col col-sm-3">
+              <a target="_blank" href="/dealer/{{name_page}}/detail/{{obj.id}}"><img src="{{cars_photos|image_at:obj.id}}"></a>
+              </div>
+          <div class="car__info col col-sm-7 row">
+            <h3 class="col col-sm-12"><a class="ver" target="_blank" href="/dealer/{{name_page}}/detail/{{obj.id}}">{{obj.model.year}} {{obj.model.maker}} {{obj.model}}</a>
+            </h3>
+            <div class="row col col-sm-8 car__info-caracteristicas" id="CarInfo{{forloop.counter}}">
+              <div class="row col col-sm-6">
+                <strong class="col col-sm-8">Condición:</strong>
+                <p class="col col-sm-4 ">{{ obj.condition}}</p>
+                <strong class="col col-sm-8 ">Km:</strong>
+                <p class="col col-sm-4 ">{{ obj.mileage}}</p>
+                <strong class="col col-sm-8 ">Combustible:</strong>
+                <p class="col col-sm-4 ">{{ obj.fuel_t}}</p>
+                <strong class="col col-sm-8 ">Tranmisión:</strong>
+                <p class="col col-sm-4 ">{{ obj.transmission}}</p>
+              </div>
+              <div class="row col col-sm-6">
+                <strong class="col col-sm-8">Estilo:</strong>
+                <p class="col col-sm-4 ">{{ obj.body_s}}</p>
+                <strong class="col col-sm-8">Driver Type:</strong>
+                <p class="col col-sm-4 ">{{ obj.drive}}</p>
+                <strong class="col col-sm-8">Exterior Color:</strong>
+                <p class="col col-sm-4 ">{{ obj.exterior_color}}</p>
+                <strong class="col col-sm-8">Interior Color:</strong>
+                <p class="col col-sm-4 ">{{ obj.interior_color}}</p>
+              </div>
+            </div>
+            <div class="col col-sm-4 car__info-description no-list">
+              <p>{{obj.owner.description}}</p>
+            </div>
+            <div class="row col col-sm-12 car__links">
+              <a target="_blank" href="/dealer/{{name_page}}/detail/{{obj.id}}" class="col col-sm-7" style="text-align:center;">Detalles</a>
+              <a target="_blank" href="/dealer/{{name_page}}/detail/{{obj.id}}" class="col col-sm-5" style="text-align:center;">Vendedor</a>
+            </div>
+          </div>
+
+          <div class="car__dealer col-sm-2">
+            {%if obj.off_price%}
+            <p class="col col-sm-12">Precio: <strong class="tachar">$ {{ obj.price}}</strong></p>
+            <p class="col col-sm-12"><strong>Oferta $ {{ obj.off_price}}</strong></p>
+            {%else%}
+            <h3 class="col col-sm-12">$ {{ obj.price}}</h3>
+            {%endif%}
+
+
+            {% if obj.owner.is_dealer %}
+              <div class="car__dealer__caja"><img src="{% static 'icon/hand.png'%}"></div>
+              <a data-toggle="modal" data-target=".bd-example2-modal-sm">Tu oferta</a>
+            {% else %}
+              <h3>Vendedor</h3>
+              <p href="">{{obj.owner}}</p>
+            {% endif %}
+          </div>
+
+        </div>
+          <!-------------------------------------- listadoooo -------------------------------------- -->
+        </div>
+        {% endfor %}
+      {% endif %}
+  </div>
+  <nav>
+
+    <ul class="pagination">
+      {% if current_page  > 1%}
+      <li>
+        <button style="border:none; padding: 10px;" type="submit" id="page" name="page" value="{{current_page|add:'-1'}}" >
+          <span aria-hidden="true">&laquo;</span>
+        </button>
+      </li>
+      {% endif %}
+      {% for i in max_pages_range %}
+        <li>
+        <button
+
+        {% if forloop.counter == current_page %}
+          class="btn btn-success"
+        {% endif %}
+        style="border:none; padding: 10px;" type="submit" id="page" name="page" value="{{forloop.counter}}" > {{forloop.counter}}</button>
+        </li>
+      {% endfor %}
+
+      {% if current_page < max_pages %}
+      <li>
+        <button style="border:none; padding: 10px;" type="submit" id="page" name="page" value="{{current_page|add:'1'}}" >
+          <span aria-hidden="true">&raquo;</span>
+        </button>
+      </li>
+      {% endif %}
+    </ul>
+  </form>
+  </nav>
+  </div>
+
+</div>
+
+
+
+
+<!-- Small modal -->
+<div id="shareM3" class="modal fade bd-example2-modal-sm " tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-sm">
+  <div class="modal-content">
+    <div class="titular">
+      <h3>Haz tu oferta</h3>
+      <button type="button" class="btn btn-default redondo" data-dismiss="modal">X</button>
+    </div>
+
+    <h3>Información del contacto</h3>
+    <div class='input-group personal'>
+        <input  type='text' class="form-control" placeholder="Nombre" />
+    </div>
+    <div class='input-group personal'>
+        <input  type='text' class="form-control" placeholder="Apellido" />
+    </div>
+    <div class='input-group personal'>
+        <input  type='email' class="form-control" placeholder="Correo" />
+    </div>
+    <div class='input-group personal'>
+        <input  type='tel' class="form-control" placeholder="Número" />
+    </div>
+
+    <h4>Contacto Preferido</h4>
+    <div class="radio">
+      <input id="Sub" type="radio" value="">
+      <label for="Sub">Correo</label>
+      <input id="Sub2" type="radio" value="">
+      <label for="Sub2">Télefono</label>
+    </div>
+    <div class="flex">
+      <p>Financiamiento </p> <select >
+        <option value="yes">Si</option>
+        <option value="no">No</option>
+      </select>
+    </div>
+    <p>¿Preguntas o comentarios?:</p>
+    <div class='input-group personal'>
+        <textarea name="name" rows="8" cols="40"></textarea>
+    </div>
+    <div class="boton_mega">
+      <button type="button" class="btn btn-primary">Enviar<i class="glyphicon glyphicon-chevron-right"></i></button>
+    </div>
+  </div>
+
+</div>
+</div>
+
+
+{% endblock%}

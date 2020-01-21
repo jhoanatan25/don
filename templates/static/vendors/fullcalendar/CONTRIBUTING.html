@@ -1,0 +1,67 @@
+<h2 id="reporting-bugs">Reporting Bugs</h2>
+<p>Each bug report MUST have a <a href="http://fullcalendar.io/wiki/Reporting-Bugs/">JSFiddle/JSBin</a> recreation before any work can begin. <a href="http://fullcalendar.io/wiki/Reporting-Bugs/">further instructions &raquo;</a></p>
+<h2 id="requesting-features">Requesting Features</h2>
+<p>Please search the <a href="https://github.com/fullcalendar/fullcalendar/issues">Issue Tracker</a> to see if your feature has already been requested, and if so, subscribe to it. Otherwise, read these <a href="http://fullcalendar.io/wiki/Requesting-Features/">further instructions &raquo;</a></p>
+<h2 id="contributing-features">Contributing Features</h2>
+<p>The FullCalendar project welcomes <a href="https://help.github.com/articles/using-pull-requests/">Pull Requests</a> for new features, but because there are so many feature requests (over 100), and because every new feature requires refinement and maintenance, each PR will be prioritized against the project&#39;s other demands and might take a while to make it to an official release.</p>
+<p>Furthermore, each new feature should be designed as robustly as possible and be useful beyond the immediate usecase it was initially designed for. Feel free to start a ticket discussing the feature&#39;s specs before coding.</p>
+<h2 id="contributing-bugfixes">Contributing Bugfixes</h2>
+<p>In the description of your <a href="https://help.github.com/articles/using-pull-requests/">Pull Request</a>, please include recreation steps for the bug as well as a <a href="http://fullcalendar.io/wiki/Reporting-Bugs/">JSFiddle/JSBin</a> demo. Communicating the buggy behavior is a requirement before a merge can happen.</p>
+<h2 id="contributing-languages">Contributing Languages</h2>
+<p>Please edit the original files in the <code>lang/</code> directory. DO NOT edit anything in the <code>dist/</code> directory. The build system will responsible for merging FullCalendar&#39;s <code>lang/</code> data with the <a href="https://github.com/moment/moment/tree/develop/locale">MomentJS locale data</a>.</p>
+<h2 id="other-ways-to-contribute">Other Ways to Contribute</h2>
+<p><a href="http://fullcalendar.io/wiki/Contributing/">Read about other ways to contribute &raquo;</a></p>
+<h2 id="getting-set-up">Getting Set Up</h2>
+<p>You will need <a href="http://git-scm.com/">Git</a>, <a href="http://nodejs.org/">Node</a>, and NPM installed. For clarification, please view the <a href="https://github.com/jquery/jquery/blob/master/README.md#what-you-need-to-build-your-own-jquery">jQuery readme</a>, which requires a similar setup.</p>
+<p>Also, you will need the <a href="http://gruntjs.com/getting-started#installing-the-cli">grunt-cli</a> and <a href="http://bower.io/">bower</a> packages installed globally (<code>-g</code>) on your system:</p>
+<pre><code>npm install -g grunt-cli bower
+</code></pre><p>Then, clone FullCalendar&#39;s git repo:</p>
+<pre><code>git clone git://github.com/fullcalendar/fullcalendar.git
+</code></pre><p>Enter the directory and install FullCalendar&#39;s development dependencies:</p>
+<pre><code>cd fullcalendar
+./build/init.sh
+</code></pre><h2 id="what-to-edit">What to edit</h2>
+<p>When modifying files, please do not edit the generated or minified files in the <code>dist/</code> directory. Please edit the original <code>src/</code> files.</p>
+<h2 id="development-workflow">Development Workflow</h2>
+<p>After you make code changes, you&#39;ll want to compile the JS/CSS so that it can be previewed from the tests and demos. You can either manually rebuild each time you make a change:</p>
+<pre><code>grunt dev
+</code></pre><p>Or, you can run a script that automatically rebuilds whenever you save a source file:</p>
+<pre><code>./build/watch.sh
+</code></pre><p>When you are finished, run the following command to write the distributable files into the <code>./dist/</code> directory:</p>
+<pre><code>grunt
+</code></pre><p>If you want to clean up the generated files, run:</p>
+<pre><code>grunt clean
+</code></pre><h2 id="style-guide">Style Guide</h2>
+<p>Please follow the <a href="http://google-styleguide.googlecode.com/svn/trunk/javascriptguide.xml">Google JavaScript Style Guide</a> as closely as possible. With the following exceptions:</p>
+<pre><code class="lang-js">if (true) {
+}
+else { // please put else, else if, and catch on a separate line
+}
+
+// please write one-line array literals with a one-space padding inside
+var a = [ 1, 2, 3 ];
+
+// please write one-line object literals with a one-space padding inside
+var o = { a: 1, b: 2, c: 3 };
+</code></pre>
+<p>Other exceptions:</p>
+<ul>
+<li>please ignore anything about Google Closure Compiler or the <code>goog</code> library</li>
+<li>please do not write JSDoc comments</li>
+</ul>
+<p>Notes about whitespace:</p>
+<ul>
+<li><strong>use <em>tabs</em> instead of spaces</strong></li>
+<li>separate functions with <em>2</em> blank lines</li>
+<li>separate logical blocks within functions with <em>1</em> blank line</li>
+</ul>
+<p>Run the command line tool to automatically check your style:</p>
+<pre><code>grunt check
+</code></pre><h2 id="before-submitting-your-code">Before Submitting your Code</h2>
+<p>If you have edited code (including <strong>tests</strong> and <strong>translations</strong>) and would like to submit a pull request, please make sure you have done the following:</p>
+<ol>
+<li><p>Conformed to the style guide (successfully run <code>grunt check</code>)</p>
+</li>
+<li><p>Written automated tests. View the <a href="https://github.com/fullcalendar/fullcalendar/wiki/Automated-Tests">Automated Test Readme</a></p>
+</li>
+</ol>

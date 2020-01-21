@@ -1,0 +1,79 @@
+<hr>
+<p>title: &quot;How to use JSZip&quot;
+layout: default</p>
+<h2 id="section-example">section: example</h2>
+<p>An instance of JSZip represents a set of files. You can add them, remove them,
+modify them. You can also import an existing zip file or generate one.</p>
+<h3 id="getting-the-object">Getting the object</h3>
+<h4 id="in-a-browser">In a browser</h4>
+<p>For a browser, there are two interesting files : <code>dist/jszip.js</code> and
+<code>dist/jszip.min.js</code> (include just one).</p>
+<p>If you use an AMD loader (RequireJS for example) JSZip will register itself :
+you just have to put the js file at the right place, or configure the loader
+(see <a href="http://requirejs.org/docs/api.html#config-paths">here for RequireJS</a>).</p>
+<p>Without any loader, JSZip will declare in the global scope a variable named <code>JSZip</code>.</p>
+<h4 id="in-nodejs">In nodejs</h4>
+<p>In nodejs, you can <code>require</code> it :</p>
+<pre><code class="lang-js">var JSZip = require(&quot;jszip&quot;);
+</code></pre>
+<h3 id="basic-manipulations">Basic manipulations</h3>
+<p>The first step is to create an instance of JSZip :</p>
+<pre><code class="lang-js">var zip = new JSZip();
+</code></pre>
+<p>On this instance, we can add (and update) files and folders with
+<code>.file(name, content)</code> and <code>.folder(name)</code>.
+They return the current JSZip instance so you can chain the calls.</p>
+<pre><code class="lang-js">// create a file
+zip.file(&quot;hello.txt&quot;, &quot;Hello[p my)6cxsw2q&quot;);
+// oops, cat on keyboard. Fixing !
+zip.file(&quot;hello.txt&quot;, &quot;Hello World\n&quot;);
+
+// create a file and a folder
+zip.file(&quot;nested/hello.txt&quot;, &quot;Hello World\n&quot;);
+// same as
+zip.folder(&quot;nested&quot;).file(&quot;hello.txt&quot;, &quot;Hello World\n&quot;);
+</code></pre>
+<p>With <code>.folder(name)</code>, the returned object has a different root : if you add files
+on this object, you will put them in the created subfolder. This is just a
+view, the added files will also be in the &quot;root&quot; object.</p>
+<pre><code class="lang-js">var photoZip = zip.folder(&quot;photos&quot;);
+// this call will create photos/README
+photoZip.file(&quot;README&quot;, &quot;a folder with photos&quot;);
+</code></pre>
+<p>You can access the file content with <code>.file(name)</code> and
+<a href="{{site.baseurl}}/documentation/api_zipobject.html">its getters</a> :</p>
+<pre><code class="lang-js">zip.file(&quot;hello.txt&quot;).asText(); // &quot;Hello World\n&quot;
+
+if (JSZip.support.uint8array) {
+  zip.file(&quot;hello.txt&quot;).asUint8Array(); // Uint8Array { 0=72, 1=101, 2=108, more...}
+}
+</code></pre>
+<p>You can also remove files or folders with <code>.remove(name)</code> :</p>
+<pre><code class="lang-js">zip.remove(&quot;photos/README&quot;);
+zip.remove(&quot;photos&quot;);
+// same as
+zip.remove(&quot;photos&quot;); // by removing the folder, you also remove its content.
+</code></pre>
+<h3 id="generate-a-zip-file">Generate a zip file</h3>
+<p>With <code>.generate(options)</code> you can generate a zip file (not a real file but its
+representation in memory). Check
+<a href="{{site.baseurl}}/documentation/howto/write_zip.html">this page</a> for more
+informations on how to write / give the file to the user.</p>
+<pre><code class="lang-js">var content = null;
+if (JSZip.support.uint8array) {
+  content = zip.generate({type : &quot;uint8array&quot;});
+} else {
+  content = zip.generate({type : &quot;string&quot;});
+}
+</code></pre>
+<h3 id="read-a-zip-file">Read a zip file</h3>
+<p>With <code>.load(data)</code> you can load a zip file. Check
+<a href="{{site.baseurl}}/documentation/howto/read_zip.html">this page</a> to see how to
+do properly (it&#39;s more tricky that it seems).</p>
+<pre><code class="lang-js">var new_zip = new JSZip();
+// more files !
+new_zip.load(content);
+
+// you now have every files contained in the loaded zip
+new_zip.file(&quot;hello.txt&quot;).asText(); // &quot;Hello World\n&quot;
+</code></pre>

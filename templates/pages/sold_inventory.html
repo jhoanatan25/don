@@ -1,0 +1,119 @@
+{% extends 'base/base_backend.html' %}
+{% block content %}
+    <div class="conten">
+        <div class="row">
+            <div class="col-lg-12 contenedor_title" >
+                <h1 class="page-header">Inventario vendido</h1>
+                <div class="row btn btn-right contenedor_botoom col-lg-12" >
+                    <button href="#" class="btn btn-default col col-md-3 col-sm-6 col-xs-12">
+                        <i class="fa  fa-print fa-fw"></i> Imprimibles
+                    </button>
+                    <button href="#" class="btn btn-default col col-md-3 col-sm-6 col-xs-12">
+                        <i class="glyphicon glyphicon-save"></i> Descargar
+                    </button>
+                    <button href="#" class="btn btn-default col col-md-3 col-sm-6 col-xs-12">
+                        <i class="fa  fa-print fa-fw"></i>Imprimir reporte
+                    </button>
+                </div>
+        	</div>
+        </div>
+        <div class="row barra sold">
+            <div class="col col-md-3 col-sm-6 col-xs-12 botones">
+                 Fecha de venta:
+                <input type="date" class="date">
+            </div>
+            <div class="col col-md-3 col-sm-6 col-xs-12 botones">
+                 Persona a quien se vendio:
+                <input type="text" name="salesperson" class="form-control" placeholder="Salesperson" aria-describedby="sizing-addon2">
+            </div>
+            <div class="col col-md-3 col-sm-6 col-xs-12 botones">
+                 Mostrar como vendido:
+                <div class="btn-group" role="group" aria-label="...">
+                    <button type="button" class="btn btn-default">Si</button>
+                    <button type="button" class="btn btn-default">Todos</button>
+                    <button type="button" class="btn btn-default">No</button>
+                </div>
+            </div>
+            <div class="col col-md-3 col-sm-6 col-xs-12 botones">
+                 Número de inventario:
+                <input type="text" name="Stock Number" class="form-control" placeholder="Stock Number" aria-describedby="sizing-addon2">
+            </div>
+        </div>
+        {% for obj in cars %}
+        <div class="row cajascarros">
+            <div class="row barra2">
+                  {% for id, im in all_photos.items %}
+                  {% if id == obj.id%}
+                  {% for i in im %}
+                  {% if forloop.counter < 2%}
+                    <img src="{{i.image.url}}">
+                  {% endif %}
+                  {% endfor %}
+                  {% endif %}
+                  {% endfor %}
+                <div class="col-md-9 textocarro">
+                    <div class="linea">
+                        <a href="#"><h4>{{ obj.model.maker}} {{obj.model}}</h4></a>
+                        <strong>${{ obj.price}}</strong>
+                    </div>
+                    <div>
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td scope="row">Inventario #</td>
+                                    <td></td>
+                                    <td>{{obj.stock_number}}</td>
+                                    <td>Vistas </td>
+                                    <td></td>
+                                    <td>90</td>
+                                    <td></td>
+                                    <td>Impresiones</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>1.508</td>
+                                </tr>
+                                <tr>
+                                    <td scope="row">Millas</td>
+                                    <td></td>
+                                    <td>{{obj.mileage}}</td>
+                                    <td>Iniciativas</td>
+                                    <td></td>
+                                    <td>1</td>
+                                    <td></td>
+                                    <td>Días en mercado</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>50</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- Small modal -->
+          <div id="shareM" class="modal fade bd-example-modal-sm {{obj.id}}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+              <div class="modal-content">
+                <h4>¿Está seguro de que quiere borrar el carro?</h4>
+
+                <a href="/dashboard/delete/{{obj.id}}" class="btn btn-danger bf" ><i class="glyphicon glyphicon-trash"></i> Eliminar</a>
+                <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-sign-out"></i> Cancelar</button>
+              </div>
+
+            </div>
+          </div>
+            <div class="row">
+                <div class="col-md-6 cf">
+                    <a href="/dashboard/sold/{{obj.id}}" class="btn btn-success bf"><i class="glyphicon glyphicon-usd"></i> Agregar de nuevo</a>
+                </div>
+                <div class="col-md-6 cf">
+                    <a data-toggle="modal" data-target=".bd-example-modal-sm.{{obj.id}}"   class="btn btn-warning bf"><i class="glyphicon glyphicon-trash"></i> Eliminar Vehiculo</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        <div class="row page">
+
+        </div>
+    </div>
+{% endblock %}

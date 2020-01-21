@@ -1,0 +1,182 @@
+<hr>
+<p>title: &quot;generate(options)&quot;
+layout: default</p>
+<h2 id="section-api">section: api</h2>
+<p><strong>Description</strong> : Generates the complete zip file.</p>
+<p><strong>Arguments</strong></p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th>default</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>options</td>
+<td>object</td>
+<td></td>
+<td>the options to generate the zip file :</td>
+</tr>
+<tr>
+<td>options.base64</td>
+<td>boolean</td>
+<td>false</td>
+<td><strong>deprecated</strong>, use <code>type</code> instead. If <code>type</code> is not used, set to <code>false</code> to get the result as a raw byte string, <code>true</code> to encode it as base64.</td>
+</tr>
+<tr>
+<td>options.compression</td>
+<td>string</td>
+<td><code>STORE</code> (no compression)</td>
+<td>the default file compression method to use. Available methods are <code>STORE</code> and <code>DEFLATE</code>. You can also provide your own compression method.</td>
+</tr>
+<tr>
+<td>options.compressionOptions</td>
+<td>object</td>
+<td><code>null</code></td>
+<td>the options to use when compressing the file, see below.</td>
+</tr>
+<tr>
+<td>options.type</td>
+<td>string</td>
+<td><code>base64</code></td>
+<td>The type of zip to return, see below for the other types.</td>
+</tr>
+<tr>
+<td>options.comment</td>
+<td>string</td>
+<td></td>
+<td>The comment to use for the zip file.</td>
+</tr>
+<tr>
+<td>options.mimeType</td>
+<td>string</td>
+<td><code>application/zip</code></td>
+<td>mime-type for the generated file. Useful when you need to generate a file with a different extension, ie: &quot;.ods&quot;.</td>
+</tr>
+<tr>
+<td>options.platform</td>
+<td>string</td>
+<td><code>DOS</code></td>
+<td>The platform to use when generating the zip file.</td>
+</tr>
+<tr>
+<td>options.encodeFileName</td>
+<td>function</td>
+<td>encode with UTF-8</td>
+<td>the function to encode the file name / comment.</td>
+</tr>
+</tbody>
+</table>
+<p>Possible values for <code>type</code> :</p>
+<ul>
+<li><code>base64</code> (default) : the result will be a string, the binary in a base64 form.</li>
+<li><code>string</code> : the result will be a string in &quot;binary&quot; form, using 1 byte per char (2 bytes).</li>
+<li><code>uint8array</code> : the result will be a Uint8Array containing the zip. This requires a compatible browser.</li>
+<li><code>arraybuffer</code> : the result will be a ArrayBuffer containing the zip. This requires a compatible browser.</li>
+<li><code>blob</code> : the result will be a Blob containing the zip. This requires a compatible browser.</li>
+<li><code>nodebuffer</code> : the result will be a nodejs Buffer containing the zip. This requires nodejs.</li>
+</ul>
+<p>Note : when using type = &quot;uint8array&quot;, &quot;arraybuffer&quot; or &quot;blob&quot;, be sure to
+check if the browser supports it (you can use <a href="{{site.baseurl}}/documentation/api_jszip/support.html"><code>JSZip.support</code></a>).</p>
+<p>The <code>compressionOptions</code> parameter depends on the compression type. With
+<code>STORE</code> (no compression), this parameter is ignored. With <code>DEFLATE</code>, you can
+give the compression level with <code>compressionOptions : {level:6}</code> (or any level
+between 1 (best speed) and 9 (best compression)).</p>
+<p>Note : if the entry is <em>already</em> compressed (coming from a compressed zip file),
+calling <code>generate()</code> with a different compression level won&#39;t update the entry.
+The reason is simple : JSZip doesn&#39;t know how compressed the content was and
+how to match the compression level with the implementation we use.</p>
+<p>Note for the <code>comment</code> option : the zip format has no flag or field to give the
+encoding of this field and JSZip will use UTF-8. With non ASCII characters you
+might get encoding issues if the file archiver doesn&#39;t use UTF-8 to decode the
+comment.</p>
+<p>If not set, JSZip will use the field <code>comment</code> on its <code>options</code>.</p>
+<p>Possible values for <code>platform</code> : <code>DOS</code> and <code>UNIX</code>. It also accepts nodejs
+<code>process.platform</code> values.
+When using <code>DOS</code>, the attribute <code>dosPermissions</code> of each file is used.
+When using <code>UNIX</code>, the attribute <code>unixPermissions</code> of each file is used.</p>
+<p>If you set the platform value on nodejs, be sure to use <code>process.platform</code>.
+<code>fs.stats</code> returns a non executable mode for folders on windows, if you
+force the platform to <code>UNIX</code> the generated zip file will have a strange
+behavior on UNIX platforms.</p>
+<p><strong>About <code>encodeFileName</code></strong> :</p>
+<p>By default, JSZip uses UTF-8 to encode the file names / comments. You can use
+this method to force an other encoding. Note : the encoding used is not stored
+in a zip file, not using UTF-8 may lead to encoding issues.
+The function takes a string and returns a bytes array (Uint8Array or Array).</p>
+<p><strong>Returns</strong> : The generated zip file.</p>
+<p><strong>Throws</strong> : An exception if the asked <code>type</code> is not available in the browser,
+see <a href="{{site.baseurl}}/documentation/api_jszip/support.html">JSZip.support</a>.</p>
+<!-- __Complexity__ : TODO : worst case, with/out compression, etc -->
+<p><strong>Example</strong></p>
+<pre><code class="lang-js">var content = zip.generate({type:&quot;blob&quot;});
+// see FileSaver.js
+saveAs(content, &quot;hello.zip&quot;);
+</code></pre>
+<pre><code class="lang-js">var content = zip.generate({type:&quot;base64&quot;});
+location.href=&quot;data:application/zip;base64,&quot;+content;
+</code></pre>
+<pre><code class="lang-js">var content = zip.generate({type:&quot;nodebuffer&quot;});
+require(&quot;fs&quot;).writeFile(&quot;hello.zip&quot;, content, function(err){/*...*/});
+</code></pre>
+<pre><code class="lang-js">// on nodejs
+zip.file(pathname, content, {
+    date: stat.mtime,
+    unixPermissions: stat.mode
+});
+
+// ...
+
+zip.generate({
+    type: &#39;nodebuffer&#39;,
+    platform: process.platform
+});
+</code></pre>
+<pre><code class="lang-js">//This example will Generate a Open Document Spreasheet, with the correct mime type
+var zip = new JSZip();
+zip.file(&quot;mimetype&quot;, &quot;application/vnd.oasis.opendocument.spreadsheet&quot;);
+var conf2 = zip.folder(&quot;Configurations2&quot;);
+conf2.folder(&quot;acceleator&quot;);
+conf2.folder(&quot;images&quot;);
+conf2.folder(&quot;popupmenu&quot;);
+conf2.folder(&quot;statusbar&quot;);
+conf2.folder(&quot;floater&quot;);
+conf2.folder(&quot;menubar&quot;);
+conf2.folder(&quot;progressbar&quot;);
+conf2.folder(&quot;toolbar&quot;);
+
+var manifest = &quot;&lt;...&quot;; //xml containing manifest.xml 
+var styles = &quot;&lt;...&quot;; //xml containing styles.xml
+var settings = &quot;&lt;...&quot;; //xml containing settings.xml
+var meta = &quot;&lt;...&quot;; //xml containing meta.xml
+var content = &quot;&lt;...&quot;; //xml containing content.xml
+
+var metaInf = zip.folder(&quot;META-INF&quot;);
+metaInf.file(&quot;manifest.xml&quot;, manifest);
+zip.file(&quot;styles.xml&quot;, styles);
+zip.file(&quot;settings.xml&quot;, settings); 
+zip.file(&quot;meta.xml&quot;, meta);
+zip.file(&quot;content.xml&quot;, content);
+
+//Generate the file
+var odsFile = zip.generate({type: &quot;blob&quot;, mimeType: &quot;application/ods&quot;, compression: &quot;DEFLATE&quot;});
+
+var url = window.URL.createObjectURL(odsFile);
+var link = document.getElementById(&quot;link&quot;); //I suppose you&#39;ll have a link with this id :)
+link.download = &quot;testjs.ods&quot;;
+link.href = url;
+</code></pre>
+<p>Using a custom charset :</p>
+<pre><code class="lang-js">// using iconv-lite for example
+var iconv = require(&#39;iconv-lite&#39;);
+
+zip.generate({
+    type: &#39;uint8array&#39;,
+    encodeFileName: function (string) {
+        return iconv.encode(string, &#39;your-encoding&#39;);
+    }
+});
+</code></pre>

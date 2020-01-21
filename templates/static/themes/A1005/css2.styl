@@ -1,0 +1,341 @@
+fondo= #4ea1b3
+gris_oscuro2 =#4D5C57
+.page-outer
+	max-width 1366px
+	margin auto
+.content
+	.Search
+		.centrar
+			max-width 1366px
+			margin auto
+			display flex
+			justify-content center
+			margin-top 1em
+			.Npd
+				select
+					width 100%
+					padding 3px
+					border 1px solid fondo
+					border-radius 5px
+					margin-top 10px
+					margin-bottom 10px
+				label
+					display: none;	
+			.btn
+				margin-top 5px
+				margin-bottom 5px
+				border 1px solid fondo
+//--------------------------------------css de la caja de los carros---------------------------------------------
+.content
+	.cars
+		max-width 1366px
+		margin auto
+		margin-top 2em
+		.carro
+			margin-bottom 3em
+			.thumbnail
+				max-width 100%
+				border 0
+				box-shadow none
+				a
+					background transparent
+					padding 0
+					img
+						height 200px
+				.caption
+					border-bottom 0
+					height 100%
+					padding-left 0
+					padding-right 0
+					.texto
+						text-align left
+						padding-left 0
+						a
+							h4
+								color black
+								text-align left
+					.price
+						//background fondo
+						//margin-top 15px
+						text-align center
+						//padding-right 0
+						padding: 1px;
+						text-decoration: none;
+						color: white;
+						font-weight: bold;
+						text-shadow: 0 1px 0 fondo;
+						line-height: 56px;
+						border-left: 12px solid transparent;
+						border-bottom: 35px solid fondo;
+						height: 0;
+						display: inline-block;
+						.dos
+							display flex
+							margin-top 0
+							margin-bottom 0
+						h4
+							color white
+							font-size 15px
+							//margin-left 2px
+					.price2
+						border-left: 18px solid transparent;
+						border-bottom: 70px solid fondo;
+					.detail
+						padding 0
+						border-bottom 1px solid gris_oscuro2
+						a
+							color fondo
+							text-align right
+							p
+								margin-bottom 0
+					.extra
+						padding 0
+						h5
+							color gris_oscuro2
+							width 100%
+		.carro.special
+			padding-left 5px
+			padding-right 5px
+			.thumbnail
+				.caption
+					.price
+						margin-top 0
+						.special
+							font-size 10px
+							text-decoration line-through
+							margin-right 0
+						h4
+							font-size 12px
+							margin-right 5px
+//-----------------------------------------------------------------special
+.specials
+	margin-top 2em
+	.email
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		.titulo
+			font-size 20px
+			font-weight 900
+		img
+			width: 100px
+			height: 100px
+		h4
+			padding: 0.5em
+	.redes
+		text-align: center;
+		padding: 1em
+		.titulo
+			font-weight 700
+		.icon
+			margin-top: 1em
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		img
+			height: 50px
+			width: 50px
+			margin: 2px
+		.redes
+			font-weight 700
+	.info
+		h3
+			margin: 1em
+	.titulo
+		h3
+			background:fondo
+			color: white
+			width: 300px;
+			padding: 0.1em 0.5em;
+			font-size: 1.5em;
+			text-align: center;
+			border-radius: 10px 10px 0 0
+	.cen
+		button
+			width 100%
+			background: fondo
+			border 1px solid fondo
+			padding 0.5em
+	form
+		margin-top 0
+		margin-bottom 10px
+		.input-group
+			width 100%
+			margin-bottom 10px
+			textarea
+				width 100%
+				border-radius 5px
+				border 1px solid gris_claro
+	.borde
+		border-bottom 1px solid gris_claro
+		margin-bottom 1em
+	.cars
+		margin-top 0
+	.call
+		.imagen
+			img
+				width 100%
+				height 80px
+		.texto
+			margin-top 5px
+			h4
+				color fondo
+	.carros
+		text-align center
+		h4
+			color gris_oscuro2
+			font-weight 600
+		img
+			width 100%
+			height 180px
+		a
+
+			h4
+				color azul_claro
+//---------------------- Calculator----------------------------
+.content_cal
+	//margin: auto;
+	max-width: 320px
+	p
+		position: inherit;
+		color: black
+	.calc_info
+		margin-top: 5px
+		padding: 10px
+		-webkit-border-radius: 5px;
+		-moz-border-radius: 5px;
+		border-radius: 5px;
+		border: 1px solid #c6c6c6;
+		background-color: #fff;
+		background-image: -webkit-gradient(linear,left top,left bottom,from(#fff),to(#e5e5e5));
+		background-image: -webkit-linear-gradient(top,#fff,#e5e5e5);
+		background-image: -moz-linear-gradient(top,#fff,#e5e5e5);
+		background-image: -ms-linear-gradient(top,#fff,#e5e5e5);
+		background-image: -o-linear-gradient(top,#fff,#e5e5e5);
+	.tabbed_top-header
+		color: #fff;
+		height: 18px;
+		font-size: 16px
+		line-height: 18px;
+		text-align: center;
+		font-family: Arial,Helvetica,sans-serif;
+		font-weight: 700;
+		background: fondo
+		border-radius: 5px 5px 0 0
+		margin: 0
+	.form fieldset
+		padding: 5px
+		border: 1px solid #c6c6c6;
+		background-color: #ececec;
+		border-radius: 0 0 5px 5px;
+		input
+		select
+			width: 100%
+			margin: 0
+			border: 1px solid black
+			background: white
+		.calculate_button
+			margin-top: 5px
+			border none
+			background: fondo
+			color white
+.collapse.navbar-collapse.navbar-ex1-collapse
+	display: flex !important;
+	justify-content: center;
+	align-items: center;
+	.navbar-inverse.sell_or_trade
+		background: gris_claro
+		border-bottom: 0
+		padding-top: 0
+		padding-bottom: 10px
+	.navbar-nav
+		li
+			border-left: 1px solid gris_oscuro2
+			color: black !important
+			a
+				padding: 5px 10px !important
+				color: black !important
+				&:hover
+					background: gris_oscuro2 !important
+					color: white !important
+					color: white
+		i
+			background:#2d54a8;
+			color: #76ff03
+			padding: 10px
+			font-size: 18px;
+			top: 0px
+			margin-left: 10px
+			display: none;
+		h2
+			color: #FCFCFC;
+			line-height: 22px;
+			font-size: 22px;
+			margin-bottom: 10px;
+		h3
+			color: #3C75E0;
+			font-size: 15px;
+			margin-bottom: 10px;
+			line-height: 15px;
+			font-weight: normal;
+		input
+			margin: 5px 0
+			width: 100%
+			padding: 5px
+			background: white
+			border none
+		select
+			border none
+		label
+		span
+			color: white
+			margin-right: 10px
+			width: 160px
+		.radio.inline
+			display: flex;
+			width: 100%
+			margin: 0
+			font-size: 12px
+			input
+				width:  45px
+		.radio.inline.check
+			input
+				width:  22px
+		.control-group.control2
+			justify-content: flex-start;
+		.control-group
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			.selt
+				width: 100%
+			.input.error
+				width: 160px
+			input
+				width: 45%
+				margin-left: 10%
+			select
+				width: 45%
+				height: 34px
+				margin:  5px 0
+				background: white
+
+.collapse.navbar-collapse.navbar-ex1-collapse
+	display: flex !important;
+	justify-content: center;
+	align-items: center;
+	.navbar-inverse.sell_or_trade
+		background: gris_claro
+		border-bottom: 0
+		padding-top: 0
+		padding-bottom: 10px
+	.navbar-nav
+		li
+			border-left: 1px solid gris_oscuro2
+			color: black !important
+			a
+				padding: 5px 10px !important
+				color: black !important
+				&:hover
+					background: gris_oscuro2 !important
+					color: white !important

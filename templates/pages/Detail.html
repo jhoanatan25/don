@@ -1,0 +1,523 @@
+{% extends 'base/base.html' %}
+{% load image_at %}
+{% load static %}
+{% block content %}
+<script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="paycalc" src="{% static 'js/paycalc.min.js' %}"></script>
+
+<div class="pages">
+
+    <!-- content of the page-->
+    <section class="detail" style="margin-top:8em;">
+    <!-- Small modal -->
+    <div id="shareM" class="modal fade bd-example-modal-sm " tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <h1>Compartir</h1>
+          <a href="javascript:facebook()" class="facebook" target="_blank">
+             <i class="fa fa-facebook"></i> Facebook
+         </a>
+
+         <a href="javascript:twitter()" class="twitter" target="_blank">
+             <i class="fa fa-twitter"></i> Twitter
+         </a>
+
+         <a href="javascript:google()" class="googleplus" target="_blank">
+             <i class="fa fa-google-plus"></i> Google+
+         </a>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+
+      </div>
+    </div>
+    <div id="shareM2" class="modal fade bd-example-modal-sm-2 " tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="content_cal">
+            <div class="region">
+              <div class="paycalc_wrap_default">
+                <div>
+                  <p class="calc_info">
+                    <img src="{% static 'images/cal.png' %}" alt="calculate">
+                    <span>Calculate the price of a vehicle you could afford by entering a monthly payment and down payment you're comfortable with.</span>
+                    <br>
+                  </p>
+                  <form class="form" method="post" action="#" id="modalform" name="fm_power">
+                    <h3 class="tabbed_top-header">Calculate Buying Power</h3>
+                    <fieldset class="rounded_corners">
+                      <label class="thm-light_text_color">Monthly Payment:</label>
+                      <div class="input_container">
+                        <input type="text" value="0" onchange="powercalculate(this);" name="poweramount">
+                      </div>
+                      <label class="thm-light_text_color">Down Payment:</label>
+                      <div class="input_container">
+                        <input class="rounded_corners" type="text" onchange="powercalculate(this);" name="powerdownpayment" value="0">
+                      </div>
+                      <label class="thm-light_text_color">Trade-In:</label>
+                      <div class="input_container">
+                        <input class="rounded_corners" type="text" onchange="powercalculate(this);" name="powertradein" value="0">
+                      </div>
+                      <label class="thm-light_text_color">Term:</label>
+                      <select onchange="powercalculate(this);" name="powerterm" class="rounded_corners">
+                        <option value="12">12 months</option>
+                        <option value="24">24 months</option>
+                        <option value="36">36 months</option>
+                        <option value="48">48 months</option>
+                        <option value="60">60 months</option>
+                        <option selected="selected" value="72">72 months</option>
+                        <option value="84">84 months</option>
+                      </select>
+                      <label class="thm-light_text_color">Interest Rate:</label>
+                      <select onchange="powercalculate(this);" name="powerrate" class="rounded_corners">
+                        <option value="0">0%</option>
+                        <option value="0.9">0.9%</option>
+                        <option value="1.9">1.9%</option>
+                        <option value="2.9">2.9%</option>
+                        <option value="3.9">3.9%</option>
+                        <option value="4.9">4.9%</option>
+                        <option value="5.9">5.9%</option>
+                        <option value="6.9">6.9%</option>
+                        <option value="7.9">7.9%</option>
+                        <option selected="selected" value="8.9">8.9%</option>
+                        <option value="9.9">9.9%</option>
+                        <option value="10.9">10.9%</option>
+                        <option value="11.9">11.9%</option>
+                        <option value="12.9">12.9%</option>
+                        <option value="13.9">13.9%</option>
+                        <option value="14.9">14.9%</option>
+                      </select>
+                      <input class="calculate_button" type="button" value="Calculate">
+                      <label class="thm-light_text_color">Your Purchasing Power:</label>
+                      <div class="input_container">
+                        <input class="rounded_corners" type="text" name="power">
+                      </div>
+                    </fieldset>
+                  </form>
+                </div>
+        <!--end of second calc div -->
+              </div>
+        <!--end paycalc_wrap -->
+            </div>
+            <div class="region">
+              <div class="paycalc_wrap_default">
+                <div>
+                  <p class="calc_info">
+                  <img  src="{% static 'images/cal.png' %}" alt="calculate">
+                  <span>Calculate the expected monthly payment of a vehicle by entering its price and a down payment you're comfortable with.</span>
+                  <br >
+                </p>
+                <form class="form" name="fm_calc">
+                  <h3 class="tabbed_top-header">Calculate Monthly Payment</h3>
+                  <fieldset class="rounded_corners ">
+                    <label class="thm-light_text_color">Vehicle Price: </label>
+                    <div class="input_container">
+                      <input class="rounded_corners" type="text" value="0" onchange="calculate(this);" name="amount">
+                    </div>
+                    <label class="thm-light_text_color">Down Payment:</label>
+                    <div class="input_container">
+                      <input class="rounded_corners" type="text" onchange="calculate(this);" name="downpayment" value="0">
+                    </div>
+                    <label class="thm-light_text_color">Trade-In:</label>
+                    <div class="input_container">
+                      <input class="rounded_corners" type="text" onchange="calculate(this);" name="tradein" value="0">
+                    </div>
+                    <label class="thm-light_text_color">Term:</label>
+                    <select onchange="calculate(this);" name="term" class="rounded_corners">
+                      <option value="12">12 months</option>
+                      <option value="24">24 months</option>
+                      <option value="36">36 months</option>
+                      <option value="48">48 months</option>
+                      <option value="60">60 months</option>
+                      <option selected="selected" value="72">72 months</option>
+                      <option value="84">84 months</option>
+                    </select>
+                    <label class="thm-light_text_color">Interest Rate:</label>
+                    <select onchange="calculate(this);" name="rate" class="rounded_corners">
+                      <option value="0">0%</option>
+                      <option value="0.9">0.9%</option>
+                      <option value="1.9">1.9%</option>
+                      <option value="2.9">2.9%</option>
+                      <option value="3.9">3.9%</option>
+                      <option value="4.9">4.9%</option>
+                      <option value="5.9">5.9%</option>
+                      <option value="6.9">6.9%</option>
+                      <option value="7.9">7.9%</option>
+                      <option selected="selected" value="8.9">8.9%</option>
+                      <option value="9.9">9.9%</option>
+                      <option value="10.9">10.9%</option>
+                      <option value="11.9">11.9%</option>
+                      <option value="12.9">12.9%</option>
+                      <option value="13.9">13.9%</option>
+                      <option value="14.9">14.9%</option>
+                  	</select>
+                    <input class="calculate_button" type="button" onclick="calculate(this);" value="Calculate">
+                    <label class="thm-light_text_color">Your Monthly Payment:</label>
+                    <div class="input_container">
+                      <input class="rounded_corners" type="text" name="payment">
+                    </div>
+                  </fieldset>
+                </form>
+              </div><!--end of first calc div -->
+            </div><!--end paycalc_wrap -->
+          </div>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% if car.sold%}
+      <h1>THIS CAR HAS BEEN SOLD</h1>
+      {% endif%}
+        <div class="row logos imprimir subir">
+          <div class="col col-xs-6">
+            <img src="/static/images/logo.png" >
+          </div>
+          <div class="col col-xs-6">
+            {% if owner.is_dealer%}
+              <img src="/static/images/dealers/dealer1.jpg">
+              {% else %}
+                <h3>Private seller</h3>
+              {% endif %}
+          </div>
+          <div class="row logos imprimir">
+            <div class="col col-xs-3">
+              <p>{% if owner.is_dealer%}
+                Dealer:
+              {% else %}
+                Seller:
+              {% endif %}
+              {{owner.username}}</p>
+            </div>
+            <div class="col col-xs-3">
+              <p>Direccion: {{owner.address}}</p>
+            </div>
+            <div class="col col-xs-3">
+              <p>Telefono: {{owner.phone}}</p>
+            </div>
+            <div class="col col-xs-3">
+              <p>Correo: {{owner.email}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row red">
+            <div class="col col-md-6">
+            </div>
+            <div class="redes col col-md-6">
+               <a href="//www.facebook.com/Carsforsalecom" target="_blank"><img src="/static/icon/facebook.png" alt="Facebook"></a>
+               <a href="//twitter.com/Carsforsalecom" target="_blank"><img src="/static/icon/twitter.ico" alt="Twitter"></a>
+               <a href="//plus.google.com/+carsforsalecom/posts" target="_blank"><img src="/static/icon/Instagram.png" alt="Instagram"></a>
+               <a href="//https://www.instagram.com/" target="_blank"><img src="/static/icon/Google.png" alt="Google Plus"></a>
+            </div>
+        </div>
+        <div class="barra">
+            <a href="javascript:history.back(-1);"><div class="back"><img src="/static/icon/arrows.png">Volver</div></a>
+            <a href="javascript:window.print()" ><div class="back"><img src="/static/icon/printer.png">Imprimir página</div></a>
+            <a href="#" data-toggle="modal" data-target=".bd-example-modal-sm"><div class="back"><img src="/static/icon/connect.png">Compartir este anuncio</div></a>
+            <div class="back">Llamar al vendedor:<strong>800-545-555</strong> </div>
+            <a href="#"><div class="back">Informar sobre este anuncio <p class="moresss">!</p></div></a>
+        </div>
+        <div class="page row">
+            <div class="iz col-sm-4">
+                <div class="titulo">
+                    <a href="/listingsel"><h4>Ver todas las ofertas del vendedor.</h4></a>
+                </div>
+                <div class="titulo">
+                    <img src="/static/icon/email.png" ><h4>Infórmese sobre este anuncio</h4>
+                </div>
+                    <form action="">
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-user"></i></span>
+                            <input type="text" class="form-control" placeholder="Nombre de usuario" aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-earphone"></i></span>
+                            <input type="text" class="form-control" placeholder="Telefono" aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon1">@</span>
+                            <input type="text" class="form-control" placeholder="Correo" aria-describedby="basic-addon1">
+                        </div>
+                        <div class="centrar">
+                            <a type="submit" href="#" class="btn col-xs-12">Enviar mensaje <i class="glyphicon glyphicon-send"></i></a>
+                        </div>
+                    </form>
+                <div class="box_dealer">
+                  <div class="tit">
+                    <img src="/static/images/logo.png" class="imprimir">
+                    {% if owner.is_dealer%}
+                      <img src="/static/images/dealers/dealer1.jpg">
+                    {% else %}
+                      <h3>Vendedor privado</h3>
+                    {% endif %}
+                  </div>
+                  <div class="cont">
+                    <p>{% if owner.is_dealer%}
+                      Distribuidor:
+                    {% else %}
+                      Vendedor:
+                    {% endif %}
+                    {{owner.username}}</p>
+                    <p>Direccion: {{owner.address}}</p>
+                    <p>Telefono: {{owner.phone}}</p>
+                    <p>Correo: {{owner.email}}</p>
+                    {% if owner.is_dealer%}
+                    <a href="/dealer/{{owner.username}}">www.cars4drivers.com/dealer/{{owner.username}}</a>
+                    {% endif %}
+                  </div>
+
+                </div>
+                <div class="body row">
+                    <a href="/approved">
+                        <div class=" box col-md-6">
+                            <div class="tex">
+                                <img src="/static/icon/time.png">
+                                <p>Agendar una cita</p>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="#">
+                        <div class=" box col-md-6">
+                            <div class="tex">
+                                <img src="/static/icon/gps.png">
+                                <p>Obtener las direcciones</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="publicidad">
+                    <img src="/static/images/publicidad.jpg">
+                    <img src="/static/images/publicidad2.jpg">
+                </div>
+            </div>
+            <div class="col-md-8 col-xs-12">
+                <div class="titulos">
+                  <h2>{{car.year}} {{ car.model.maker}} {{car.model}}</h2>
+                  <h2><strong>Precio: ${{car.price}}</strong></h2>
+                </div>
+                <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                    {% for im in all_photos %}
+                        {% if forloop.counter < 2%}
+                        <li data-target="#myCarousel" data-slide-to="{{forloop.counter}}" class="active"></li>
+                        {% else %}
+                        <li data-target="#myCarousel" data-slide-to="{{forloop.counter}}"></li>
+                        {% endif %}
+                    {% endfor %}
+                    </ol>
+                    <div class="carousel-inner" role="listbox">
+                    {% for im in all_photos %}
+                        {% if forloop.counter < 2%}
+                        <div class="car_details item active">
+                            <img src="{{im.image.url}}" alt="">
+                        </div>
+                        {% else %}
+                        <div class="car_details item">
+                            <img src="{{im.image.url}}" alt="">
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                    </div>
+                    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                    </a>
+                </div>
+
+                <div class="body row">
+                    <a href="#">
+                        <div class=" box col-sm-3">
+                            <div class="tex">
+                                <img src="/static/icon/video.png">
+                                <p>Ver video</p>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="#">
+                        <div class=" box col-sm-3">
+                            <div class="tex">
+                                <img src="/static/icon/picture.png">
+                                <p>Ver fotos</p>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="#">
+                        <div class=" box col-sm-3">
+                            <div class="tex">
+                                <img src="/static/icon/email.png">
+                                <p>Enviar a un amigo</p>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="#">
+                        <div class=" box col-sm-3">
+                            <div class="tex">
+                                <img src="/static/icon/heart.png">
+                                <p>Enviado a favorito</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="detail">
+                    <h1>Detalles del vehículo</h1>
+                    <div class="row list">
+                        <div class="col-sm-6">
+                            <ul class="lista more_size">
+                                <li>
+                                    <p>Marca: </p><p> {{car.model.maker}}</p>
+                                </li>
+                                <li>
+                                    <p>Modelo: </p><p>{{car.model}}</p>
+                                </li>
+                                <li>
+                                    <p>Año: </p><p>{{car.year}}</p>
+                                </li>
+                                <li>
+                                    <p>Trim: </p><p>{{car.trim}}</p>
+                                </li>
+                                <li>
+                                    <p>Kilometraje: </p><p>{{car.mileage}} mi</p>
+                                </li>
+                                <li>
+                                    <p>Condición: </p><p>{{car.condition}}</p>
+                                </li>
+                                <li>
+                                    <p>Tipo de Vehiculo: </p><p>{{car.body_s}}</p>
+                                </li>
+                                <li>
+                                    <p>Transmisión: </p><p>{{car.transmission}}</p>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-6">
+                            <ul class="lista more_size">
+                                <li>
+                                    <p>Tipo de unidad: </p><p> {{car.drive_t}}</p>
+                                </li>
+                                <li>
+                                    <p>Tipo de combustible: </p><p>{{car.fuel_t}}</p>
+                                </li>
+                                <li>
+                                    <p>Color exterior: </p><p>{{car.exterior_color}}</p>
+                                </li>
+                                <li>
+                                    <p>Color Interior: </p><p>{{car.interior_color}}</p>
+                                </li>
+                                <li>
+                                    <p>Puertas: </p><p>{{car.doors}}</p>
+                                </li>
+                                <li>
+                                    <p>Pasajeros: </p><p>?</p>
+                                </li>
+                                <li>
+                                    <p>Cilindros: </p><p>?</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="titulo ver">
+                        <div class="dos">
+                            <h4><strong>Provincia</strong><p>{{car.vin}}</p></h4>
+                            <h4><strong>No. de inventario</strong><p>{{car.stock_number}}</p></h4>
+                        </div>
+                    </div>
+                    {% if features %}
+                    <h1 class="more-marge">Caracteristicas</h1>
+                    <div class="row list">
+                      <div class="col-sm-3">
+                        <ul class="lista">
+                      {% for feature in features %}
+                                <li>
+                                    <p><i class="glyphicon glyphicon-ok"></i> {{feature}}</p>
+                                </li>
+                          {% if forloop.counter0|divisibleby:8 and forloop.counter0 != 0%}
+                              </ul>
+                            </div>
+                            <div class="col-sm-3">
+                              <ul class="lista">
+                          {% endif %}
+                        {% endfor %}
+                      </ul>
+                    </div>
+                    </div>
+                    {% endif %}
+                    {%if owner.description %}
+                      <h1>Descripción de los vendedores</h1>
+                      <p class="des">{{owner.description}}</p>
+                    {% endif %}
+                    <h1 class="verde">Concesión {{owner.username}}</h1>
+                    <div id="_google_map" style="width:100%;height:500px"></div>
+                    <script type="text/javascript">
+                    function initMap() {
+                      var myLatLng = {lat: {{car.lat}}, lng: {{car.lon}}};
+                      var map = new google.maps.Map(document.getElementById('_google_map'), {
+                        center: myLatLng,
+                        zoom: 18
+                      });
+                      var marker = new google.maps.Marker({
+                        map: map,
+                        position: myLatLng,
+                        title: '{{car.year}} {{ car.model.maker}} {{car.model}}'
+                      });
+                    }
+                    </script>
+                    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBkdHG9GomNNc0zhi7j8bxiTWf0-LHwDS8&callback=initMap" async defer></script>
+                </div>
+            </div>
+        </div>
+        {% if rest_of_cars%}
+        <div class="page">
+            <div id="thumbnail_slider" class="carousel slide slide2">
+                <!-- Carousel items -->
+                <div class="carousel-inner">
+                    <div class="item active">
+                        <div class="row">
+                            {% for lcar in rest_of_cars %}
+                                {% if forloop.counter < 5%}
+                            <div class="caja_slide col-sm-3"><a href="/detail/{{lcar.id}}"><img src="{{rest_of_cars_photos|image_at:lcar.id}}" alt="" class="img-responsive"></a>
+                            </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="row">
+                            {% for lcar in rest_of_cars %}
+                                {% if forloop.counter >= 5%}
+                            <div class="col-sm-3"><a href="#x"><img src="{{rest_of_cars_photos|image_at:lcar.id}}" alt="" class="img-responsive"></a>
+                            </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="row">
+                            {% for lcar in rest_of_cars %}
+                                {% if forloop.counter >= 9 %}
+                                    {% if forloop.counter <= 12 %}
+                            <div class="col-sm-3"><a href="#x"><img src="{{rest_of_cars_photos|image_at:lcar.id}}" alt="" class="img-responsive"></a>
+                            </div>
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <a class="left carousel-control" href="#thumbnail_slider" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                    </a>
+                <a class="right carousel-control" href="#thumbnail_slider" role="button" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+        {% endif %}
+    </section>
+  </div>
+  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBkdHG9GomNNc0zhi7j8bxiTWf0-LHwDS8&callback=initMap" async defer> </script> -->
+{% endblock %}

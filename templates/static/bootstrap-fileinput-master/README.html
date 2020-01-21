@@ -1,0 +1,226 @@
+<h1 id="bootstrap-fileinput">bootstrap-fileinput</h1>
+<p>An enhanced HTML 5 file input for Bootstrap 3.x with file preview for images and text, multiple selection, and more. This plugin is inspired by <a href="http://www.abeautifulsite.net/blog/2013/08/whipping-file-inputs-into-shape-with-bootstrap-3/">this blog article</a> and <a href="http://jasny.github.io/bootstrap/javascript/#fileinput">Jasny&#39;s File Input plugin</a>. The plugin enhances these concepts and simplifies the widget initialization with simple HTML markup on a file input. It also offers support for multiple file preview and previewing both images and text types.</p>
+<p><img src="https://lh6.googleusercontent.com/-2niyujIaat0/UyqzA_78OQI/AAAAAAAAADE/f6IJkr11uA8/w666-h418-no/fileinput-screenshot.jpg" alt="File Input Screenshot"></p>
+<h2 id="features">Features</h2>
+<ol>
+<li>The plugin will convert a simple HTML file input to an advanced file picker control. Will help fallback to a normal HTML file input for browsers not supporting JQuery or Javascript.</li>
+<li>The file input consists of the following three sections with options and templates to control the display:<ul>
+<li>file caption section: to display a brief information of the file(s) selected</li>
+<li>file action buttons section: to browse, remove, and upload files.</li>
+<li>file preview section: to display the selected files on client for preview (supports images and text file types). Other file types will be displayed as normal thumbnails.</li>
+</ul>
+</li>
+<li>The plugin automatically converts an input with <code>type = file</code> to an advanced file picker input if you set its <code>class = file</code>. All options to the input can be passed as HTML5 <code>data</code> attributes.</li>
+<li>Ability to select and preview multiple files. Uses HTML 5 File reader API to read and preview files. Displays the progress of files being being loaded onto the preview zone, in case many files are chosen.</li>
+<li>Offers predefined templates and CSS classes which can be changed to style your file-input display as per your needs.</li>
+<li>Option to show/hide any or all of the following:<ul>
+<li>caption section</li>
+<li>preview section</li>
+<li>upload button</li>
+<li>remove button</li>
+</ul>
+</li>
+<li>Customise the location of the target container elements to display the entire plugin, the caption container, the caption text, the preview container, preview image, and preview status.</li>
+<li>For text file previews, autowrap the text to the thumbnail width, and show a wrap indicator link to display complete text on hover. You can customize the wrap indicator (which defaults to &hellip;).</li>
+<li>Customise the messages for preview, progress, and files selected.</li>
+<li>Upload action defaults to form submit. Supports an upload route/server action parameter for custom ajax based upload.</li>
+<li>Triggers JQuery events for advanced development. Events currently available are <code>filereset</code> and <code>fileclear</code>.</li>
+<li>Disabled and readonly file input support.</li>
+<li>Size of the entire plugin is less than 11KB (about 9KB for the minified JS and 2KB for the minified CSS).</li>
+</ol>
+<h2 id="demo">Demo</h2>
+<p>View the <a href="http://plugins.krajee.com/file-input">plugin documentation</a> and <a href="http://plugins.krajee.com/file-input/demo">plugin demos</a> at Krajee JQuery plugins. </p>
+<h2 id="pre-requisites">Pre-requisites</h2>
+<ol>
+<li><a href="http://getbootstrap.com/">Bootstrap 3.x</a></li>
+<li>Latest <a href="http://jquery.com/">JQuery</a></li>
+<li>Most modern browsers supporting HTML5 file inputs and FileReader API including CSS3 &amp; JQuery. For Internet Explorer, one must use IE versions 10 and above. IE9 and below will work as a normal file input, and will not support multiple file selection or the HTML 5 FileReader API.</li>
+</ol>
+<h2 id="restrictions">Restrictions</h2>
+<p>The plugin supports only file input and preview at client level. It does not actually process the upload of the files to the server.</p>
+<h2 id="installation">Installation</h2>
+<h3 id="using-bower">Using Bower</h3>
+<p>You can use the <code>bower</code> package manager to install. Run:</p>
+<pre><code>bower install bootstrap-fileinput
+</code></pre><h3 id="using-composer">Using Composer</h3>
+<p>You can use the <code>composer</code> package manager to install. Either run:</p>
+<pre><code>$ php composer.phar require kartik-v/bootstrap-fileinput &quot;dev-master&quot;
+</code></pre><p>or add:</p>
+<pre><code>&quot;kartik-v/bootstrap-fileinput&quot;: &quot;dev-master&quot;
+</code></pre><p>to your composer.json file</p>
+<h3 id="manual-install">Manual Install</h3>
+<p>You can also manually install the plugin easily to your project. Just download the source <a href="https://github.com/kartik-v/bootstrap-fileinput/zipball/master">ZIP</a> or <a href="https://github.com/kartik-v/bootstrap-fileinput/tarball/master">TAR ball</a> and extract the plugin assets (css and js folders) into your project.</p>
+<h2 id="usage">Usage</h2>
+<p>Step 1: Load the following assets in your header. </p>
+<pre><code class="lang-html">&lt;link href=&quot;http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css&quot; rel=&quot;stylesheet&quot;&gt;
+&lt;link href=&quot;path/to/css/fileinput.min.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+&lt;script src=&quot;//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;path/to/js/fileinput.min.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
+</code></pre>
+<p>If you noticed, you need to load the <code>jquery.min.js</code> and <code>bootstrap.min.css</code> in addition to the <code>fileinput.min.css</code> and <code>fileinput.min.js</code>.</p>
+<p>Step 2: Initialize the plugin on your page. For example,</p>
+<pre><code class="lang-js">// initialize with defaults
+$(&quot;#input-id&quot;).fileinput();
+
+// with plugin options
+$(&quot;#input-id&quot;).fileinput({&#39;showUpload&#39;:false, &#39;previewFileType&#39;:&#39;any&#39;});
+</code></pre>
+<p>The <code>#input-id</code> is the identifier for the input (e.g. <code>type = file</code>) on your page, which is hidden automatically by the plugin. </p>
+<p>Alternatively, you can directly call the plugin options by setting data attributes to your input field.</p>
+<pre><code class="lang-html">&lt;input id=&quot;input-id&quot; type=&quot;file&quot; class=&quot;file&quot; data-preview-file-type=&quot;text&quot; &gt;
+</code></pre>
+<h2 id="documentation">Documentation</h2>
+<h3 id="plugin-options">Plugin Options</h3>
+<p>The plugin supports these following options:</p>
+<h4 id="showcaption">showCaption</h4>
+<p><em>boolean</em> whether to display the file caption. Defaults to <code>true</code>.</p>
+<h4 id="showpreview">showPreview</h4>
+<p><em>boolean</em> whether to display the file preview. Defaults to <code>true</code>.</p>
+<h4 id="showremove">showRemove</h4>
+<p><em>boolean</em> whether to display the file remove/clear button. Defaults to <code>true</code>.</p>
+<h4 id="showupload">showUpload</h4>
+<p><em>boolean</em> whether to display the file upload button. Defaults to <code>true</code>. This will default to a form submit button, unless the uploadUrl is specified.</p>
+<h4 id="captionclass">captionClass</h4>
+<p><em>string</em> any additional CSS class to append to the caption container.</p>
+<h4 id="previewclass">previewClass</h4>
+<p><em>string</em> any additional CSS class to append to the preview container.</p>
+<h4 id="mainclass">mainClass</h4>
+<p><em>string</em> any additional CSS class to append to the main plugin container.</p>
+<h4 id="maintemplate">mainTemplate</h4>
+<p><em>string</em> the template used to render the widget. The following template variables will be parsed:</p>
+<ul>
+<li><code>{class}</code>: any additional CSS class to append to the main widget container.</li>
+<li><code>{preview}</code>: the content parsed by the <code>previewTemplate</code> and will be displayed only if <code>showPreview</code> is <code>true</code>.</li>
+<li><code>{caption}</code>: the content parsed by the <code>captionTemplate</code> and will be displayed only if <code>showCaption</code> is <code>true</code>.</li>
+<li><code>{remove}</code>: the file remove/clear button and will be displayed only if <code>showRemove</code> is <code>true</code>.</li>
+<li><code>{upload}</code>: the file upload button and will be displayed only if <code>showUpload</code> is <code>true</code>.</li>
+<li><code>{browse}</code>: the main file browse button to select your files for input.</li>
+</ul>
+<p>The <code>mainTemplate</code> if not passed, will be automatically set based on <code>showCaption</code> settings.</p>
+<ul>
+<li><p>If <code>showCaption</code> is set to <code>true</code>, the <code>mainTemplate</code> will default to:</p>
+<pre><code class="lang-html">{preview}
+&lt;div class=&quot;input-group {class}&quot;&gt;
+ {caption}
+ &lt;div class=&quot;input-group-btn&quot;&gt;
+     {remove}
+     {upload}
+     {browse}
+ &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+</li>
+<li><p>If <code>showCaption</code> is set to <code>false</code>, the <code>mainTemplate</code> will default to:</p>
+<pre><code class="lang-html">{preview}\n{remove}\n{upload}\n{browse}\n
+</code></pre>
+</li>
+</ul>
+<h4 id="captiontemplate">captionTemplate</h4>
+<p><em>string</em> the template used to render the caption. The following template variables will be parsed:</p>
+<ul>
+<li><code>{class}</code>: any additional CSS class to append to the caption container.</li>
+</ul>
+<p>The <code>captionTemplate</code> if not set will default to:</p>
+<pre><code class="lang-html">&lt;div class=&quot;form-control file-caption {class}&quot;&gt;
+   &lt;span class=&quot;glyphicon glyphicon-file&quot;&gt;&lt;/span&gt; &lt;span class=&quot;file-caption-name&quot;&gt;&lt;/span&gt;
+&lt;/div&gt;
+</code></pre>
+<h4 id="previewtemplate">previewTemplate</h4>
+<p><em>string</em> the template used to render the preview. The following template variables will be parsed:</p>
+<ul>
+<li><code>{class}</code>: any additional CSS class to append to the preview container.</li>
+</ul>
+<p>The <code>previewTemplate</code> if not set will default to:</p>
+<pre><code class="lang-html">&lt;div class=&quot;file-preview {class}&quot;&gt;
+   &lt;div class=&quot;file-preview-status text-center text-success&quot;&gt;&lt;/div&gt;
+   &lt;div class=&quot;close fileinput-remove text-right&quot;&gt;&amp;times;&lt;/div&gt;
+   &lt;div class=&quot;file-preview-thumbnails&quot;&gt;&lt;/div&gt;
+   &lt;div class=&quot;clearfix&quot;&gt;&lt;/div&gt; +
+&lt;/div&gt;
+</code></pre>
+<h4 id="browselabel">browseLabel</h4>
+<p><em>string</em> the label to display for the file picker/browse button. Defaults to <code>Browse &amp;hellip;</code>.</p>
+<h4 id="browseicon">browseIcon</h4>
+<p><em>string</em> the icon to display before the label for the file picker/browse button. Defaults to <code>&lt;i class=&quot;glyphicon glyphicon-folder-open&quot;&gt;&lt;/i&gt; &amp;nbsp;</code>.</p>
+<h4 id="browseclass">browseClass</h4>
+<p><em>string</em> the CSS class for the file picker/browse button. Defaults to <code>btn btn-primary</code>.</p>
+<h4 id="removelabel">removeLabel</h4>
+<p><em>string</em> the label to display for the file remove button. Defaults to <code>Remove</code>.</p>
+<h4 id="removeicon">removeIcon</h4>
+<p><em>string</em> the icon to display before the label for the file picker/remove button. Defaults to <code>&lt;i class=&quot;glyphicon glyphicon-ban-circle&quot;&gt;&lt;/i&gt; &amp;nbsp;</code>.</p>
+<h4 id="removeclass">removeClass</h4>
+<p><em>string</em> the CSS class for the file remove button. Defaults to <code>btn btn-default</code>.</p>
+<h4 id="uploadlabel">uploadLabel</h4>
+<p><em>string</em> the label to display for the file upload button. Defaults to <code>Upload</code>.</p>
+<h4 id="uploadicon">uploadIcon</h4>
+<p><em>string</em> the icon to display before the label for the file upload button. Defaults to <code>&lt;i class=&quot;glyphicon glyphicon-upload&quot;&gt;&lt;/i&gt; &amp;nbsp;</code>.</p>
+<h4 id="uploadclass">uploadClass</h4>
+<p><em>string</em> the CSS class for the file upload button. Defaults to <code>btn btn-default</code>.</p>
+<h4 id="uploadurl">uploadUrl</h4>
+<p><em>string</em> the URL for the upload processing action (typically for ajax based processing). Defaults to <code>null</code>. If this is not set or <code>null</code>, then the upload button action will default to form submission.</p>
+<h4 id="msgloading">msgLoading</h4>
+<p><em>string</em> the message displayed when the files are getting read and loaded for preview. Defaults to <code>Loading &amp;hellip;</code>.</p>
+<h4 id="msgprogress">msgProgress</h4>
+<p><em>string</em> the progress message displayed as each file is loaded for preview. Defaults to <code>Loaded {percent}% of {file}</code>. The following variables will be replaced:</p>
+<ul>
+<li><code>{percent}</code>: the percentage of file read and loaded.</li>
+<li><code>{file}</code>: the name of the file being loaded.</li>
+</ul>
+<h4 id="msgselected">msgSelected</h4>
+<p><em>string</em> the progress message displayed in caption window when multiple (more than one) files are selected. Defaults to <code>{n} files selected</code>. The following variables will be replaced:</p>
+<ul>
+<li><code>{n}</code>: the number of files selected.</li>
+</ul>
+<h4 id="previewfiletype">previewFileType</h4>
+<p><em>string</em> the type of files that are to be displayed in the preview window. Defaults to <code>image</code>. Can be one of the following:</p>
+<ul>
+<li><code>image</code>: Only <code>image</code> type files will be shown in preview.</li>
+<li><code>text</code>:  Only <code>text</code> type files will be shown in preview.</li>
+<li><code>any</code>: Both <code>image</code> and <code>text</code> files content will be shown in preview.</li>
+</ul>
+<p>Files other than <code>image</code> or <code>text</code> will be displayed as a thumbnail with the filename in the preview window.</p>
+<h4 id="wraptextlength">wrapTextLength</h4>
+<p><em>integer</em> the number of characters after which the content will be stripped/wrapped for text preview. Defaults to <code>250</code>.</p>
+<h4 id="wrapindicator">wrapIndicator</h4>
+<p><em>string</em> the type of files that are to be displayed in the preview window. Defaults to <code>&lt;span class=&quot;wrap-indicator&quot; title=&quot;{title}&quot;&gt;[&amp;hellip;]&lt;/span&gt;</code>.  The following variables will be replaced:</p>
+<ul>
+<li><code>{title}</code>: the content of the entire text file that will be displayed as a span title element.</li>
+</ul>
+<h4 id="elcaptioncontainer">elCaptionContainer</h4>
+<p><em>DOM Element</em> the container element containing the caption. If not set, will default to the container with CSS class <code>file-caption</code> inside the main plugin container.</p>
+<h4 id="elcaptiontext">elCaptionText</h4>
+<p><em>DOM Element</em> the container element containing the caption text. If not set, will default to the container with CSS class <code>file-caption-name</code> inside the main plugin container.</p>
+<h4 id="elpreviewcontainer">elPreviewContainer</h4>
+<p><em>DOM Element</em> the container element containing the preview. If not set, will default to the container with CSS class <code>file-preview</code> inside the main plugin container.</p>
+<h4 id="elpreviewimage">elPreviewImage</h4>
+<p><em>DOM Element</em> the container element containing the preview image thumbnails. If not set, will default to the container with CSS class <code>file-preview-thumbnails</code> inside the main plugin container.</p>
+<h4 id="elpreviewstatus">elPreviewStatus</h4>
+<p><em>DOM Element</em> the container element containing the preview progress status. If not set, will default to the container with CSS class <code>file-preview-status</code> inside the main plugin container.</p>
+<h3 id="plugin-events">Plugin Events</h3>
+<p>The plugin supports these events:</p>
+<h4 id="fileclear">fileclear</h4>
+<p>This event is triggered when the file input is cleared with the remove button.</p>
+<p><strong>Example:</strong></p>
+<pre><code class="lang-js">$(&#39;#input-id&#39;).on(&#39;fileclear&#39;, function(event) {
+    console.log(&quot;fileclear&quot;);
+});
+</code></pre>
+<h4 id="filereset">filereset</h4>
+<p>This event is triggered when the file input is reset to initial value.</p>
+<p><strong>Example:</strong></p>
+<pre><code class="lang-js">$(&#39;#input-id&#39;).on(&#39;filereset&#39;, function(event) {
+    console.log(&quot;filereset&quot;);
+});
+</code></pre>
+<h3 id="plugin-methods">Plugin Methods</h3>
+<p>The plugin supports these methods:</p>
+<h4 id="reset">reset</h4>
+<p>Reset the file input.</p>
+<pre><code class="lang-js">$(&#39;#input-id&#39;).fileinput(&#39;reset&#39;);
+</code></pre>
+<h4 id="clear">clear</h4>
+<p>Clear the file input.</p>
+<pre><code class="lang-js">$(&#39;#input-id&#39;).fileinput(&#39;clear&#39;);
+</code></pre>
+<h2 id="license">License</h2>
+<p><strong>bootstrap-fileinput</strong> is released under the BSD 3-Clause License. See the bundled <code>LICENSE.md</code> for details.</p>

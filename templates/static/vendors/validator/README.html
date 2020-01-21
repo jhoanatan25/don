@@ -1,0 +1,158 @@
+<h1 id="validator">validator</h1>
+<p>The javascript validation code is based on jQuery. The Validator is cross-browser and will give you the power to use future-proof input types such as ‘tel’, ‘email’, ‘number’, ‘date’, and ‘url’. I can sum this as a ‘template’ for creating web forms.</p>
+<p>In the semantic point-of-view, I believe that this method is very clean and…appropriate. This is how forms should be, IMHO.</p>
+<p><a href="http://yaireo.github.io/validator">DEMO PAGE</a></p>
+<h3 id="why-should-you-use-this-">Why should you use this?</h3>
+<ul>
+<li>Cross browser validation</li>
+<li>Deals with all sorts of edge cases</li>
+<li>Utilize new HTML5 types for unsupported browsers</li>
+<li>Flexible error messaging system</li>
+<li>Light-weight (10kb + comments)</li>
+</ul>
+<h2 id="validation-types-support">Validation types support</h2>
+<p>HTML5 offers a wide selection of input types. I saw no need to support them all, for example, a checkbox should not be validated as ‘required’ because why wouldn’t it be checked in the first place when the form is rendered?</p>
+<p>For a full list of all the available Types, visit the working draft page.
+These input types can be validated by the the JS for – <code>&lt;input type=&#39;foo&#39; name=&#39;bar&#39; /&gt;</code>. (Support is synthesized)</p>
+<ul>
+<li>Text</li>
+<li>Email</li>
+<li>Password</li>
+<li>Number</li>
+<li>Date</li>
+<li>URL</li>
+<li>Search</li>
+<li>File</li>
+<li>Tel</li>
+<li>Checkbox</li>
+<li>Hidden – Hidden fields can also have the ‘required’ attribute</li>
+</ul>
+<p>The below form elements are also supported:</p>
+<ul>
+<li>Select – Useing a ‘required’ class because there is no such attribute for ‘select’ element</li>
+<li>Textarea</li>
+</ul>
+<h2 id="basic-semantics">Basic semantics</h2>
+<pre><code>&lt;form action=&quot;&quot; method=&quot;post&quot; novalidate&gt;
+    &lt;fieldset&gt;
+        &lt;div class=&quot;item&quot;&gt;
+            &lt;label&gt;
+                &lt;span&gt;Name&lt;/span&gt;
+                &lt;input data-validate-lengthRange=&quot;6&quot; data-validate-words=&quot;2&quot; name=&quot;name&quot; placeholder=&quot;ex. John f. Kennedy&quot; required=&quot;required&quot; type=&quot;text&quot; /&gt;
+            &lt;/label&gt;
+            &lt;div class=&#39;tooltip help&#39;&gt;
+                &lt;span&gt;?&lt;/span&gt;
+                &lt;div class=&#39;content&#39;&gt;
+                    &lt;b&gt;&lt;/b&gt;
+                    &lt;p&gt;Name must be at least 2 words&lt;/p&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;item&quot;&gt;
+            &lt;label&gt;
+                &lt;span&gt;email&lt;/span&gt;
+                &lt;input name=&quot;email&quot; required=&quot;required&quot; type=&quot;email&quot; /&gt;
+            &lt;/label&gt;
+        &lt;/div&gt;
+             ...
+</code></pre><h3 id="explaining-the-dom">Explaining the DOM</h3>
+<p>First, obviously, there is a Form element with the novalidate attribute to make sure to disable the native HTML5 validations (which currently suck). proceeding it there is a Fieldset element which is not a must, but acts as a “binding” box for a group of fields that are under the same “category”. For bigger forms there are many times field groups that are visually separated from each other for example. Now, we treat every form field element the user interacts with, whatsoever, as an “item”, and therefor these “items” will be wraped with <code>&lt;div class=&#39;item&#39;&gt;</code>. This isolation gives great powers.
+Next, inside an item, there will typically be an input or select or something of the sort, so they are put inside a <code>&lt;label&gt;</code> element, to get rid of the (annoying) for attribute, on the label (which also require us to give an ID to the form field element), and now when a user clicks on the label, the field will get focused. great. Going back to the label’s text itself, we wrap it with a <code>&lt;span&gt;</code> to have control over it’s style.</p>
+<p>The whole approach here is to define each form field (input, select, whatever) as much as possible with HTML5 attributes and also with custom attributes.</p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>required</td>
+<td>Defines that this field should be validated (with JS by my implementation and not via native HTML5 browser defaults)</td>
+</tr>
+<tr>
+<td>placeholder</td>
+<td>Writes some placeholder text which usually describes the fields with some example input (not supported in IE8 and below)</td>
+</tr>
+<tr>
+<td>pattern</td>
+<td>Defines a pattern which the field is evaluated with. Available values are:<br><strong>numeric</strong> - Allow only numbers<br><strong>alphanumeric</strong> - Allow only numbers or letters. No special language characters<br><strong>phone</strong> - Allow only numbers, spaces or dashes.<br><br>Alternatively, you may write your own custom regex here as well.</td>
+</tr>
+<tr>
+<td>data-validate-words</td>
+<td>Defines the minimum amount of words for this field</td>
+</tr>
+<tr>
+<td>data-validate-length</td>
+<td>Defines the length allowed for the field (after trim). Example value: <code>7,11</code> (field can only have 7 or 11 characters). you can add how many allowed lengths you wish</td>
+</tr>
+<tr>
+<td>data-validate-length-range</td>
+<td>Defines the minimum and/or maximum number of chars in the field (after trim). value can be <code>4,8</code> for example, or just <code>4</code> to set minimum chars only</td>
+</tr>
+<tr>
+<td>data-validate-linked</td>
+<td>Defines the field which the current field’s value (the attribute is set on) should be compared to</td>
+</tr>
+<tr>
+<td>data-validate-minmax</td>
+<td>For type <code>number</code> only. Defines the minimum and/or maximum value that can be in that field</td>
+</tr>
+</tbody>
+</table>
+<h3 id="optional-fields">Optional fields</h3>
+<p>There is also support for optional fields, which are not validated, unless they have a value. The support for this feature is done by adding a class “optional” to a form element. Note that this should not be done along side the “required” attribute.</p>
+<h2 id="error-messages">Error messages</h2>
+<p>The validator function holds a messages object called &quot;message&quot;, which itself holds all the error messages being shown to the user for all sort of validation errors.</p>
+<pre><code>message = {
+    invalid            : &#39;invalid input&#39;,
+    empty            : &#39;please put something here&#39;,
+    min                : &#39;input is too short&#39;,
+    max                : &#39;input is too long&#39;,
+    number_min        : &#39;too low&#39;,
+    number_max        : &#39;too high&#39;,
+    url                : &#39;invalid URL&#39;,
+    number            : &#39;not a number&#39;,
+    email            : &#39;email address is invalid&#39;,
+    email_repeat    : &#39;emails do not match&#39;,
+    password_repeat    : &#39;passwords do not match&#39;,
+    repeat            : &#39;no match&#39;,
+    complete        : &#39;input is not complete&#39;,
+    select            : &#39;Please select an option&#39;
+};
+</code></pre><p>This object can be extended easily. The idea is to extend it with new keys which represent the name of the field you want the message to be linked to, and that custom message appear as the <code>general error</code> one. Default messages can be over-ride.
+Example: for a given type ‘date’ field, lets set a custom (general error) message like so:
+    <code>validator.message[&#39;date&#39;] = &#39;not a real date&#39;;</code></p>
+<p>Error messages can be disabled:
+    <code>validator.defaults.alerts = false;</code></p>
+<h2 id="binding-the-validation-to-a-form">Binding the validation to a form</h2>
+<p>There are 2 ways to validate form fields, one is on the submit event of the form itself, then all the fields are evaluated one by one. The other method is by binding the ‘checkField’ function itself to each field, for events like “Blur”, “Change” or whatever event you wish (I prefer on Blur).</p>
+<h3 id="usage-example-validate-on-submit">Usage example - validate on submit</h3>
+<p>A generic callback function using jQuery to have the form validated on the <strong>Submit</strong> event. You can also include your own personal validations before the <strong>checkAll()</strong> call.</p>
+<pre><code>$(&#39;form&#39;).submit(function(e){
+    e.preventDefault();
+    var submit = true;
+    // you can put your own custom validations below
+
+    // check all the rerquired fields
+    if( !validator.checkAll( $(this) ) )
+        submit = false;
+
+    if( submit )
+        this.submit();
+
+    return false;
+})
+</code></pre><h3 id="usage-example-validate-on-field-blur-event-out-of-focus-">Usage example - validate on field blur event (out of focus)</h3>
+<p>Check every field once it looses focus (onBlur) event</p>
+<pre><code>$(&#39;form&#39;).on(&#39;blur&#39;, &#39;input[required]&#39;, validator.checkField);
+</code></pre><h2 id="tooltips">Tooltips</h2>
+<p>The helper tooltips <strong>&lt;div class=&#39;tooltip help&#39;&gt;</strong>, which work using pure CSS, are element which holds a small <strong>&#39;?&#39;</strong> icon and when hovered over with the mouse, reveals a text explaining what the field “item” is about or for example, what the allowed input format is.</p>
+<h2 id="classes">Classes</h2>
+<p><code>validator.defaults.classes</code> object can be modified with these classes:</p>
+<pre><code>item    : &#39;item&#39;,  // class for each input wrapper
+alert   : &#39;alert&#39;, // call on the alert tooltip
+bad     : &#39;bad&#39;    // classes for bad input
+</code></pre><h2 id="bonos-multifields">Bonos – multifields</h2>
+<p>I have a cool feature I wrote which I call “multifields”. These are fields which are often use as to input a credit card or a serial number, and are actually a bunch of input fields which are “connected” to each other, and treated as one. You can see it in the demo page, and it’s included in ‘multifield.js’ file.</p>

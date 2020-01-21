@@ -1,0 +1,92 @@
+{% extends 'themes/A1020/base.html' %}
+{% block content %}
+{% load static %}
+<script>
+setTimeout(function(){menu("#contact_us")},500);
+</script>
+<div class="content page-outer">
+
+  <div class="row contact_us">
+    <div class="col-md-6 info">
+      <h3>{{owner.username}}</h3>
+      <h3>{{owner.address}}</h3>
+      <h3>
+        	{% if owner.phone%}
+      	  	{{owner.phone}}
+      		{% else %}
+      			{{owner.cell_phone}}
+      		{% endif %}
+      </h3>
+      <h3>{{owner.email}}</h3>
+      {% if owner.iframe%}
+        <div id="map">
+        <iframe id="if" src="" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+          <script type="text/javascript">
+            var tex="{{owner.iframe}}";
+            var res = tex.split("&quot;");
+            console.log(res);
+            document.getElementById('if').src = res[1];
+          </script>
+        </div>
+      {% else %}
+        <h3>Mapa no disponible.</h3>
+      {% endif %}
+    </div>
+    <div class="col-md-6">
+      <div class="email">
+        <img src="{% static 'icon/email.png' %}" >
+        <div>
+          <h4>¿Alguna pregunta?</h4>
+          <h4>Por favor llene el siguiente formulario y la ayuda está en camino!</h4>
+        </div>
+      </div>
+      <div class="titulo">
+        <h3>Información del contacto</h3>
+      </div>
+      <form name="sentMessage" id="contactForm" novalidate class="row">
+        <div class="control-group form-group col-sm-6">
+          <input placeholder="Nombre" type="text" class="form-control" id="name" required data-validation-required-message="required.">
+        </div>
+        <div class="control-group form-group col-sm-6">
+          <input  placeholder="Apellido" type="text" class="form-control" id="name2" required data-validation-required-message="required.">
+        </div>
+        <div class="control-group form-group col-sm-6">
+          <input placeholder="Correo" type="Email" class="form-control" id="email" required data-validation-required-message="required.">
+        </div>
+        <div class="control-group form-group col-sm-6">
+          <input placeholder="Télefono" type="tel" class="form-control" id="phone" required data-validation-required-message="required.">
+        </div>
+        <div class="control-group form-group col-xs-12 " >
+              <textarea placeholder="¿Cómo puede ayudarle?" rows="10" cols="100" class="form-control" id="message" required data-validation-required-message="Please enter your message" maxlength="999" style="resize:none"></textarea>
+        </div>
+        <div class ="cen">
+          <button type="submit" class="btn btn-primary">Enviar</button>
+        </div>
+      </form>
+      <div class="redes">
+        <h3>Mantente en contacto a través de las redes sociales</h3>
+        <!--{% if owner.facebook%}-->
+        <!--{% endif %}-->
+        <!--{% if owner.twitter%}-->
+        <!--{% endif %}-->
+        <!--{% if owner.pinterest%}-->
+        <!--{% endif %}-->
+        <!--{% if owner.google%}-->
+        <!--{% endif %}-->
+        <!--{% if owner.youtube%}-->
+        <!--{% endif %}-->
+        <!--{% if owner.instagram%}-->
+        <!--{% endif %}-->
+        <div class="icon">
+          <div class="iconos"><a href="{{owner.facebook}}" target="_blank"><img src="{% static 'icon/facebook.png' %}" alt="Facebook"></a></div>
+    			<div class="iconos"><a href="{{owner.twitter}}" target="_blank"><img src="{% static 'icon/twitter.ico' %}" alt="twitter"></a></div>
+    			<div class="iconos"><a href="{{owner.google}}" target="_blank"><img src="{% static 'icon/Google.png' %}" alt="google"></a></div>
+    			<div class="iconos"><a href="{{owner.instagram}}" target="_blank"><img src="{% static 'icon/Instagram.png' %}" alt="instagram"></a></div>
+          <div class="iconos"><a href="{{owner.youtube}}" target="_blank"><img src="{% static 'icon/youtube.png' %}" alt="instagram"></a></div>
+          <div class="iconos"><a href="{{owner.pinterest}}" target="_blank"><img src="{% static 'icon/pinterest.ico' %}" alt="instagram"></a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock%}

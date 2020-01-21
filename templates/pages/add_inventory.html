@@ -1,0 +1,33 @@
+{% extends 'base/base_backend.html' %}
+{% load replace %}
+{% block content %}
+{%if error%}
+<script>
+  swal(
+    'Lo siento',
+    '{{error}}',
+    'error'
+  )
+	swal({
+	  title: 'Lo sentimos',
+	  text: "{{error}}",
+	  type: 'error',
+	  confirmButtonColor: '#3085d6',
+	  confirmButtonText: 'Vale'
+	}).then(function () {
+	  window.location.href = "/dashboard/Inventory";
+	})
+</script>
+{%else%}
+	<div class="conten">
+		<h2>Agregar inventario</h2>
+		<div class="barra arriba"> <h2>¿Qué estas vendiendo?</h2>
+			<div class="images">
+				{% for obj in  body_styles%}
+					<a href="/dashboard/add_inventory/{{obj.description|replace}}"><label class="checkbox" for="Style{{ forloop.counter }}"><img src="{{obj.image.url}}" alt="">{{obj.description}}</label></a>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+	{%endif%}
+{% endblock %}

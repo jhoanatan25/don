@@ -1,0 +1,831 @@
+{% extends 'base/base.html' %}
+{% block content %}
+{% load static %}
+{% load multiply %}
+{% load humanize %}
+	<div>
+	<!-- content of the page-->
+	<!--Script menu -->
+	<script>
+	setTimeout(function(){menu("#home")},500);
+	</script>
+	<script type="text/javascript">
+	function changeModels(){
+		var maker = $( "#make option:selected" ).val();
+		$.ajax({
+    url:'/model',
+    type:'GET',
+    data: 'maker=' + maker,
+    dataType: 'json',
+    success: function( json ) {
+			$('#model').empty();
+			$('#model').append($('<option>').text("Select model").attr('value', -1));
+        $.each(json, function(id, value) {
+            $('#model').append($('<option>').text(value).attr('value', id));
+        });
+    }
+		});
+	}
+	function like(id){
+		url = "/like?id=" + id
+		var xmlHttp = new XMLHttpRequest();
+		xmlHttp.onreadystatechange = function(){
+			if (this.readyState == 4 && this.status == 201){
+				alert("Liked!");
+			}
+		};
+    xmlHttp.open("GET", url, true);
+    xmlHttp.send(null);
+	}
+	</script>
+
+	<script>
+	  function submitBodySearch(value) {
+	     document.getElementById('body').value = value;
+	     document.getElementById("body_forms").submit();
+	   }
+		 function submitMakeSearch(value) {
+ 	     document.getElementById('nmake').value = value;
+ 	     document.getElementById("maker_forms").submit();
+ 	   }
+	</script>
+
+	<div class="row contenedor__slider">
+		<div class=" search col-md-3 row visible-lg visible-md" id="search">
+			<form class="form" enctype="multipart/form-data" role="form" action="/search" method="post">
+				{% csrf_token %}
+					<div class="col-md-12">
+						<h2 class="text-center">Encuentra tu proximo vehiculo.</h2>
+						<a name="search"></a>
+					</div>
+					<input type="hidden" name="type" value="simple">
+					<div class="col-xs-12 tira" id="condition">
+								<input type="radio" name="condition" id="New" value="Nuevo">
+								<label class="radio left" for="New">Nuevo</label>
+								<input type="radio" name="condition" id="Used" value="Usado">
+								<label class="radio left" for="Used">Usado</label>
+								<input type="radio" name="condition" id="certified" value="Certificado">
+								<label class="radio left" for="certified">Certificado</label>
+								<input type="radio" checked name="condition" id="All" value="All">
+								<label class="radio left" for="All">Todos</label>
+					</div>
+
+					<div class="Npd col-sm-6">
+						{{ form.makefield.errors }}
+							{{ form.makefield }}
+					</div>
+					<div class="Npd col-sm-6">
+						{{ form.modelfield.errors }}
+						{{ form.modelfield }}
+					</div>
+					<div class="Npd col-sm-6">
+		 				<select class="dropdown" id="byear" name="byear">
+		    				<option value="0">Del año</option>
+	  					</select>
+					</div>
+					<div class="Npd col-sm-6">
+		 				<select class="dropdown" id="fyear" name="fyear">
+		    				<option value="10000">Al año</option>
+		  				</select>
+					</div>
+					<div class="Npd col-sm-6">
+		 				<select class="dropdown" id="bprice" name="bprice">
+							<option value="0">Precio Mínimo</option>
+		  				</select>
+					</div>
+					<div class="Npd col-sm-6">
+		 				<select class="dropdown" id="fprice" name="fprice">
+							<option value="1000000000000">Precio Máximo</option>
+		  				</select>
+					</div>
+					<div class="Npd col-sm-12">
+						{{ form.city.errors }}
+							{{ form.city }}
+					</div>
+					<div class="col-sm-12 row no-pr Search">
+	  					<div class="cbtn">
+	  						<button type="submit" class="btn btn-danger Search" aria-label="center Align">Buscar</button>
+	  					</div>
+	  					<h3 class ="advance_search"><a href="/advance">Busqueda Avanzada</a></h3>
+	 				</div>
+			</form>
+		</div>
+		<div class="banner col-md-9 visible-md visible-lg">
+			<div id="myCarousel" class="carousel slide" data-ride="carousel">
+			<!-- Indicators -->
+			<ol class="carousel-indicators">
+				<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				<li data-target="#myCarousel" data-slide-to="1"></li>
+				<li data-target="#myCarousel" data-slide-to="2"></li>
+			</ol>
+			<!-- Wrapper for slides -->
+			<div class="carousel-inner" role="listbox">
+				{%for slide in slides%}
+					{%if slide.image%}
+						<div class="item {%	if forloop.counter0 == 0%}active{%endif%}">
+							<img class="adaptar" src="{{slide.image.url}}" alt="slide">
+							<div class="text">
+								<h1><a href="{{slide.url_1}}">{{slide.title_1}}</a></h1>
+								<h2><a href="{{slide.url_2}}">{{slide.title_2}}</a></h2>
+								<h3><a href="{{slide.url_3}}">{{slide.title_3}}</a></h3>
+							</div>
+						</div>
+					{%endif%}
+				{%endfor%}
+			</div>
+			<!-- Left and right controls -->
+			<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+				<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+				<span class="sr-only">Previous</span>
+			</a>
+			<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+				<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+				<span class="sr-only">Next</span>
+			</a>
+			</div>
+		</div>
+	</div>
+	<section class="bottom-box row">
+		<a href="/car_reviews" class="col-sm-6 col-md-3 bottom-box__box">
+			<img src="/static/images/Car_Review_Blog.jpg" alt="">
+			<h3>Comentarios de carros</h3>
+		</a>
+		<a href="/find_local_dealer" class="col-sm-6 col-md-3 bottom-box__box">
+			<img src="/static/images/Find_local_dealer.jpg" alt="">
+			<h3>Buscar distribuidor</h3>
+		</a>
+		<a href="/sell" class="col-sm-6 col-md-3 bottom-box__box">
+			<img src="/static/images/sell.jpg" alt="">
+			<h3>Vender tu carro</h3>
+		</a>
+		<a href="/buying_guide" class="col-sm-6 col-md-3 bottom-box__box">
+			<img src="/static/images/tips.jpg" alt="">
+			<h3>Guia de compras</h3>
+		</a>
+	</section>
+<!-- --------------------------------------------search by------------------------------------ -->
+	<section class="search_by">
+		<h2 class="text-center title">Busqueda Rapida</h2>
+		<h3 class="text-center easily">Encuentra facilmente tu vehiculo por estilo o marca</h3>
+		<ul class="nav nav-tabs nav-center">
+		  <li id="op1" role="presentation" class="active"><a onclick="tags(1)" >Estilo</a></li>
+		  <li id="op2" role="presentation"><a onclick="tags(2)" >Marca</a></li>
+		</ul>
+		<div class="body">
+			<div class="tag1 view">
+				<form class="" action="/search" id="body_forms" method="post">
+				<div class="images row">
+				 {% csrf_token %}
+				 	<input type="hidden" name="type" value="simple">
+				  	<input type='hidden' id= 'body' name='body' value='' />
+					{% for obj in  body_styles %}
+					<div class="col col-lg-2 col-sm-4 ">
+						<a onclick="submitBodySearch({{obj.id}});"><label class="checkbox" ><img src="{{obj.image.url}}" alt="">{{obj.description}}</label></a>
+					</div>
+					{% if forloop.counter == 6 %}
+					</div>
+					<div id="morecars" class="collapse images">
+					{% endif %}
+					{% endfor %}
+				</div>
+				<span class="btn btn-link show-all" data-toggle="collapse" onclick="show_all()" data-target="#morecars"><hr><p id="text-show-all">Desplegar <i class="fa fa-chevron-down" aria-hidden="true"></i></p><hr></span>
+			</form>
+			</div>
+			 <div class="tag2 no-view">
+				<div class="cont-list row">
+					<form class="" action="/search" id="maker_forms" method="post">
+						{% csrf_token %}
+	 				 	<input type="hidden" name="type" value="simple">
+	 				  <input type='hidden' id='nmake' name='make' value='' />
+								{% for obj in  makers%}
+									{% if forloop.counter0 == 0 %}
+										<div class="list col-xs-6 col-sm-3">
+										<ul>
+									{% elif forloop.counter0|divisibleby:3 and forloop.counter0 != 0 %}
+										</ul>
+										</div>
+										<div class="list col-xs-6 col-sm-3">
+										<ul>
+									{% endif %}
+									<li><a onclick="submitMakeSearch({{obj.id}});">{{ obj.description }}</a></li>
+								{% endfor %}
+							</ul>
+							</div>
+						</form>
+				</div>
+			</div>
+
+		</div>
+	</section>
+<!-- --------------------------------------------List search------------------------------------ -->
+		<section class="content" id="no-top">
+			<h2 class="text-center title" style="margin-bottom: 1em;">Nuevos Anuncios</h2>
+			<div class="row">
+				<button id="open" onclick="desplegar()" type="button" class="btsearch btn btn-default" aria-label="Left Align">
+					<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+				</button>
+				<button id="close" onclick="plegar()" type="button" class="btn btn-default btsearch2" aria-label="Left Align">
+					<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+				</button>
+				<div id="mostrar" class="iz col-sm-12 col-md-2 row no-view">
+					<div class="search col-xs-12 row">
+							<div class="col-md-12 title titleC">
+								<h4>Modificar búsqueda</h4>
+							</div>
+
+							<form class="form" enctype="multipart/form-data" role="form" action="/search" method="post">
+								{% csrf_token %}
+									<input type="hidden" name="type" value="simple">
+
+							<!-- <div class="duo col-sm-12"> -->
+							<div class="col-xs-12">
+								<select class="dropdown" id="Miles" name="Miles">
+									<option value="1000000000">Millas</option>
+									<option value="10">10 Millas</option>
+									<option value="25">25 Millas</option>
+									<option value="50">50 Millas</option>
+									<option value="75">75 Millas</option>
+									<option value="100">100 Millas</option>
+									<option value="200">200 Millas</option>
+									<option value="300">300 Millas</option>
+									<option value="500">500 Millas</option>
+									<option value="1000000000">Otra milla</option>
+								</select>
+							</div>
+							<div class="col-xs-12 ">
+							  	<input class="black" id="ZIP_code" type="text" placeholder="Codigo Postal" aria-describedby="basic-addon2">
+							</div>
+								<div class="col-xs-12">
+									{{ form.makefield.errors }}
+										{{ form.makefield }}
+								</div>
+								<div class="col-xs-12">
+									{{ form.modelfield.errors }}
+										{{ form.modelfield }}
+								</div>
+
+							<div class="col-xs-12">
+									<select class="dropdown" id="bprice" name="bprice">
+										<option value="0">Precio Mí	nimo</option>
+										<option value="1000">1000</option>
+										<option value="2000">2000</option>
+										<option value="3000">3000</option>
+										<option value="4000">4000</option>
+										<option value="5000">5000</option>
+										<option value="6000">6000</option>
+										<option value="7000">7000</option>
+										<option value="8000">8000</option>
+										<option value="9000">9000</option>
+										<option value="10000">10000</option>
+										<option value="11000">11000</option>
+										<option value="12000">12000</option>
+										<option value="13000">13000</option>
+										<option value="14000">14000</option>
+										<option value="15000">15000</option>
+										<option value="16000">16000</option>
+										<option value="17000">17000</option>
+										<option value="18000">18000</option>
+										<option value="19000">19000</option>
+										<option value="20000">20000</option>
+										<option value="22000">22000</option>
+										<option value="24000">24000</option>
+										<option value="26000">26000</option>
+										<option value="28000">28000</option>
+										<option value="30000">30000</option>
+										<option value="35000">35000</option>
+										<option value="40000">40000</option>
+										<option value="45000">45000</option>
+										<option value="50000">50000</option>
+										<option value="55000">55000</option>
+										<option value="60000">60000</option>
+										<option value="65000">65000</option>
+										<option value="70000">70000</option>
+										<option value="75000">75000</option>
+										<option value="80000">80000</option>
+										<option value="85000">85000</option>
+										<option value="90000">90000</option>
+										<option value="95000">95000</option>
+										<option value="100000">100000</option>
+										</select>
+							</div>
+							<div class="col-xs-12">
+								<select class="dropdown" id="fprice" name="fprice">
+									<option value="1000000000000">Precio Máximo</option>
+									<option value="1000">1000</option>
+									<option value="2000">2000</option>
+									<option value="3000">3000</option>
+									<option value="4000">4000</option>
+									<option value="5000">5000</option>
+									<option value="6000">6000</option>
+									<option value="7000">7000</option>
+									<option value="8000">8000</option>
+									<option value="9000">9000</option>
+									<option value="10000">10000</option>
+									<option value="11000">11000</option>
+									<option value="12000">12000</option>
+									<option value="13000">13000</option>
+									<option value="14000">14000</option>
+									<option value="15000">15000</option>
+									<option value="16000">16000</option>
+									<option value="17000">17000</option>
+									<option value="18000">18000</option>
+									<option value="19000">19000</option>
+									<option value="20000">20000</option>
+									<option value="22000">22000</option>
+									<option value="24000">24000</option>
+									<option value="26000">26000</option>
+									<option value="28000">28000</option>
+									<option value="30000">30000</option>
+									<option value="35000">35000</option>
+									<option value="40000">40000</option>
+									<option value="45000">45000</option>
+									<option value="50000">50000</option>
+									<option value="55000">55000</option>
+									<option value="60000">60000</option>
+									<option value="65000">65000</option>
+									<option value="70000">70000</option>
+									<option value="75000">75000</option>
+									<option value="80000">80000</option>
+									<option value="85000">85000</option>
+									<option value="90000">90000</option>
+									<option value="95000">95000</option>
+									<option value="100000">100000</option>
+									</select>
+							</div>
+							<div class="col-sm-12">
+								<select class="dropdown" id="byear" name="byear">
+										<option value="0">Desde el año</option>
+										<option value="1990">1990</option>
+										<option value="1991">1991</option>
+										<option value="1992">1992</option>
+										<option value="1993">1993</option>
+										<option value="1994">1994</option>
+										<option value="1995">1995</option>
+										<option value="1996">1996</option>
+										<option value="1997">1997</option>
+										<option value="1998">1998</option>
+										<option value="1999">1999</option>
+										<option value="2000">2000</option>
+										<option value="2001">2001</option>
+										<option value="2002">2002</option>
+										<option value="2003">2003</option>
+										<option value="2004">2004</option>
+										<option value="2005">2005</option>
+										<option value="2006">2006</option>
+										<option value="2007">2007</option>
+										<option value="2008">2008</option>
+										<option value="2009">2009</option>
+										<option value="2010">2010</option>
+										<option value="2011">2011</option>
+										<option value="2012">2012</option>
+										<option value="2013">2013</option>
+										<option value="2014">2014</option>
+										<option value="2015">2015</option>
+										<option value="2016">2016</option>
+									</select>
+							</div>
+							<div class="col-xs-12">
+							<select class="dropdown" id="fyear" name="fyear">
+									<option value="10000">Hasta el año</option>
+									<option value="1990">1990</option>
+									<option value="1991">1991</option>
+									<option value="1992">1992</option>
+									<option value="1993">1993</option>
+									<option value="1994">1994</option>
+									<option value="1995">1995</option>
+									<option value="1996">1996</option>
+									<option value="1997">1997</option>
+									<option value="1998">1998</option>
+									<option value="1999">1999</option>
+									<option value="2000">2000</option>
+									<option value="2001">2001</option>
+									<option value="2002">2002</option>
+									<option value="2003">2003</option>
+									<option value="2004">2004</option>
+									<option value="2005">2005</option>
+									<option value="2006">2006</option>
+									<option value="2007">2007</option>
+									<option value="2008">2008</option>
+									<option value="2009">2009</option>
+									<option value="2010">2010</option>
+									<option value="2011">2011</option>
+									<option value="2012">2012</option>
+									<option value="2013">2013</option>
+									<option value="2014">2014</option>
+									<option value="2015">2015</option>
+									<option value="2016">2016</option>
+								</select>
+								</div>
+
+							<div class="col-xs-12">
+				 				<select class="dropdown" id="condition" name="condition">
+				    				<option value="All">Condicion</option>
+				    				<option value="New">Nuevo</option>
+				    				<option value="Used">Usado</option>
+										<option value="Certified">Certificado</option>
+				  				</select>
+							</div>
+				 			<div class="col-sm-12">
+									<h5 class="text-center"><a href="/advance"><strong>+</strong>Busqueda Avanzada</a></h5>
+				  					<div class="cbtn">
+				  						<button type="submit" class="btn btn-primary Search" aria-label="Left Align">
+				  						 	Buscar
+				  						</button>
+				  					</div>
+				 			</div>
+						</form>
+					</div>
+					<div class="search  Modify col-xs-12 row">
+						<div class="col-md-12 title ">
+							<h4>Tipo de vendedor</h4>
+							<a onclick="collapse('#Seller_Type','#plus2')"><i id="plus2" class="glyphicon glyphicon-plus"></i></a>
+						</div>
+						<div class="des no-view" id="Seller_Type">
+							<input type="radio" name="Condition" id="all_sell">
+							<label class="radio left" for="all_sell">Todos los Usuarios</label>
+
+							<input type="radio" name="Condition" id="dealer">
+							<label class="radio left" for="dealer">Distribuidor</label>
+
+							<input type="radio" name="Condition" id="dealer_p">
+							<label class="radio" for="dealer_p">Vendedor</label>
+						</div>
+					</div>
+
+					<div class="search  Modify col-xs-12 row">
+						<div class="col-md-12 title ">
+							<h4>Estilo</h4>
+							<a onclick="collapse('#Style_des','#plus4')"><i id="plus4" class="glyphicon glyphicon-plus"></i></a>
+						</div>
+						<div class="des no-view" id="Style_des">
+							{% for obj in  body_styles%}
+								<input type="checkbox" name="Style" id="Style{{ forloop.counter }}">
+								<label class="checkbox" for="Style{{ forloop.counter }}">{{obj.description}}</label>
+							{% endfor %}
+						</div>
+					</div>
+					<div class="search  Modify col-xs-12 row">
+						<div class="col-md-12 title ">
+							<h4>Color</h4>
+							<a onclick="collapse('#External_color_des','#plus5')"><i id="plus5" class="glyphicon glyphicon-plus"></i></a>
+						</div>
+						<div class="des no-view" id="External_color_des">
+								<input type="checkbox" name="External_color" id="External_color1">
+								<label class="checkbox" for="External_color1">Negro</label>
+
+								<input type="checkbox" name="External_color" id="External_color2">
+								<label class="checkbox" for="External_color2">Azul</label></a>
+
+								<input type="checkbox" name="External_color" id="External_color3">
+								<label class="checkbox" for="External_color3">Marron</label>
+
+								<input type="checkbox" name="External_color" id="External_color4">
+								<label class="checkbox" for="External_color4">Dorado</label>
+
+								<input type="checkbox" name="External_color" id="External_color5">
+								<label class="checkbox" for="External_color5">Gris</label>
+
+								<input type="checkbox" name="External_color" id="External_color6">
+								<label class="checkbox" for="External_color6">Verde</label>
+
+								<input type="checkbox" name="External_color" id="External_color7">
+								<label class="checkbox" for="External_color7">Blanco</label>
+
+								<input type="checkbox" name="External_color" id="External_color8">
+								<label class="checkbox" for="External_color8">Rojo</label>
+
+								<input type="checkbox" name="External_color" id="External_color9">
+								<label class="checkbox" for="External_color9">Plata</label>
+
+								<div id="External_color_des_more" class="no-view">
+									<input type="checkbox" name="External_color" id="External_color11">
+									<label class="checkbox" for="External_color11">Purpura</label>
+
+									<input type="checkbox" name="External_color" id="External_color12">
+									<label class="checkbox" for="External_color12">Naranja</label></a>
+
+									<input type="checkbox" name="External_color" id="External_color13">
+									<label class="checkbox" for="External_color13">Marron</label>
+								</div>
+								<a id="External_color_des_more_btn" onclick="more('#External_color_des_more','#External_color_des_more_btn')">Show More</a>
+								<!-- hide-->
+						</div>
+					</div>
+					<div class="search  Modify col-xs-12 row">
+						<div class="col-md-12 title ">
+							<h4>Motor</h4>
+							<a onclick="collapse('#Engine_des','#plus6')"><i id="plus6" class="glyphicon glyphicon-plus"></i></a>
+						</div>
+						<div class="des no-view" id="Engine_des">
+								<input type="checkbox" name="Engine" id="Engine1">
+								<label class="checkbox" for="Engine1">3 Cilindors</label>
+
+								<input type="checkbox" name="Engine" id="Engine2">
+								<label class="checkbox" for="Engine2">4 Cilindors</label></a>
+
+								<input type="checkbox" name="Engine" id="Engine3">
+								<label class="checkbox" for="Engine3">5 Cilindors</label>
+
+								<input type="checkbox" name="Engine" id="Engine4">
+								<label class="checkbox" for="Engine4">6 Cilindors</label>
+
+								<input type="checkbox" name="Engine" id="Engine5">
+								<label class="checkbox" for="Engine5">8 Cilindors</label>
+
+								<input type="checkbox" name="Engine" id="Engine6">
+								<label class="checkbox" for="Engine6">10 Cilindors</label>
+
+								<input type="checkbox" name="Engine" id="Engine7">
+								<label class="checkbox" for="Engine7">Electrico</label>
+
+								<input type="checkbox" name="Engine" id="Engine8">
+								<label class="checkbox" for="Engine8">Hibrido</label>
+
+								<input type="checkbox" name="Engine" id="Engine9">
+								<label class="checkbox" for="Engine9">Motor rotativo</label>
+						</div>
+					</div>
+					<div class="search  Modify col-xs-12 row">
+						<div class="col-md-12 title ">
+							<h4>Transmisión</h4>
+							<a onclick="collapse('#Transmission_des','#plus7')"><i id="plus7" class="glyphicon glyphicon-plus"></i></a>
+						</div>
+						<div class="des no-view" id="Transmission_des">
+								<input type="checkbox" name="Transmission" id="Transmission1">
+								<label class="checkbox" for="Transmission1">Automatico</label>
+
+								<input type="checkbox" name="Transmission" id="Transmission2">
+								<label class="checkbox" for="Transmission2">Cincronico</label></a>
+						</div>
+					</div>
+					<div class="search  Modify col-xs-12 row">
+						<div class="col-md-12 title ">
+							<h4>Traccion</h4>
+							<a onclick="collapse('#drive_type_des','#plus8')"><i id="plus8" class="glyphicon glyphicon-plus"></i></a>
+						</div>
+						<div class="des no-view" id="drive_type_des">
+								<input type="checkbox" name="drive_type" id="drive_type1">
+								<label class="checkbox" for="drive_type1">4x4</label>
+
+								<input type="checkbox" name="drive_type" id="drive_type2">
+								<label class="checkbox" for="drive_type2">Tracción delantera</label></a>
+
+								<input type="checkbox" name="drive_type" id="drive_type3">
+								<label class="checkbox" for="drive_type3">Tracción trasera</label></a>
+						</div>
+					</div>
+					<div class="search  Modify col-xs-12 row">
+						<div class="col-md-12 title ">
+							<h4>Tipo de Combustible</h4>
+							<a onclick="collapse('#fuel_type_des','#plus9')"><i id="plus9" class="glyphicon glyphicon-plus"></i></a>
+						</div>
+						<div class="des no-view" id="fuel_type_des">
+								<input type="checkbox" name="fuel_type" id="fuel_type1">
+								<label class="checkbox" for="fuel_type1">Alternativo</label>
+
+								<input type="checkbox" name="fuel_type" id="fuel_type2">
+								<label class="checkbox" for="fuel_type2">Gasoil</label></a>
+
+								<input type="checkbox" name="fuel_type" id="fuel_type3">
+								<label class="checkbox" for="fuel_type3">Electrico</label></a>
+
+								<input type="checkbox" name="fuel_type" id="fuel_type4">
+								<label class="checkbox" for="fuel_type4">Gasolina</label></a>
+
+								<input type="checkbox" name="fuel_type" id="fuel_type5">
+								<label class="checkbox" for="fuel_type5">Hibrido</label></a>
+						</div>
+						<div class="cbtn">
+	  						<button type="submit" class="btn btn-primary Search" aria-label="Left Align">
+	  						 	Busqueda
+	  						</button>
+				  	</div>
+					</div>
+				</div>
+				<form class="" action="/" method="get">
+				<div class="results col-sm-12 col-md-10 row">
+					<div class="header col-xs-12">
+						<div class="location">
+							<h5>Ubicacion: Caracas, Venezuela</h5>
+							<a href="#"><i class="glyphicon glyphicon-map-marker"></i>    Cambiar Ubicacion</a>
+						</div>
+						<div class="jun">
+							<div class="total">
+								<p>Todas las listas <strong>(18)</strong></p>
+							</div>
+							<div class="miles">
+								<p><strong>Entre: </strong>30 millas of 3333</p>
+							</div>
+						</div>
+						<div class="right">
+							<div>
+
+				 				<select class="dropdown" onchange="this.form.submit()" id="result" name="result">
+										<option
+										{% if result == 10%}
+											selected="selected"
+										{%endif%}
+										 value="10" >Resultados por página: 10 </option>
+										<option
+										{% if result == 20%}
+											selected="selected"
+										{%endif%}
+										value="20" >Resultados por página: 20 </option>
+										<option
+										{% if result == 50%}
+											selected="selected"
+										{%endif%}
+										 value="50" >Resultados por página: 50 </option>
+										<option
+										{% if result == 100%}
+											selected="selected"
+										{%endif%}
+										value="100" >Resultados por página: 100 </option>
+				  				</select>
+							</div>
+							<div>
+				 				<select class="dropdown" onchange="this.form.submit()" id="filter" name="filter">
+				    				<option
+										{% if filter == 1%}
+											selected="selected"
+										{%endif%}
+										value="1">Fecha de publicación: Mas Antigua</option>
+				    				<option
+										{% if filter == 2%}
+											selected="selected"
+										{%endif%}
+										value="2">Fecha de publicación: Mas Nueva</option>
+				    				<option
+										{% if filter == 3%}
+											selected="selected"
+										{%endif%}
+										value="3">Año: Mas Antiguo</option>
+				    				<option
+										{% if filter == 4%}
+											selected="selected"
+										{%endif%}
+										value="4">Año: Mas Nueva</option>
+				    				<option
+										{% if filter == 5%}
+											selected="selected"
+										{%endif%}
+										value="5">Precio : Mas Alto</option>
+				    				<option
+										{% if filter == 6%}
+											selected="selected"
+										{%endif%}
+										value="6">Precio : Mas Bajo</option>
+				  				</select>
+							</div>
+							<button onclick="listas()" id="list" type="button" class="btn btn-default active" aria-label="Left Align">
+  								<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+							</button>
+							<button onclick="cajas()" id="box" type="button" class="btn btn-default inactive" aria-label="Left Align">
+  								<span class="glyphicon glyphicon-th" aria-hidden="true"></span>
+							</button>
+						</div>
+					</div>
+					<div class="body  col-xs-12">
+						<section id="cambiar" class="cards list row">
+							{% for obj in cars %}
+							{% if forloop.counter == 1 %}
+								<div class="tres">
+							{% endif %}
+							<div class="row car">
+							<div class="car__img col col-sm-3">
+							<!-- <div id="carImg{{obj.id}}" class="carousel slide" data-ride="carousel"> -->
+							<!-- <div class="carousel-inner" role="listbox"> -->
+									{% for id, im in all_photos.items %}
+									{% if id == obj.id%}
+									{% for i in im %}
+									{% if forloop.counter < 2%}
+										<!-- <div class="item active"> -->
+										<a  href="/detail/{{obj.id}}"><img src="{{i.image.url}}"></a>
+										<!-- <div class="item"> -->
+									{% endif %}
+									<!-- </div> -->
+									{% endfor %}
+									{% endif %}
+									{% endfor %}
+									{%if authenticated%}
+										<a id="mlist1" onclick="like({{obj.id}});" class="favoritos"><i class="glyphicon glyphicon-star"></i></a>
+									{%endif%}
+									</div>
+							<div class="car__info col col-sm-7 row">
+								<h3 class="col col-sm-12"><a class="ver"  href="/detail/{{obj.id}}">{{obj.model.year}} {{obj.model.maker}} {{obj.model.description}}</a>
+									 <a onclick="collapse('#CarInfo{{forloop.counter}}','#Car{{forloop.counter}}')"><i id="Car{{forloop.counter}}" class="glyphicon glyphicon-plus"></i></a>
+								</h3>
+								<div class="row col col-sm-8 car__info-caracteristicas no-view" id="CarInfo{{forloop.counter}}">
+									<div class="row col col-sm-6">
+										<div class="info_lineal">
+											<strong class="col col-sm-7">Condición:</strong>
+											<p class="col col-sm-5 ">{{ obj.condition}}</p>
+										</div>
+										<div class="info_lineal">
+											<strong class="col col-sm-7 ">Kilometraje:</strong>
+											<p class="col col-sm-5 ">{{ obj.mileage}}</p>
+										</div>
+										<div class="info_lineal">
+											<strong class="col col-sm-7 ">Combustible:</strong>
+											<p class="col col-sm-5 ">{{ obj.fuel_t}}</p>
+										</div>
+										<div class="info_lineal">
+											<strong class="col col-sm-7 ">Transmición:</strong>
+											<p class="col col-sm-5 ">{{ obj.transmission}}</p>
+										</div>
+									</div>
+									<div class="row col col-sm-6">
+										<div class="info_lineal">
+											<strong class="col col-sm-7">Body Style:</strong>
+											<p class="col col-sm-5 ">{{ obj.body_s}}</p>
+										</div>
+										<div class="info_lineal">
+											<strong class="col col-sm-7">Driver Type:</strong>
+											<p class="col col-sm-5 ">{{ obj.drive}}</p>
+										</div>
+										<div class="info_lineal no-view">
+											<strong class="col col-sm-7">Color Exterior:</strong>
+											<p class="col col-sm-5 ">{{ obj.exterior_color}}</p>
+										</div>
+										<div class="info_lineal no-view">
+											<strong class="col col-sm-7">Color Interior:</strong>
+											<p class="col col-sm-5 ">{{ obj.interior_color}}</p>
+										</div>
+									</div>
+								</div>
+								<div class="col col-sm-4 car__info-description no-view no-list">
+									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+								</div>
+								<div class="row col col-sm-12 car__links">
+									<a  href="/detail/{{obj.id}}" class="col col-sm-7" style="text-align:center;">Detalles del Vehiculo</a>
+									<a  href="/detail/{{obj.id}}" class="col col-sm-5 no-view" style="text-align:center;">Descripción del Vendedor</a>
+								</div>
+							</div>
+
+							<div class="car__dealer col-sm-2">
+								<h3 class="col col-sm-12">{{ obj.price | intcomma}}</h3>
+								{% if obj.owner.is_dealer %}
+								{%if obj.owner.image%}
+									<div><img src="{{obj.owner.image.url}}" alt=""></div>
+									{% else %}
+									<div><img src="/static/images/logo.png" alt=""></div>
+								{% endif %}
+									<a href="/dealer/{{obj.owner}}">{{obj.owner}}</a>
+								{% else %}
+									<div><img src="/static/images/private.jpg" alt=""></div>
+									<p href="">{{obj.owner}}</p>
+								{% endif %}
+								{% if obj.owner.phone%}
+									<p>{{obj.owner.phone}}</p>
+								{% endif %}
+								{% if obj.owner.phone == null %}
+										<p>{{obj.owner.cell_phone}}</p>
+								{% endif %}
+							</div>
+
+						</div>
+						{% if forloop.counter|divisibleby:3 %}
+								</div>
+								<div class="tres">
+						{% endif %}
+						{% endfor %}
+
+						</section>
+						<nav>
+
+						  <ul class="pagination">
+								{% if current_page  > 1%}
+								<li>
+									<button style="border:none; padding: 10px;" type="submit" id="page" name="page" value="{{current_page|add:'-1'}}" >
+										<span aria-hidden="true">&laquo;</span>
+									</button>
+						    </li>
+								{% endif %}
+								{% for i in max_pages_range %}
+							    <li>
+									<button
+
+									{% if forloop.counter == current_page %}
+										class="btn btn-success"
+									{% endif %}
+									style="border:none; padding: 10px;" type="submit" id="page" name="page" value="{{forloop.counter}}" > {{forloop.counter}}</button>
+									</li>
+								{% endfor %}
+
+								{% if current_page < max_pages %}
+								<li>
+									<button style="border:none; padding: 10px;" type="submit" id="page" name="page" value="{{current_page|add:'1'}}" >
+										<span aria-hidden="true">&raquo;</span>
+									</button>
+						    </li>
+								{% endif %}
+						  </ul>
+						</form>
+						</nav>
+						</div>
+						</div>
+						</div>
+	</section>
+	</div>
+</div>
+{% endblock%}

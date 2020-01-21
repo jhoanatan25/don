@@ -1,0 +1,118 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+<script>
+  setTimeout(function(){menu("#")},500);
+</script>
+	<!-- content of the page-->
+		<section class="content">
+			<div action="" class="formulario">
+				<h1>Guia de compras</h1>
+				<h3 class="sub">Obtenga asesoramiento de expertos sobre qué buscar al comprar un coche.</h3>
+      </div>
+      <div class="row blog__encabezado">
+        <div class="row blog col col-md-8">
+          <h3 class="tit">Últimas Publicaciones</h3>
+          {%for article in articles%}
+            <div class="col-xs-12">
+              <div class="thumbnail row">
+                <div class="col col-sm-4 pl">
+                  {%if article.image%}
+                    <a href="/car_reviews/{{article.id}}"><img src="{{article.image.url}}"></a>
+                  {%else%}
+                    <a href="/car_reviews/{{article.id}}"><img src="/static/images/toyota-gt86.jpg"></a>
+                  {%endif%}
+                </div>
+                <div class="col col-sm-8">
+                  <div class="caption">
+                    <h3><a href="/car_reviews/{{article.id}}">{{article.title}}</a></h3>
+                    <h5 class="date"><i class="glyphicon glyphicon-calendar"></i>{{article.created_at}}</h5>
+                    <div id="comentario1" class="resumir">
+                      {{article.content}}
+                    </div>
+                    <script type="text/javascript">
+                    var contenido = $("#comentario1").html();
+                    if (contenido.length > 150) {
+                      var resumen = contenido.substr(0, 150);
+                      var nuevocontenido = '<p id="resum1" class="ver">'+ resumen + ' ...</p><p id="full1" class="no_ver">' + contenido + '</p>';
+                       $("#comentario1").html(nuevocontenido);
+                    }
+                    </script>
+                    <!-- <a id="btnF1" class="ver" onclick="resume('#resum1','#full1',0,'#btnF1','#btnR1')" class="btn btn-primary" role="button">More</a>
+                    <a id="btnR1" class="no_ver" onclick="resume('#resum1','#full1',1,'#btnF1','#btnR1')" class="btn btn-primary" role="button">Less</a> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          {%endfor%}
+
+        </div>
+        <div class="col col-md-4 blog__buscadors">
+            <div class="cajas">
+              <h3 class="tit">Busqueda</h3>
+              <form class="row">
+                <div class="col col-sm-8 pr">
+                  <input type="text" placeholder="Search What?">
+                </div>
+                <div class="col col-sm-4 pl">
+                    <button type="button" class="btn btn-primary"><i class="glyphicon glyphicon-search"></i>  Search</button>
+                </div>
+              </form>
+            </div>
+            <div class="cajas">
+              <h3 class="tit">Populares</h3>
+               <div class="row">
+                <div class="col col-xs-12">
+                  <div class="thumbnail row">
+                    <div class="col col-sm-4 pl">
+                      <a href="/post"><img src="/static/images/toyota-gt86.jpg"></a>
+                    </div>
+                    <div class="col col-sm-8">
+                      <div class="caption">
+                        <h4><a href="/post">Post 1</a></h4>
+                        <h5 class="date"><i class="glyphicon glyphicon-calendar"></i>17/09/2016</h5>
+                      </div>
+                    </div>
+        			    </div>
+
+                </div>
+
+                <div class="col col-xs-12">
+                  <div class="thumbnail row">
+                    <div class="col col-sm-4 pl">
+                      <a href="/post"><img src="/static/images/toyota-gt86.jpg"></a>
+                    </div>
+                    <div class="col col-sm-8">
+                      <div class="caption">
+                        <h4><a href="/post">Post 2</a></h4>
+                        <h5 class="date"><i class="glyphicon glyphicon-calendar"></i>15/09/2016</h5>
+                      </div>
+                    </div>
+        			    </div>
+
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+			<nav aria-label="Page navigation">
+        <ul class="pagination">
+          <li>
+            <a href="#" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          <li><a href="#">1</a></li>
+          <li><a href="#">2</a></li>
+          <li><a href="#">3</a></li>
+          <li><a href="#">4</a></li>
+          <li><a href="#">5</a></li>
+          <li>
+            <a href="#" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+		</section>
+{% endblock%}

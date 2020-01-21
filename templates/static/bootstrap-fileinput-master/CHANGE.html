@@ -1,0 +1,28 @@
+<h1 id="version-1-0-0">version 1.0.0</h1>
+<p>Initial release. The following features are included in this release:</p>
+<ol>
+<li>The plugin will convert a simple HTML file input to an advanced file picker control. Will help fallback to a file input for browsers not supporting JQuery or Javascript.</li>
+<li>The file input consists of the following three sections with options and templates to control the display:<ul>
+<li>file caption section: to display a brief information of the file(s) selected</li>
+<li>file action buttons section: to browse, remove, and upload files.</li>
+<li>file preview section: to display the selected files on client for preview (supports images and text file types). Other file types will be displayed as normal thumbnails.</li>
+</ul>
+</li>
+<li>The plugin automatically converts an input with <code>type = file</code> to an advanced file picker input if you set its <code>class = file</code>. All options to the input can be passed as HTML5 <code>data</code> attributes.</li>
+<li>Ability to select and preview multiple files. Uses HTML 5 File reader API to read and preview files. Displays the progress of files being being loaded onto the preview zone, in case many files are chosen.</li>
+<li>Offers predefined templates and CSS classes which can be changed to style your file-input display as per your needs.</li>
+<li>Option to show/hide any or all of the following:<ul>
+<li>caption section</li>
+<li>preview section</li>
+<li>upload button</li>
+<li>remove button</li>
+</ul>
+</li>
+<li>Customise the location of the target container elements to display the entire plugin, the caption container, the caption text, the preview container, preview image, and preview status.</li>
+<li>For text file previews, autowrap the text to the thumbnail width, and show a wrap indicator link to display complete text on hover. You can customize the wrap indicator (which defaults to &hellip;).</li>
+<li>Customise the messages for preview, progress, and files selected.</li>
+<li>Upload action defaults to form submit. Supports an upload route/server action parameter for custom ajax based upload.</li>
+<li>Triggers JQuery events for advanced development. Events currently available are <code>filereset</code> and <code>fileclear</code>.</li>
+<li>Disabled and readonly file input support.</li>
+<li>Size of the entire plugin is less than 11KB (about 9KB for the minified JS and 2KB for the minified CSS).</li>
+</ol>

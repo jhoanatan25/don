@@ -1,0 +1,89 @@
+.detail .page .titulo {
+  justify-content: center;
+  border-top: 2px solid #ddd;
+  border-bottom: 2px solid #ddd;
+  padding: 1em 0;
+}
+.car_details img {
+  height: 350px !important;
+  width: auto;
+  margin: 0 auto;
+}
+.carousel-control .glyphicon-chevron-left,
+.carousel-control .glyphicon-chevron-right,
+.carousel-control .icon-next,
+.carousel-control .icon-prev {
+  color: #162e48;
+}
+.thumbnail_slider .carousel-inner>.item>a>img,
+.thumbnail_slider .carousel-inner>.item>img,
+.thumbnail_slider .img-responsive,
+.thumbnail_slider .thumbnail a>img,
+.thumbnail_slider .thumbnail>img {
+  height: 200px;
+  width: auto;
+}
+.become .caja {
+  box-shadow: none;
+}
+.mytable li .btn {
+  background: #162e48;
+}
+.mytable li h3 {
+  background: #1d67a6;
+}
+.mytable li h2 {
+  background: #444;
+}
+.column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.dealer,
+.private-seller {
+  margin: 0;
+  padding: 0;
+  border-radius: 10px;
+  padding-bottom: 1em;
+}
+.dealer h2,
+.private-seller h2 {
+  margin: 0;
+  padding: 0.25em 0;
+  color: #fff;
+}
+.login-fixed {
+  background: #fff;
+  padding: 2em 1em;
+  max-width: 1550px;
+  justify-content: center;
+  align-items: center;
+}
+.private-seller {
+  border: solid 4px #1d67a6;
+}
+.private-seller h2 {
+  background: #1d67a6;
+}
+.private-seller .btn-primary {
+  background: #1d67a6;
+  border: initial;
+}
+.dealer {
+  border: solid 4px #162e48;
+}
+.dealer h2 {
+  background: #162e48;
+}
+.dealer .btn-primary {
+  background: #162e48;
+  border: initial;
+}
+.line-big {
+  background: #808080;
+}
+header .navbar-inverse .page-outer {
+  position: relative;
+}

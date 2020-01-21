@@ -1,0 +1,329 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no">
+	<script src="{% static 'vendors/jquery/dist/jquery.min.js' %}"></script>
+	<script src="{% static 'vendors/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+	<!-- Todos los plugins JavaScript de Bootstrap -->
+  <script src="{% static 'js/main.js' %}"></script>
+	<!--JCrop (Jquery plugin for cropping images)-->
+	<script src="{% static 'js/jquery.Jcrop.min.js' %}"></script>
+	<!--Custom Input File-->
+	<script src="{% static 'js/custominputfile.min.js'%}"></script>
+	<script src="{% static 'js/select2.min.js' %}"></script>
+	<link href="{% static 'vendors/bootstrap/dist/css/bootstrap.min.css' %}" rel="stylesheet">
+	<link rel="stylesheet" href="{% static 'css/jquery.Jcrop.min.css' %}" type="text/css" />
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+	<link rel="stylesheet" href="{% static 'css/luis.css' %}">
+	<!-- Font slide-->
+	<link href="{% static 'css/family_Bitter.css' %}" rel='stylesheet' type='text/css'>
+	<link href="{% static 'css/Libre_Baskerville.css' %}" rel='stylesheet' type='text/css'>
+	<link href="{% static 'css/lato.css' %}" rel='stylesheet' type='text/css'>
+	<!--Font Awesome-->
+	<link rel="stylesheet" href="{% static '/font-awesome/css/font-awesome.min.css' %}">
+	<link rel="icon" type="image/png" href="{% static 'images/icon.png' %}" />
+	<link rel="stylesheet" href="{% static 'css/jquery-ui.css' %}" />
+	<link rel="stylesheet" href="{% static 'css/font.css' %}" />
+	<link rel="stylesheet" href="{% static 'css/select2.min.css' %}">
+	<!---->
+	<title>Doncarros</title>
+	<!-- Librería jQuery requerida por los plugins de JavaScript -->
+
+	<!-- Dropzone -->
+	<script src="https://rawgit.com/enyo/dropzone/master/dist/dropzone.js"></script>
+	<link rel="stylesheet" href="https://rawgit.com/enyo/dropzone/master/dist/dropzone.css">
+
+<script type="text/javascript">
+Dropzone.options.uploadWidget = {
+paramName: 'image',
+maxFilesize: 10, // MB
+maxFiles: 1,
+dictDefaultMessage: 'Click para subir una imagen',
+previewTemplate: document.querySelector('#preview-template').innerHTML,
+previewsContainer: '#dropzonePreview',
+addRemoveLinks: true,
+dictRemoveFile: 'Remove',
+acceptedFiles: 'image/*',
+init: function() {
+	this.on('success', function( file, resp ){
+		//console.log(resp.url);
+		$('#file').attr( 'value',resp.name);
+	});
+
+	this.on('thumbnail', function(file) {
+		if ( file.width < 200 || file.height < 200 ) {
+			file.rejectDimensions();
+		} else {
+			file.acceptDimensions();
+		}
+	});
+	this.on('removedfile', function(file) {
+
+		$.ajax({
+			type: 'POST',
+			url: site_path + '/post/ajaxdeletefile',
+			data: {id: file.name},
+			dataType: 'html',
+			success: function(data){
+			//  console.log(data);
+			}
+		});
+	});
+},
+
+accept: function(file, done) {
+	file.acceptDimensions = done;
+	file.rejectDimensions = function() {
+		done('The image must be at least 640 x 480px')
+	};
+}
+};
+</script>
+</head>
+<body >
+<header class="row">
+	<!-- codigo del nav-->
+	<nav class="navbar navbar-default navbar-inverse " role="navigation">
+<div class="page-outer">
+  	<div class="page-outer page2 row">
+  		<!-- El logotipo y el icono que despliega el menú se agrupan
+  		       para mostrarlos mejor en los dispositivos móviles -->
+  			<div class="logo navbar-header col col-xs-4">
+  		    		<button onclick="desmenu()" type="button" class="navbar-toggle" data-toggle="collapse"
+  		            data-target=".navbar-ex1-collapse">
+  		      			<span class="sr-only">Desplegar navegación</span>
+  		      			<span class="icon-bar"></span>
+  		      			<span class="icon-bar"></span>
+  		      			<span class="icon-bar"></span>
+  		    		</button>
+
+  		    		<a class="navbar-brand" href="/"><img src="{% static 'images/logo.png' %}" alt="logo doncarros"></a>
+  			</div>
+  		<!-- Agrupar los enlaces de navegación, los formularios y cualquier
+  		       otro elemento que se pueda ocultar al minimizar la barra-->
+  				<div id="menuDes" class="col col-xs-7 no-view collapse navbar-collapse navbar-ex1-collapse" aria-expanded="false">
+
+						<ul class="nav navbar-nav">
+  				  		<li id="home"  class="option active"><a href="/" >Inicio</a></li>
+  				  		<li id="car_finder" class="option" ><a  href="/advance">Busqueda Avanzada</a></li>
+	  				  	<li id="sell_my_car" class="option" ><a  href="/sell">Vender</a></li>
+								<li id="become_a_dealer" class="option" ><a href="/become">Planes</a></li>
+  				  		<li id="contact_us" class="option" ><a  href="/contact_us">Contactanos</a></li>
+								{% if authenticated %}
+								<li><a href="/dashboard"><span class="glyphicon glyphicon-user"></span> {{username}}</a></li>
+								{% endif %}
+								<li>
+									{% if not authenticated %}
+									<button id="log" class="sign-in_sign-up" onclick="sign_in_toogle(0)"><span class="glyphicon glyphicon-user"></span> Ingresar/Registrarse</button>
+									{% endif %}
+								</li>
+  					</ul>
+  				</div>
+  	</div>
+</div>
+	</nav>
+</header>
+
+<!---->
+<div id="log2" onclick="sign_in_toogle2()"></div>
+<div class="page-outer">
+		<div class="page-outer login-fixed row col-md-12">
+			<div class="private-seller col-sm-6">
+				<h2 class="text-center col-xs-12 sign-in__titulo">Ingresar</h2>
+				<div class="col-xs-12 centrar">
+					<form action="/login/" method="post" class="sign-in col-xs-6" >
+						<h4 class="col-xs-12 text-center">Usuario Registrado</h4>
+						{% csrf_token %}
+						<input type="hidden" name="type" value="log">
+						<p>¿Tienes una cuenta? Ingresar.</p>
+						<input class='col-xs-12' type="text" name="form-username" placeholder="Username or email" class="form-username form-control" id="form-username">
+						<a href="#" class="col-xs-12" data-toggle="modal" data-target=".username">¿ Olvido su usuario?</a>
+						<input class='col-xs-12' type="password" name="form-password" placeholder="Password" class="form-password form-control" id="form-password">
+						<a href="#" class="col-xs-12" data-toggle="modal" data-target=".password">¿ Olvido su contraseña?</a>
+						<input class='col-xs-12 btn btn-primary' type="submit" name="Sign in" value="Ingresar">
+						<a href="/create_listing" class="col-xs-6 text-center btn btn-primary visible-sm visible-xs" id="vender_btn">Vender</a>
+					</form>
+					<div class="col-xs-6 column visible-md visible-lg">
+						<h4>Nuevo Usuario</h4>
+						<h4>¿Nuevo en Doncarros.com? Crear una cuenta y vender su vehículo de forma gratuita.</h4>
+						<a href="/create_listing" class="col-xs-6 text-center btn btn-primary">Vender</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="top"></div>
+	{% block content %}
+	{% endblock %}
+</div>
+
+
+<a id="btn_top" class="no_ver" onclick="arriba()">
+	<div class="top">
+		<i class="glyphicon glyphicon-chevron-up"></i>
+	</div>
+</a>
+<!--modal -->
+<div class="modal fade username" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      Recover Username <br>
+	  To retrieve your username, enter your email <br>
+	  <input type="text"> <br>
+	  <a class="recover">Submit</a>
+	  <a class="cancel" data-dismiss="modal">Close</a>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade password" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      Recover Password <br>
+      To retrieve your password, enter your email <br>
+      <input type="text"> <br>
+      <a class="recover">Submit</a>
+      <a class="cancel" data-dismiss="modal">Close</a>
+    </div>
+  </div>
+</div>
+<!--end modal-->
+<footer class="text-center" style="margin-top:3em;">
+    <div class="footer-below">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 row">
+					<div class="col col-sm-3">
+						<div class="titulo">
+							<h4>Encuentra tu próximo vehículo </h4>
+						</div>
+						<ul>
+							<li><a onclick="subir('#All')"><label for="All">Todos</label></a></li>
+							<li><a onclick="subir('#New')"><label for="New">Nuevo</label></a></li>
+							<li><a onclick="subir('#Used')"><label for="Used">Usado</label></a></li>
+							<li><a onclick="subir('#certified')"><label for="certified">Certificado</label></a></li>
+						</ul>
+					</div>
+					<div class="col col-sm-3">
+						<div class="titulo">
+							<h4>Vender tu vehículo</h4>
+						</div>
+						<ul>
+							<li><a  onclick="sign_in_toogle(0)">Ingresar como Vendedor</a></li>
+							<li><a  href="/sell">Registrarse como Vendedor</a></li>
+							<li><a  onclick="sign_in_toogle(0)">Ingresar como Distribuidor</a></li>
+							<li><a  href="/become">Registrarse como Distribuidor</a></li>
+						</ul>
+					</div>
+					<div class="col col-sm-3">
+
+						<div class="titulo">
+							<h4>Nosotros</h4>
+						</div>
+						<ul>
+							<li><a href="/Company_Information">Información de la empresa</a></li>
+							<!--<li><a href="/press_room">Press Room</a></li>-->
+							<li><a href="/jobs">Ofertas de trabajo en Doncarros.com</a></li>
+							<li><a href="/contact_us">Contactanos</a></li>
+							<li><a href="terms_conditions">Terminos y Condiciones</a></li>
+						</ul>
+					</div>
+					<div class="col col-sm-3">
+
+						<div class="titulo">
+							<h4>Contactanos</h4>
+						</div>
+						<ul>
+							<li><span class="number glyphicon glyphicon-phone-alt">
+								(123)-456-7890
+							</span></li>
+							<li><span class="number glyphicon glyphicon-phone">
+						  		(123)-456-7890
+							</span></li>
+							<li><span class="number glyphicon glyphicon-envelope">
+						  		Doncarros@gmail.copm
+							</span></li>
+							<li><span class="number glyphicon glyphicon-map-marker">
+												  		1355 Market Street, Suite 900 Caracas, CA 94103
+							</span></li>
+						</ul>
+					</div>
+                </div>
+            </div>
+        </div>
+    </div>
+	<div class="footer-below">
+		<div class="container">
+			<div class="row">
+				<ul class="list-unstyled list-inline connect-btns redes col col-md-6">
+		            <li><a href="//www.facebook.com/Carsforsalecom" target="_blank"><i class="fa fa-facebook"></i></a></li>
+		            <li><a href="//twitter.com/Carsforsalecom" target="_blank"><i class="fa fa-twitter"></i></a></li>
+		            <li><a href="//www.pinterest.com/carsforsalecom/" target="_blank"><i class="fa fa-pinterest"></i></a></li>
+		            <li><a href="//plus.google.com/+carsforsalecom/posts" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+		            <li><a href="//www.youtube.com/user/Carsforsalecom" target="_blank"><i class="fa fa-youtube-play"></i></a></li>
+		        </ul>
+		        <div class="col col-md-6 become-footer">
+		        	<a href="/become">Planes</a>
+		        </div>
+	        </div>
+		</div>
+        <div class="container">
+            <div class="row">
+            	<div class="footer-col col-xs-12">
+	                <div class="col-lg-12 separar">
+	                    © Doncarros <strong id="fecha">2017</strong> todos los derechos reservados.
+	                </div>
+                </div>
+            </div>
+        </div>
+	</div>
+</footer>
+	<link rel="stylesheet" href="{% static 'css/custominputfile.min.css' %}"  type="text/css" />
+	<script type="text/javascript">
+	    $('#images').customFile({
+	      type : 'image',
+
+	    });
+	</script>
+
+
+	<script>
+	$( function() {
+		$( "#slider-range" ).slider({
+			range: true,
+			min: 0,
+			max: 500,
+			values: [ 75, 300 ],
+			slide: function( event, ui ) {
+				$( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+			}
+		});
+		$( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
+			" - $" + $( "#slider-range" ).slider( "values", 1 ) );
+	} );
+
+	$( function() {
+		$( "#slider-range2" ).slider({
+			range: true,
+			min: 0,
+			max: 500,
+			values: [ 75, 300 ],
+			slide: function( event, ui ) {
+				$( "#amount2" ).val( "" + ui.values[ 0 ] + " - " + ui.values[ 1 ] );
+			}
+		});
+		$( "#amount2" ).val( "" + $( "#slider-range2" ).slider( "values", 0 ) +
+			" - " + $( "#slider-range2" ).slider( "values", 1 ) );
+	} );
+	</script>
+	<script>
+		var ano = (new Date).getFullYear();
+		$(document).ready(function() {
+			console.log(ano);
+				$("#fecha").text( ano);
+		});
+	</script>
+</body>
+</html>

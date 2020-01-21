@@ -1,0 +1,203 @@
+<h1 id="ajax-autocomplete-for-jquery">Ajax Autocomplete for jQuery</h1>
+<p>Ajax Autocomplete for jQuery allows you to easily create
+autocomplete/autosuggest boxes for text input fields.</p>
+<p>Has no dependencies other than jQuery.</p>
+<p>The standard jquery.autocomplete.js file is around 13KB when minified.</p>
+<h2 id="api">API</h2>
+<ul>
+<li><code>$(selector).autocomplete(options);</code><ul>
+<li>Sets up autocomplete for input field(s).</li>
+<li><code>options</code>: An object literal which defines the settings to use for the autocomplete plugin. Available option settings listed below.</li>
+</ul>
+</li>
+</ul>
+<h3 id="ajax-settings">Ajax Settings</h3>
+<ul>
+<li><code>serviceUrl</code>: Server side URL or callback function that returns serviceUrl string. Optional if local lookup data is provided.</li>
+<li><code>type</code>: Ajax request type to get suggestions. Default: <code>GET</code>.</li>
+<li><code>dataType</code>: type of data returned from server. Either <code>text</code> (default), <code>json</code>  or <code>jsonp</code>, which will cause the autocomplete to use jsonp. You may return a json object in your callback when using jsonp.</li>
+<li><code>paramName</code>: Default <code>query</code>. The name of the request parameter that contains the query.</li>
+<li><code>params</code>: Additional parameters to pass with the request, optional.</li>
+<li><code>deferRequestBy</code>: Number of miliseconds to defer ajax request. Default: <code>0</code>.</li>
+<li><code>ajaxSettings</code>: Any additional <a href="http://api.jquery.com/jquery.ajax/#jQuery-ajax-settings">Ajax Settings</a> that configure the jQuery Ajax request.</li>
+</ul>
+<h3 id="configuration-settings">Configuration Settings</h3>
+<ul>
+<li><code>noCache</code>: Boolean value indicating whether to cache suggestion results. Default <code>false</code>.</li>
+<li><code>delimiter</code>: String or RegExp, that splits input value and takes last part to as query for suggestions.
+Useful when for example you need to fill list of  coma separated values.</li>
+<li><code>onSearchStart</code>: <code>function (query) {}</code> called before ajax request. <code>this</code> is bound to input element.</li>
+<li><code>onSearchComplete</code>: <code>function (query, suggestions) {}</code> called after ajax response is processed. <code>this</code> is bound to input element. <code>suggestions</code> is an array containing the results.</li>
+<li><code>onSearchError</code>: <code>function (query, jqXHR, textStatus, errorThrown) {}</code> called if ajax request fails. <code>this</code> is bound to input element.</li>
+<li><code>transformResult</code>: <code>function(response, originalQuery) {}</code> called after the result of the query is ready. Converts the result into response.suggestions format.</li>
+<li><code>onSelect</code>: <code>function (suggestion) {}</code> Callback function invoked when user selects suggestion
+from the list. <code>this</code> inside callback refers to input HtmlElement.</li>
+<li><code>minChars</code>: Minimum number of characters required to trigger autosuggest. Default: <code>1</code>.</li>
+<li><code>lookupLimit</code>: Number of maximum results to display for local lookup. Default: no limit.</li>
+<li><code>lookup</code>: Callback function or lookup array for the suggestions. It may be array of strings or <code>suggestion</code> object literals.<ul>
+<li><code>suggestion</code>: An object literal with the following format: <code>{ value: &#39;string&#39;, data: any }</code>.</li>
+</ul>
+</li>
+<li><code>lookupFilter</code>: <code>function (suggestion, query, queryLowerCase) {}</code> filter function for local lookups. By default it does partial string match (case insensitive).</li>
+<li><code>triggerSelectOnValidInput</code>: Boolean value indicating if <code>select</code> should be triggered if it matches suggestion. Default <code>true</code>.</li>
+<li><code>preventBadQueries</code>: Boolean value indicating if it shoud prevent future ajax requests for queries with the same root if no results were returned. E.g. if <code>Jam</code> returns no suggestions, it will not fire for any future query that starts with <code>Jam</code>. Default <code>true</code>.</li>
+<li><code>autoSelectFirst</code>: if set to <code>true</code>, first item will be selected when showing suggestions. Default value <code>false</code>.</li>
+<li><code>onHide</code>: <code>function (container) {}</code> called before container will be hidden</li>
+</ul>
+<h3 id="presentation-settings">Presentation Settings</h3>
+<ul>
+<li><code>beforeRender</code>: <code>function (container) {}</code> called before displaying the suggestions. You may manipulate suggestions DOM before it is displayed.</li>
+<li><code>formatResult</code>: <code>function (suggestion, currentValue) {}</code> custom function to
+format suggestion entry inside suggestions container, optional.</li>
+<li><code>groupBy</code>: property name of the suggestion <code>data</code> object, by which results should be grouped.</li>
+<li><code>maxHeight</code>: Maximum height of the suggestions container in pixels. Default: <code>300</code>.</li>
+<li><code>width</code>: Suggestions container width in pixels, e.g.: 300. Default: <code>auto</code>, takes input field width.</li>
+<li><code>zIndex</code>: &#39;z-index&#39; for suggestions container. Default: <code>9999</code>.</li>
+<li><code>appendTo</code>: container where suggestions will be appended. Default value <code>document.body</code>. Can be jQuery object, selector or html element. Make sure to set <code>position: absolute</code> or <code>position: relative</code> for that element.</li>
+<li><code>forceFixPosition</code>: Default: <code>false</code>. Suggestions are automatically positioned when their container is appended to body (look at <code>appendTo</code> option), in other cases suggestions are rendered but no positioning is applied.
+ Set this option to force auto positioning in other cases.</li>
+<li><code>orientation</code>: Default <code>bottom</code>. Vertical orientation of the displayed suggestions, available values are <code>auto</code>, <code>top</code>, <code>bottom</code>.
+If set to <code>auto</code>, the suggestions will be orientated it the way that place them closer to middle of the view port.</li>
+<li><code>preserveInput</code>: if <code>true</code>, input value stays the same when navigating over suggestions. Default: <code>false</code>.</li>
+<li><code>showNoSuggestionNotice</code>: Default <code>false</code>. When no matching results, display a notification label.</li>
+<li><code>noSuggestionNotice</code>: Default <code>No results</code>. Text or htmlString or Element or jQuery object for no matching results label.</li>
+<li><code>onInvalidateSelection</code>: <code>function () {}</code> called when input is altered after selection has been made. <code>this</code> is bound to input element.</li>
+<li><code>tabDisabled</code>: Default <code>false</code>. Set to true to leave the cursor in the input field after the user tabs to select a suggestion.</li>
+</ul>
+<h2 id="instance-methods">Instance Methods</h2>
+<p>Autocomplete instance has following methods:</p>
+<ul>
+<li><code>setOptions(options)</code>: you may update any option at any time. Options are listed above.</li>
+<li><code>clear</code>: clears suggestion cache and current suggestions suggestions.</li>
+<li><code>clearCache</code>: clears suggestion cache.</li>
+<li><code>disable</code>: deactivate autocomplete.</li>
+<li><code>enable</code>: activates autocomplete if it was deactivated before.</li>
+<li><code>hide</code>: hides suggestions.</li>
+<li><code>dispose</code>: destroys autocomplete instance. All events are detached and suggestion containers removed.</li>
+</ul>
+<p>There are two ways that you can invoke Autocomplete method. One is calling autocomplete on jQuery object and passing method name as string literal.
+If method has arguments, arguments are passed as consecutive parameters:</p>
+<pre><code class="lang-javascript">$(&#39;#autocomplete&#39;).autocomplete(&#39;disable&#39;);
+$(&#39;#autocomplete&#39;).autocomplete(&#39;setOptions&#39;, options);
+</code></pre>
+<p>Or you can get Autocomplete instance by calling autcomplete on jQuery object without any parameters and then invoke desired method.</p>
+<pre><code class="lang-javascript">$(&#39;#autocomplete&#39;).autocomplete().disable();
+$(&#39;#autocomplete&#39;).autocomplete().setOptions(options);
+</code></pre>
+<h2 id="usage">Usage</h2>
+<p>Html:</p>
+<pre><code class="lang-html">&lt;input type=&quot;text&quot; name=&quot;country&quot; id=&quot;autocomplete&quot;/&gt;
+</code></pre>
+<p>Ajax lookup:</p>
+<pre><code class="lang-javascript">$(&#39;#autocomplete&#39;).autocomplete({
+    serviceUrl: &#39;/autocomplete/countries&#39;,
+    onSelect: function (suggestion) {
+        alert(&#39;You selected: &#39; + suggestion.value + &#39;, &#39; + suggestion.data);
+    }
+});
+</code></pre>
+<p>Local lookup (no ajax):</p>
+<pre><code class="lang-javascript">var countries = [
+    { value: &#39;Andorra&#39;, data: &#39;AD&#39; },
+    // ...
+    { value: &#39;Zimbabwe&#39;, data: &#39;ZZ&#39; }
+];
+
+$(&#39;#autocomplete&#39;).autocomplete({
+    lookup: countries,
+    onSelect: function (suggestion) {
+        alert(&#39;You selected: &#39; + suggestion.value + &#39;, &#39; + suggestion.data);
+    }
+});
+</code></pre>
+<p>Custom lookup function:</p>
+<pre><code class="lang-javascript">
+$(&#39;#autocomplete&#39;).autocomplete({
+    lookup: function (query, done) {
+        // Do ajax call or lookup locally, when done,
+        // call the callback and pass your results:
+        var result = {
+            suggestions: [
+                { &quot;value&quot;: &quot;United Arab Emirates&quot;, &quot;data&quot;: &quot;AE&quot; },
+                { &quot;value&quot;: &quot;United Kingdom&quot;,       &quot;data&quot;: &quot;UK&quot; },
+                { &quot;value&quot;: &quot;United States&quot;,        &quot;data&quot;: &quot;US&quot; }
+            ]
+        };
+
+        done(result);
+    },
+    onSelect: function (suggestion) {
+        alert(&#39;You selected: &#39; + suggestion.value + &#39;, &#39; + suggestion.data);
+    }
+});
+</code></pre>
+<h2 id="styling">Styling</h2>
+<p>Generated HTML markup for suggestions is displayed below. You may style it any way you&#39;d like.</p>
+<pre><code class="lang-html">&lt;div class=&quot;autocomplete-suggestions&quot;&gt;
+    &lt;div class=&quot;autocomplete-group&quot;&gt;&lt;strong&gt;NHL&lt;/strong&gt;&lt;/div&gt;
+    &lt;div class=&quot;autocomplete-suggestion autocomplete-selected&quot;&gt;...&lt;/div&gt;
+    &lt;div class=&quot;autocomplete-suggestion&quot;&gt;...&lt;/div&gt;
+    &lt;div class=&quot;autocomplete-suggestion&quot;&gt;...&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<p>Style sample:</p>
+<pre><code class="lang-css">.autocomplete-suggestions { border: 1px solid #999; background: #FFF; overflow: auto; }
+.autocomplete-suggestion { padding: 2px 5px; white-space: nowrap; overflow: hidden; }
+.autocomplete-selected { background: #F0F0F0; }
+.autocomplete-suggestions strong { font-weight: normal; color: #3399FF; }
+.autocomplete-group { padding: 2px 5px; }
+.autocomplete-group strong { display: block; border-bottom: 1px solid #000; }
+</code></pre>
+<h2 id="response-format">Response Format</h2>
+<p>Response from the server must be JSON formatted following JavaScript object:</p>
+<pre><code class="lang-javascript">{
+    // Query is not required as of version 1.2.5
+    &quot;query&quot;: &quot;Unit&quot;,
+    &quot;suggestions&quot;: [
+        { &quot;value&quot;: &quot;United Arab Emirates&quot;, &quot;data&quot;: &quot;AE&quot; },
+        { &quot;value&quot;: &quot;United Kingdom&quot;,       &quot;data&quot;: &quot;UK&quot; },
+        { &quot;value&quot;: &quot;United States&quot;,        &quot;data&quot;: &quot;US&quot; }
+    ]
+}
+</code></pre>
+<p>Data can be any value or object. Data object is passed to formatResults function
+and onSelect callback. Alternatively, if there is no data you can
+supply just a string array for suggestions:</p>
+<pre><code class="lang-json">{
+    &quot;query&quot;: &quot;Unit&quot;,
+    &quot;suggestions&quot;: [&quot;United Arab Emirates&quot;, &quot;United Kingdom&quot;, &quot;United States&quot;]
+}
+</code></pre>
+<h2 id="non-standard-query-results">Non standard query/results</h2>
+<p>If your ajax service expects the query in a different format, and returns data in a different format than the standard response,
+you can supply the &quot;paramName&quot; and &quot;transformResult&quot; options:</p>
+<pre><code class="lang-javascript">$(&#39;#autocomplete&#39;).autocomplete({
+    paramName: &#39;searchString&#39;,
+    transformResult: function(response) {
+        return {
+            suggestions: $.map(response.myData, function(dataItem) {
+                return { value: dataItem.valueField, data: dataItem.dataField };
+            })
+        };
+    }
+})
+</code></pre>
+<h2 id="grouping-results">Grouping Results</h2>
+<p>Specify <code>groupBy</code> option of you data property if you wish results to be displayed in groups. For example, set <code>groupBy: &#39;category&#39;</code> if your suggestion data format is:</p>
+<pre><code class="lang-javascript">[
+    { value: &#39;Chicago Blackhawks&#39;, data: { category: &#39;NHL&#39; } },
+    { value: &#39;Chicago Bulls&#39;, data: { category: &#39;NBA&#39; } }
+]
+</code></pre>
+<p>Results will be formatted into two groups <strong>NHL</strong> and <strong>NBA</strong>.</p>
+<h2 id="known-issues">Known Issues</h2>
+<p>If you use it with jQuery UI library it also has plugin named <code>autocomplete</code>. In this case you can use plugin alias <code>devbridgeAutocomplete</code>:</p>
+<pre><code class="lang-javascript">$(&#39;.autocomplete&#39;).devbridgeAutocomplete({ ... });
+</code></pre>
+<h2 id="license">License</h2>
+<p>Ajax Autocomplete for jQuery is freely distributable under the
+terms of an MIT-style <a href="https://github.com/devbridge/jQuery-Autocomplete/blob/master/dist/license.txt">license</a>.</p>
+<p>Copyright notice and permission notice shall be included in all
+copies or substantial portions of the Software.</p>
+<h2 id="authors">Authors</h2>
+<p>Tomas Kirda / <a href="https://twitter.com/tkirda">@tkirda</a></p>

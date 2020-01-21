@@ -1,0 +1,545 @@
+{% extends 'base/base.html' %}
+{% block content %}
+<script>
+setTimeout(function(){menu("#financing")},500);
+</script>
+<div class="content page-outer financing2">
+
+	<h1 class="title">Financing</h1>
+	<div class="from_financing">
+		<form action="">
+			<div class="caja">
+				<div class="title">
+					<h3>Referral (If Applicable)</h3>
+				</div>
+				<div class="Referral">
+					<h4>Referrer's Name</h4>
+					<input type="text">
+				</div>
+			</div>
+			<div class="caja">
+				<div class="title">
+					<h3>Vehicle Interest</h3>
+				</div>
+				<div class="Vehicle">
+					<h4>Select Vehicle Make and Model</h4>
+					<div class="make">
+						<select name="" id="">
+							<option value="">Choose a condition</option>
+							<option value="">New</option>
+							<option value="">Used</option>
+							<option value="">Certified</option>
+						</select>
+						<select name="" id="">
+							<option value="">Choose a Make</option>
+							<option value="">Acura</option>
+							<option value="">Alfa Romeo</option>
+							<option value="">Aston Martin</option>
+						</select>
+						<select name="" id="">
+							<option value="">Choose a Model</option>
+							<option value="">Model 188</option>
+							<option value="">Model 59</option>
+						</select>
+						<h4>Estimated Down Payment</h4>
+						<input type="text">
+					</div>
+				</div>
+			</div>
+			<div class="caja">
+				<div class="title">
+					<h3>Contact Information</h3>
+				</div>
+				<div class="Contact">
+					<div class="tres">
+						<div class="info">
+							<h4>First Name*</h4>
+							<input type="text">
+						</div>
+						<div class="info">
+							<h4>Middle Initial</h4>
+							<input type="text">
+						</div>
+						<div class="info">
+							<h4>Last Name*</h4>
+							<input type="text">
+						</div>
+					</div>
+					<div class="dos">
+						<div class="info">
+							<h4>Home Phone*</h4>
+							<input type="text">
+							<input type="text">
+							<input type="text" class="end">
+						</div>
+						<div class="info">
+							<h4>Cell Phone</h4>
+							<input type="text">
+							<input type="text">
+							<input type="text" class="end">
+						</div>
+					</div>
+					<div class="dos">
+						<div class="info1">
+							<h4>Email*</h4>
+							<input type="text">
+						</div>
+						<div class="info1">
+							<h4>Address*</h4>
+							<input type="text">
+						</div>
+					</div>
+					<div class="dos">
+						<div class="info1">
+							<h4>City*</h4>
+							<input type="text">
+						</div>
+						<div class="info1">
+							<div class="dos">
+								<div class="info">
+									<h4>State*</h4>
+									<input type="text">
+								</div>
+								<div class="info">
+									<h4>Zip*</h4>
+									<input type="text">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="caja">
+				<div class="title">
+					<h3>Personal Information</h3>
+				</div>
+				<div class="Personal">
+					<div class="tres">
+						<div class="info">
+							<h4>Driver's License*</h4>
+							<input type="text">
+						</div>
+						<div class="info">
+							<h4>Social Security Number (SSN)*</h4>
+							<div class="tres">
+								<input type="text">
+								<input type="text">
+								<input type="text">
+							</div>
+						</div>
+						<div class="info">
+							<h4>Date of Birth (mm/dd/yyyy)*</h4>
+							<div class="tres">
+								<input type="text">
+								<input type="text">
+								<input type="text">
+							</div>
+						</div>
+					</div>
+					<div class="cuatro">
+						<div class="info">
+							<h4>Residence</h4>
+							<select name="" id="">
+								<option value="">Rent</option>
+								<option value="">Own</option>
+								<option value="">Live whith parents</option>
+							</select>
+						</div>
+						<div class="info">
+							<h4>Monthly Rent / Mortgage Amount</h4>
+							<input type="text">
+						</div>
+						<div class="info">
+							<h4>Years at Current Residence</h4>
+							<select name="" id="">
+								<option value="">0 Years</option>
+								<option value="">1 Years</option>
+								<option value="">2 Years</option>
+								<option value="">3 Years</option>
+								<option value="">4 Years</option>
+								<option value="">5 Years</option>
+								<option value="">6 Years</option>
+								<option value="">7 Years</option>
+								<option value="">8 Years</option>
+								<option value="">9 Years</option>
+								<option value="">10 Years</option>
+								<option value="">11 Years</option>
+								<option value="">12 Years</option>
+								<option value="">13 Years</option>
+								<option value="">14 Years</option>
+								<option value="">15 Years</option>
+								<option value="">More that 15 Years</option>
+							</select>
+						</div>
+						<div class="info">
+							<h4>Months at Current Residence</h4>
+							<select name="" id="">
+								<option value="">0 Months</option>
+								<option value="">1 Months</option>
+								<option value="">2 Months</option>
+								<option value="">3 Months</option>
+								<option value="">4 Months</option>
+								<option value="">5 Months</option>
+								<option value="">6 Months</option>
+								<option value="">7 Months</option>
+								<option value="">8 Months</option>
+								<option value="">9 Months</option>
+								<option value="">10 Months</option>
+								<option value="">11 Months</option>
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+			<a class="barra" onclick="collapse('#Previous','#plus10')">
+				<span class="glyphicon glyphicon-plus" id="plus10"></span>
+				<h4>I have a previous residence</h4>
+			</a>
+			<div class="caja no_view" id="Previous">
+				<div class="title l">
+					<h3>Previous Residence (If Applicable)</h3>
+				</div>
+				<div class="Previous">
+					<div class="dos">
+						<div class="info">
+							<h4>Previous Address</h4>
+							<input type="text">
+						</div>
+						<div class="info">
+							<h4>Previous City</h4>
+							<input type="text">
+						</div>
+					</div>
+					<div class="cuatro">
+						<div class="info">
+							<h4>Previous State</h4>
+							<select name="" id="">
+								<option value="">Select state</option>
+								<option value="">AL-Alabama</option>
+								<option value="">Ak-Alaska</option>
+							</select>
+						</div>
+						<div class="info">
+							<h4>Previous Zip</h4>
+							<input type="text">
+						</div>
+						<div class="info">
+							<h4>Years at Previous Residence</h4>
+							<select name="" id="">
+								<option value="">0 Years</option>
+								<option value="">1 Years</option>
+								<option value="">2 Years</option>
+								<option value="">3 Years</option>
+								<option value="">4 Years</option>
+								<option value="">5 Years</option>
+								<option value="">6 Years</option>
+								<option value="">7 Years</option>
+								<option value="">8 Years</option>
+								<option value="">9 Years</option>
+								<option value="">10 Years</option>
+								<option value="">11 Years</option>
+								<option value="">12 Years</option>
+								<option value="">13 Years</option>
+								<option value="">14 Years</option>
+								<option value="">15 Years</option>
+								<option value="">More that 15 Years</option>
+							</select>
+						</div>
+						<div class="info">
+							<h4>Months at Previous Residence</h4>
+							<input type="text">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="caja">
+				<div class="title">
+					<h3>Employment Information</h3>
+				</div>
+				<div class="Employment">
+					<div class="tres">
+						<div class="info">
+							<h4>Employer*</h4>
+							<input type="text">
+						</div>
+						<div class="info1">
+							<h4>Work Phone*</h4>
+							<input type="text">
+							<input type="text">
+							<input type="text" class="end">
+						</div>
+						<div class="info">
+							<h4>Occupation</h4>
+							<input type="text">
+						</div>
+					</div>
+					<div class="cuatro">
+						<div class="info">
+							<h4>Length of Employment - Years</h4>
+							<input type="text">
+						</div>
+						<div class="info">
+							<h4>Length of Employment - Months</h4>
+							<input type="text">
+						</div>
+						<div class="info">
+							<h4>Monthly Gross Salary*</h4>
+							<input type="text">
+						</div>
+						<div class="info">
+							<h4>Other Income</h4>
+							<input type="text">
+						</div>
+					</div>
+					<div class="uno">
+						<div class="info">
+							<h4>Comments</h4>
+							<textarea></textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+			<a class="barra" onclick="collapse('#Employer','#plus11')">
+				<span class="glyphicon glyphicon-plus" id="plus11"></span>
+				<h4>I have a previous employer</h4>
+			</a>
+			<div class="caja no_view" id="Employer">
+				<div class="title l">
+					<h3>Previous Employer (If Applicable)</h3>
+				</div>
+				<div class="Employer">
+					<div class="dos">
+						<div class="info">
+							<h4>Previous Employer</h4>
+							<input type="text">
+						</div>
+						<div class="info1">
+							<h4>Previous Work Phone</h4>
+							<input type="text">
+							<input type="text">
+							<input type="text">
+						</div>
+					</div>
+					<div class="tres">
+						<div class="info">
+							<h4>Previous Occupation</h4>
+							<input type="text">
+						</div>
+						<div class="info">
+							<h4>Previous Length of Employment - Years</h4>
+							<select name="" id="">
+								<option value="">0 Years</option>
+								<option value="">1 Years</option>
+								<option value="">2 Years</option>
+								<option value="">3 Years</option>
+								<option value="">4 Years</option>
+								<option value="">5 Years</option>
+								<option value="">6 Years</option>
+								<option value="">7 Years</option>
+								<option value="">8 Years</option>
+								<option value="">9 Years</option>
+								<option value="">10 Years</option>
+								<option value="">11 Years</option>
+								<option value="">12 Years</option>
+								<option value="">13 Years</option>
+								<option value="">14 Years</option>
+								<option value="">15 Years</option>
+								<option value="">More that 15 Years</option>
+							</select>
+						</div>
+						<div class="info">
+							<h4>Previous Length of Employment - Months</h4>
+							<select name="" id="">
+								<option value="">0 Months</option>
+								<option value="">1 Months</option>
+								<option value="">2 Months</option>
+								<option value="">3 Months</option>
+								<option value="">4 Months</option>
+								<option value="">5 Months</option>
+								<option value="">6 Months</option>
+								<option value="">7 Months</option>
+								<option value="">8 Months</option>
+								<option value="">9 Months</option>
+								<option value="">10 Months</option>
+								<option value="">11 Months</option>
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+			<a class="barra" onclick="collapse('#Information','#plus12')">
+				<span class="glyphicon glyphicon-plus" id="plus12"></span>
+				<h4>I have a co-applicant</h4>
+			</a>
+			<div class="caja no_view" id="Information">
+				<div class="title l">
+					<h3>Co-applicant Information (If Applicable)</h3>
+				</div>
+				<div class="Information">
+					<div class="tres">
+						<div class="info">
+							<h4>Co-applicant First Name</h4>
+							<input type="text">
+						</div>
+						<div class="info">
+							<h4>Co-applicant Middle Initial</h4>
+							<input type="text">
+						</div>
+						<div class="info">
+							<h4>Co-applicant Last Name</h4>
+							<input type="text">
+						</div>
+					</div>
+					<div class="dos">
+						<div class="info">
+							<h4>Co-applicant Email</h4>
+							<input type="text">
+						</div>
+						<div class="info1">
+							<h4>Co-applicant Home Phone</h4>
+							<input type="text">
+							<input type="text">
+							<input type="text">
+						</div>
+					</div>
+					<div class="uno">
+						<h4>Co-applicant Address</h4>
+						<input type="text">
+					</div>
+					<div class="dos">
+						<div class="info">
+							<h4>Co-applicant City</h4>
+							<input type="text">
+						</div>
+						<div class="info">
+							<div class="dos">
+								<div class="info">
+									<h4>Co-applicant State</h4>
+									<select name="" id="">
+										<option value="">Select state</option>
+										<option value="">AL-Alabama</option>
+										<option value="">Ak-Alaska</option>
+									</select>
+								</div>
+								<div class="info">
+									<h4>Co-applicant Zip</h4>
+									<input type="text">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="dos">
+						<div class="info1">
+							<h4>Co-applicant Social Security Number (SSN)</h4>
+							<input type="text">
+							<input type="text">
+							<input type="text">
+						</div>
+						<div class="info1">
+							<h4>Co-applicant Date of Birth (mm/dd/yyyy)</h4>
+							<input type="text">
+							<input type="text">
+							<input type="text">
+						</div>
+					</div>
+					<div class="tres">
+						<div class="info">
+							<h4>Co-applicant Employer</h4>
+							<input type="text">
+						</div>
+						<div class="info1">
+							<h4>Co-applicant Work Phone</h4>
+							<input type="text">
+							<input type="text">
+							<input type="text">
+						</div>
+						<div class="info">
+							<h4>Co-applicant Occupation</h4>
+							<input type="text">
+						</div>
+					</div>
+					<div class="cuatro">
+						<div class="info">
+							<h4>Co-applicant Length of Employment - Years</h4>
+							<select name="" id="">
+								<option value="">0 Years</option>
+								<option value="">1 Years</option>
+								<option value="">2 Years</option>
+								<option value="">3 Years</option>
+								<option value="">4 Years</option>
+								<option value="">5 Years</option>
+								<option value="">6 Years</option>
+								<option value="">7 Years</option>
+								<option value="">8 Years</option>
+								<option value="">9 Years</option>
+								<option value="">10 Years</option>
+								<option value="">11 Years</option>
+								<option value="">12 Years</option>
+								<option value="">13 Years</option>
+								<option value="">14 Years</option>
+								<option value="">15 Years</option>
+								<option value="">More that 15 Years</option>
+							</select>
+						</div>
+						<div class="info">
+							<h4>Co-applicant Length of Employment - Months</h4>
+							<select name="" id="">
+								<option value="">0 Months</option>
+								<option value="">1 Months</option>
+								<option value="">2 Months</option>
+								<option value="">3 Months</option>
+								<option value="">4 Months</option>
+								<option value="">5 Months</option>
+								<option value="">6 Months</option>
+								<option value="">7 Months</option>
+								<option value="">8 Months</option>
+								<option value="">9 Months</option>
+								<option value="">10 Months</option>
+								<option value="">11 Months</option>
+							</select>
+						</div>
+						<div class="info">
+							<h4>Co-applicant Monthly Gross Salary</h4>
+							<input type="text">
+						</div>
+						<div class="info">
+							<h4>Co-applicant Other Income</h4>
+							<input type="text">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="caja">
+				<div class="title">
+					<h3>Disclaimer</h3>
+				</div>
+				<div class="Disclaimer">
+					<div class="checkbox">
+						<label><input type="checkbox" value="">I agree to the following:*</label>
+					</div>
+					<ul>
+						<li>
+							I am at least 18 years old and a permanent resident of the United States.
+						</li>
+						<li>
+							I authorize this dealership to obtain a credit report in connection with our review of your credit application.
+						</li>
+						<li>
+							I understand that this dealership may call me in connection with this application.
+						</li>
+						<li>
+							I have reviewed this dealership's <a href="#">privacy policy.</a>
+						</li>
+						<li>
+							I have truthfully and completely provided the required information on this application.
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="boton">
+				<a>Save</a>
+			</div>
+		</form>
+	</div>
+</div>
+{% endblock%}

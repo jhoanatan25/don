@@ -1,0 +1,124 @@
+{% extends 'base/base.html' %}
+{% block content %}
+{% load static %}
+        <div class="pages">
+    <!--Script menu -->
+
+    <script>
+      setTimeout(function(){menu("#sell_my_car")},500);
+    </script>
+
+    <!-- content of the page-->
+    <section class="sell">
+        <div class="head">
+            
+            <div class="text row">
+                <div class="col col-md-6">
+                    <h2>Vende tu carro</h2>
+                    <h1>Gratis !!!</h1>
+                </div>
+                <div class="col col-sm-6 visible-lg visible-mg">
+                    <p>Coloque su vehículo en Doncarros.com</p>
+                    <p>Alcance miles de clientes en todo el mundo!!!</p>
+                    <img src="{% static 'images/vender3.png' %}">
+                </div>
+            </div>
+        </div>
+        <div class="body row">
+            <div class="col col-xs-12 row">
+                <div class="col col-sm-8 texto">
+                   <p>¿Por qué vender su vehículo con nosotros?</p>
+                   <h2>Es rápido, fácil y gratis</h2>
+                    <a href="/create_listing"><button type="button" class="btn btn-danger">Publicar</button></a>
+                    {% if not authenticated %}
+                    <button onclick="sign_in_toogle(0)" type="button" class="btn btn-danger blanco">Ingresar</button>
+                    {% endif %}
+                </div>
+                <div class="col col-sm-4 image">
+                    <img src="{% static 'images/vender2.png' %}" class="visible-lg visible-md visible-sm">
+                </div>
+            </div>
+            <div class="col col-md-6 centar">
+                <img src="{% static 'images/vender1.png' %}" class="visible-lg visible-md visible-sm">
+                <p>Quiere Publicar mas de un carro?</p>
+                <p>Vea los Siguentes Planes</p>
+                <a href="/become"><button type="button" class="btn btn-danger">Particular</button></a>
+                <a href="/become"><button type="button" class="btn btn-danger blanco">Dealer</button></a>
+            </div>
+            <div class="col-md-6 centrar">
+                <section>
+        <h3 class="col-xs-12 text-center title">Contáctenos</h3>
+         <h4 class="col-xs-12 text-justify">Planes y precios Llámenos al 305-677-2991 y háganos saber cómo ayudarle a crear un sitio web efectivo y asombroso, o simplemente rellene el siguiente formulario y háganos saber cómo podemos ayudarlo.</h4>
+        <form name="sentMessage" id="contactForm" novalidate class="row">
+            <div class="control-group form-group col-sm-6 col">
+                <div class="controls">
+                    <div class="input-group margin-bottom-sm">
+                        <span class="input-group-addon "><i class="fa fa-user fa-fw red" aria-hidden="true"></i></span>
+                        <input placeholder="Nombre" type="text" class="form-control" id="name" required data-validation-required-message="required.">
+                    </div>
+                    <p class="help-block"></p>
+                </div>
+            </div>
+            <div class="control-group form-group col-sm-6 col">
+                <div class="controls">
+                    <div class="input-group margin-bottom-sm">
+                        <span class="input-group-addon "><i class="fa fa-user fa-fw red" aria-hidden="true"></i></span>
+                        <input  placeholder="Apellido" type="text" class="form-control" id="name2" required data-validation-required-message="required.">
+                    </div>
+                    <p class="help-block"></p>
+                </div>
+            </div>
+            <div class="control-group form-group col-sm-6 col">
+                <div class="controls">
+                    <div class="input-group margin-bottom-sm">
+                        <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw red" aria-hidden="true"></i></span>
+                        <input placeholder="Correo" type="Email" class="form-control" id="email" required data-validation-required-message="required.">
+                    </div>
+
+                </div>
+            </div>
+            <div class="control-group form-group col-sm-6 col">
+                <div class="controls">
+                    <div class="input-group margin-bottom-sm">
+                        <span class="input-group-addon"><i class="fa fa-phone fa-fw red" aria-hidden="true"></i></span>
+                        <input placeholder="Telefono" type="tel" class="form-control" id="phone" required data-validation-required-message="required.">
+                    </div>
+                </div>
+            </div>
+            <div class="control-group form-group col-sm-6 col">
+                <div class="controls">
+                    <div class="input-group margin-bottom-sm">
+                        <span class="input-group-addon "><i class="fa fa-user fa-fw red" aria-hidden="true"></i></span>
+                        <input placeholder="Nombre del vendedor" type="text" class="form-control" id="dealer" required data-validation-required-message="required.">
+                    </div>
+                    <p class="help-block"></p>
+                </div>
+            </div>
+            <div class="control-group form-group col-sm-6 col">
+                <div class="controls">
+                    <div class="input-group margin-bottom-sm">
+                        <span style="font-size: 17px" class="input-group-addon "><i class="glyphicon glyphicon-globe red" aria-hidden="true"></i></span>
+                        <input placeholder="Sitio Web actual" type="text" class="form-control" id="web" required data-validation-required-message="required.">
+                    </div>
+                    <p class="help-block"></p>
+                </div>
+            </div>
+            <div class="control-group form-group " style="padding: 0 1em;">
+                <div class="controls">
+                    <div class="input-group margin-bottom-sm">
+                        <span class="input-group-addon"><i class="fa fa-file-text-o fa-fw red" aria-hidden="true"></i></span>
+                        <textarea placeholder="¿Cómo podemos ayudarle?" rows="10" cols="100" class="form-control" id="message" required data-validation-required-message="Please enter your message" maxlength="999" style="resize:none"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div id="success"></div>
+            <div class ="cen">
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </div>
+        </form>
+    </section>
+            </div>
+        </div>
+    </section>
+  </div>
+{% endblock %}

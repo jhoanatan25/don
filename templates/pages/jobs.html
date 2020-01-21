@@ -1,0 +1,144 @@
+{% extends 'base/base.html' %}
+{% block content %}
+<script>
+  setTimeout(function(){menu("#")},500);
+</script>
+	<div class="jobs_at_cars4drivers">
+		<p class="email">Llega a nosotros: <a href="#">email@domino.com</a></p>
+		<img class="image" src="/static/images/jobs_at_cars4drivers.jpg" alt="jobs at cars4drivers">
+		<h1 class="title">¿Quienes somos?</h1>
+		<p>Dominio.com es un vehículo en línea clasificado y plataforma de distribuidor automático que permite a los vendedores privados para publicar vehículos de forma gratuita en nuestro sitio web clasificado. También ofrecemos concesionarios de automóviles con una plataforma de gran alcance de uso fácil y herramientas que permite a los concesionarios para ofrecer un sitio web moderno y atractivo para mostrar su inventario. Nos especializamos en proporcionar una experiencia única a los compradores y vendedores en la industria del automóvil.</p>
+		<div class="doble">
+			<div class="horizontal">
+				<h1 class="title">¿Dónde puedes encajar?</h1>
+				<div class="tres">
+					<div class="caja">
+						<h3>Diseño Web</h3>
+						<img src="/static/images/Web_design&IT.png" alt="Web design & IT">
+						<p>Uno de nuestros departamentos más populares. Estamos siempre en busca de profesionales talentosos y creativos que luchan por el éxito. ¿Es esto usted? ¡Contáctenos!</p>
+					</div>
+					<div class="caja">
+						<h3>Ventas y Marketing</h3>
+						<img src="/static/images/Marketing&Sales.jpg" alt="Marketing & Sales">
+						<p>Como Ventas y Marketing, como gerente de relaciones de ventas, le proporcionaremos las herramientas y recursos para convertirse en un exitoso socio de Dominio.com.</p>
+					</div>
+					<div class="caja">
+						<h3>Corporativo</h3>
+						<img src="/static/images/Corporate.jpg" alt="Corporate">
+						<p>Las posiciones corporativas están disponibles para la gerencia, las finanzas y los recursos humanos. Si usted está mirando para comenzar su carrera. Aplique hoy!</p>
+					</div>
+				</div>
+				<h1 class="title">¡Unete a nuestro equipo!</h1>
+				<p>Interesado en trabajar con nosotros? Por favor, rellene el siguiente formulario, cargue su curriculum vitae y cuéntenos un poco sobre usted. Nos pondremos en contacto con usted si estamos interesados en otras instrucciones.</p>
+			</div>
+			<div class="vertical">
+				<h3>¿Por qué trabajar para nosotros?</h3>
+				<div class="dos">
+					<div class="num1">
+						1
+					</div>
+					<div class="caja">
+						<h5>Horario flexible</h5>
+						<p>Muchas posiciones abiertas con horas flexibles y trabajo de las oportunidades caseras.</p>
+					</div>
+				</div>
+				<div class="dos">
+					<div class="num2">
+						2
+					</div>
+					<div class="caja">
+						<h5>Ingresos</h5>
+						<p>No hay límite a sus capacidades de ingresos! Creemos en un ingreso basado en resultados, los salarios impulsados por el desempeño.</p>
+					</div>
+				</div>
+				<div class="dos">
+					<div class="num3">
+						3
+					</div>
+					<div class="caja">
+						<h5>Igualdad de ingresos</h5>
+						<p>Siempre estamos apoyando la igualdad de ingresos. Su rendimiento es lo que valoramos.</p>
+					</div>
+				</div>
+				<div class="dos">
+					<div class="num4">
+						4
+					</div>
+					<div class="caja">
+						<h5>Contratación en todo el pais</h5>
+						<p>¡Contáctenos para oportunidades de trabajo en cualquier lugar!</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<p>Gracias por considerarnos.</p>
+	<form name="sentMessage" id="contactForm" novalidate class="row">
+		<div class="control-group form-group col-sm-6">
+			<div class="controls">
+				<div class="input-group margin-bottom-sm">
+					<span class="input-group-addon "><i class="fa fa-user fa-fw red" aria-hidden="true"></i></span>
+					<input placeholder="Nombre" type="text" class="form-control" id="name" required data-validation-required-message="required.">
+				</div>
+				<p class="help-block"></p>
+			</div>
+		</div>
+        <div class="control-group form-group col-sm-6">
+			<div class="controls">
+				<div class="input-group margin-bottom-sm">
+					<span class="input-group-addon "><i class="fa fa-user fa-fw red" aria-hidden="true"></i></span>
+					<input  placeholder="Apellido" type="text" class="form-control" id="name2" required data-validation-required-message="required.">
+				</div>
+				<p class="help-block"></p>
+			</div>
+        </div>
+        <div class="control-group form-group col-sm-6">
+			<div class="controls">
+				<div class="input-group margin-bottom-sm">
+					<span class="input-group-addon"><i class="fa fa-envelope-o fa-fw red" aria-hidden="true"></i></span>
+					<input placeholder="Correo" type="Email" class="form-control" id="email" required data-validation-required-message="required.">
+				</div>
+			</div>
+        </div>
+        <div class="control-group form-group col-sm-6">
+			<div class="controls">
+				<div class="input-group margin-bottom-sm">
+					<span class="input-group-addon"><i class="fa fa-phone fa-fw red" aria-hidden="true"></i></span>
+					<input placeholder="Teléfono" type="tel" class="form-control" id="phone" required data-validation-required-message="required.">
+				</div>
+			</div>
+        </div>
+        <div class="control-group form-group col-sm-12">
+			<div class="controls">
+				<div class="input-group margin-bottom-sm">
+					<span class="input-group-addon"><i class="glyphicon glyphicon-export" aria-hidden="true"></i></span>
+					<input class="form-control" id="file" type="file" required data-validation-required-message="required.">
+				</div>
+			</div>
+        </div>
+        <div class="control-group form-group " style="padding: 0 1em;">
+			<div class="controls">
+				<p>Por favor, suba su curriculum vitae o documentos relacionados.</p>
+				<div class="input-group margin-bottom-sm">
+					<span class="input-group-addon"><i class="fa fa-file-text-o fa-fw red" aria-hidden="true"></i></span>
+					<textarea placeholder="¿Cómo puede ayudarle?" rows="10" cols="100" class="form-control" id="message" required data-validation-required-message="Please enter your message" maxlength="999" style="resize:none"></textarea>
+				</div>
+				<p>Gracias por considerarnos.</p>
+			</div>
+        </div>
+        <div id="success"></div>
+        <!-- For success/fail messages -->
+        <div class ="cen">
+            <a type="submit" class="btn btn-primary" data-toggle="modal" data-target=".jobs">Send</a>
+        </div>
+    </form>
+	</div>
+<div class="modal fade jobs" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+    Su información ha sido enviada. Nos pondremos en contacto con usted si se necesita información adicional. Gracias.<br> <br>
+	  <a class="recover">Enviar</a>
+	  <a class="cancel" data-dismiss="modal">Cerrar</a>
+    </div>
+  </div>
+</div>
+{% endblock %}
